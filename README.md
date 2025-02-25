@@ -22,10 +22,10 @@ Contents
 
 * [Set Up MathCask Using GitHub Pages](#set-up-mathcask-using-github-pages)
   * [Fork MathCask](#fork-mathcask)
-  * [Write Snippets](#write-snippets)
+  * [Add Snippets](#add-snippets)
 * [Set Up MathCask Using Codeberg Pages](#set-up-mathcask-using-codeberg-pages)
   * [Fork MathCask](#fork-mathcask)
-
+  * [Add Snippets](#add-snippets)
 
 Set Up MathCask Using GitHub Pages
 ----------------------------------
@@ -72,7 +72,7 @@ and then write and maintain mathematical notes with it:
 [demo-gh: https://susam.github.io/mathcask/demo.html
 
 
-### Write Snippets
+### Add Snippets
 
 The following steps offer beginner-friendly instructions for creating
 a new page to host your mathematics notes or snippets written in
@@ -118,8 +118,8 @@ instructions below helpful.
 [example-gh]: https://susam.github.io/mathcask/example.html
 
 
-Set Up MathCask Using Codeberg
-------------------------------
+Set Up MathCask Using Codeberg Pages
+------------------------------------
 
 Codeberg.org is a project repository hosting platform provided by
 Codeberg e.V., a non-profit organisation.  Codeberg also offers a
@@ -151,6 +151,51 @@ and then write and maintain mathematical notes with it:
   6. You are now setup to use MathCask.
 
 [demo-cb]: https://susam.codeberg.page/mathcask/demo.html
+
+
+### Add Snippets
+
+The following steps offer beginner-friendly instructions for creating
+a new page to host your mathematics notes or snippets written in
+Markdown and LaTeX.  If you're an experienced Git user, you may prefer
+using the Git CLI tool to create and publish your pages instead of
+following these steps.  However, if you're new to Git, you might the
+instructions below helpful.
+
+  1. Go to your fork of MathCask, which is likely at
+     `https://codeberg.org/USERNAME/mathcask`.
+
+  2. Click on **Add file** and then click **New file**.
+
+  3. Name your new file `foo.html`.  In fact, you could choose any
+     name you like as long it has the extension `.html`.
+
+  4. Now enter the following file contents:
+
+     ```html
+     <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
+
+     # Euler's Identity
+
+     In mathematics, **Euler's identity** is the equality
+     $$ e^{i \pi} + 1 = 0. $$
+
+     ## Explanation
+
+     Euler's identity is a special case of Euler's formula from complex
+     analysis, which states that for any real number $ x $,
+     $$ e^{ix} = \cos x + i \sin x. $$
+     ```
+
+  5. Click **Commit changes**.
+
+  6. Wait for a few minutes for GitHub to publish your new HTML page.
+     Assuming you had named it `foo.html`, now visit
+     `https://USERNAME.codeberg.page/mathcask/foo.html` and confirm the
+     rendered page loads on your web browser.  The output should look
+     like this: [example.html][example-gh].
+
+[example-cb]: https://susam.codeberg.page/mathcask/example.html
 
 
 License
