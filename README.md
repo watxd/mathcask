@@ -26,6 +26,11 @@ Contents
 * [Set Up MathCask Using Codeberg Pages](#set-up-mathcask-using-codeberg-pages)
   * [Fork MathCask](#fork-mathcask)
   * [Add Snippets](#add-snippets)
+* [Host On Your Own Web Server](#host-on-your-own-web-server)
+* [How Does This Work?](#how-does-this-work)
+* [Why?](#why)
+* [License](#license)
+
 
 Set Up MathCask Using GitHub Pages
 ----------------------------------
@@ -35,7 +40,6 @@ GitHub, and then write and maintain mathematical notes with it.
 Naturally, this means that you need a GitHub account to perform these
 steps.  If you do not want to create an account on GitHub, skip ahead
 to the other sections and see if one of them suits your needs better.
-
 In this section the word `USERNAME` is used as a placeholder for your
 GitHub username.  Wherever you see this word, you must replace it with
 your actual username.
@@ -69,7 +73,7 @@ and then write and maintain mathematical notes with it:
 
   6. You are now setup to use MathCask.
 
-[demo-gh: https://susam.github.io/mathcask/demo.html
+[demo-gh]: https://susam.github.io/mathcask/demo.html
 
 
 ### Add Snippets
@@ -193,9 +197,103 @@ instructions below helpful.
      Assuming you had named it `foo.html`, now visit
      `https://USERNAME.codeberg.page/mathcask/foo.html` and confirm the
      rendered page loads on your web browser.  The output should look
-     like this: [example.html][example-gh].
+     like this: [example.html][example-cb].
 
 [example-cb]: https://susam.codeberg.page/mathcask/example.html
+
+
+Host On Your Own Web Server
+---------------------------
+
+You can also host self-rendering Markdown + LaTeX pages on your own
+web server.  In fact, you do not even need this project to do so.  All
+you need to do is add HTML files that contain a simple boilerplate
+header to load [TeXMe][] followed by Markdown + LaTeX content.  Here
+is an example such HTML:
+
+```html
+<!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
+
+# Euler's Identity
+
+In mathematics, **Euler's identity** is the equality
+$$ e^{i \pi} + 1 = 0. $$
+
+## Explanation
+
+Euler's identity is a special case of Euler's formula from complex
+analysis, which states that for any real number $ x $,
+$$ e^{ix} = \cos x + i \sin x. $$
+```
+
+The first line of this file loads TeXMe.  The TeXMe parser parses the
+remainder of the file and renders the Markdown and MathJax-flavoured
+LaTeX in it.  To learn more about TeXMe, see
+[github.com/susam/texme][TeXMe].
+
+[TeXMe]: https://github.com/susam/texme#texme
+
+
+How Does This Work?
+-------------------
+
+If you have looked at the HTML examples from earlier sections, you may
+have noticed that they all begin with this line:
+
+```html
+<!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
+```
+
+This line loads [TeXMe][], a lightweight tool that enables seamless
+rendering of both Markdown and MathJax-flavored LaTeX within the same
+HTML file.  TeXMe processes the remainder of the HTML file and invokes
+a Markdown parser and a LaTeX renderer separately, ensuring that each
+parser only interprets the content meant for it.  This prevents
+conflicts and produces clean, high-quality output.
+
+One of the important features of TeXMe is its conformance to the
+GitHub Flavoured Markdown (GFM) specification.  Since GFM is an
+extension of the CommonMark specification, TeXMe also conforms to the
+CommonMark specification as a bonus.  To achieve this, TeXMe invokes a
+very high quality Markdown parser called Marked that is known to parse
+and render GFM text very accurately.  To render MathJax-flavoured
+LaTeX, TeXMe invokes MathJax of course, ensuring accurate mathematical
+typesetting.  To read more about TeXMe, visit
+[github.com/susam/texme][TeXMe].
+
+
+Why?
+----
+
+This quick starter kit was created as a substitute for MathB.in, a
+mathematics pastebin that operated from March 2012 to March 2025.
+After 13 years of service, MathB.in was shut down.  See the post
+[MathB.in Is Shutting Down][shutdown] for more details on why it was
+shut down.
+
+MathB.in offered a very convenient way to quickly write down a short
+mathematical snippet or post using Markdown and LaTeX and then
+generate a distributable link for it with the click of a button.  This
+service was powered by MathB, a free and open source software available
+at [github.com/susam/mathb][mathb].
+
+Users appreciated MathB.in for its ease of use and robust support for
+GitHub Flavoured Markdown (GFM), and MathJax-powered LaTeX.  Since GFM
+is a strict superset of CommonMark, the parsing and rendering of user
+posts conformed to the CommonMark specification as well.
+
+With the discontinuation of MathB.in, an alternative was needed.
+While this kit is nowhere near as quick and convenient as MathB.in, it
+does offer a reasonably easy way to set up your own little web space
+for sharing your mathematical snippets and notes.  As mentioned in the
+previous section, this kit guides you through creating HTML pages for
+your snippets and notes that are automatically rendered using the
+[TeXMe][texme] parser, the same parser used by MathB.in.  This ensures
+that the parsing accuracy, rendering quality, and Markdown
+compatibility remain just as reliable.
+
+[shutdown]: https://susam.net/mathbin-is-shutting-down.html
+[mathb]: https://github.com/susam/mathb
 
 
 License
