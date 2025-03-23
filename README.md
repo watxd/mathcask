@@ -2,9 +2,9 @@ MathCask
 ========
 
 MathCask is a quick starter kit for hosting your mathematical notes
-and snippets as self-rendering, distributable HTML documents.  It
-supports Markdown and MathJax-flavored LaTeX, making it easy to write
-and distribute mathematical content.
+and snippets as self-rendering HTML documents that can be distributed
+easily.  It supports Markdown and MathJax-flavored LaTeX, making it
+easy to write and distribute mathematical content.
 
 You can use MathCask in multiple ways, depending on your technical
 background.  If you're familiar with Git, GitHub, or Codeberg, you can
@@ -60,7 +60,7 @@ and then write and maintain mathematical notes with it:
   3. In the left sidebar click **Pages**.
 
   4. Under the **Branch** section, click on the dropdown, select
-     **main**, and click **Save*.
+     **main**, and click **Save**.
 
   5. Wait for a few minutes to allow GitHub to deploy the pages in
      this kit using GitHub Pages.
@@ -110,8 +110,8 @@ instructions below helpful.
      $$ e^{ix} = \cos x + i \sin x. $$
      ```
 
-  5. Finally, click **Commit changes**, review/change the commit
-     message, and click **Commit changes** again.
+  5. Finally, click **Commit changes**, edit the commit message if you
+     like, and click **Commit changes** again.
 
   6. Wait for a few minutes for GitHub to publish your new HTML page.
      Assuming you had named it `foo.html`, now visit
@@ -244,22 +244,25 @@ have noticed that they all begin with this line:
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 ```
 
-This line loads [TeXMe][], a lightweight tool that enables seamless
-rendering of both Markdown and MathJax-flavored LaTeX within the same
-HTML file.  TeXMe processes the remainder of the HTML file and invokes
-a Markdown parser and a LaTeX renderer separately, ensuring that each
-parser only interprets the content meant for it.  This prevents
-conflicts and produces clean, high-quality output.
+This line loads [TeXMe][], a lightweight tool that can seamless render
+content written in a mixture of Markdown and MathJax-flavored LaTeX
+within the same HTML file.  TeXMe processes the remainder of the HTML
+file and invokes a Markdown parser and a LaTeX renderer separately,
+ensuring that each parser only interprets the content meant for it.
+This prevents conflicts and produces clean, high-quality output.
 
-One of the important features of TeXMe is its conformance to the
-GitHub Flavoured Markdown (GFM) specification.  Since GFM is an
-extension of the CommonMark specification, TeXMe also conforms to the
-CommonMark specification as a bonus.  To achieve this, TeXMe invokes a
-very high quality Markdown parser called Marked that is known to parse
-and render GFM text very accurately.  To render MathJax-flavoured
-LaTeX, TeXMe invokes MathJax of course, ensuring accurate mathematical
+One important feature of TeXMe is its conformance to the GitHub
+Flavoured Markdown (GFM) specification.  Since GFM is an extension of
+the CommonMark specification, TeXMe also conforms to the CommonMark
+specification as a bonus.  To achieve this, TeXMe invokes a high
+quality Markdown parser called [Marked][] that is known for parsing
+and rendering GFM text accurately.  To render MathJax-flavoured LaTeX,
+TeXMe invokes [MathJax][] of course, ensuring accurate mathematical
 typesetting.  To read more about TeXMe, visit
 [github.com/susam/texme][TeXMe].
+
+[Marked]: https://github.com/markedjs/marked
+[MathJax]: https://github.com/mathjax/MathJax
 
 
 Why?
@@ -278,7 +281,7 @@ service was powered by MathB, a free and open source software available
 at [github.com/susam/mathb][mathb].
 
 Users appreciated MathB.in for its ease of use and robust support for
-GitHub Flavoured Markdown (GFM), and MathJax-powered LaTeX.  Since GFM
+GitHub Flavoured Markdown (GFM) and MathJax-powered LaTeX.  Since GFM
 is a strict superset of CommonMark, the parsing and rendering of user
 posts conformed to the CommonMark specification as well.
 
@@ -291,6 +294,14 @@ your snippets and notes that are automatically rendered using the
 [TeXMe][texme] parser, the same parser used by MathB.in.  This ensures
 that the parsing accuracy, rendering quality, and Markdown
 compatibility remain just as reliable.
+
+Moreover, by structuring your documents this way, you retain full
+control over your documents and you can host them anywhere you like,
+
+If you are very familiar with web technologies and hosting websites,
+you likely do not need this kit.  In that case, you might want to take
+a look at [TeXMe][texme] and start writing mathematical documents
+directly with it.
 
 [shutdown]: https://susam.net/mathbin-is-shutting-down.html
 [mathb]: https://github.com/susam/mathb
