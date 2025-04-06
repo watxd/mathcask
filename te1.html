@@ -1,10 +1,91 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
-Based on the given table, the polynomial can be written as:
+**Addressing Reviewers' Comments on the Last Page:**
 
-\[ P(x) = 12.15297x^1 - 132.113x^2 + 788.7002x^3 - 2704.91x^4 + 5269.555x^5 - 5010.65x^6 + 0x^7 + 4737.142x^8 - 4125.71x^9 + 1166.803x^{10} \]
+### **1. Chemical Engineering (CHE) Contributions:**
+**Comment:**  
+*"CHE contribution is absent. No engineering design is mentioned. Students should design the electrochemical distiller based on engineering/mathematical principles."*  
 
-Simplifying by omitting the term with a zero coefficient (the \( 0x^7 \) term), the polynomial becomes:
+**Actions Taken:**  
+- **Added detailed design components:**  
+  - **Electrochemical Reactor Design:** CHE students will calculate reaction kinetics (e.g., Tafel equation for electrode efficiency) and optimize parameters (voltage, temperature, electrolyte concentration) using AspenTech simulations.  
+  - **Material Selection:** Conduct experiments to compare graphite vs. stainless steel electrodes, evaluating degradation rates (<5% per 1000 hours) and conductivity.  
+  - **Safety Protocols:** Design fail-safe mechanisms for electrolyte handling (e.g., neutralization tanks for acid/base spills).  
 
-\[ P(x) = 12.15297x - 132.113x^2 + 788.7002x^3 - 2704.91x^4 + 5269.555x^5 - 5010.65x^6 + 4737.142x^8 - 4125.71x^9 + 1166.803x^{10} \]
+**Revised Section:**  
+> *"CHE students will **design the electrochemical reactor** using mass/energy balance models and AspenTech simulations to achieve ≥80% desulfurization efficiency. Electrode materials will be tested under varying voltages (5–45V DC) to validate lifespan constraints. Safety systems (e.g., automated pH neutralization) will be prototyped."*  
 
-This is a 10th-degree polynomial with no constant term (0th power).
+---
+
+### **2. Electrical Engineering (EE) Contributions:**
+**Comment:**  
+*"EE contributions are too general. Safety components and prototyping feasibility are unclear."*  
+
+**Actions Taken:**  
+- **Specified safety and control systems:**  
+  - **Circuit Protection:** Implement fuses, current limiters, and isolation transformers to prevent overloads.  
+  - **Automated Shutoff:** Integrate Arduino-based monitoring to trigger shutdowns if temperature exceeds 75°C or current surpasses 5A.  
+  - **Precision Control:** Use PID algorithms to maintain ±1V accuracy via feedback loops.  
+
+**Revised Section:**  
+> *"EE students will **design a protected power supply** (0–50V DC, ≤5A) with Arduino-controlled shutoffs for overheating/overcurrent. PID loops will adjust voltage dynamically. All circuits will comply with IEC 61010 safety standards."*  
+
+---
+
+### **3. Industrial & Systems Engineering (ISE) Contributions:**
+**Comment:**  
+*"ISE contributions lack specificity. Tools and roadmap are unclear."*  
+
+**Actions Taken:**  
+- **Detailed ISE tools and deliverables:**  
+  - **Techno-Economic Analysis:** Use LCCA (Life Cycle Cost Analysis) in **GAMS** to ensure cost ≤40 SAR/barrel.  
+  - **Process Optimization:** Apply **Six Sigma DMAIC** to reduce energy use by 30%.  
+  - **Risk Assessment:** Conduct **HAZOP** studies to achieve zero critical failures in 6 months.  
+  - **Automation:** Deploy **Python-based predictive models** (TensorFlow) for real-time efficiency monitoring.  
+
+**Revised Section:**  
+> *"ISE students will **optimize costs** via GAMS modeling and **reduce waste** using Six Sigma. **HAZOP** will mitigate risks, while **Python scripts** will automate data logging. Facility layouts will be analyzed via **Arena simulations** to minimize energy use (<10% increase for 2× capacity)."*  
+
+---
+
+### **4. Project Title & Specifications:**
+**Comment:**  
+*"Title is too vague. Constraints need measurable values."*  
+
+**Actions Taken:**  
+- **Revised Title:**  
+  *"Development of a **Modular Electrochemical Desulfurization System** for Cost-Effective Oil Refining"*  
+- **Added Quantifiable Specs:**  
+  - **Desulfurization Rate:** ≥85% (validated via GC analysis).  
+  - **Energy Efficiency:** ≤1.2 kWh/barrel (benchmarked against thermal cracking).  
+
+---
+
+### **5. Prototyping Feasibility:**
+**Comment:**  
+*"Concerns about prototyping implementation."*  
+
+**Actions Taken:**  
+- **Outlined Prototyping Phases:**  
+  1. **Phase 1 (Lab-Scale):** Build a 1L reactor with manual controls (Weeks 1–6).  
+  2. **Phase 2 (Pilot-Scale):** Integrate automation and safety systems (Weeks 7–12).  
+- **Resource Allocation:** Use KFUPM’s **Building 75 lab** for GC testing and **Building 59** for circuit assembly.  
+
+---
+
+### **Summary of Revisions:**  
+| **Reviewer** | **Key Changes Made** |  
+|--------------|----------------------|  
+| **CHE**      | Added reactor design, material testing, and safety protocols. |  
+| **EE**       | Detailed safety circuits, PID control, and Arduino integration. |  
+| **ISE**      | Specified GAMS, Six Sigma, HAZOP, and Python tools. |  
+| **All**      | Clarified title, specs, and prototyping roadmap. |  
+
+**Next Steps:**  
+- Submit revised scope form with highlighted changes.  
+- Schedule follow-up meetings with reviewers to confirm alignment.  
+
+**Attachments:**  
+- Updated Gantt chart with prototyping phases.  
+- Excel files for cost analysis (GAMS outputs) and risk matrices (HAZOP).  
+
+This revision addresses all critiques while strengthening the project’s academic rigor and industrial relevance. Let me know if you'd like further refinements!
