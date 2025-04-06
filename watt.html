@@ -1,135 +1,51 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-### **Energy Balance Equation for a Nonisothermal Batch Reactor**
+In **electrochemical desulfurization**, sulfur-containing compounds (like H₂S or organic sulfides) are removed through redox reactions at the **anode** and **cathode**. The general reactions depend on the electrolyte and sulfur species involved. Below is a typical representation for **H₂S removal** in an aqueous medium:
 
-For a **batch reactor**, the general energy balance is derived from the **First Law of Thermodynamics**, which accounts for the accumulation of energy within the system. The equation is:
+### **Anode (Oxidation):**  
+Here, sulfide (S²⁻) is oxidized to elemental sulfur (S⁰) or sulfate (SO₄²⁻), depending on conditions.  
 
-\[
-\frac{dE}{dt} = \dot{Q} + \dot{W}
-\]
-
-Where:
-- \(\frac{dE}{dt}\) = Rate of energy accumulation in the system.
-- \(\dot{Q}\) = Rate of heat added to the system.
-- \(\dot{W}\) = Rate of work done on the system.
-
----
-
-### **Step-by-Step Derivation**
-
-#### **1. Total Energy of the System**
-The total energy (\(E\)) consists of **internal energy (\(U\))**, **kinetic energy (KE)**, and **potential energy (PE)**. For most chemical reactors, KE and PE are negligible, so:
-
-\[
-E \approx U
-\]
-
-Thus, the rate of energy accumulation is:
-
-\[
-\frac{dE}{dt} = \frac{dU}{dt}
-\]
-
-#### **2. Work Done on the System (\(\dot{W}\))**
-The work term includes:
-- **Flow work** (irrelevant for batch reactors, as there is no continuous flow).
-- **Shaft work** (\(W_s\), e.g., stirring).
-- **Boundary work** (\(W_b\), due to volume changes).
-
-For a batch reactor with negligible shaft work and constant volume (no boundary work):
-
-\[
-\dot{W} \approx 0
-\]
-
-#### **3. Heat Added to the System (\(\dot{Q}\))**
-This represents heat exchange with the surroundings (e.g., heating/cooling jackets):
-
-\[
-\dot{Q} = UA(T' - T)
-\]
-
-Where:
-- \(U\) = Overall heat transfer coefficient.
-- \(A\) = Heat transfer area.
-- \(T'\) = Temperature of the heating/cooling medium.
-- \(T\) = Reactor temperature.
-
-#### **4. Internal Energy Change (\(\frac{dU}{dt}\))**
-For a reacting mixture, internal energy depends on:
-- **Temperature (\(T\))**
-- **Composition (moles of species, \(N_i\))**
-
-Using **enthalpy (\(H = U + PV\))** and assuming constant pressure:
-
-\[
-\frac{dU}{dt} = \frac{dH}{dt} - P \frac{dV}{dt}
-\]
-
-For a **constant-volume batch reactor** (\(\frac{dV}{dt} = 0\)):
-
-\[
-\frac{dU}{dt} = \frac{dH}{dt}
-\]
-
-The enthalpy change is due to:
-- **Sensible heat** (temperature change).
-- **Heat of reaction (\(\Delta H_{RX}\))**.
-
-Thus:
-
-\[
-\frac{dH}{dt} = \sum_{i} N_i C_{pi} \frac{dT}{dt} + \Delta H_{RX}(T) \cdot rV
-\]
-
-Where:
-- \(N_i\) = Moles of species \(i\).
-- \(C_{pi}\) = Heat capacity of species \(i\).
-- \(r\) = Reaction rate.
-- \(V\) = Reactor volume.
-
-#### **5. Final Energy Balance**
-Combining all terms:
-
-\[
-\sum_{i} N_i C_{pi} \frac{dT}{dt} = \dot{Q} - \Delta H_{RX}(T) \cdot rV
-\]
-
-For an **adiabatic batch reactor (\(\dot{Q} = 0\))**:
-
-\[
-\sum_{i} N_i C_{pi} \frac{dT}{dt} = -\Delta H_{RX}(T) \cdot rV
-\]
-
-For a **non-adiabatic reactor with heat exchange**:
-
-\[
-\sum_{i} N_i C_{pi} \frac{dT}{dt} = UA(T' - T) - \Delta H_{RX}(T) \cdot rV
-\]
-
----
-
-### **Key Equations Summary**
-1. **General Form (Non-adiabatic Batch Reactor):**
+1. **Formation of elemental sulfur (S⁰):**  
    \[
-   \frac{dT}{dt} = \frac{UA(T' - T) - \Delta H_{RX}(T) \cdot rV}{\sum_{i} N_i C_{pi}}
+   \text{H}_2\text{S} \rightarrow 2\text{H}^+ + \text{S} + 2\text{e}^-
+   \]  
+   or  
+   \[
+   \text{S}^{2-} \rightarrow \text{S} + 2\text{e}^-
    \]
 
-2. **Adiabatic Batch Reactor (\(\dot{Q} = 0\)):**
+2. **Further oxidation to sulfate (SO₄²⁻) (if over-oxidation occurs):**  
    \[
-   \frac{dT}{dt} = \frac{-\Delta H_{RX}(T) \cdot rV}{\sum_{i} N_i C_{pi}}
+   \text{S} + 4\text{H}_2\text{O} \rightarrow \text{SO}_4^{2-} + 8\text{H}^+ + 6\text{e}^-
    \]
 
-3. **Relating Temperature and Conversion (Adiabatic Case):**
+### **Cathode (Reduction):**  
+The cathode typically involves proton (H⁺) reduction to form hydrogen gas (H₂) or oxygen reduction (if in an O₂-containing system).  
+
+1. **Hydrogen evolution reaction (HER):**  
    \[
-   T = T_o + \frac{[-\Delta H_{RX}(T)]}{\sum_{i} \theta_i C_{pi}} X
+   2\text{H}^+ + 2\text{e}^- \rightarrow \text{H}_2 \quad (\text{in acidic media})
+   \]  
+   or  
+   \[
+   2\text{H}_2\text{O} + 2\text{e}^- \rightarrow \text{H}_2 + 2\text{OH}^- \quad (\text{in alkaline media})
    \]
 
----
+2. **If oxygen is present (for fuel cell-type desulfurization):**  
+   \[
+   \text{O}_2 + 4\text{H}^+ + 4\text{e}^- \rightarrow 2\text{H}_2\text{O}
+   \]
 
-### **Physical Interpretation**
-- **Exothermic Reaction (\(\Delta H_{RX} < 0\)):** Temperature increases with conversion.
-- **Endothermic Reaction (\(\Delta H_{RX} > 0\)):** Temperature decreases with conversion.
-- **Heat Exchange (\(\dot{Q}\)):** Controls temperature by adding/removing heat.
+### **Overall Reaction (for H₂S → S⁰ + H₂):**  
+Combining the half-reactions (assuming sulfur is the product):  
+\[
+\text{H}_2\text{S} \rightarrow \text{S} + \text{H}_2
+\]  
+This is the net desulfurization process, where H₂S is split into **elemental sulfur (S)** and **hydrogen gas (H₂)**.
 
-This derivation ensures proper coupling between **reaction kinetics** and **energy balance**, crucial for designing safe and efficient batch reactors.
+### **Key Notes:**  
+- **In non-aqueous systems**, different sulfur species (e.g., polysulfides, SO₂) may form.  
+- **For organic sulfides (e.g., thiophenes)**, the anode reaction involves C–S bond cleavage, producing hydrocarbons and sulfur.  
+- **The electrolyte (acidic/alkaline/membrane-based)** influences the exact reaction pathways.  
+
+Would you like a more specific reaction for a particular sulfur compound or electrolyte system?
