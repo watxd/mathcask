@@ -1,69 +1,157 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
-# **Derivation of the Design Equation for a Batch Reactor**
+### **Step-by-Step Energy Balance for a Nonisothermal Batch Reactor**
 
-### **General Mole Balance Equation**
-The design equation for a batch reactor is derived from the **general mole balance** for a chemical species \( i \) in a reactor:
+Starting from the **general energy balance** (Page 9) and simplifying for a **batch reactor**, we derive the key equations governing temperature and conversion.
 
+---
+
+### **1. General Energy Balance (Page 9)**
+The **First Law of Thermodynamics** for a batch reactor (no inflow/outflow):  
 \[
-\text{Accumulation} = \text{Input} - \text{Output} + \text{Generation} - \text{Consumption}
+\frac{dE}{dt} = Q + W
+\]  
+Where:  
+- \( E = U + KE + PE \) (total energy)  
+- \( Q \): Heat added to the system (\(+\) if heat flows in).  
+- \( W \): Work done on the system (\(+\) if work is done on the system).  
+
+#### **Assumptions (Pages 10-12)**  
+1. **Neglect kinetic/potential energy** → \( E \approx U \).  
+2. **Work terms**:  
+   - Only **boundary work** (\( W_b = -P \frac{dV}{dt} \)) is significant.  
+   - Shaft work (\( W_s \)) and viscous work (\( W_\mu \)) are negligible.  
+
+Thus:  
+\[
+\frac{dU}{dt} = Q - P \frac{dV}{dt}
 \]
 
-### **Assumptions for a Batch Reactor**
-1. **No input or output streams** (closed system).  
-   → \(\text{Input} = 0\), \(\text{Output} = 0\).  
-2. **Accumulation** = Rate of change of moles of \( i \) in the reactor.  
-   → \(\text{Accumulation} = \frac{dN_i}{dt}\).  
-3. **Net generation** = Reaction rate × Volume.  
-   → \(\text{Generation} - \text{Consumption} = r_i V\).  
+---
 
-### **Applying the Mole Balance**
-Substituting the terms into the general mole balance:
-
+### **2. Express in Terms of Enthalpy (Page 13)**
+Since \( H = U + PV \), we take the time derivative:  
 \[
-\frac{dN_i}{dt} = 0 - 0 + r_i V
-\]
-
-Thus, the **differential form** of the batch reactor design equation is:
-
+\frac{dH}{dt} = \frac{dU}{dt} + P \frac{dV}{dt} + V \frac{dP}{dt}
+\]  
+Substitute \( \frac{dU}{dt} \) from above:  
 \[
-\frac{dN_i}{dt} = r_i V
-\]
+\frac{dH}{dt} = Q + V \frac{dP}{dt}
+\]  
 
-### **Integral Form (Time Required for Reaction)**
-To find the time \( t \) required to reach a certain conversion, we rearrange and integrate:
+---
 
+### **3. Enthalpy as a Function of \( T, P, N_j \) (Page 14)**
+For a reacting mixture, enthalpy depends on:  
+- Temperature (\( T \))  
+- Pressure (\( P \))  
+- Composition (\( N_j \))  
+
+Using the **total differential of \( H \)**:
 \[
-dt = \frac{dN_i}{r_i V}
-\]
+dH = \left( \frac{\partial H}{\partial T} \right)_{P,N_j} dT + \left( \frac{\partial H}{\partial P} \right)_{T,N_j} dP + \sum_j \left( \frac{\partial H}{\partial N_j} \right)_{T,P} dN_j
+\]  
+Where:  
+- \( \left( \frac{\partial H}{\partial T} \right)_{P,N_j} = C_p \) (heat capacity at constant pressure).  
+- \( \left( \frac{\partial H}{\partial P} \right)_{T,N_j} = V(1 - \alpha T) \) (thermal expansion effects).  
+- \( \left( \frac{\partial H}{\partial N_j} \right)_{T,P} = H_j \) (partial molar enthalpy).  
 
+Thus:  
 \[
-t = \int_{N_{i0}}^{N_{if}} \frac{dN_i}{r_i V}
-\]
+\frac{dH}{dt} = C_p \frac{dT}{dt} + V(1 - \alpha T) \frac{dP}{dt} + \sum_j H_j \frac{dN_j}{dt}
+\]  
 
-Where:
-- \( N_{i0} \) = Initial moles of \( i \).
-- \( N_{if} \) = Final moles of \( i \).
-- \( r_i \) = Reaction rate (depends on kinetics).
-- \( V \) = Reactor volume (constant for liquid-phase reactions).
-
-### **Special Case: Constant Volume (Liquid-Phase Reactions)**
-For **constant volume** (e.g., liquid-phase reactions), we express the equation in terms of **concentration** (\( C_i = N_i / V \)):
-
+Since \( \frac{dN_j}{dt} = r_j V \) (reaction rate):  
 \[
-\frac{dC_i}{dt} = r_i
-\]
+\frac{dH}{dt} = C_p \frac{dT}{dt} + V(1 - \alpha T) \frac{dP}{dt} + \sum_j H_j r_j V
+\]  
 
-The **integral form** becomes:
+---
 
+### **4. Heat of Reaction (Page 15)**
+For a reaction \( aA + bB \rightarrow cC + dD \), the **heat of reaction** is:  
 \[
-t = \int_{C_{i0}}^{C_{if}} \frac{dC_i}{r_i}
-\]
+\Delta H_{RX}(T) = \sum_j \nu_j H_j
+\]  
+Where \( \nu_j \) are stoichiometric coefficients (\( \nu_A = -a, \nu_B = -b, \nu_C = +c, \nu_D = +d \)).  
 
-### **Summary of Key Equations**
-| Form | Equation | Application |
-|------|----------|-------------|
-| **Differential** | \(\frac{dN_i}{dt} = r_i V\) | General mole balance |
-| **Integral** | \(t = \int \frac{dN_i}{r_i V}\) | Batch time calculation |
-| **Constant \( V \)** | \(\frac{dC_i}{dt} = r_i\) | Liquid-phase reactions |
+Thus:  
+\[
+\sum_j H_j r_j V = \Delta H_{RX}(T) r V
+\]  
+Where \( r \) is the reaction rate (moles reacted per unit time per unit volume).  
 
-This derivation shows how the batch reactor design equation is obtained from a mole balance and how it can be applied to determine reaction time. The final form depends on whether the reactor volume changes (gas-phase reactions) or remains constant (liquid-phase reactions).
+Substitute back into the energy balance:  
+\[
+\frac{dH}{dt} = C_p \frac{dT}{dt} + V(1 - \alpha T) \frac{dP}{dt} + \Delta H_{RX}(T) r V
+\]  
+
+---
+
+### **5. Combine with Simplified Energy Balance (Page 16)**
+From Step 2:  
+\[
+\frac{dH}{dt} - V \frac{dP}{dt} = Q
+\]  
+Substitute \( \frac{dH}{dt} \):  
+\[
+C_p \frac{dT}{dt} - \alpha T V \frac{dP}{dt} + \Delta H_{RX}(T) r V = Q
+\]  
+
+#### **Case: Constant Pressure (\( \frac{dP}{dt} = 0 \))**  
+\[
+C_p \frac{dT}{dt} = Q - \Delta H_{RX}(T) r V
+\]  
+
+#### **Case: Adiabatic (\( Q = 0 \))**  
+\[
+C_p \frac{dT}{dt} = -\Delta H_{RX}(T) r V
+\]  
+
+---
+
+### **6. Final Form for Batch Reactor (Page 17)**
+For **constant pressure and adiabatic operation**:  
+\[
+\frac{dT}{dt} = \frac{-\Delta H_{RX}(T) r V}{\sum N_i C_{pi}}
+\]  
+Where:  
+- \( C_p = \sum N_i C_{pi} \) (total heat capacity of the mixture).  
+- \( r V = \frac{dX}{dt} \) (conversion rate).  
+
+#### **Coupling with Mole Balance (Design Equation)**  
+For a **batch reactor**, the **mole balance** is:  
+\[
+\frac{dX}{dt} = (-r_A) \frac{V}{N_{A0}}
+\]  
+Thus, the **temperature and conversion are coupled**:  
+\[
+\frac{dT}{dt} = \frac{-\Delta H_{RX}(T)}{\sum N_i C_{pi}} \cdot \frac{dX}{dt}
+\]  
+Integrate to find \( T(X) \):  
+\[
+T = T_0 + \frac{-\Delta H_{RX}(T)}{\sum \theta_i C_{pi}} X
+\]  
+(Where \( \theta_i = \frac{N_{i0}}{N_{A0}} \))  
+
+---
+
+### **Summary: Key Equations for Batch Reactor**
+1. **General Energy Balance (Non-adiabatic, Non-isothermal):**  
+   \[
+   \frac{dT}{dt} = \frac{Q - \Delta H_{RX}(T) r V}{\sum N_i C_{pi}}
+   \]  
+2. **Adiabatic Operation (\( Q = 0 \)):**  
+   \[
+   \frac{dT}{dt} = \frac{-\Delta H_{RX}(T) r V}{\sum N_i C_{pi}}
+   \]  
+3. **Relationship Between \( T \) and \( X \):**  
+   \[
+   T = T_0 + \frac{-\Delta H_{RX}(T)}{\sum \theta_i C_{pi}} X
+   \]  
+
+---
+
+### **Conclusion**
+The **energy balance for a batch reactor** couples temperature and conversion. For **adiabatic** cases, temperature rises (exothermic) or falls (endothermic) linearly with conversion if heat capacities are constant. For **non-adiabatic** cases, heat exchange (\( Q \)) must be included.  
+
+This is essential for designing reactors where temperature control is critical (e.g., avoiding thermal runaway in exothermic reactions).
