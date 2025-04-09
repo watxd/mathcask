@@ -1,134 +1,112 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-MathCask Demo
-=============
+**Title:** Sustainable Design of a Boat Using Polymer Composites  
+**Report Name:** Assignment: Design of a Polymer Composite-Based Boat  
 
+**Report Description:**  
+This report provides a comprehensive overview of the design of a sustainable boat using polymer composites. It explores the historical background, material choices, fabrication methods, advantages and disadvantages of current materials, identifies research gaps, proposes innovative solutions, and projects the expected outcomes. Emphasis is placed on sustainability, environmental impact, and performance.
 
-Binomial Theorem
-----------------
+---
 
-$$ (x+y)^n = \sum_{k=0}^n {n \choose k} x^{n - k} y^k. $$
+### 1. Introduction and Background (30%)
 
+#### History and Relevance of Polymer Composites in Boat Manufacturing
+The marine industry has adopted fiber-reinforced polymer (FRP) composites extensively over the past 50 years. Their initial application was in small craft production due to the significant benefits offered, such as light weight, high durability, and resistance to corrosion and fatigue (Neser, 2017). Glass-reinforced plastic (GRP) became a preferred material by the 1970s, dominating recreational boat manufacturing (Neser, 2017).
 
-Exponential Function
---------------------
+Composites like GRP and carbon-fiber-reinforced polymers have proven critical in enhancing performance, reducing emissions, and meeting sustainability goals. Their use in structures such as hulls, decks, and superstructures leads to a lighter design, improving speed and fuel economy while lowering maintenance needs (Baley et al., 2024; Neser, 2017).
 
-$$ e^x = \lim_{n \to \infty} \left( 1+ \frac{x}{n} \right)^n. $$
+#### Materials Used
+Marine composites typically include:
+- **Matrix Materials:** Polyester, vinyl ester, epoxy resins
+- **Reinforcements:** Glass fiber (GFRP), carbon fiber, aramid
+- **Core Materials (for sandwich construction):** PVC foam, balsa wood
 
+#### Fabrication Methods
+- **Hand lay-up:** Traditional but labor-intensive
+- **Vacuum infusion:** Reduces resin use and emissions (Baley et al., 2024)
+- **Spray lay-up and resin transfer molding (RTM):** Efficient for complex shapes
+- **Autoclave molding:** Used for high-performance parts
 
-Cauchy-Schwarz Inequality
--------------------------
+*Insert Image 1: Diagram of Vacuum Infusion Technique from Baley et al. (2024)*
 
-$$
-  \left( \sum_{k=1}^n a_k b_k \right)^2 \leq
-  \left( \sum_{k=1}^n a_k^2 \right)
-  \left( \sum_{k=1}^n b_k^2 \right).
-$$
+Vacuum infusion, for instance, cuts down on raw material waste and improves fiber volume fraction, reducing long-term operational costs and emissions (Baley et al., 2024).
 
+#### Key Properties
+Polymer composites offer:
+- High strength-to-weight ratio
+- Corrosion and fatigue resistance
+- Superior impact tolerance
+- Design flexibility
 
-Bayes' Theorem
---------------
+These characteristics make polymer composites particularly suitable for marine applications (Baley et al., 2024; Neser, 2017; Dhandapani et al., 2024).
 
-$$ P(A \mid B) = \frac{P(B \mid A) \, P(A)}{P(B)}. $$
+---
 
+### 2. Current Materials: Advantages and Disadvantages (10%)
 
-Euler's Summation Formula
--------------------------
+| Material | Advantages | Disadvantages |
+|---------|-------------|----------------|
+| Glass Fiber Reinforced Plastic (GFRP) | Cost-effective, durable, low maintenance | Difficult to recycle, emits VOCs during production (Baley et al., 2024; Neser, 2017) |
+| Carbon Fiber Composites | Lightweight, high strength and stiffness | High cost, energy-intensive production (Baley et al., 2024) |
+| Biocomposites (e.g., flax, jute) | Renewable, biodegradable, lower carbon footprint | Lower mechanical properties, durability concerns (Baley et al., 2024; Dhandapani et al., 2024) |
 
-**Theorem** (Euler's summation formula). _If $ f $ has a continuous
-derivative $ f' $ on the interval $ [y, x], $ where $ 0 < y < x, $
-then_
-\begin{align}
-  \sum_{y < n \le x} f(n)
-    = & \int_y^x f(t) \, dt + \int_y^x (t - [t]) f'(t) \, dt \notag \\
-      & + f(x)([x] - x) - f(y)([y] - y). \label{theorem}
-\end{align}
+*Insert Table 1: Comparative Properties of Marine Composite Materials*
 
-_Proof._ Let $ m = [y] $, $k = [x].$ For integers $n$ and $n - 1$
-in $[y, x]$ we have
-\begin{align*}
-  \int_{n - 1}^n [t] f'(t) \, dt
-    & = \int_{n - 1}^n (n - 1) f'(t) \, dt \\
-    & = (n - 1) \{ f(n) - f(n - 1) \} \\
-    & = \{n f(n) - (n - 1) f(n - 1)\} - f(n).
-\end{align*}
-Summing from $n = m + 2$ to $n = k$ we find the first sum telescopes,
-hence
-\begin{align*}
-  \int_{m + 1}^k [t] f'(t) \, dt
-    & = k f(k) - (m + 1) f(m + 1) - \sum_{n = m + 2}^k f(n) \\
-    & = k f(k) - m f(m + 1) - \sum_{y < n \le x} f(n).
-\end{align*}
-Therefore
-\begin{align}
-  \sum_{y < n \le x} f(n)
-    & = - \int_{m + 1}^k [t] f'(t) \, dt + k f(k) - m f(m + 1) \notag \\
-    & = - \int_y^x [t] f'(t) \, dt + k f(x) - m f(y). \label{summation}
-\end{align}
-Integration by parts gives us
-$$ \int_y^x f(t) \, dt = x f(x) - y f(y) - \int_y^x t f'(t) \, dt, $$
-and when this is combined with \eqref{summation} we obtain
-\eqref{theorem}. <span style="float:right">&#8718;</span>
+---
 
+### 3. Research Gap (10%)
+Despite advancements, key challenges persist:
+- Limited recycling of thermoset composites due to cross-linked structures (Neser, 2017; Dhandapani et al., 2024)
+- Incomplete integration of end-of-life strategies in early design stages (Baley et al., 2024)
+- Mechanical limitations of bio-based composites restrict their mainstream use (Dhandapani et al., 2024)
+- Difficulty in separating bonded core materials during recycling (Baley et al., 2024)
 
-Hello World Program
--------------------
+Abandoned composite vessels pose significant environmental risks due to their non-degradable nature and embedded hazardous materials (Baley et al., 2024; Dhandapani et al., 2024). According to recent studies, GRP vessels have created a rising problem in marine waste, particularly in estuarine and coastal zones where abandoned boats accumulate and contribute to microplastic pollution (Dhandapani et al., 2024).
 
-Here is an example of `"hello, world"` program written in the C
-programming language:
+---
 
-```
-#include <stdio.h>
+### 4. Proposed Strategies and Opinions (30%)
 
-int main()
-{
-    printf("hello, world\n");
-    return 0;
-}
-```
+#### Solutions by Researchers
+- **Use of thermoplastic resins** that are recyclable and remoldable (Baley et al., 2024; Dhandapani et al., 2024)
+- **Development of green composites** incorporating marine and plant-based fibers (Dhandapani et al., 2024)
+- **Adoption of closed-mold processes** to reduce VOCs and improve workplace safety (Neser, 2017)
+- **Mechanical recycling technologies** for shredded GRP used in secondary applications like artificial wood or construction materials (Dhandapani et al., 2024)
 
+*Insert Image 2: Biocomposite Canoe Example Using Flax/PLA (from Baley et al., 2024)*
 
-Issac Newton Quotes
--------------------
+#### Proposed Design Improvements
+1. **Hybrid Composites:** Blend natural fibers with carbon or glass for performance optimization (Baley et al., 2024; Dhandapani et al., 2024).
+2. **Modular Construction:** Enables disassembly and reuse/recycling of components (Baley et al., 2024).
+3. **Digital Traceability Tags:** Embedding RFID or QR codes to detail material composition (Baley et al., 2024).
+4. **Integrated LCA Tools:** Enhance design decisions by simulating environmental impacts early on (Baley et al., 2024; Neser, 2017).
+5. **Incorporation of recycled GRP filler** in structural or non-load-bearing boat components to reduce landfill waste (Dhandapani et al., 2024).
 
-Issac Newton was relatively modest about his achievements, writing in a
-letter to Robert Hooke in February 1676:
+These strategies can bridge the gap between functionality, sustainability, and regulatory compliance in boat design.
 
-> If I have seen further it is by standing on the shoulders of giants.
+---
 
-In a later memoir, Newton wrote:
+### 5. Expected Results and Conclusions (10%)
 
-> I do not know what I may appear to the world, but to myself I seem to
-> have been only like a boy playing on the sea-shore, and diverting
-> myself in now and then finding a smoother pebble or a prettier shell
-> than ordinary, whilst the great ocean of truth lay all undiscovered
-> before me.
+Implementing these design and material strategies is projected to:
+- Reduce boat weight by 20–50%, leading to fuel efficiency improvements (Baley et al., 2024)
+- Lower lifecycle environmental footprint
+- Facilitate recycling and responsible disposal at end-of-life (Dhandapani et al., 2024)
+- Match or exceed mechanical performance standards of traditional GRP boats (Baley et al., 2024; Dhandapani et al., 2024)
 
-To read more about Newton, see the [Wikipedia entry on Issac Newton][1].
+Polymer composite-based boats, when designed sustainably, present a transformative path forward for marine engineering.
 
-[1]: https://en.wikipedia.org/wiki/Isaac_Newton
+---
 
+### 6. References (10%)
 
-Table of Number Theory Functions
---------------------------------
+Baley, C., Davies, P., Troalen, W., Chamley, A., Dinham-Price, I., Marchandise, A., & Keryvin, V. (2024). *Sustainable polymer composite marine structures: Developments and challenges*. Progress in Materials Science, 145, 101307.
 
-The following table shows information about a few important functions
-in number theory.
+Neser, G. (2017). *Polymer based composites in marine use: History and future trends*. Procedia Engineering, 194, 19–24.
 
-| Name                     | Notation       | First few values                      | Multiplicative property   |
-| ------------------------ | -------------- | ------------------------------------- | ------------------------- |
-| Möbius function          | $ \mu(n) $     | $ 1, -1, -1, 0, -1 $                  | Multiplicative            |
-| Euler's totient function | $ \varphi(n) $ | $ 1, 1, 2, 2, 4 $                     | Multiplicative            |
-| Mangoldt function        | $ \Lambda(n) $ | $ 0, \log 2, \log 3, \log 2, \log 5 $ | Not multiplicative        |
-| Liouville's function     | $ \lambda(n) $ | $ 1, -1, -1, 1, -1 $                  | Completely multiplicative |
+Dhandapani, A., Krishnasamy, S., Thiagamani, S. M. K., Periasamy, D., Muthukumar, C., Sundaresan, T. K., Ali, S., & Kurniawan, R. (2024). *Evolution, prospects, and predicaments of polymers in marine applications: A potential successor to traditional materials*. Recycling, 9(1), 8.
 
+Baley, C., Davies, P., Troalen, W., Chamley, A., Dinham-Price, I., Marchandise, A., & Keryvin, V. (2024). *Sustainable polymer composite marine structures: Developments and challenges* [Author manuscript]. Ifremer Archimer Repository. https://archimer.ifremer.fr/doc/00889/100053/
 
-About This Demo
----------------
+*Note: All content derived and cited exclusively from the provided references.*
 
-This is a demo of a self-rendering Markdown + LaTeX document rendered
-with TeXMe.  To learn more about what TeXMe is and how to use it, visit
-[github.com/susam/texme](https://github.com/susam/texme#texme).
-
-This file is provided with the μBin quick-starter kit.  To learn more
-about μBin, visit [github.com/susam/mathcask](https://github.com/susam/mathcask).
