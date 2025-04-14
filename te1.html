@@ -1,157 +1,194 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
-### **Step-by-Step Energy Balance for a Nonisothermal Batch Reactor**
-
-Starting from the **general energy balance** (Page 9) and simplifying for a **batch reactor**, we derive the key equations governing temperature and conversion.
+Here’s the reorganized and corrected version of the tables from the file, with content properly grouped and formatted for clarity:
 
 ---
 
-### **1. General Energy Balance (Page 9)**
-The **First Law of Thermodynamics** for a batch reactor (no inflow/outflow):  
-\[
-\frac{dE}{dt} = Q + W
-\]  
-Where:  
-- \( E = U + KE + PE \) (total energy)  
-- \( Q \): Heat added to the system (\(+\) if heat flows in).  
-- \( W \): Work done on the system (\(+\) if work is done on the system).  
+### **Table 11.2 (a) Physical Property Heuristics**
 
-#### **Assumptions (Pages 10-12)**  
-1. **Neglect kinetic/potential energy** → \( E \approx U \).  
-2. **Work terms**:  
-   - Only **boundary work** (\( W_b = -P \frac{dV}{dt} \)) is significant.  
-   - Shaft work (\( W_s \)) and viscous work (\( W_\mu \)) are negligible.  
-
-Thus:  
-\[
-\frac{dU}{dt} = Q - P \frac{dV}{dt}
-\]
+| Property          | Units      | Water | Organic Liquids | Steam | Air | Organic Gases |
+|-------------------|------------|-------|------------------|-------|-----|---------------|
+| Heat Capacity    | kJ/kg°C    | 4.2   | 1.0–2.5         | 2.0   | 1.0 | 2.0–4.0       |
+| Density          | kg/m³      | 1000  | 700–1500        | –     | 1.29@STP | –          |
+| Latent Heat      | kJ/kg      | 1200–2100 | –             | –     | –   | –             |
+| Thermal Conductivity | W/m°C | 0.55–0.70 | –           | 0.025–0.07 | 0.025–0.05 | 0.02–0.06 |
+| Viscosity        | kg/m·s     | Wide range (1.8×10⁻³) | – | 10–30×10⁻⁶ | 20–50×10⁻⁶ | 10–30×10⁻⁶ |
+| Prandtl No.      | –          | 1–15  | 10–1000         | 1.0   | 0.7  | 0.7–0.8      |
 
 ---
 
-### **2. Express in Terms of Enthalpy (Page 13)**
-Since \( H = U + PV \), we take the time derivative:  
-\[
-\frac{dH}{dt} = \frac{dU}{dt} + P \frac{dV}{dt} + V \frac{dP}{dt}
-\]  
-Substitute \( \frac{dU}{dt} \) from above:  
-\[
-\frac{dH}{dt} = Q + V \frac{dP}{dt}
-\]  
+### **Table 11.2 (b) Typical Physical Property Variations with Temperature and Pressure**
+
+| Property        | Liquids (Temperature) | Liquids (Pressure) | Gases (Temperature) | Gases (Pressure) |
+|----------------|-----------------------|--------------------|---------------------|------------------|
+| Density       | Significant           | Negligible         | \( \rho = \frac{MW}{ZRT} \) | \( \rho = \frac{MW \cdot P}{ZRT} \) |
+| Viscosity     | Significant           | Negligible         | \( \mu \propto \frac{T^{1.5}}{T + 1.47T_c} \) | Significant (>10 bar) |
+| Vapor Pressure | \( P^* = f(T) \)      | –                  | –                   | –                |
+
+**Notes:**  
+- \( T_c \): Critical temperature (K), \( T_b \): Normal boiling point (K), \( MW \): Molecular weight.  
+- \( P \): Pressure, \( Z \): Compressibility, \( R \): Gas constant, \( P^* \): Vapor pressure.  
 
 ---
 
-### **3. Enthalpy as a Function of \( T, P, N_j \) (Page 14)**
-For a reacting mixture, enthalpy depends on:  
-- Temperature (\( T \))  
-- Pressure (\( P \))  
-- Composition (\( N_j \))  
+### **Table 11.3 Capacities of Process Units in Common Usage**
 
-Using the **total differential of \( H \)**:
-\[
-dH = \left( \frac{\partial H}{\partial T} \right)_{P,N_j} dT + \left( \frac{\partial H}{\partial P} \right)_{T,N_j} dP + \sum_j \left( \frac{\partial H}{\partial N_j} \right)_{T,P} dN_j
-\]  
-Where:  
-- \( \left( \frac{\partial H}{\partial T} \right)_{P,N_j} = C_p \) (heat capacity at constant pressure).  
-- \( \left( \frac{\partial H}{\partial P} \right)_{T,N_j} = V(1 - \alpha T) \) (thermal expansion effects).  
-- \( \left( \frac{\partial H}{\partial N_j} \right)_{T,P} = H_j \) (partial molar enthalpy).  
+| Process Unit          | Capacity (Unit) | Max. Value | Min. Value | Comment |
+|-----------------------|-----------------|------------|------------|---------|
+| **Horizontal Vessel** | Pressure (bar)  | 400        | Vacuum     | \( L/D \) typically 2–5 |
+|                       | Temp. (°C)      | 400        | -200       | See Table 11.6 |
+|                       | Height (m)      | 10         | 2          | –       |
+|                       | Diameter (m)    | 2          | 0.3        | –       |
+| **Vertical Vessel**   | Pressure (bar)  | 400        | Vacuum     | \( L/D \) typically 2–5 |
+|                       | Temp. (°C)      | 400        | -200       | –       |
+|                       | Height (m)      | 10         | 2          | –       |
+| **Towers**           | Pressure (bar)  | 400        | Vacuum     | Diameter \( L/D \) 0.5–40 |
+|                       | Height (m)      | 50         | 2          | –       |
+|                       | Diameter (m)    | 4          | 0.3        | –       |
+| **Pumps**            | Power (kW)      | 250        | <0.1       | –       |
+| **Compressors**      | Power (kW)      | 8000       | 50         | –       |
+| **Heat Exchangers**  | Area (m²)       | 1000       | 10         | For <10 m², use double pipe |
 
-Thus:  
-\[
-\frac{dH}{dt} = C_p \frac{dT}{dt} + V(1 - \alpha T) \frac{dP}{dt} + \sum_j H_j \frac{dN_j}{dt}
-\]  
-
-Since \( \frac{dN_j}{dt} = r_j V \) (reaction rate):  
-\[
-\frac{dH}{dt} = C_p \frac{dT}{dt} + V(1 - \alpha T) \frac{dP}{dt} + \sum_j H_j r_j V
-\]  
+**Notes:**  
+- \( L/D \): Length-to-diameter ratio.  
+- For towers, \( L/D > 30 \) requires special design.  
 
 ---
 
-### **4. Heat of Reaction (Page 15)**
-For a reaction \( aA + bB \rightarrow cC + dD \), the **heat of reaction** is:  
-\[
-\Delta H_{RX}(T) = \sum_j \nu_j H_j
-\]  
-Where \( \nu_j \) are stoichiometric coefficients (\( \nu_A = -a, \nu_B = -b, \nu_C = +c, \nu_D = +d \)).  
+### **Table 11.4 Effect of Materials of Construction**
 
-Thus:  
-\[
-\sum_j H_j r_j V = \Delta H_{RX}(T) r V
-\]  
-Where \( r \) is the reaction rate (moles reacted per unit time per unit volume).  
-
-Substitute back into the energy balance:  
-\[
-\frac{dH}{dt} = C_p \frac{dT}{dt} + V(1 - \alpha T) \frac{dP}{dt} + \Delta H_{RX}(T) r V
-\]  
+| Material          | Advantages | Disadvantages |
+|-------------------|------------|---------------|
+| **Metals**        |            |               |
+| Carbon Steel      | Low cost, abrasion-resistant | Poor acid resistance, discoloration |
+| Stainless Steel   | Acid-resistant, reduces discoloration | Expensive, fabrication challenges |
+| **Nonmetals**     |            |               |
+| Glass             | Low diffusion, batch use | Fragile, poor heat transfer |
+| Plastics          | Low cost, easy fabrication | Low strength, high temp. limits |
+| Ceramics          | High temp. resistance | Poor abrasion properties |
 
 ---
 
-### **5. Combine with Simplified Energy Balance (Page 16)**
-From Step 2:  
-\[
-\frac{dH}{dt} - V \frac{dP}{dt} = Q
-\]  
-Substitute \( \frac{dH}{dt} \):  
-\[
-C_p \frac{dT}{dt} - \alpha T V \frac{dP}{dt} + \Delta H_{RX}(T) r V = Q
-\]  
+### **Table 11.5 Heuristics for Drivers and Power Recovery Equipment**
 
-#### **Case: Constant Pressure (\( \frac{dP}{dt} = 0 \))**  
-\[
-C_p \frac{dT}{dt} = Q - \Delta H_{RX}(T) r V
-\]  
-
-#### **Case: Adiabatic (\( Q = 0 \))**  
-\[
-C_p \frac{dT}{dt} = -\Delta H_{RX}(T) r V
-\]  
+1. **Efficiencies**: Electric motors (85–95%), steam turbines (42–78%), gas turbines (28–38%).  
+2. **<75 kW**: Electric motors preferred.  
+3. **>75 kW**: Steam turbines competitive (speed controllable).  
+4. **Power Recovery**: Gas expanders justified for >100 hp.  
+5. **Definitions**:  
+   - Shaft power = Theoretical power / Pump efficiency.  
+   - Drive power = Shaft power / Drive efficiency.  
 
 ---
 
-### **6. Final Form for Batch Reactor (Page 17)**
-For **constant pressure and adiabatic operation**:  
-\[
-\frac{dT}{dt} = \frac{-\Delta H_{RX}(T) r V}{\sum N_i C_{pi}}
-\]  
-Where:  
-- \( C_p = \sum N_i C_{pi} \) (total heat capacity of the mixture).  
-- \( r V = \frac{dX}{dt} \) (conversion rate).  
+### **Table 11.6 Heuristics for Process Vessels (Drums)**
 
-#### **Coupling with Mole Balance (Design Equation)**  
-For a **batch reactor**, the **mole balance** is:  
-\[
-\frac{dX}{dt} = (-r_A) \frac{V}{N_{A0}}
-\]  
-Thus, the **temperature and conversion are coupled**:  
-\[
-\frac{dT}{dt} = \frac{-\Delta H_{RX}(T)}{\sum N_i C_{pi}} \cdot \frac{dX}{dt}
-\]  
-Integrate to find \( T(X) \):  
-\[
-T = T_0 + \frac{-\Delta H_{RX}(T)}{\sum \theta_i C_{pi}} X
-\]  
-(Where \( \theta_i = \frac{N_{i0}}{N_{A0}} \))  
+1. **Holdup Time**: 5 min (reflux drums), 30 min (furnace feed).  
+2. **Gas/Liquid Separators**: Vertical, gas velocity \( u = k \sqrt{\rho_L - \rho_G} \).  
+3. **Mesh Pads**: 15 cm thickness for 99% entrainment removal.  
 
 ---
 
-### **Summary: Key Equations for Batch Reactor**
-1. **General Energy Balance (Non-adiabatic, Non-isothermal):**  
-   \[
-   \frac{dT}{dt} = \frac{Q - \Delta H_{RX}(T) r V}{\sum N_i C_{pi}}
-   \]  
-2. **Adiabatic Operation (\( Q = 0 \)):**  
-   \[
-   \frac{dT}{dt} = \frac{-\Delta H_{RX}(T) r V}{\sum N_i C_{pi}}
-   \]  
-3. **Relationship Between \( T \) and \( X \):**  
-   \[
-   T = T_0 + \frac{-\Delta H_{RX}(T)}{\sum \theta_i C_{pi}} X
-   \]  
+### **Table 11.7 Heuristics for Pressure and Storage Vessels**
+
+1. **Design Pressure**: 10% or 0.69–1.7 bar above operating pressure.  
+2. **Wall Thickness**: 6.4 mm (≤1.07 m dia.), 8.1 mm (1.07–1.52 m dia.).  
+3. **Storage Tanks**:  
+   - <3.8 m³: Vertical on legs.  
+   - 3.8–38 m³: Horizontal on supports.  
+   - >38 m³: Vertical on concrete pads.  
 
 ---
 
-### **Conclusion**
-The **energy balance for a batch reactor** couples temperature and conversion. For **adiabatic** cases, temperature rises (exothermic) or falls (endothermic) linearly with conversion if heat capacities are constant. For **non-adiabatic** cases, heat exchange (\( Q \)) must be included.  
+### **Table 11.8 Heuristics for Piping**
 
-This is essential for designing reactors where temperature control is critical (e.g., avoiding thermal runaway in exothermic reactions).
+1. **Line Velocities**:  
+   - Liquid pump discharge: \( u = (5 + D/3) \) ft/s, \( \Delta P = 2.0 \) psi/100 ft.  
+   - Gas/steam: \( u = 20D \) ft/s, \( \Delta P = 0.5 \) psi/100 ft.  
+2. **Valves**: Globe valves for gases, gate valves for liquids.  
+
+---
+
+### **Table 11.9 Heuristics for Pumps**
+
+1. **Power**: \( \text{kW} = 1.67 \times \text{Flow (m³/min)} \times \Delta P (\text{bar}) / \text{Efficiency} \).  
+2. **NPSH**: 1.2–6.1 m of liquid to avoid cavitation.  
+3. **Centrifugal Pumps**: Max. head = 152 m (single-stage), 1675 m (multistage).  
+
+---
+
+### **Table 11.10 Heuristics for Compressors**
+
+1. **Theoretical Power**: \( P = m z_1 R T_1 \left( \left( \frac{P_2}{P_1} \right)^a - 1 \right) / a \).  
+2. **Outlet Temp.**: \( T_2 = T_1 \left( \frac{P_2}{P_1} \right)^a \).  
+3. **Staging**: Compression ratio per stage = \( (P_{\text{final}} / P_{\text{initial}})^{1/n} \).  
+
+---
+
+### **Table 11.11 Heuristics for Heat Exchangers**
+
+1. **Shell-and-Tube**:  
+   - Tube side: Corrosive/high-pressure fluids.  
+   - Shell side: Viscous/condensing fluids.  
+2. **Approach Temp.**: 10°C (fluids), 5°C (refrigerants).  
+3. **Cooling Water**: Inlet = 30°C, outlet ≤45°C.  
+
+---
+
+### **Table 11.12 Heuristics for Thermal Insulation**
+
+1. **Materials**:  
+   - ≤345°C: 85% magnesia.  
+   - ≤1040°C: Asbestos-diatomaceous earth.  
+2. **Thickness**: 1.27 cm (95°C), 3.2 cm (315°C).  
+
+---
+
+### **Table 11.13 Heuristics for Distillation**
+
+1. **Reflux Ratio**: 1.2–1.5 × minimum.  
+2. **Trays**: Optimum = 2 × minimum.  
+3. **Sequencing**: Easiest separation first (highest volatility or concentration).  
+
+---
+
+### **Table 11.14 Heuristics for Tray Towers**
+
+1. **Tray Spacing**: 0.5–0.6 m.  
+2. **Efficiency**: 60–90% (distillation), 10–20% (absorption).  
+3. **Pressure Drop**: 0.007 bar/tray.  
+
+---
+
+### **Table 11.15 Heuristics for Packed Towers**
+
+1. **Packing Size**: 2.5 cm (<14.2 m³/min), 5 cm (>56.6 m³/min).  
+2. **HETS**: 0.4–0.56 m (2.5 cm pall rings).  
+3. **Liquid Distributors**: Every 5–10 tower diameters.  
+
+---
+
+### **Table 11.16 Heuristics for Extraction**
+
+1. **Dispersed Phase**: Higher flow rate or less wetting.  
+2. **Mixer-Settlers**: ≤5 stages, 30–60 min residence time.  
+3. **Packed Towers**: HETS = 1.5–3.0 m.  
+
+---
+
+### **Table 11.17 Heuristics for Reactors**
+
+1. **Catalyst Size**: 0.1 mm (fluidized), 2–5 mm (fixed bed).  
+2. **CSTR**: 5–10× mixing time for homogeneity.  
+3. **Temperature Effect**: Rate doubles per 10°C rise.  
+
+---
+
+### **Table 11.18 Heuristics for Refrigeration**
+
+1. **Refrigerants**: Ammonia (-45°C), propane (-100°C).  
+2. **Compression Ratio**: ≤4 (single-stage).  
+3. **Absorption Refrigeration**: Economical with waste steam.  
+
+---
+
+This reorganization ensures clarity, corrects formatting errors, and groups related information logically. Let me know if further refinements are needed!
