@@ -1,95 +1,45 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-Absolutely — here’s a professionally written solution for **Part (e)** of the problem, clearly showing all steps, **substitutions**, and **units** for a combined **CSTR + PFR design** with 99% conversion.
+
+Here’s the rewritten version with explicit units for the gas constant \( R \) and temperature \( T \), while keeping everything else the same:  
 
 ---
 
-## ✅ Part (e): Reactor Scheme for 99% Conversion of A
+If we observe that \( E_2 \) has the lowest activation energy, higher selectivity is achieved at lower temperatures. However, this comes at the cost of a reduced reaction rate for species \( B \), leading to lower production of \( B \) as temperature decreases. Therefore, a balance must be struck between achieving high selectivity and maintaining sufficient production. To accomplish this, we require expressions for \( k_1 \), \( k_2 \), and \( k_3 \) as functions of temperature. From the provided data, we know:  
 
-### **Design Strategy**:
+\[ k_i = A_i \, e^{\left( \frac{-E_i}{R T} \right)} \]  
 
-To achieve **99% conversion**, we use:
+where:  
+- \( R = 1.98 \, \text{cal/(mol·K)} \) (gas constant)  
+- \( T \) is in **Kelvin (K)**  
 
-* A **CSTR** to reach the optimal concentration $C_A^* = 0.040 \, \text{mol/dm}^3$
-* Followed by a **PFR** to complete conversion to $X = 0.99$
+Given the rate constants at \( T = 300 \, \text{K} \), we can solve for \( A_i \):  
 
----
+\[ A_1 = \frac{0.004 \, (\text{mol/dm}^3)^{1/2} \cdot \text{min}^{-1}}{e^{\left( \frac{-20000 \, \text{cal/mol}}{1.98 \, \text{cal/(mol·K)} \times 300 \, \text{K}} \right)}} = 1.49 \times 10^{12} \, (\text{mol/dm}^3)^{1/2} \cdot \text{min}^{-1} \]  
 
-### 🔹 **Step 1: CSTR Volume**
+\[ A_2 = \frac{0.3 \, \text{min}^{-1}}{e^{\left( \frac{-10000 \, \text{cal/mol}}{1.98 \, \text{cal/(mol·K)} \times 300 \, \text{K}} \right)}} = 5.79 \times 10^6 \, \text{min}^{-1} \]  
 
-From part (b):
+\[ A_3 = \frac{0.25 \, \text{dm}^3/\text{mol} \cdot \text{min}}{e^{\left( \frac{-30000 \, \text{cal/mol}}{1.98 \, \text{cal/(mol·K)} \times 300 \, \text{K}} \right)}} = 1.798 \times 10^{21} \, \text{dm}^3/\text{mol} \cdot \text{min} \]  
 
-$$
-V_{\text{CSTR}} = 92.7 \, \text{dm}^3 \quad (\text{from exit } C_A^* = 0.040)
-$$
+The mole balance on species \( A \) is given by:  
 
-This gives a conversion of:
+\[ V = \frac{F_{A0} - F_A}{-r_A} \]  
 
-$$
-X_{\text{CSTR}} = 1 - \frac{C_A^*}{C_{A0}} = 1 - \frac{0.040}{0.1624} = 0.7537 \approx 0.74
-$$
+\[ V = \frac{v(C_{A0} - C_A)}{-r_A} \]  
 
----
+\[ \tau = \frac{C_{A0} - C_A}{-r_A} = \frac{C_{A0} - C_A}{k_1 C_A^{0.5} + k_2 C_A + k_3 C_A^2} \]  
 
-### 🔹 **Step 2: Mole Balance for PFR**
+For the other species, the mole balance yields:  
 
-For the PFR:
+\[ F_i = v C_i = r_i V \]  
 
-$$
-\frac{dV}{dX} = \frac{F_{A0}}{-r_A}
-\quad \Rightarrow \quad 
-V_{\text{PFR}} = F_{A0} \int_{0.74}^{0.99} \frac{dX}{-r_A}
-$$
+\[ C_i = \tau r_i \]  
 
-Where:
+---  
 
-* $F_{A0} = C_{A0} \cdot v_0 = 0.1624 \, \text{mol/dm}^3 \cdot 10 \, \text{dm}^3/\text{min} = 1.624 \, \text{mol/min}$
+### Key Changes:  
+1. Explicitly stated the units of \( R \) (**cal/(mol·K)**) and \( T \) (**K**).  
+2. Kept all other equations, notation, and units unchanged.  
+3. Maintained consistency with the original problem statement.  
 
----
-
-### 🔹 **Step 3: Rate Expression for $r_A$**
-
-$$
--r_A = k_1 C_A^{1/2} + k_2 C_A + k_3 C_A^2
-$$
-
-With:
-
-* $k_1 = 0.004 \, \left( \frac{\text{mol}}{\text{dm}^3} \right)^{1/2} \cdot \text{min}^{-1}$
-* $k_2 = 0.3 \, \text{min}^{-1}$
-* $k_3 = 0.25 \, \frac{\text{dm}^3}{\text{mol} \cdot \text{min}}$
-
-We need to express $C_A$ in terms of conversion $X$:
-
-$$
-C_A = C_{A0}(1 - X) = 0.1624(1 - X)
-$$
-
----
-
-### 🔹 **Step 4: Substituted Integral**
-
-$$
-\begin{aligned}
-V_{\text{PFR}} &= 1.624 \, \text{mol/min} \cdot \int_{0.74}^{0.99} \frac{dX}{
-k_1 \left(0.1624(1 - X)\right)^{1/2} 
-+ k_2 \cdot 0.1624(1 - X) 
-+ k_3 \cdot \left(0.1624(1 - X)\right)^2
-} \\
-&= \text{(integral evaluated numerically)} = 92.8 \, \text{dm}^3
-\end{aligned}
-$$
-
----
-
-### ✅ Final Result:
-
-$$
-\boxed{
-\text{Total reactor system: CSTR (92.7 dm}^3\text{) + PFR (92.8 dm}^3\text{)} = 185.5 \, \text{dm}^3
-}
-$$
-
-This design ensures 99% conversion while **maximizing the selectivity** toward desired product B by exploiting $S_{B/XY}$ optimization in the CSTR.
-
-Would you like the integral evaluated numerically in MATLAB too?
+Let me know if you'd like any further modifications!
