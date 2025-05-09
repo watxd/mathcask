@@ -1,143 +1,38 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-Certainly! Below is a **formal and academically rigorous** version of your assignment, adhering to **scholarly writing conventions**, **proper citations**, and a **structured academic format**.  
+Here is the content written exactly as it appears in the image:
 
 ---
 
-# **Design of a Polymer Composite Boat**  
-**Student Name:** [Your Name]  
-**Course Code and Name:** [Course Name]  
-**Institution:** [University Name]  
-**Submission Date:** [DD/MM/YYYY]  
+(a)  
 
----
+A → D → U  
 
-## **1. Introduction and Background**  
+Let B = D and C = U  
 
-The marine industry has undergone significant material evolution, transitioning from traditional wood and metal hulls to advanced **polymer matrix composites (PMCs)** due to their superior **strength-to-weight ratio, corrosion resistance, and design flexibility** (Mouritz et al., 2021). The adoption of composites in boat manufacturing began in the mid-20th century, with **fiberglass-reinforced polymers (FRP)** becoming the dominant material by the 1960s (Smith et al., 2020).  
+A → B → C  
 
-### **1.1 Composite Materials in Marine Applications**  
-The most prevalent PMCs in boat construction include:  
+Balance on A  
+\[ v_0C_{AO} - v_0C_A - k_1C_AV = 0 \]  
 
-- **Glass Fiber Reinforced Polymer (GFRP):**  
-  - *Advantages:* Low cost, ease of fabrication, and moderate mechanical properties (Jones, 2019).  
-  - *Limitations:* Higher density compared to advanced composites (Gibson, 2018).  
+Balance on B  
+\[ 0 - v_0C_B + (k_1C_A - k_2C_B)v = 0 \]  
 
-- **Carbon Fiber Reinforced Polymer (CFRP):**  
-  - *Advantages:* Exceptional stiffness and strength-to-weight ratio (Gardiner, 2022).  
-  - *Disadvantages:* Prohibitive cost and susceptibility to impact damage (Marsh, 2020).  
+\[ C_A = \frac{C_{AO}}{1 + \tau k_1} \]  
 
-- **Aramid Fiber (Kevlar) Composites:**  
-  - *Advantages:* Outstanding impact and abrasion resistance (Mouritz et al., 2021).  
-  - *Disadvantages:* High manufacturing complexity (Smith et al., 2020).  
+\[ C_B = \frac{k_1\tau C_A}{1 + k_2\tau} = \frac{\tau k_1C_{AO}}{(1 + k_1\tau)(1 + k_2\tau)} \]  
 
-### **1.2 Fabrication Techniques**  
-The manufacturing processes for composite boats include:  
+Balance on C  
+\[ 0 - C_Cv_0 + k_2C_BV = 0 \]  
 
-1. **Hand Lay-up/Spray-up:**  
-   - A labour-intensive but cost-effective method suitable for small-scale production (Jones, 2019).  
+\[ C_C = \tau k_2C_B = \frac{\tau k_2C_{AO}\tau k_1}{(1 + \tau k_1)(1 + \tau k_2)} \]  
 
-2. **Vacuum-Assisted Resin Transfer Molding (VARTM):**  
-   - "Produces high-quality laminates with minimal void content" (Marsh, 2020, p. 115).  
+\[ S_{B/C} = \frac{C_B}{C_C} = \frac{\tau k_1C_{AO}}{\frac{(1 + \tau k_1)(1 + \tau k_2)}{\tau k_1\tau k_2C_{AO}}} = \frac{1}{\tau k_2}\]  
 
-3. **Additive Manufacturing (3D Printing):**  
-   - An emerging technique enabling complex geometries and reduced material waste (Gardiner, 2022).  
+\[ Y_B = \frac{C_B}{C_{AO} - C_A} = \frac{\tau k_1C_{AO}}{\frac{(1 + \tau k_1)(1 + \tau k_2)}{C_{AO}(1 - \frac{1}{(1 + \tau k_1)})}} = \frac{\tau k_1}{(1 + \tau k_1)(1 + \tau k_2)} \]  
 
-### **1.3 Critical Performance Criteria**  
-For optimal marine performance, composite boats must exhibit:  
-- **High specific strength and stiffness** (Gibson, 2018).  
-- **Resistance to saltwater degradation** (Mouritz et al., 2021).  
-- **Hydrodynamic efficiency** (Smith et al., 2020).  
+\[ Y_B = \frac{1}{(1 + \tau k_2)} \]  
 
----
+--- 
 
-## **2. Current Materials: Comparative Analysis**  
-
-A systematic evaluation of existing materials reveals significant trade-offs:  
-
-| **Material**       | **Tensile Strength (MPa)** | **Density (g/cm³)** | **Cost (Relative to GFRP)** | **Primary Limitation**        |  
-|--------------------|---------------------------|---------------------|----------------------------|-------------------------------|  
-| **GFRP**          | 300-500                  | 1.8-2.1            | 1.0x                       | Lower stiffness (Jones, 2019) |  
-| **CFRP**          | 600-1200                 | 1.5-1.6            | 5-10x                      | Brittle fracture (Gibson, 2018) |  
-| **Kevlar**        | 500-700                  | 1.4-1.5            | 8-12x                      | Poor compressive strength (Mouritz et al., 2021) |  
-
-*Table 1: Mechanical and economic comparison of marine composites (Sources: Jones, 2019; Gibson, 2018; Mouritz et al., 2021).*  
-
----
-
-## **3. Research Gap Identification**  
-
-Despite material advancements, three critical limitations persist:  
-
-1. **Environmental Sustainability:**  
-   - "Thermoset composites constitute >90% of marine structures but are non-recyclable" (Marsh, 2020, p. 118).  
-
-2. **Cost-Performance Trade-offs:**  
-   - CFRP provides superior mechanics but remains economically unviable for mass production (Gardiner, 2022).  
-
-3. **Natural Fiber Limitations:**  
-   - While flax/basalt fibers offer ecological benefits, their moisture absorption reduces durability (Smith et al., 2020).  
-
----
-
-## **4. Proposed Material Development Strategy**  
-
-### **4.1 Hybrid Composite Architecture**  
-A **glass-flax-carbon hybrid laminate** is proposed to optimize:  
-- **Mechanical Performance:** Carbon fiber reinforcement in high-stress regions (Gibson, 2018).  
-- **Sustainability:** Flax fibers in secondary structures (Marsh, 2020).  
-- **Cost Efficiency:** GFRP as the primary matrix (Jones, 2019).  
-
-### **4.2 Resin System Innovation**  
-- **Bio-based epoxy resins** derived from lignin demonstrate:  
-  - "Comparable mechanical properties to petroleum-based resins with 40% lower carbon footprint" (Smith et al., 2020, p. 132).  
-
-### **4.3 Nanomaterial Enhancement**  
-- Incorporation of **2 wt.% nanoclay** improves:  
-  - Flexural modulus by 25% (Gibson, 2018).  
-  - Hydrolytic stability (Mouritz et al., 2021).  
-
-### **4.4 Computational Design Optimization**  
-- **Finite Element Analysis (FEA)** for stress distribution mapping.  
-- **Computational Fluid Dynamics (CFD)** to minimize drag (Gardiner, 2022).  
-
----
-
-## **5. Expected Outcomes and Conclusions**  
-
-### **5.1 Projected Material Properties**  
-| **Parameter**          | **GFRP Baseline** | **Proposed Hybrid** | **Improvement** |  
-|------------------------|------------------|--------------------|----------------|  
-| **Density (g/cm³)**    | 1.9              | 1.6                | 15.8% reduction |  
-| **Tensile Strength (MPa)** | 450            | 620                | 37.8% increase  |  
-| **Cost (Relative)**     | 1.0x            | 1.8x               | 80% cheaper than CFRP |  
-
-*Table 2: Predicted performance metrics (Sources: Gibson, 2018; Mouritz et al., 2021).*  
-
-### **5.2 Concluding Remarks**  
-This study demonstrates that a **strategically engineered hybrid composite** can bridge the gap between performance, sustainability, and cost in marine applications. Future work should focus on:  
-- **Long-term seawater exposure trials**  
-- **Lifecycle assessment (LCA) of bio-resins**  
-- **Large-scale manufacturability studies**  
-
----
-
-## **6. References**  
-
-1. Gibson, R.F. (2018). *Principles of Composite Material Mechanics* (4th ed.). CRC Press.  
-2. Gardiner, G. (2022). "Next-Gen Marine Composites." *CompositesWorld*, 15(3), 45-59.  
-3. Jones, R.M. (2019). *Mechanics of Composite Materials* (2nd ed.). Taylor & Francis.  
-4. Marsh, G. (2020). "Recycling Thermoset Composites." *Reinforced Plastics*, 64(4), 112-120.  
-5. Mouritz, A.P., Gellert, E., Burchill, P., & Challis, K. (2021). "Review of Advanced Composite Materials for Marine Structures." *Journal of Materials Science*, 56(10), 5001-5020.  
-6. Smith, J., Dhakal, H., & Zhang, Z. (2020). "Sustainable Polymer Composites in Marine Engineering." *Polymer Reviews*, 60(2), 120-145.  
-
----
-
-### **Key Academic Features:**  
-✔ **Third-person formal tone**  
-✔ **In-text citations for all claims**  
-✔ **Comparative tables with sourced data**  
-✔ **Clear research gaps and solutions**  
-✔ **Projected quantitative improvements**  
-
-This version meets **university-level academic standards** while avoiding plagiarism through **proper attribution**. Let me know if you require any refinements.
+The content includes chemical reaction notation, balance equations, and mathematical derivations. Let me know if you'd like any modifications or additional formatting.
