@@ -1,45 +1,17 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
 
-Here’s the rewritten version with explicit units for the gas constant \( R \) and temperature \( T \), while keeping everything else the same:  
+Here is a table summarizing the applications, advantages, and disadvantages of selected fabrication methods, using the exact wording from the file:
 
----
+| **Fabrication Method** | **Applications**                                  | **Advantages**                                                                 | **Disadvantages**                                                                 |
+|------------------------|--------------------------------------------------|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| **Hand Lay-up**        | Large commercial parts, where cost is more important than high strength or low weight | - Low cost tools<br>- Versatile: wide range of products<br>- Relatively low cost tooling | - Time consuming<br>- Easy to form air bubbles and disorientation of fibers<br>- Inconsistency |
+| **Vacuum Bag Moulding** | Large commercial parts, where cost is more important than high strength or low weight | - Simple design<br>- Any fiber/matrix combination<br>- Better quality for the cost | - Cannot be heated up too much<br>- Low pressure (760 mm Hg the most)<br>- Slowest speed |
+| **Autoclave Moulding** | High performance military and aerospace components and thermal cores | - High quality<br>- High strength<br>- Elevated pressure yields low void content | - Relatively high cost of tooling<br>- Size limited by autoclave<br>- High fiber volume fraction requires elevated pressure |
+| **Resin Transfer Moulding (RTM)** | Military and aerospace applications, large-volume commercial parts, small enclosures and keyboards | - Good surface finish on both sides<br>- Selective reinforcement and accurate fiber management<br>- Low pressure injection | - Waste some material (spill)<br>- Curing time long<br>- Hard for intricate parts |
+| **Compression Moulding** | Electronic module covers and small electronic enclosures | - Wide range of shapes<br>- Consistency<br>- Structural stability | - High cost of machine<br>- Expensive molds (strong materials required)<br>- No intricate parts |
+| **Filament Winding**   | Gas tanks, aerospace parts, compressed air tanks, sail boat masts | - Quick, easy to handle package<br>- Parts can have huge size<br>- Low manufacturing costs if high throughput | - Shape of the products limited (only cylindrical possible)<br>- Curing by heat is not easy to apply<br>- Spinning speed is limited |
+| **Injection Moulding** | Complex geometries with tight tolerances, wide range of materials and colors | - Very efficient<br>- High repeatability and reliability<br>- Reuse material | - Start-up costs are high<br>- Initial lead times are long<br>- Design changes are expensive |
+| **3D Printing**        | Customized and complex geometries, lightweight design, small-batch production | - Material efficiency<br>- Reduced lead times<br>- On-demand manufacturing | - Limited material choices<br>- Mechanical properties variability<br>- Print size limitations |
 
-If we observe that \( E_2 \) has the lowest activation energy, higher selectivity is achieved at lower temperatures. However, this comes at the cost of a reduced reaction rate for species \( B \), leading to lower production of \( B \) as temperature decreases. Therefore, a balance must be struck between achieving high selectivity and maintaining sufficient production. To accomplish this, we require expressions for \( k_1 \), \( k_2 \), and \( k_3 \) as functions of temperature. From the provided data, we know:  
-
-\[ k_i = A_i \, e^{\left( \frac{-E_i}{R T} \right)} \]  
-
-where:  
-- \( R = 1.98 \, \text{cal/(mol·K)} \) (gas constant)  
-- \( T \) is in **Kelvin (K)**  
-
-Given the rate constants at \( T = 300 \, \text{K} \), we can solve for \( A_i \):  
-
-\[ A_1 = \frac{0.004 \, (\text{mol/dm}^3)^{1/2} \cdot \text{min}^{-1}}{e^{\left( \frac{-20000 \, \text{cal/mol}}{1.98 \, \text{cal/(mol·K)} \times 300 \, \text{K}} \right)}} = 1.49 \times 10^{12} \, (\text{mol/dm}^3)^{1/2} \cdot \text{min}^{-1} \]  
-
-\[ A_2 = \frac{0.3 \, \text{min}^{-1}}{e^{\left( \frac{-10000 \, \text{cal/mol}}{1.98 \, \text{cal/(mol·K)} \times 300 \, \text{K}} \right)}} = 5.79 \times 10^6 \, \text{min}^{-1} \]  
-
-\[ A_3 = \frac{0.25 \, \text{dm}^3/\text{mol} \cdot \text{min}}{e^{\left( \frac{-30000 \, \text{cal/mol}}{1.98 \, \text{cal/(mol·K)} \times 300 \, \text{K}} \right)}} = 1.798 \times 10^{21} \, \text{dm}^3/\text{mol} \cdot \text{min} \]  
-
-The mole balance on species \( A \) is given by:  
-
-\[ V = \frac{F_{A0} - F_A}{-r_A} \]  
-
-\[ V = \frac{v(C_{A0} - C_A)}{-r_A} \]  
-
-\[ \tau = \frac{C_{A0} - C_A}{-r_A} = \frac{C_{A0} - C_A}{k_1 C_A^{0.5} + k_2 C_A + k_3 C_A^2} \]  
-
-For the other species, the mole balance yields:  
-
-\[ F_i = v C_i = r_i V \]  
-
-\[ C_i = \tau r_i \]  
-
----  
-
-### Key Changes:  
-1. Explicitly stated the units of \( R \) (**cal/(mol·K)**) and \( T \) (**K**).  
-2. Kept all other equations, notation, and units unchanged.  
-3. Maintained consistency with the original problem statement.  
-
-Let me know if you'd like any further modifications!
+This table focuses on the key features and practical applications mentioned in the file, without paraphrasing. Let me know if you'd like to add or adjust any methods!
