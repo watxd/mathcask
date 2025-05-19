@@ -1,60 +1,71 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
 
-  **Determination of the Number of Electrons Transferred per Mole of Sulfur Formed**
+ The **Tafel plot** is a linearized form of the **Butler–Volmer equation**, used to extract key kinetic parameters of an **electrochemical reaction**, particularly in the **activation-controlled region** (low to moderate overpotentials). It is directly related to the electrochemical decomposition of **H₂S → S + H₂** because this process involves **electron transfer reactions** at electrodes, for which Tafel analysis is highly applicable.
 
 ---
 
-**Overall Reaction (Target Product: Sulfur)**
+### 1. **Tafel Equation**
+
+From the Butler–Volmer equation:
 
 $$
-\text{H}_2\text{S} \rightarrow \text{S} + \text{H}_2
+j = j_0 \left[ \exp\left( \frac{\alpha n F \eta}{RT} \right) - \exp\left( -\frac{(1 - \alpha) n F \eta}{RT} \right) \right]
 $$
+
+At high anodic or cathodic overpotentials, one of the exponential terms becomes negligible. For anodic reactions (e.g., H₂S oxidation), the equation simplifies to:
+
+$$
+j \approx j_0 \cdot \exp\left( \frac{\alpha n F \eta}{RT} \right)
+$$
+
+Taking the natural logarithm:
+
+$$
+\ln j = \ln j_0 + \frac{\alpha n F}{RT} \eta
+$$
+
+Or in base-10 logarithmic form (Tafel equation):
+
+$$
+\eta = a + b \log j
+$$
+
+Where:
+
+* $\eta$: overpotential (V)
+* $j$: current density (A/m²)
+* $a$: intercept (related to $j_0$)
+* $b$: **Tafel slope** = $\frac{2.303RT}{\alpha n F}$
 
 ---
 
-**Step 1: Identify the Half-Reactions**
+### 2. **Application to H₂S Electrochemical Decomposition**
 
-**Anodic (Oxidation) Half-Reaction:**
+For H₂S → S + 2H⁺ + 2e⁻:
 
-$$
-\text{H}_2\text{S} \rightarrow 2\text{H}^+ + \text{S} + 2e^-
-$$
+* $n = 2$
+* Anodic Tafel analysis is used for sulfur evolution
+* Cathodic Tafel analysis is used for hydrogen evolution (HER)
 
-This represents the oxidation of hydrogen sulfide to elemental sulfur. Two electrons are released per mole of H₂S oxidized.
+By plotting $\eta$ vs. $\log j$, the Tafel plot allows:
 
-**Cathodic (Reduction) Half-Reaction:**
-
-$$
-2\text{H}^+ + 2e^- \rightarrow \text{H}_2
-$$
-
-This corresponds to the hydrogen evolution reaction (HER), which consumes the two electrons produced during oxidation.
+* **Determination of the Tafel slope** $b$
+* **Extraction of exchange current density** $j_0$
+* **Insight into reaction mechanism** via charge transfer coefficient $\alpha$
 
 ---
 
-**Step 2: Determine Moles of Electrons Transferred**
+### 3. **Significance in H₂S Electrolysis**
 
-From the oxidation half-reaction:
-
-$$
-\text{H}_2\text{S} \rightarrow \text{S} + 2e^-
-$$
-
-This shows that 2 moles of electrons are transferred for every 1 mole of sulfur formed.
+* A **steep Tafel slope** may indicate sluggish kinetics (slow electron transfer or surface poisoning by S).
+* A **low Tafel slope** suggests more efficient charge transfer and better electrocatalytic performance.
+* The plot helps **compare electrode materials** (e.g., Pt, Au, Ni) for H₂S oxidation efficiency.
 
 ---
 
-**Step 3: Apply the Formula**
+### Summary
 
-$$
-n = \frac{\text{mol of electrons transferred}}{\text{mol of sulfur produced}} = \frac{2}{1}
-$$
+Tafel plots are fundamental tools in **characterizing and optimizing** the electrochemical kinetics of H₂S decomposition. They provide experimental access to $j_0$, $\alpha$, and insights into how easily the redox steps proceed under varying overpotentials.
 
----
-
-**Final Result**
-
-$$
-n = 2
-$$
+Would you like a plotted example or data from a real study involving H₂S electrooxidation Tafel analysis?
