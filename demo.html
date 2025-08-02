@@ -1,69 +1,99 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-Here’s an academic-style explanation of how **DPD powder** is used to measure **free chlorine** using a **pocket colorimeter** or portable chlorine analyzer:
+Certainly. Below is a complete, academic-style write-up on the **Pulsa Series® 7120 diaphragm metering pump**, incorporating explanations of the **flow-stroke-pressure relationship**, interpretation of **Table 2** (model selection table), and **Figure 6** (flow vs. pressure envelopes by piston size).
 
 ---
 
-## **Measurement of Free Chlorine Using DPD Powder and a Pocket Colorimeter**
+## Pulsa Series® 7120 Diaphragm Metering Pump: Flow, Stroke, and Pressure Analysis
 
-### **1. Introduction**
-
-Monitoring free chlorine concentration is a critical component of water quality control in drinking water treatment, swimming pools, and industrial water systems. One of the most widely used field methods involves the use of **DPD (N,N-diethyl-p-phenylenediamine)** reagents in combination with a **portable colorimeter**, such as a pocket chlorine meter. This method offers rapid, accurate, and reliable measurements of free chlorine in water samples.
+The **Pulsa Series® 7120** is a hydraulically actuated diaphragm metering pump designed for precise and reliable dosing of chemical fluids. It supports **linear stroke length adjustment** and accommodates a wide range of piston sizes and diaphragm styles to meet diverse flow and pressure requirements.
 
 ---
 
-### **2. Principle of the DPD Method**
+### 1. Flow Rate (Q) in Terms of Stroke Size
 
-The DPD method is a **colorimetric technique** in which the presence of free chlorine (HOCl and ClO⁻) reacts with DPD powder to produce a **pink-magenta colored complex**. The intensity of this color is directly proportional to the concentration of free chlorine in the water sample.
+The flow rate delivered by the Pulsa 7120 pump is directly proportional to the **piston area**, **stroke length**, and **stroke frequency (SPM)**:
 
 $$
-\text{HOCl} + \text{DPD (colorless)} \rightarrow \text{DPD⁺ (pink)} + \text{Cl}^- + \text{H}_2\text{O}
+Q = \left( \frac{\pi d^2}{4} \right) \cdot L \cdot \text{SPM}
 $$
 
-Only free chlorine (i.e., hypochlorous acid and hypochlorite ion) reacts instantly with the DPD reagent to form this color. Combined chlorine (e.g., chloramines) can also be measured with a second reagent (DPD No. 3), but is not involved in the initial free chlorine test.
+Where:
+
+* $Q$ = Flow rate (in³/min or converted to GPH/LPH)
+* $d$ = Piston diameter (inches)
+* $L$ = Stroke length (inches)
+* $\text{SPM}$ = Strokes per minute (e.g., 70 or 175 for 60 Hz)
+
+For practical applications, stroke length is controlled as a **percentage of full stroke**, hence:
+
+$$
+Q = Q_{\text{max}} \cdot \left( \frac{\text{Stroke \%}}{100} \right)
+$$
+
+This provides **linear flow adjustment** from 0% to 100% of maximum rated capacity.
 
 ---
 
-### **3. Procedure Using a Pocket Colorimeter**
+### 2. Table 2 – Specifications and Model Selection
 
-1. **Sample Collection**: A clean, chlorine-demand-free glass vial is filled with a specified volume (typically 10 mL) of the water sample.
+**Table 2** presents flow capacities at rated pressure across various piston sizes, diaphragm styles, and stroke frequencies. The 60 Hz values (70 and 175 SPM) are typically used in North American installations.
 
-2. **Addition of DPD Powder**: One DPD reagent powder pillow (commonly known as **DPD Free Chlorine Reagent**) is added to the sample vial and mixed thoroughly.
+#### Key Observations from Table 2:
 
-3. **Color Development**: Within seconds, a pink color appears if free chlorine is present. The reaction is immediate and stable for a few minutes.
+| Piston Size (in) | Diaphragm Style | Max Pressure (psi) | Flow Range at 60 Hz (GPH) |
+| ---------------- | --------------- | ------------------ | ------------------------- |
+| 0.375            | M               | 3000               | 1.2 – 2.4                 |
+| 0.5              | TM / THM        | 2000 / 600         | 2.3 – 7.1                 |
+| 0.75             | T / TM / THM    | 1200 – 600         | 6.8 – 18.5                |
+| 1.0              | THM             | 600                | 13.2 – 33                 |
+| 1.25             | TM              | 440                | 21.4 – 54                 |
+| 1.5              | THM             | 300                | 31 – 77                   |
+| 1.75             | THM             | 225                | 42 – 105                  |
+| 2.125            | THM             | 150                | 62 – 155                  |
+| 2.625            | TH              | 100                | 94 – 235                  |
 
-4. **Measurement**: The vial is inserted into the **pocket colorimeter**, which uses a light beam (usually at 530 nm) to measure the intensity of the pink color via **photometric detection**.
+#### Interpretation:
 
-5. **Reading**: The device displays the free chlorine concentration in **mg/L (ppm)**.
-
----
-
-### **4. Advantages and Limitations**
-
-| Aspect          | Description                                                                                                      |
-| --------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Advantages**  | Rapid, easy to use, portable, field-friendly, provides quantitative data                                         |
-| **Limitations** | Subject to interference from oxidizing agents, color fading after few minutes, requires careful reagent handling |
-
----
-
-### **5. Applications**
-
-* **Municipal water treatment plants**
-* **Industrial water disinfection**
-* **Swimming pool maintenance**
-* **Field verification of residual chlorine**
+* **Higher piston sizes** correspond to **higher flow capacity**, as expected from the volumetric relationship $A \propto d^2$.
+* **Rated pressure decreases** with increasing piston diameter due to larger diaphragm surface area, which lowers pressure-handling capability.
+* **Diaphragm style** affects pressure rating: **Metal (M)** supports highest pressures, while **HydraTube (H)** variants offer flexibility and chemical compatibility at moderate pressures.
 
 ---
 
-### **6. Conclusion**
+### 3. Figure 6 – Flow & Pressure Envelope by Piston Size
 
-The DPD-powder method, when used with a pocket free chlorine colorimeter, is a reliable and standardized technique for measuring free chlorine in water systems. Its simplicity and portability make it suitable for routine monitoring in both laboratory and field environments. The method's accuracy depends on timely color development and consistent reagent handling, ensuring dependable control of chlorine disinfection levels.
+**Figure 6** graphically depicts the operating range of each piston size in terms of **flow (GPH or LPH)** on the x-axis and **maximum pressure (psi/bar)** on the y-axis.
+
+#### Interpretation of Figure 6:
+
+* The **left graph** shows smaller pistons (0.375–1.0 in):
+   • Piston 0.375″ reaches **3000 psi** but offers minimal flow (2.4 GPH max).
+   • Piston 1.0″ reaches only **600 psi** but offers \~33 GPH.
+* The **right graph** shows larger pistons (1.25–2.625 in):
+   • As piston size increases, **flow capacity rises rapidly**.
+   • However, **maximum allowable pressure drops** significantly (down to 100 psi for 2.625″).
+   • The region for each piston is a trapezoidal envelope, showing **upper limits** at full stroke and pressure combinations.
+
+This confirms the inverse relationship between **flow capacity and pressure** across the piston sizes—a trade-off intrinsic to reciprocating metering pump design.
 
 ---
 
-Would you like this section added to your Word-style document or converted into a printable SOP (Standard Operating Procedure)?
+### 4. Practical Summary
 
+| Parameter                  | Influence on Q (Flow Rate)                      | Behavior                                        |
+| -------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| **Piston Size (d)**        | $Q \propto d^2$                                 | Quadratic increase in flow                      |
+| **Stroke Length (L)**      | $Q \propto L$                                   | Linear increase in flow                         |
+| **SPM (Stroke Frequency)** | $Q \propto \text{SPM}$                          | Linear increase in flow                         |
+| **Pressure**               | Limits max stroke/frequency for given head      | Trade-off with flow capacity                    |
+| **Diaphragm Type**         | Affects chemical compatibility, pressure rating | Must match fluid properties and system pressure |
 
-Let me know if you'd like references or in-text citations added in APA or IEEE format.
+---
+
+### ✅ Conclusion
+
+The **Pulsa 7120 diaphragm pump** offers wide configurability through interchangeable piston sizes and diaphragm types. By adjusting **stroke length**, users can achieve **precise linear flow control**, while the **piston area and SPM** define total flow capacity. Figures and tables clearly demonstrate the **engineering trade-off** between high flow and high pressure, allowing optimized selection based on process needs.
+
+Let me know if you’d like this write-up formatted into a formal PDF technical report or if you need help calculating flow for a specific piston/stroke scenario.
 
