@@ -1,6 +1,84 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
+Certainly. Below is an academic-style breakdown of the **Pulsa Series® 7120 diaphragm metering pump**, including:
 
+1. Explanation of how flow rate, pressure, and stroke length correlate
+2. Summary performance table based on datasheet values
+3. Interpretation of the **flow vs. pressure vs. stroke** graph
 
-The given equation is:
+---
 
-\[ t = N_{Ao} \int_{0}^{X} \frac{dX}{V \left( -r_{A} \right)} \]
+## **1. Working Principle and Correlation: Flow, Pressure, and Stroke**
+
+The **PulsaPro® 7120** is a **hydraulic diaphragm metering pump** that operates on a **positive displacement principle**. Each stroke of the diaphragm displaces a fixed volume of fluid. The overall flow rate (Q) depends on:
+
+* **Stroke frequency** (SPM, strokes per minute)
+* **Stroke length** (adjustable from 0–100%)
+* **Displacement volume per stroke** (which varies by piston size)
+
+### **Basic Equation**
+
+$$
+Q = V_s \times SPM \times \frac{\text{Stroke %}}{100}
+$$
+
+Where:
+
+* $Q$: Flow rate (L/min or GPH)
+* $V_s$: Displacement volume per full stroke (L or G)
+* $\text{Stroke %}$: Set stroke length (0–100%)
+* $SPM$: Stroke rate (typically 70 or 175 SPM for 60 Hz operation)
+
+### **Effect of Pressure**
+
+* Flow rate remains relatively **independent of discharge pressure** up to the pump’s rated limit (due to its **positive displacement** nature).
+* However, at **higher pressures**, minor **internal losses** and **diaphragm deflection limitations** can reduce net flow capacity slightly.
+* In the datasheets, **flow ratings decrease as pressure increases**, which is captured empirically in the pump’s **flow-pressure-stroke graph**.
+
+---
+
+## **2. Summary Performance Table for PulsaPro® 7120**
+
+| **Parameter**                | **Value / Range**                         |
+| ---------------------------- | ----------------------------------------- |
+| **Max Flow Rate**            | 244 GPH (923 LPH)                         |
+| **Max Pressure**             | 3,000 psi (207 bar)                       |
+| **Stroke Length Adjustment** | 0–100% linear (sinusoidal motion)         |
+| **Accuracy**                 | ±1% over 10:1 turndown                    |
+| **Control Options**          | Manual, Electric (PULSAmatic®), Pneumatic |
+| **Diaphragm Types**          | PTFE Flat, HYDRAtube®                     |
+| **Temperature Range**        | 40–180°F (4.4–82°C)                       |
+| **Construction Materials**   | 316L SS, GF-PTFE, PVC, Cast Iron          |
+| **Certifications**           | API 675, CE, ATEX                         |
+| **Connection Type**          | NPT or Raised Face Flange                 |
+| **Flow Regulation**          | By stroke length and/or motor speed       |
+
+---
+
+## **3. Graph Interpretation: Flow vs Pressure vs Stroke (Piston Size)**
+
+The **flow-pressure-stroke chart** from the Pulsa 7120 datasheet shows curves for various **piston diameters** (1.0" to 2.62") with **stroke lengths (in inches)** on the X-axis and **corresponding flow rate and pressure limits** on the Y-axis.
+
+### **Key Observations**
+
+* **Larger piston sizes** yield **higher flow** at a given stroke and frequency.
+* As **stroke length increases**, **flow increases linearly**—confirming the sinusoidal motion output.
+* At **higher backpressures**, **flow output drops**, especially for larger pistons, due to diaphragm flexibility limits and internal compression losses.
+* The graph aligns with the flow equation and reflects **empirical correction for real-world conditions** (e.g., viscous losses, hydraulic deflection).
+
+### **Empirical Trend**
+
+From the graph:
+
+$$
+\text{Flow} \propto \text{Stroke length (in)} \quad \text{(for constant SPM and piston size)}
+$$
+
+At full stroke, flow approaches the maximum rated values (e.g., 923 LPH at 2.62" piston).
+
+---
+
+## **Conclusion**
+
+The **PulsaPro 7120** offers **precise, linear flow control** via stroke length and piston size. The correlation between flow, pressure, and stroke is **quantifiable and tunable**, allowing for accurate dosing across a wide range of chemical applications. However, users must consider pressure-flow tradeoffs and adjust stroke accordingly to maintain dosing accuracy under varying line pressures.
+
+Would you like a plotted version of the correlation graph or a case study simulation (e.g., in Excel or MATLAB) to predict flow for certain settings?
