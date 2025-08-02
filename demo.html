@@ -1,99 +1,118 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-Certainly. Below is a complete, academic-style write-up on the **Pulsa Series® 7120 diaphragm metering pump**, incorporating explanations of the **flow-stroke-pressure relationship**, interpretation of **Table 2** (model selection table), and **Figure 6** (flow vs. pressure envelopes by piston size).
+**Technical Comparison Report: DuCoNite 15 Hose Pump vs. Pulsa Series 7120 Diaphragm Pump for Sodium Hypochlorite Dosing**
 
 ---
 
-## Pulsa Series® 7120 Diaphragm Metering Pump: Flow, Stroke, and Pressure Analysis
+**1. Introduction**
 
-The **Pulsa Series® 7120** is a hydraulically actuated diaphragm metering pump designed for precise and reliable dosing of chemical fluids. It supports **linear stroke length adjustment** and accommodates a wide range of piston sizes and diaphragm styles to meet diverse flow and pressure requirements.
-
----
-
-### 1. Flow Rate (Q) in Terms of Stroke Size
-
-The flow rate delivered by the Pulsa 7120 pump is directly proportional to the **piston area**, **stroke length**, and **stroke frequency (SPM)**:
-
-$$
-Q = \left( \frac{\pi d^2}{4} \right) \cdot L \cdot \text{SPM}
-$$
-
-Where:
-
-* $Q$ = Flow rate (in³/min or converted to GPH/LPH)
-* $d$ = Piston diameter (inches)
-* $L$ = Stroke length (inches)
-* $\text{SPM}$ = Strokes per minute (e.g., 70 or 175 for 60 Hz)
-
-For practical applications, stroke length is controlled as a **percentage of full stroke**, hence:
-
-$$
-Q = Q_{\text{max}} \cdot \left( \frac{\text{Stroke \%}}{100} \right)
-$$
-
-This provides **linear flow adjustment** from 0% to 100% of maximum rated capacity.
+This report presents a technical analysis and comparison between two chemical dosing pumps: the DuCoNite® 15 hose pump and the Pulsa Series® 7120 hydraulic diaphragm metering pump. Both pumps are evaluated for their suitability in handling sodium hypochlorite (NaOCl) dosing in water treatment applications.
 
 ---
 
-### 2. Table 2 – Specifications and Model Selection
+**2. Hose Pump Working Principle (Refer to Figure 7)**
 
-**Table 2** presents flow capacities at rated pressure across various piston sizes, diaphragm styles, and stroke frequencies. The 60 Hz values (70 and 175 SPM) are typically used in North American installations.
+Hose pumps, also called peristaltic pumps, transport fluids through the mechanical compression of a flexible hose. Figure 7 illustrates the operational mechanism:
 
-#### Key Observations from Table 2:
+* A rotor with rollers compresses the hose along a circular path.
+* The fluid is pushed forward within the sealed section of the hose.
+* As the roller releases, the hose re-expands, drawing in more fluid via vacuum.
 
-| Piston Size (in) | Diaphragm Style | Max Pressure (psi) | Flow Range at 60 Hz (GPH) |
-| ---------------- | --------------- | ------------------ | ------------------------- |
-| 0.375            | M               | 3000               | 1.2 – 2.4                 |
-| 0.5              | TM / THM        | 2000 / 600         | 2.3 – 7.1                 |
-| 0.75             | T / TM / THM    | 1200 – 600         | 6.8 – 18.5                |
-| 1.0              | THM             | 600                | 13.2 – 33                 |
-| 1.25             | TM              | 440                | 21.4 – 54                 |
-| 1.5              | THM             | 300                | 31 – 77                   |
-| 1.75             | THM             | 225                | 42 – 105                  |
-| 2.125            | THM             | 150                | 62 – 155                  |
-| 2.625            | TH              | 100                | 94 – 235                  |
+**Advantages:**
 
-#### Interpretation:
-
-* **Higher piston sizes** correspond to **higher flow capacity**, as expected from the volumetric relationship $A \propto d^2$.
-* **Rated pressure decreases** with increasing piston diameter due to larger diaphragm surface area, which lowers pressure-handling capability.
-* **Diaphragm style** affects pressure rating: **Metal (M)** supports highest pressures, while **HydraTube (H)** variants offer flexibility and chemical compatibility at moderate pressures.
+* No valves or seals
+* Fully self-priming
+* Dry-running capability
+* Excellent for abrasive, viscous, or gas-forming fluids
 
 ---
 
-### 3. Figure 6 – Flow & Pressure Envelope by Piston Size
+**3. DuCoNite® 15 Hose Pump Overview**
 
-**Figure 6** graphically depicts the operating range of each piston size in terms of **flow (GPH or LPH)** on the x-axis and **maximum pressure (psi/bar)** on the y-axis.
+The DuCoNite 15 is an industrial-grade hose pump engineered by Bredel/Watson-Marlow. It is especially suited for corrosive and shear-sensitive chemicals like sodium hypochlorite.
 
-#### Interpretation of Figure 6:
+**Key Features:**
 
-* The **left graph** shows smaller pistons (0.375–1.0 in):
-   • Piston 0.375″ reaches **3000 psi** but offers minimal flow (2.4 GPH max).
-   • Piston 1.0″ reaches only **600 psi** but offers \~33 GPH.
-* The **right graph** shows larger pistons (1.25–2.625 in):
-   • As piston size increases, **flow capacity rises rapidly**.
-   • However, **maximum allowable pressure drops** significantly (down to 100 psi for 2.625″).
-   • The region for each piston is a trapezoidal envelope, showing **upper limits** at full stroke and pressure combinations.
-
-This confirms the inverse relationship between **flow capacity and pressure** across the piston sizes—a trade-off intrinsic to reciprocating metering pump design.
+* Max continuous flow: 375 L/h (99 USGPH)
+* Max intermittent flow: 525 L/h (139 USGPH)
+* Max pressure: 12 bar (174 psi)
+* Max continuous speed: 75 rpm
+* Fully reversible and dry-run capable
+* Constructed with DuCoNite-coated cast iron and 316 SS hardware
+* Hose materials: CSM, EPDM, NBR, NR variants
 
 ---
 
-### 4. Practical Summary
+**4. Operating Envelope (Figure 9)**
 
-| Parameter                  | Influence on Q (Flow Rate)                      | Behavior                                        |
-| -------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| **Piston Size (d)**        | $Q \propto d^2$                                 | Quadratic increase in flow                      |
-| **Stroke Length (L)**      | $Q \propto L$                                   | Linear increase in flow                         |
-| **SPM (Stroke Frequency)** | $Q \propto \text{SPM}$                          | Linear increase in flow                         |
-| **Pressure**               | Limits max stroke/frequency for given head      | Trade-off with flow capacity                    |
-| **Diaphragm Type**         | Affects chemical compatibility, pressure rating | Must match fluid properties and system pressure |
+Figure 9 plots motor power, pump speed, pressure, and product temperature.
+
+**Interpretation:**
+
+* Green zone: Continuous operation up to 40°C
+* Yellow zone: Intermittent duty (max 3 hours on, 1 hour off)
+* Flow and pressure determine pump speed and power requirement
+
+*Example:* At 375 L/h and 400 kPa (58 psi), continuous operation is allowed with motor power of \~0.25 kW.
 
 ---
 
-### ✅ Conclusion
+**5. Technical Specifications (Table 3)**
 
-The **Pulsa 7120 diaphragm pump** offers wide configurability through interchangeable piston sizes and diaphragm types. By adjusting **stroke length**, users can achieve **precise linear flow control**, while the **piston area and SPM** define total flow capacity. Figures and tables clearly demonstrate the **engineering trade-off** between high flow and high pressure, allowing optimized selection based on process needs.
+| Parameter              | Value                 |
+| ---------------------- | --------------------- |
+| Max continuous flow    | 375 L/h (99 USGPH)    |
+| Max intermittent flow  | 525 L/h (139 USGPH)   |
+| Volume per revolution  | 0.083 L               |
+| Max continuous speed   | 75 rpm                |
+| Max intermittent speed | 105 rpm               |
+| Max pressure           | 12 bar (174 psi)      |
+| Max suction lift       | 9.5 mWC               |
+| Operating temperature  | -20°C to 45°C         |
+| Fluid temperature      | -20°C to 80°C         |
+| Starting torque        | 60 Nm                 |
+| Port configuration     | Down, Left, Right, Up |
+| Hose materials         | CSM, EPDM, NBR, NR    |
+| Connection type        | ANSI, DIN             |
 
-Let me know if you’d like this write-up formatted into a formal PDF technical report or if you need help calculating flow for a specific piston/stroke scenario.
+---
 
+**6. Pulsa Series® 7120 Diaphragm Pump Summary**
+
+The Pulsa 7120 is a hydraulic diaphragm metering pump suitable for high-pressure precision dosing.
+
+**Key Features:**
+
+* Max flow: 923 L/h (235 GPH)
+* Max pressure: 207 bar (3000 psi)
+* Accuracy: ±1% over 10:1 turndown
+* Adjustable stroke length (0-100%)
+* Various diaphragm types: PTFE, Metal, HYDRAtube
+* Certifications: API 675, CE, ATEX
+
+---
+
+**7. Comparison Table**
+
+| Feature                    | DuCoNite 15 Hose Pump          | Pulsa 7120 Diaphragm Pump      |
+| -------------------------- | ------------------------------ | ------------------------------ |
+| Max Flow Rate              | 375 L/h (525 L/h intermittent) | Up to 923 L/h                  |
+| Max Pressure               | 12 bar (174 psi)               | 207 bar (3000 psi)             |
+| Dry Running                | Yes                            | No                             |
+| Self-Priming               | Yes (9.5 mWC)                  | Limited                        |
+| Gas Handling (e.g., NaOCl) | Excellent                      | Requires degassing valves      |
+| Accuracy                   | High (positive displacement)   | ±1% (with stroke control)      |
+| Reversibility              | Yes                            | No                             |
+| Maintenance                | Hose change only               | Diaphragm and valve service    |
+| Suitable for High Pressure | No                             | Yes                            |
+| Best Use Case              | Corrosive/gas-forming fluids   | High-pressure precision dosing |
+
+---
+
+**8. Conclusion**
+
+The DuCoNite 15 offers a low-maintenance, self-priming solution ideal for handling gas-forming, corrosive chemicals like sodium hypochlorite. Its simplicity, reversibility, and dry-running capabilities make it highly reliable in water treatment environments.
+
+In contrast, the Pulsa 7120 excels in high-pressure, precision-controlled dosing scenarios with regulatory compliance. However, it is more sensitive to gas-locking and requires regular maintenance.
+
+A trial installation of the DuCoNite 15 is recommended to assess its long-term suitability as a replacement for diaphragm pumps in sodium hypochlorite injection systems.
