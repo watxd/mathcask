@@ -2,6 +2,79 @@
 
 
 
+### **Step 1 – General energy balance equation (from image 1):**
+
+$$
+\frac{d}{dt} \Bigg[ \rho V \big( \hat{U} + \hat{P} + \hat{K} \big) \Bigg] 
+= \sum_{i=1}^{N_{in}} \Big[ \rho_i F_i \big( \hat{H}_i + \hat{P}_i + \hat{K}_i \big) \Big]
+- \sum_{j=1}^{N_{out}} \Big[ \rho_j F_j \big( \hat{H}_j + \hat{P}_j + \hat{K}_j \big) \Big] 
++ Q + W_s - P \frac{dV}{dt} + \big(-\Delta H_{rxn}\big) r_{rxn} V
+$$
+
+---
+
+### **Step 2 – Cancel neglected terms**
+
+We neglect pressure energy ($\hat{P}$), kinetic energy ($\hat{K}$), shaft work ($W_s$), heat transfer ($Q$), expansion work ($P dV/dt$), and reaction enthalpy term.
+
+$$
+\frac{d}{dt} \Bigg[ \rho V \big( \hat{U} + \cancel{\hat{P}} + \cancel{\hat{K}} \big) \Bigg] 
+= \sum_{i=1}^{N_{in}} \Big[ \rho_i F_i \big( \hat{H}_i + \cancel{\hat{P}_i} + \cancel{\hat{K}_i} \big) \Big]
+- \sum_{j=1}^{N_{out}} \Big[ \rho_j F_j \big( \hat{H}_j + \cancel{\hat{P}_j} + \cancel{\hat{K}_j} \big) \Big] 
++ \cancel{Q} + \cancel{W_s} - \cancel{P \frac{dV}{dt}} + \cancel{\big(-\Delta H_{rxn}\big) r_{rxn} V}
+$$
+
+Simplifies to:
+
+$$
+\frac{d}{dt} \Big[ \rho V \hat{U} \Big] 
+= \sum_{i=1}^{N_{in}} \Big[ \rho_i F_i \hat{H}_i \Big]
+- \sum_{j=1}^{N_{out}} \Big[ \rho_j F_j \hat{H}_j \Big]
+$$
+
+---
+
+### **Step 3 – Relating internal energy and enthalpy**
+
+By definition,
+
+$$
+\hat{U} = \hat{H}
+$$
+
+---
+
+### **Step 4 – Substitution of enthalpy expression (from image 2):**
+
+The specific enthalpy is described as:
+
+$$
+\hat{H}(T) = \alpha + C_{p,liq}\,T 
+\quad \text{with } \alpha \neq 0
+$$
+
+Substituting into Step 2:
+
+$$
+\frac{d}{dt} \Big[ \rho V \big( \alpha + C_{p,liq}T \big) \Big] 
+= \sum_{i=1}^{N_{in}} \Big[ \rho_i F_i \big( \alpha + C_{p,liq}T_i \big) \Big]
+- \sum_{j=1}^{N_{out}} \Big[ \rho_j F_j \big( \alpha + C_{p,liq}T_j \big) \Big]
+$$
+
+---
+
+✅ That’s the complete set of steps:
+
+1. Full general equation.
+2. Cancel unnecessary terms.
+3. State $\hat{U} = \hat{H}$.
+4. Substitute $\hat{H}(T) = \alpha + C_{p,liq}T$.
+
+---
+
+Do you want me to now **make this into a polished Word file with full equation formatting** so it looks exactly like in your textbook notes?
+
+
 **a)**
 Overall mass balance:
 
