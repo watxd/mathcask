@@ -1,146 +1,43 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-In **electrochemical desulfurization**, sulfur-containing compounds (like H₂S or organic sulfides) are removed through redox reactions at the **anode** and **cathode**. The general reactions depend on the electrolyte and sulfur species involved. Below is a typical representation for **H₂S removal** in an aqueous medium:
 
-### **Anode (Oxidation):**  
-Here, sulfide (S²⁻) is oxidized to elemental sulfur (S⁰) or sulfate (SO₄²⁻), depending on conditions.  
 
-1. **Formation of elemental sulfur (S⁰):**  
-   \[
-   \text{H}_2\text{S} \rightarrow 2\text{H}^+ + \text{S} + 2\text{e}^-
-   \]  
-   or  
-   \[
-   \text{S}^{2-} \rightarrow \text{S} + 2\text{e}^-
-   \]
+**a)**
+Overall mass balance:
 
-2. **Further oxidation to sulfate (SO₄²⁻) (if over-oxidation occurs):**  
-   \[
-   \text{S} + 4\text{H}_2\text{O} \rightarrow \text{SO}_4^{2-} + 8\text{H}^+ + 6\text{e}^-
-   \]
+$$
+\frac{d(\rho V)}{dt} = w_{1} + w_{2} - w_{3} \tag{1}
+$$
 
-### **Cathode (Reduction):**  
-The cathode typically involves proton (H⁺) reduction to form hydrogen gas (H₂) or oxygen reduction (if in an O₂-containing system).  
+Energy balance:
 
-1. **Hydrogen evolution reaction (HER):**  
-   \[
-   2\text{H}^+ + 2\text{e}^- \rightarrow \text{H}_2 \quad (\text{in acidic media})
-   \]  
-   or  
-   \[
-   2\text{H}_2\text{O} + 2\text{e}^- \rightarrow \text{H}_2 + 2\text{OH}^- \quad (\text{in alkaline media})
-   \]
+$$
+C \frac{d \left[\rho V (T_{3} - T_{ref}) \right]}{dt} 
+= w_{1} C (T_{1} - T_{ref}) + w_{2} C (T_{2} - T_{ref}) - w_{3} C (T_{3} - T_{ref}) \tag{2}
+$$
 
-2. **If oxygen is present (for fuel cell-type desulfurization):**  
-   \[
-   \text{O}_2 + 4\text{H}^+ + 4\text{e}^- \rightarrow 2\text{H}_2\text{O}
-   \]
+Because $\rho = \text{constant}$ and $V = \overline{V} = \text{constant}$, Eq. (1) becomes:
 
-### **Overall Reaction (for H₂S → S⁰ + H₂):**  
-Combining the half-reactions (assuming sulfur is the product):  
-\[
-\text{H}_2\text{S} \rightarrow \text{S} + \text{H}_2
-\]  
-This is the net desulfurization process, where H₂S is split into **elemental sulfur (S)** and **hydrogen gas (H₂)**.
-
-### **Key Notes:**  
-- **In non-aqueous systems**, different sulfur species (e.g., polysulfides, SO₂) may form.  
-- **For organic sulfides (e.g., thiophenes)**, the anode reaction involves C–S bond cleavage, producing hydrocarbons and sulfur.  
-- **The electrolyte (acidic/alkaline/membrane-based)** influences the exact reaction pathways.  
-
-Would you like a more specific reaction for a particular sulfur compound or electrolyte system?
-   The **reaction kinetics** of electrochemical desulfurization depend on multiple factors, including the sulfur species (e.g., H₂S, thiophenes), electrolyte (aqueous/non-aqueous), electrode material, and applied potential. Below is a general kinetic analysis for **H₂S electro-oxidation to sulfur (S⁰)** at the anode, coupled with hydrogen evolution (HER) at the cathode.
+$$
+w_{3} = w_{1} + w_{2} \tag{3}
+$$
 
 ---
 
-### **1. Anode Kinetics (H₂S Oxidation)**
-The oxidation of H₂S to S⁰ follows an **electrochemical–chemical (EC) mechanism**:
-1. **Electrochemical step (rate-determining, RDS):**  
-   \[
-   \text{H}_2\text{S} \rightarrow \text{HS}^- + \text{H}^+ + \text{e}^- \quad (\text{slow})
-   \]
-2. **Chemical step (fast):**  
-   \[
-   2\text{HS}^- \rightarrow 2\text{S} + 2\text{H}^+ + 2\text{e}^-
-   \]
+**b)**
+From Eq. (2), substituting Eq. (3):
 
-#### **Rate Law (Butler-Volmer Kinetics)**
-The current density (\(i_a\)) for H₂S oxidation is given by:  
-\[
-i_a = nFk_a [\text{H}_2\text{S}] \exp\left(\frac{(1-\beta)FE_a}{RT}\right)
-\]  
-where:  
-- \(n = 2\) (electrons transferred)  
-- \(k_a\) = rate constant for H₂S oxidation  
-- \(\beta\) = symmetry factor (~0.5)  
-- \(E_a\) = applied anode potential  
-- \([H₂S]\) = bulk concentration of H₂S  
+$$
+\rho \overline{V} C \frac{d (T_{3} - T_{ref})}{dt} = \rho \overline{V} C \frac{dT_{3}}{dt} 
+= w_{1} C (T_{1} - T_{ref}) + w_{2} C (T_{2} - T_{ref}) - (w_{1} + w_{2}) C (T_{3} - T_{ref}) \tag{4}
+$$
 
-**Tafel Slope Analysis:**  
-- If the **first electron transfer (H₂S → HS⁻)** is rate-limiting, the Tafel slope is ~ **120 mV/decade** (at 25°C).  
-- If **surface adsorption of HS⁻** is limiting, the slope may vary (e.g., 40–60 mV/decade for catalytic electrodes like Pt or MoS₂).  
+Constants $C$ and $T_{ref}$ can be cancelled:
 
----
+$$
+\rho \overline{V} \frac{dT_{3}}{dt} = w_{1} T_{1} + w_{2} T_{2} - (w_{1} + w_{2}) T_{3} \tag{5}
+$$
 
-### **2. Cathode Kinetics (Hydrogen Evolution, HER)**
-The HER follows either:  
-- **Volmer-Tafel mechanism (acidic):**  
-  \[
-  \text{H}^+ + \text{e}^- \rightarrow \text{H}_{ads} \quad (\text{Volmer, RDS})  
-  \]  
-  \[
-  2\text{H}_{ads} \rightarrow \text{H}_2 \quad (\text{Tafel, fast})  
-  \]  
-- **Volmer-Heyrovsky mechanism (alkaline):**  
-  \[
-  \text{H}_2\text{O} + \text{e}^- \rightarrow \text{H}_{ads} + \text{OH}^-  
-  \]  
-  \[
-  \text{H}_{ads} + \text{H}_2\text{O} + \text{e}^- \rightarrow \text{H}_2 + \text{OH}^-  
-  \]  
+The simplified model now consists only of Eq. (5).
 
-#### **Rate Law (HER)**
-\[
-i_c = nFk_c [\text{H}^+] \exp\left(-\frac{\beta FE_c}{RT}\right)
-\]  
-- Tafel slope:  
-  - **120 mV/decade** (Volmer-limited)  
-  - **30–40 mV/decade** (Tafel or Heyrovsky-limited, e.g., on Pt/C).  
 
----
-
-### **3. Overall Cell Kinetics**
-The **total current** is controlled by the slower process (usually **H₂S oxidation**).  
-
-#### **Mass Transport Effects**
-- If H₂S diffusion is limiting, the current becomes:  
-  \[
-  i_{lim} = nFD_{\text{H}_2\text{S}} \frac{[\text{H}_2\text{S}]}{\delta}  
-  \]  
-  where \(D_{\text{H}_2\text{S}}\) = diffusion coefficient, \(\delta\) = diffusion layer thickness.  
-
-#### **Apparent Activation Energy**
-- Typically **30–60 kJ/mol** for H₂S oxidation, depending on electrocatalyst (e.g., lower for Ni or Co sulfide electrodes).  
-
----
-
-### **4. Key Factors Affecting Kinetics**
-1. **Electrode Material:**  
-   - **Anode:** Pt, NiS₂, MoS₂, or conductive polymers enhance H₂S oxidation.  
-   - **Cathode:** Pt/C, Ni-Mo, or carbon-based catalysts improve HER.  
-2. **Electrolyte pH:**  
-   - Acidic media favor faster H₂S oxidation but may corrode electrodes.  
-   - Alkaline media slow H₂S dissociation but reduce side reactions.  
-3. **Potential Control:**  
-   - Higher overpotential → faster kinetics but risk of over-oxidation to SO₄²⁻.  
-
----
-
-### **Summary of Rate-Determining Steps**
-| **Process**       | **Rate-Limiting Step**          | **Tafel Slope** |  
-|-------------------|---------------------------------|----------------|  
-| **H₂S oxidation** | First electron transfer (H₂S → HS⁻) | ~120 mV/dec |  
-| **HER (acidic)**  | Proton adsorption (Volmer step) | ~120 mV/dec |  
-| **HER (alkaline)** | Water dissociation step       | ~40–60 mV/dec |  
-
-Would you like a more detailed mechanism for a specific sulfur compound (e.g., thiophene, SO₂) or electrode setup?
