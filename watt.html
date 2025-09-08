@@ -1,96 +1,122 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-
-Great prompt. I’ll start from the **general energy balance** you gave (image 1), cross out the terms we don’t need for this system (image 2 assumptions), invoke $\hat U=\hat H$ where helpful, and derive the **tank** and **jacket** balances so the final result matches image 3.
+Awesome—let’s do it cleanly twice, starting each time from the **general energy balance**, then reducing to the required ODE.
 
 ---
 
-# 1) Start from the general energy balance
+# Part 1) Vessel (tank) control volume
+
+## Step A — Start from the **general energy balance**
 
 $$
 \frac{d}{dt}\!\left[\rho V\left(\hat U+\hat P+\hat K\right)\right]
-= \sum_{i=1}^{N_{in}}\!\left[\rho_i F_i(\hat H_i+\hat P_i+\hat K_i)\right]
--\sum_{j=1}^{N_{out}}\!\left[\rho_j F_j(\hat H_j+\hat P_j+\hat K_j)\right]
-+Q+W_s-P\frac{dV}{dt}+(-\Delta H_{rxn})\,r_{rxn}V
+=\sum_{i=1}^{N_{in}}\!\left[\rho_i F_i\left(\hat H_i+\hat P_i+\hat K_i\right)\right]
+-\sum_{j=1}^{N_{out}}\!\left[\rho_j F_j\left(\hat H_j+\hat P_j+\hat K_j\right)\right]
++Q+W_s-P\frac{dV}{dt}+(-\Delta H_{rxn})\,r_{rxn}V .
 $$
 
----
+## Step B — Apply problem assumptions for the **tank**
 
-# 2) Apply the problem’s assumptions (image 2) and cross out terms
+From the statement + added assumptions:
 
-* No shaft work, no reaction, negligible heat losses to the environment (heat transfer only occurs across the tank–jacket interface), constant $V,\,V_J$, well-mixed with finite capacitance, and kinetic/pressure energies are negligible.
+* $V$ constant; well-mixed liquid with significant thermal capacitance.
+* No reaction, no shaft work, negligible kinetic/pressure energies, negligible wall capacitances.
+* External losses negligible; **only** heat transfer with jacket across area $A$ with $U=K\,q_J^{0.8}$.
+* Same $\rho, C$ for feed and tank contents; $\hat U=\hat H$, $\hat H=\alpha+C\,T$ (sensible liquid).
 
-$$
-\frac{d}{dt}\!\left[\rho V\big(\hat U+\cancel{\hat P}+\cancel{\hat K}\big)\right]
-=\sum_{i}\!\left[\rho_i F_i(\hat H_i+\cancel{\hat P_i}+\cancel{\hat K_i})\right]
--\sum_{j}\!\left[\rho_j F_j(\hat H_j+\cancel{\hat P_j}+\cancel{\hat K_j})\right]
-+\cancel{Q}+\cancel{W_s}-\cancel{P\frac{dV}{dt}}+\cancel{(-\Delta H_{rxn})\,r_{rxn}V}
-$$
-
-So,
+Crossing out neglected terms:
 
 $$
-\frac{d}{dt}\big[\rho V \hat U\big]
-=\sum_i \rho_i F_i \hat H_i - \sum_j \rho_j F_j \hat H_j
-\quad\text{(heat transfer across tank–jacket interface will be added explicitly)}
+\frac{d}{dt}\!\left[\rho V(\hat U+\cancel{\hat P}+\cancel{\hat K})\right]
+= \rho q_F(\hat H_F+\cancel{\hat P_F}+\cancel{\hat K_F})
+-\rho q(\hat H+\cancel{\hat P}+\cancel{\hat K})
++\cancel{Q}+\cancel{W_s}-\cancel{P\frac{dV}{dt}}+\cancel{(-\Delta H_{rxn})\,r_{rxn}V}.
 $$
 
-Use $\hat U=\hat H$ (for sensible-heat liquids) and $\hat H=\alpha+C_pT$. With constant $\rho,V,C_p$,
+Thus
 
 $$
-\frac{d}{dt}(\rho V\hat U)=\rho VC_p\frac{dT}{dt}.
+\frac{d}{dt}(\rho V \hat U)=\rho q_F \hat H_F-\rho q \hat H\;+\;\dot Q_{\text{tank}},
 $$
 
-We now write balances for each control volume and add the **interfacial heat term** between tank and jacket:
+where $\dot Q_{\text{tank}}$ is **net heat into the tank** from the jacket.
+Since heat **leaves** the tank when $T>T_J$: $\dot Q_{\text{tank}}=-U A (T-T_J)$.
+
+## Step C — Convert to temperature form
+
+With $\hat U=\hat H=\alpha+C\,T$ and constants $\rho,V,C$,
 
 $$
-\dot Q_{\text{tank}\to\text{jacket}}=K\,q_J^{0.8}\,A\,(T-T_J).
-$$
-
----
-
-# 3) Tank energy balance (contents at temperature $T$)
-
-* Inlet: feed $q_F$ at $T_F$ (density $\rho$, heat capacity $C$)
-* Outlet: process stream $q$ at tank temperature $T$
-* Interfacial heat **leaves** the tank when $T>T_J$: subtract $Kq_J^{0.8}A(T-T_J)$
-
-$$
-\boxed{\;
-\rho V C\,\frac{dT}{dt}
-=\underbrace{q_F \rho C (T_F - T)}_{\text{in minus out enthalpy}}
-\;-\;\underbrace{K q_J^{0.8} A (T - T_J)}_{\text{to jacket}}
-\;}
-\tag{1}
-$$
-
----
-
-# 4) Jacket energy balance (coolant at temperature $T_J$)
-
-* Inlet: coolant $q_J$ at $T_i$ (density $\rho_J$, heat capacity $C_J$)
-* Outlet: coolant $q_J$ at jacket temperature $T_J$
-* Interfacial heat **enters** the jacket from tank: add $Kq_J^{0.8}A(T-T_J)$
-
-$$
-\boxed{\;
-\rho_J V_J C_J\,\frac{dT_J}{dt}
-=\underbrace{q_J \rho_J C_J (T_i - T_J)}_{\text{in minus out enthalpy}}
-\;+\;\underbrace{K q_J^{0.8} A (T - T_J)}_{\text{from tank}}
-\;}
-\tag{2}
-$$
-
----
-
-These two boxed equations are exactly the **energy balances for the tank and the jacket** shown in image 3:
-
-$$
-\rho VC\,\frac{dT}{dt}=q_F\rho C(T_F-T)-Kq_J^{0.8}A(T-T_J),
+\frac{d}{dt}(\rho V \hat U)=\rho V C\,\frac{dT}{dt},
 \qquad
-\rho_J V_J C_J\,\frac{dT_J}{dt}=q_J\rho_J C_J(T_i-T_J)+Kq_J^{0.8}A(T-T_J).
+\rho q_F \hat H_F-\rho q \hat H=\rho C\,(q_F T_F-q\,T).
 $$
 
-If you want, I can drop these into a Word file with clean equation formatting.
+If the outlet equals the inlet (as in the book’s result, $q=q_F$),
+
+$$
+\boxed{\;\rho V C\,\frac{dT}{dt}
+= q_F \rho C (T_F-T)\;-\;U A (T-T_J)\;}
+$$
+
+and with $U=K\,q_J^{0.8}$,
+
+$$
+\boxed{\;\rho V C\,\frac{dT}{dt}
+= q_F \rho C (T_F-T)\;-\;K\,q_J^{0.8}\,A\,(T-T_J)\;}\quad\text{(Tank)}
+$$
+
+---
+
+# Part 2) Coolant **jacket** control volume
+
+## Step A — Start again from the **general energy balance**
+
+$$
+\frac{d}{dt}\!\left[\rho_J V_J\left(\hat U_J+\hat P_J+\hat K_J\right)\right]
+=\sum_{in}\!\left[\rho_J q_J\left(\hat H_i+\hat P_i+\hat K_i\right)\right]
+-\sum_{out}\!\left[\rho_J q_J\left(\hat H_J+\hat P_J+\hat K_J\right)\right]
++Q_J+W_{s,J}-P_J\frac{dV_J}{dt} .
+$$
+
+## Step B — Apply jacket assumptions
+
+* $V_J$ constant; well mixed at $T_J$.
+* Single inlet $q_J$ at $T_i$; outlet $q_J$ at $T_J$.
+* No reaction/shaft work/KE/PE; wall capacitance negligible.
+* Heat exchange only with tank across $A$, **into** jacket: $+U A (T-T_J)$.
+
+Cross-outs give
+
+$$
+\frac{d}{dt}(\rho_J V_J \hat U_J)
+= \rho_J q_J \hat H_i-\rho_J q_J \hat H_J \;+\; U A (T-T_J).
+$$
+
+## Step C — Convert to temperature form
+
+With $\hat U_J=\hat H_J=\alpha_J+C_J T_J$ and constants $\rho_J,V_J,C_J$,
+
+$$
+\frac{d}{dt}(\rho_J V_J \hat U_J)=\rho_J V_J C_J\,\frac{dT_J}{dt},
+\quad
+\rho_J q_J \hat H_i-\rho_J q_J \hat H_J=\rho_J q_J C_J (T_i-T_J).
+$$
+
+Therefore,
+
+$$
+\boxed{\;\rho_J V_J C_J\,\frac{dT_J}{dt}
+= q_J \rho_J C_J (T_i-T_J)\;+\;U A (T-T_J)\;}
+$$
+
+and using $U=K\,q_J^{0.8}$,
+
+$$
+\boxed{\;\rho_J V_J C_J\,\frac{dT_J}{dt}
+= q_J \rho_J C_J (T_i-T_J)\;+\;K\,q_J^{0.8}\,A\,(T-T_J)\;}\quad\text{(Jacket)}
+$$
+
+These two boxed equations are precisely the vessel and jacket energy balances requested.
 
 
