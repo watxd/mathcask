@@ -1,116 +1,96 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
 
+Great prompt. I’ll start from the **general energy balance** you gave (image 1), cross out the terms we don’t need for this system (image 2 assumptions), invoke $\hat U=\hat H$ where helpful, and derive the **tank** and **jacket** balances so the final result matches image 3.
 
-### **Step 1 – General energy balance equation (from image 1):**
+---
+
+# 1) Start from the general energy balance
 
 $$
-\frac{d}{dt} \Bigg[ \rho V \big( \hat{U} + \hat{P} + \hat{K} \big) \Bigg] 
-= \sum_{i=1}^{N_{in}} \Big[ \rho_i F_i \big( \hat{H}_i + \hat{P}_i + \hat{K}_i \big) \Big]
-- \sum_{j=1}^{N_{out}} \Big[ \rho_j F_j \big( \hat{H}_j + \hat{P}_j + \hat{K}_j \big) \Big] 
-+ Q + W_s - P \frac{dV}{dt} + \big(-\Delta H_{rxn}\big) r_{rxn} V
+\frac{d}{dt}\!\left[\rho V\left(\hat U+\hat P+\hat K\right)\right]
+= \sum_{i=1}^{N_{in}}\!\left[\rho_i F_i(\hat H_i+\hat P_i+\hat K_i)\right]
+-\sum_{j=1}^{N_{out}}\!\left[\rho_j F_j(\hat H_j+\hat P_j+\hat K_j)\right]
++Q+W_s-P\frac{dV}{dt}+(-\Delta H_{rxn})\,r_{rxn}V
 $$
 
 ---
 
-### **Step 2 – Cancel neglected terms**
+# 2) Apply the problem’s assumptions (image 2) and cross out terms
 
-We neglect pressure energy ($\hat{P}$), kinetic energy ($\hat{K}$), shaft work ($W_s$), heat transfer ($Q$), expansion work ($P dV/dt$), and reaction enthalpy term.
-
-$$
-\frac{d}{dt} \Bigg[ \rho V \big( \hat{U} + \cancel{\hat{P}} + \cancel{\hat{K}} \big) \Bigg] 
-= \sum_{i=1}^{N_{in}} \Big[ \rho_i F_i \big( \hat{H}_i + \cancel{\hat{P}_i} + \cancel{\hat{K}_i} \big) \Big]
-- \sum_{j=1}^{N_{out}} \Big[ \rho_j F_j \big( \hat{H}_j + \cancel{\hat{P}_j} + \cancel{\hat{K}_j} \big) \Big] 
-+ \cancel{Q} + \cancel{W_s} - \cancel{P \frac{dV}{dt}} + \cancel{\big(-\Delta H_{rxn}\big) r_{rxn} V}
-$$
-
-Simplifies to:
+* No shaft work, no reaction, negligible heat losses to the environment (heat transfer only occurs across the tank–jacket interface), constant $V,\,V_J$, well-mixed with finite capacitance, and kinetic/pressure energies are negligible.
 
 $$
-\frac{d}{dt} \Big[ \rho V \hat{U} \Big] 
-= \sum_{i=1}^{N_{in}} \Big[ \rho_i F_i \hat{H}_i \Big]
-- \sum_{j=1}^{N_{out}} \Big[ \rho_j F_j \hat{H}_j \Big]
+\frac{d}{dt}\!\left[\rho V\big(\hat U+\cancel{\hat P}+\cancel{\hat K}\big)\right]
+=\sum_{i}\!\left[\rho_i F_i(\hat H_i+\cancel{\hat P_i}+\cancel{\hat K_i})\right]
+-\sum_{j}\!\left[\rho_j F_j(\hat H_j+\cancel{\hat P_j}+\cancel{\hat K_j})\right]
++\cancel{Q}+\cancel{W_s}-\cancel{P\frac{dV}{dt}}+\cancel{(-\Delta H_{rxn})\,r_{rxn}V}
 $$
 
----
-
-### **Step 3 – Relating internal energy and enthalpy**
-
-By definition,
+So,
 
 $$
-\hat{U} = \hat{H}
+\frac{d}{dt}\big[\rho V \hat U\big]
+=\sum_i \rho_i F_i \hat H_i - \sum_j \rho_j F_j \hat H_j
+\quad\text{(heat transfer across tank–jacket interface will be added explicitly)}
 $$
 
----
-
-### **Step 4 – Substitution of enthalpy expression (from image 2):**
-
-The specific enthalpy is described as:
+Use $\hat U=\hat H$ (for sensible-heat liquids) and $\hat H=\alpha+C_pT$. With constant $\rho,V,C_p$,
 
 $$
-\hat{H}(T) = \alpha + C_{p,liq}\,T 
-\quad \text{with } \alpha \neq 0
+\frac{d}{dt}(\rho V\hat U)=\rho VC_p\frac{dT}{dt}.
 $$
 
-Substituting into Step 2:
+We now write balances for each control volume and add the **interfacial heat term** between tank and jacket:
 
 $$
-\frac{d}{dt} \Big[ \rho V \big( \alpha + C_{p,liq}T \big) \Big] 
-= \sum_{i=1}^{N_{in}} \Big[ \rho_i F_i \big( \alpha + C_{p,liq}T_i \big) \Big]
-- \sum_{j=1}^{N_{out}} \Big[ \rho_j F_j \big( \alpha + C_{p,liq}T_j \big) \Big]
+\dot Q_{\text{tank}\to\text{jacket}}=K\,q_J^{0.8}\,A\,(T-T_J).
 $$
 
 ---
 
-✅ That’s the complete set of steps:
+# 3) Tank energy balance (contents at temperature $T$)
 
-1. Full general equation.
-2. Cancel unnecessary terms.
-3. State $\hat{U} = \hat{H}$.
-4. Substitute $\hat{H}(T) = \alpha + C_{p,liq}T$.
-
----
-
-Do you want me to now **make this into a polished Word file with full equation formatting** so it looks exactly like in your textbook notes?
-
-
-**a)**
-Overall mass balance:
+* Inlet: feed $q_F$ at $T_F$ (density $\rho$, heat capacity $C$)
+* Outlet: process stream $q$ at tank temperature $T$
+* Interfacial heat **leaves** the tank when $T>T_J$: subtract $Kq_J^{0.8}A(T-T_J)$
 
 $$
-\frac{d(\rho V)}{dt} = w_{1} + w_{2} - w_{3} \tag{1}
-$$
-
-Energy balance:
-
-$$
-C \frac{d \left[\rho V (T_{3} - T_{ref}) \right]}{dt} 
-= w_{1} C (T_{1} - T_{ref}) + w_{2} C (T_{2} - T_{ref}) - w_{3} C (T_{3} - T_{ref}) \tag{2}
-$$
-
-Because $\rho = \text{constant}$ and $V = \overline{V} = \text{constant}$, Eq. (1) becomes:
-
-$$
-w_{3} = w_{1} + w_{2} \tag{3}
+\boxed{\;
+\rho V C\,\frac{dT}{dt}
+=\underbrace{q_F \rho C (T_F - T)}_{\text{in minus out enthalpy}}
+\;-\;\underbrace{K q_J^{0.8} A (T - T_J)}_{\text{to jacket}}
+\;}
+\tag{1}
 $$
 
 ---
 
-**b)**
-From Eq. (2), substituting Eq. (3):
+# 4) Jacket energy balance (coolant at temperature $T_J$)
+
+* Inlet: coolant $q_J$ at $T_i$ (density $\rho_J$, heat capacity $C_J$)
+* Outlet: coolant $q_J$ at jacket temperature $T_J$
+* Interfacial heat **enters** the jacket from tank: add $Kq_J^{0.8}A(T-T_J)$
 
 $$
-\rho \overline{V} C \frac{d (T_{3} - T_{ref})}{dt} = \rho \overline{V} C \frac{dT_{3}}{dt} 
-= w_{1} C (T_{1} - T_{ref}) + w_{2} C (T_{2} - T_{ref}) - (w_{1} + w_{2}) C (T_{3} - T_{ref}) \tag{4}
+\boxed{\;
+\rho_J V_J C_J\,\frac{dT_J}{dt}
+=\underbrace{q_J \rho_J C_J (T_i - T_J)}_{\text{in minus out enthalpy}}
+\;+\;\underbrace{K q_J^{0.8} A (T - T_J)}_{\text{from tank}}
+\;}
+\tag{2}
 $$
 
-Constants $C$ and $T_{ref}$ can be cancelled:
+---
+
+These two boxed equations are exactly the **energy balances for the tank and the jacket** shown in image 3:
 
 $$
-\rho \overline{V} \frac{dT_{3}}{dt} = w_{1} T_{1} + w_{2} T_{2} - (w_{1} + w_{2}) T_{3} \tag{5}
+\rho VC\,\frac{dT}{dt}=q_F\rho C(T_F-T)-Kq_J^{0.8}A(T-T_J),
+\qquad
+\rho_J V_J C_J\,\frac{dT_J}{dt}=q_J\rho_J C_J(T_i-T_J)+Kq_J^{0.8}A(T-T_J).
 $$
 
-The simplified model now consists only of Eq. (5).
+If you want, I can drop these into a Word file with clean equation formatting.
 
 
