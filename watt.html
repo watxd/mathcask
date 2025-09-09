@@ -1,122 +1,109 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-Awesome—let’s do it cleanly twice, starting each time from the **general energy balance**, then reducing to the required ODE.
+Awesome—here’s a ready-to-drop write-up for **Sections 1.1–1.3** tailored to your Team 30 project (Electrochemical Desulfurization, CHE/EE/ISE), matching the flow of your deck.&#x20;
 
 ---
 
-# Part 1) Vessel (tank) control volume
+# 1.1 Overview
 
-## Step A — Start from the **general energy balance**
-
-$$
-\frac{d}{dt}\!\left[\rho V\left(\hat U+\hat P+\hat K\right)\right]
-=\sum_{i=1}^{N_{in}}\!\left[\rho_i F_i\left(\hat H_i+\hat P_i+\hat K_i\right)\right]
--\sum_{j=1}^{N_{out}}\!\left[\rho_j F_j\left(\hat H_j+\hat P_j+\hat K_j\right)\right]
-+Q+W_s-P\frac{dV}{dt}+(-\Delta H_{rxn})\,r_{rxn}V .
-$$
-
-## Step B — Apply problem assumptions for the **tank**
-
-From the statement + added assumptions:
-
-* $V$ constant; well-mixed liquid with significant thermal capacitance.
-* No reaction, no shaft work, negligible kinetic/pressure energies, negligible wall capacitances.
-* External losses negligible; **only** heat transfer with jacket across area $A$ with $U=K\,q_J^{0.8}$.
-* Same $\rho, C$ for feed and tank contents; $\hat U=\hat H$, $\hat H=\alpha+C\,T$ (sensible liquid).
-
-Crossing out neglected terms:
-
-$$
-\frac{d}{dt}\!\left[\rho V(\hat U+\cancel{\hat P}+\cancel{\hat K})\right]
-= \rho q_F(\hat H_F+\cancel{\hat P_F}+\cancel{\hat K_F})
--\rho q(\hat H+\cancel{\hat P}+\cancel{\hat K})
-+\cancel{Q}+\cancel{W_s}-\cancel{P\frac{dV}{dt}}+\cancel{(-\Delta H_{rxn})\,r_{rxn}V}.
-$$
-
-Thus
-
-$$
-\frac{d}{dt}(\rho V \hat U)=\rho q_F \hat H_F-\rho q \hat H\;+\;\dot Q_{\text{tank}},
-$$
-
-where $\dot Q_{\text{tank}}$ is **net heat into the tank** from the jacket.
-Since heat **leaves** the tank when $T>T_J$: $\dot Q_{\text{tank}}=-U A (T-T_J)$.
-
-## Step C — Convert to temperature form
-
-With $\hat U=\hat H=\alpha+C\,T$ and constants $\rho,V,C$,
-
-$$
-\frac{d}{dt}(\rho V \hat U)=\rho V C\,\frac{dT}{dt},
-\qquad
-\rho q_F \hat H_F-\rho q \hat H=\rho C\,(q_F T_F-q\,T).
-$$
-
-If the outlet equals the inlet (as in the book’s result, $q=q_F$),
-
-$$
-\boxed{\;\rho V C\,\frac{dT}{dt}
-= q_F \rho C (T_F-T)\;-\;U A (T-T_J)\;}
-$$
-
-and with $U=K\,q_J^{0.8}$,
-
-$$
-\boxed{\;\rho V C\,\frac{dT}{dt}
-= q_F \rho C (T_F-T)\;-\;K\,q_J^{0.8}\,A\,(T-T_J)\;}\quad\text{(Tank)}
-$$
+Conventional hydrodesulfurization (HDS) achieves very low sulfur but at **high temperature/pressure** with **hydrogen** and **expensive catalysts**, driving cost and emissions. Our project investigates a **batch electrochemical desulfurization (ECDS)** reactor that operates at **mild temperature (\~60–95 °C)** and **ambient pressure (\~1 atm)**. The design integrates safe low-voltage power, sensing, and data logging to quantify **sulfur removal (%/ppm)**, **specific energy (Wh/L)**, and **reliability**. The expected outcome is proof that **ULSD-class or model-fuel sulfur targets** can be met **without HDS-level severity**, enabling safer, lower-energy refining options and a compact, modular prototype suited for lab validation and future scale-up.
 
 ---
 
-# Part 2) Coolant **jacket** control volume
+# 1.2 Introduction
 
-## Step A — Start again from the **general energy balance**
+## i) Need for the Product
 
-$$
-\frac{d}{dt}\!\left[\rho_J V_J\left(\hat U_J+\hat P_J+\hat K_J\right)\right]
-=\sum_{in}\!\left[\rho_J q_J\left(\hat H_i+\hat P_i+\hat K_i\right)\right]
--\sum_{out}\!\left[\rho_J q_J\left(\hat H_J+\hat P_J+\hat K_J\right)\right]
-+Q_J+W_{s,J}-P_J\frac{dV_J}{dt} .
-$$
+* **Regulatory pressure:** Ultra-low sulfur limits (e.g., 10–15 ppm) require robust desulfurization; HDS meets spec but increases **CAPEX/OPEX** and **CO₂ footprint** due to high T/P and H₂.
+* **Operational risk & complexity:** High-pressure hydrogen systems add safety, maintenance, and catalyst management burdens.
+* **Measurement & agility:** Refineries and R\&D groups want **instrumented, modular** units for rapid learning (current density, energy per liter, selectivity) at **mild conditions**.
+* **Our response:** A **bench-scale ECDS** that demonstrates **spec-compliant sulfur removal** at **\~1 atm**, with full data capture and safety interlocks.
 
-## Step B — Apply jacket assumptions
+## ii) Relevance to Industry
 
-* $V_J$ constant; well mixed at $T_J$.
-* Single inlet $q_J$ at $T_i$; outlet $q_J$ at $T_J$.
-* No reaction/shaft work/KE/PE; wall capacitance negligible.
-* Heat exchange only with tank across $A$, **into** jacket: $+U A (T-T_J)$.
+* **Sectors impacted:** Refining (diesel/kerosene), petrochemicals (naphtha cuts), specialty fuels (marine/aviation), and pilot/demo facilities.
+* **Trends aligned:**
 
-Cross-outs give
+  * **Electrification of processes** (replace part of heat/H₂ duty with electrons).
+  * **Decarbonization** (lower energy intensity and cleaner operation).
+  * **Modularity & retrofits** (skid-mounted, easy integration).
+  * **Digitalization** (continuous logging of V/I/T → traceable KPIs).
+* **Value proposition:** If ECDS meets sulfur targets at mild conditions with competitive **Wh/L** and acceptable **electrode life**, it can **de-risk** portions of desulfurization, complement HDS, or serve as a **pre/post-treat** step.
 
-$$
-\frac{d}{dt}(\rho_J V_J \hat U_J)
-= \rho_J q_J \hat H_i-\rho_J q_J \hat H_J \;+\; U A (T-T_J).
-$$
+## iii) Evaluation of Current Solutions
 
-## Step C — Convert to temperature form
+* **Hydrodesulfurization (HDS):** Proven, deep desulfurization; **disadvantages**—high T/P, H₂ supply, catalyst cost/sensitivity (poisoning), large footprint and safety complexity.
+* **Oxidative desulfurization (ODS):** Uses oxidants (e.g., H₂O₂) to convert sulfur species then extract; simpler hardware but **chemical consumables** and **waste handling**.
+* **Adsorptive methods:** Selective sorbents remove sulfur; **periodic regeneration** and capacity limits raise cost and waste concerns.
+* **Biodesulfurization:** Operates mild, but **slow kinetics** and complex bioprocess control.
+* **Electrochemical approaches (research):** Growing evidence of selective sulfur removal at low T/P; challenges are **electrode durability**, **side reactions**, and **energy efficiency**.
+  **Gap our design addresses:** instrumented **ambient-pressure ECDS** that reports **sulfur ppm**, **Wh/L**, and **durability** with clear safety and maintainability—i.e., **data-rich benchmarking** against HDS-style performance expectations.
 
-With $\hat U_J=\hat H_J=\alpha_J+C_J T_J$ and constants $\rho_J,V_J,C_J$,
+---
 
-$$
-\frac{d}{dt}(\rho_J V_J \hat U_J)=\rho_J V_J C_J\,\frac{dT_J}{dt},
-\quad
-\rho_J q_J \hat H_i-\rho_J q_J \hat H_J=\rho_J q_J C_J (T_i-T_J).
-$$
+# 1.3 Fundamental Scientific and Engineering Concepts
 
-Therefore,
+## i) Relevant Scientific & Computational Techniques
 
-$$
-\boxed{\;\rho_J V_J C_J\,\frac{dT_J}{dt}
-= q_J \rho_J C_J (T_i-T_J)\;+\;U A (T-T_J)\;}
-$$
+**Electrochemistry & transport**
 
-and using $U=K\,q_J^{0.8}$,
+* **Faraday’s law (charge → moles):**
+  $n = \dfrac{I\,t}{zF}$ (moles reacted), where $I$ = current, $t$ = time, $z$ = electrons per reaction, $F$ = 96485 C/mol.
+  **Faradaic (coulombic) efficiency**: fraction of charge that actually removes sulfur.
+* **Current density & area:**
+  $J = \dfrac{I}{A}$ (A m⁻²). Controls rate; links to **mass-transfer** and **selectivity**.
+* **Kinetics & overpotential:**
+  Butler–Volmer/Tafel—activation overpotential and side reactions; **ohmic drop** (iR) and **mass-transfer limit** $i_L = n F k_L C$.
+* **Thermodynamics/Nernst:** Redox potentials and driving force for target sulfur species vs. competing reactions.
 
-$$
-\boxed{\;\rho_J V_J C_J\,\frac{dT_J}{dt}
-= q_J \rho_J C_J (T_i-T_J)\;+\;K\,q_J^{0.8}\,A\,(T-T_J)\;}\quad\text{(Jacket)}
-$$
+**Energy & performance metrics**
 
-These two boxed equations are precisely the vessel and jacket energy balances requested.
+* **Specific energy (term-project KPI):**
+  $E_{\text{spec}} = \dfrac{\displaystyle\int V(t)I(t)\,dt}{V_{\text{processed}}} \approx \dfrac{V_{\text{avg}} I_{\text{avg}} t}{V_b}$ (Wh L⁻¹).
+* **Sulfur removal efficiency:**
+  $\eta_S = 100\cdot \dfrac{S_{\text{in}}-S_{\text{out}}}{S_{\text{in}}}\ \%$ (ppm or % basis).
+* **Electrode durability:** performance decay < 10% after \~10 h cumulative run (lab target).
 
+**Simple computational/analytical tools**
+
+* **0-D mass balance** for sulfur species across a batch.
+* **DoE/statistics (ISE)** to plan **T–J** sweeps and analyze sensitivity.
+* **Event detection** from time-series (EE): uptime, trips, MTBF/MTTR.
+* (Optional) **Equivalent circuit** (ohmic + charge-transfer + diffusion) to interpret V–I data.
+
+*(Diagrams/flowcharts to include in the report:)* block diagram of PSU→controller→reactor, sensor feedback loop, and a simple flow of data logging to KPIs (ηₛ, Wh/L, durability).
+
+## ii) Relevant Basic Engineering Concepts (mapped to CHE, EE, ISE)
+
+**Chemical Engineering (CHE)**
+
+* **Reactor design & scale-up basics:** batch mass balance, mixing, heat removal at **\~1 atm**, **60–95 °C**.
+* **Thermodynamics & transport:** heat effects, diffusion/film coefficients (impact on $i_L$).
+* **Materials & safety:** electrolyte compatibility (SS316L/graphite/PTFE), **no H₂S release**, vent/scrubber.
+* **Quality target:** **ULSD-class** or **model-fuel sulfur** to spec; validated sampling/analysis.
+
+**Electrical Engineering (EE)**
+
+* **Circuit & power electronics:** safe **low-voltage DC**, current-controlled operation (PWM/buck).
+* **Measurement & DAQ:** V/I/T sensing, calibration, **1 s logging**, data integrity.
+* **Protection/interlocks:** **E-stop**, relay trip (< 1 s), over-current/over-temp cutbacks; wiring per good practice.
+
+**Industrial & Systems Engineering (ISE)**
+
+* **DoE & statistics:** plan limited runs for maximum information (factorial/response surface on **T, J**).
+* **Process capability & quality:** repeatability, control charts for ηₛ and Wh/L.
+* **Cost & maintainability:** consumables tracking (mL/L, SAR/L), preventive checks, uptime metrics.
+
+---
+
+### (Optional) Mini “spec math” box for your appendix
+
+* **Pass criteria (model fuel):** $S_{\text{out}} \le 50\ \text{ppm}$ **or** $\eta_S \ge 90\%$.
+* **Energy:** $E_{\text{spec}} \le 50\ \text{Wh L}^{-1}$ at target removal.
+* **Durability:** < 10% performance drop after \~10 h.
+* **Uptime:** ≥ 98% over 3×1 h runs; ≤ 1 unplanned trip.
+
+---
+
+If you want this formatted as a **Word/PDF section** with formulas and figure placeholders, I can generate a clean document you can paste into your report.
 
