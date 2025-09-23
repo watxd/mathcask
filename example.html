@@ -1,47 +1,39 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
+```latex
 $$
-\begin{array}{|l|l|l|}
+\begin{array}{|l|l|}
 \hline
-\textbf{Metric} & \textbf{Value} & \textbf{Notes} \\
+\textbf{Source of Error} & \textbf{Effect on Results / Notes} \\
 \hline
-\text{Feed mole fraction (EtOH), } z_F & 0.2182 & \\
+\text{GC calibration (slope/intercept)} & \text{Biased peak area }\Rightarrow\ x_D,\ x_B,\ z_F\ \text{shift; propagates to }w,\ \text{lines, }N_{\text{th}} \\
 \hline
-\text{Distillate mole fraction (EtOH), } x_D & 0.7460 & \\
+\text{Peak overlap / integration baseline} & \text{Under/over-estimated EtOH area at low conc.; affects compositions} \\
 \hline
-\text{Bottoms mole fraction (EtOH), } x_B & 0.1554 & \\
+\text{Thermometer accuracy (CW in/out, column)} & \Delta T\ \text{error }\Rightarrow\ Q_c\ \text{error; also impacts }q,\ \text{CMO validity} \\
 \hline
-\text{Feed mass fraction (EtOH), } w_F & 0.4164 & \\
+\text{Flow readings (CW, reflux, distillate)} & \dot m\ \text{error }\Rightarrow\ Q_c,\ R\ \text{error; stage count shifts} \\
 \hline
-\text{Distillate mass fraction (EtOH), } w_D & 0.8825 & \\
+\text{Density assumptions in unit conversions} & \text{L/min}\to\text{kg/s errors; impacts }Q_c,\ \text{material balances} \\
 \hline
-\text{Bottoms mass fraction (EtOH), } w_B & 0.3200 & \\
+\text{VLE data interpolation / azeotrope proximity} & \text{Curve misread }\Rightarrow\ wrong step-off; }N_{\text{th}}\text{ off by } \pm 1\text{ stage} \\
 \hline
-\text{Feed thermal condition, } q & 0.8 & \\
+\text{Graphical reading (ruler/parallax)} & \text{Operating-line intercepts and intersection point drift} \\
 \hline
-\text{Operating reflux ratio, } R & 1.3 & \\
+\text{Non-ideal CMO (heat losses, }c_p,\ \lambda\text{)} & \text{Operating lines deviate from linear model; }N_{\text{th}}\text{ bias} \\
 \hline
-\text{Minimum reflux ratio, } R_{\min} & 0.69 & \text{from pinch} \\
+\text{Tray hydrodynamics (weeping/flooding)} & \text{Overall efficiency }E_o\text{ changes; Murphree }\neq\ E_o \\
 \hline
-R/R_{\min} & 1.88 & \\
+\text{Entrainment / vapor–liquid maldistribution} & \text{Apparent enrichment or dilution; affects compositions} \\
 \hline
-\text{Enriching (top) line} & y=0.565217\,x+0.324348 & \text{total condenser} \\
+\text{Steady-state not fully reached} & \text{Drifting }x_D,\ x_B,\ \text{temperatures; inconsistent }R,\ Q_c \\
 \hline
-\text{Feed (}q\text{) line} & y=-4\,x+1.091 & q=0.8,\ z_F=0.2182 \\
+\text{Instrument lag / logging resolution} & \text{Time-averaging hides transients; misrepresents true }Q_c,\ R \\
 \hline
-\text{Stripping (bottom) line} & y\approx21.053\,x-3.116 & (0.1554,0.1554)\ \&\ (0.1679,0.4193) \\
+\text{Incorrect feed }q\text{ (enthalpy estimate)} & \text{Wrong }q\text{-line slope }\Rightarrow\ feed stage mislocated \\
 \hline
-\text{Feed--top intersection }(x,y) & (0.1679,\ 0.4193) & \text{feed-stage point} \\
-\hline
-\text{Theoretical trays, } N_{\text{theoretical}} & 7 & \\
-\hline
-\text{Optimum feed tray (from top)} & 6 & \\
-\hline
-\text{Actual trays} & 8 & \\
-\hline
-\text{Overall tray efficiency, } E_o & 0.875 & E_o=7/8 \\
-\hline
-\text{Condenser duty, } Q_c & 347.93\ \mathrm{J} & \approx 0.348\ \mathrm{kJ} \\
+\text{Unit/rounding and sig-fig handling} & \text{Small but cumulative biases in reported results} \\
 \hline
 \end{array}
 $$
+```
