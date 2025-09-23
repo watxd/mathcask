@@ -1,50 +1,47 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-Done! I pulled the formulas from your Excel and surfaced them in two tables you can browse:
-
-* **Extracted Excel Formulas** — every formula I found in the workbook (sheet, cell, exact formula text, and current value).
-* **Formulas for Feed Row (Sheet3 Row 2)** — the subset for the row labeled “Feed”.
-
-If you don’t see them yet, they’re visible as interactive tables in the workspace here.
-
-Here are the **sample calculations for the Feed row** (using your sheet’s numbers); I show the exact equations and the numeric evaluations that match your file:
-
-**Given (Feed row, Sheet3):**
-Ethanol Area% = 42.75, Water Area% = 57.25
-Molar masses: $M_{\mathrm{EtOH}} = 46.068$, $M_{\mathrm{H_2O}} = 18.01528$
-
-1. **Area ratio (EtOH/Water)**
-
 $$
-\text{Area Ratio}=\frac{\text{Ethanol Area\%}}{\text{Water Area\%}}
-=\frac{42.75}{57.25}=0.7467248908
+\begin{array}{|l|l|l|}
+\hline
+\textbf{Metric} & \textbf{Value} & \textbf{Notes} \\
+\hline
+\text{Feed mole fraction (EtOH), } z_F & 0.2182 & \\
+\hline
+\text{Distillate mole fraction (EtOH), } x_D & 0.7460 & \\
+\hline
+\text{Bottoms mole fraction (EtOH), } x_B & 0.1554 & \\
+\hline
+\text{Feed mass fraction (EtOH), } w_F & 0.4164 & \\
+\hline
+\text{Distillate mass fraction (EtOH), } w_D & 0.8825 & \\
+\hline
+\text{Bottoms mass fraction (EtOH), } w_B & 0.3200 & \\
+\hline
+\text{Feed thermal condition, } q & 0.8 & \\
+\hline
+\text{Operating reflux ratio, } R & 1.3 & \\
+\hline
+\text{Minimum reflux ratio, } R_{\min} & 0.69 & \text{from pinch} \\
+\hline
+R/R_{\min} & 1.88 & \\
+\hline
+\text{Enriching (top) line} & y=0.565217\,x+0.324348 & \text{total condenser} \\
+\hline
+\text{Feed (}q\text{) line} & y=-4\,x+1.091 & q=0.8,\ z_F=0.2182 \\
+\hline
+\text{Stripping (bottom) line} & y\approx21.053\,x-3.116 & (0.1554,0.1554)\ \&\ (0.1679,0.4193) \\
+\hline
+\text{Feed--top intersection }(x,y) & (0.1679,\ 0.4193) & \text{feed-stage point} \\
+\hline
+\text{Theoretical trays, } N_{\text{theoretical}} & 7 & \\
+\hline
+\text{Optimum feed tray (from top)} & 6 & \\
+\hline
+\text{Actual trays} & 8 & \\
+\hline
+\text{Overall tray efficiency, } E_o & 0.875 & E_o=7/8 \\
+\hline
+\text{Condenser duty, } Q_c & 347.93\ \mathrm{J} & \approx 0.348\ \mathrm{kJ} \\
+\hline
+\end{array}
 $$
-
-(matches your “Area Ratio” cell)
-
-2. **Mole ratio → Mole fraction**
-   (Your sheet already has “Mole Ratio” $=0.2790510917$. If that’s $n_{\text{EtOH}}/n_{\text{H2O}}$, then the ethanol mole fraction is)
-
-$$
-x_{\text{EtOH}}=\frac{n_{\text{EtOH}}}{n_{\text{EtOH}}+n_{\text{H2O}}}
-=\frac{\text{Mole Ratio}}{1+\text{Mole Ratio}}
-=\frac{0.2790510917}{1+0.2790510917}
-=0.2181704027
-$$
-
-(matches your “Mole Fraction” cell)
-
-3. **Mole fraction → Mass fraction (EtOH)**
-
-$$
-w_{\text{EtOH}}
-=\frac{x_{\text{EtOH}}\,M_{\text{EtOH}}}
-{x_{\text{EtOH}}\,M_{\text{EtOH}}+(1-x_{\text{EtOH}})\,M_{\text{H_2O}}}
-=\frac{(0.2181704027)(46.068)}
-{(0.2181704027)(46.068)+(0.7818295973)(18.01528)}
-=0.4164260922
-$$
-
-(matches your “Mass Fraction” cell)
-
-If you’d like, I can also export the formulas list as a CSV and/or paste the feed-row formulas inline with exact cell addresses. Want me to generate a **“Formulas\_Dump.csv”** with all formulas, and a **“Feed\_Row\_Summary.csv”** for just the feed row?
