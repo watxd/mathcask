@@ -1,12 +1,30 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-# Euler's Identity
-
-In mathematics, **Euler's identity** is the equality
-$$ e^{i \pi} + 1 = 0. $$
-
-## Explanation
-
-Euler's identity is a special case of Euler's formula from complex
-analysis, which states that for any real number $ x $,
-$$ e^{ix} = \cos x + i \sin x. $$
+$$
+\begin{aligned}
+&\textbf{Abstract: }\ \text{Continuous ethanol--water distillation by McCabe--Thiele. } z_F=0.2182,\ x_D=0.7460,\ x_B=0.1554.\ \text{Mass fractions: } w_F\approx0.4164,\ w_D\approx0.8825,\ w_B\approx0.3200.\ \text{With } q\approx0.8 \text{ and } R=1.3,\ \text{we built operating lines and found } N_{\text{th}}=7,\ \text{feed tray }=6,\ R_{\min}\approx0.69,\ E_o=7/8=0.875.\\[6pt]
+&\textbf{Given: }\ z_F=0.2182,\ x_D=0.7460,\ x_B=0.1554,\ q=0.8,\ R=1.3.\\[6pt]
+&\textbf{Mole}\to\textbf{Mass (EtOH):}\quad
+w_{\text{EtOH}}=\frac{x_{\text{EtOH}}\,M_{\text{EtOH}}}{x_{\text{EtOH}}\,M_{\text{EtOH}}+\left(1-x_{\text{EtOH}}\right)M_{\text{H_2O}}}.\\
+&\text{Feed }(x=0.2182):\ w\approx0.4164;\ \ \text{Distillate }(x=0.7460):\ w\approx0.8825;\ \ \text{Bottoms }(x=0.1554):\ w\approx0.3200.\\[6pt]
+&\textbf{Enriching line (total condenser):}\quad
+y=\frac{R}{R+1}x+\frac{x_D}{R+1}
+=\frac{1.3}{2.3}x+\frac{0.7460}{2.3}
+=0.565217\,x+0.324348.\\[6pt]
+&\textbf{Feed ($q$) line:}\quad
+y=\frac{q}{q-1}x-\frac{z_F}{q-1}
+=\frac{0.8}{-0.2}x-\frac{0.2182}{-0.2}
+=-4x+1.091.\\[6pt]
+&\textbf{Feed--top intersection:}\quad
+0.565217x+0.324348=-4x+1.091\ \Rightarrow\ 4.565217x=0.766652\ \Rightarrow\ x\approx0.1679,\ y\approx0.4193.\\[6pt]
+&\textbf{Stripping line through }(x_B,y_B)=(0.1554,0.1554)\text{ and }(0.1679,0.4193):\\
+&\hspace{1.5em}m=\frac{0.4193-0.1554}{0.1679-0.1554}=\frac{0.2639}{0.0125}\approx21.053,\ \ 
+b=0.4193-21.053\cdot0.1679\approx-3.116,\ \ 
+y\approx21.053\,x-3.116.\\[6pt]
+&\textbf{Minimum reflux }(R_{\min})\textbf{ from pinch:}\quad
+y=\frac{R_{\min}}{R_{\min}+1}x+\frac{x_D}{R_{\min}+1},\ \ (x_p,y_p)\ \Rightarrow\ R_{\min}=\frac{x_D-y_p}{y_p-x_p}.\\
+&\text{Equivalently, if } b=\frac{x_D}{R_{\min}+1} \text{ is the intercept, then } R_{\min}=\frac{x_D}{b}-1,\ \text{ and with } b\approx0.4414:\ R_{\min}\approx\frac{0.7460}{0.4414}-1\approx0.69.\\[6pt]
+&\textbf{Stages and efficiency:}\quad
+N_{\text{theoretical}}=7,\ \text{feed tray}=6,\ N_{\text{actual}}=8,\ E_o=\frac{N_{\text{theoretical}}}{N_{\text{actual}}}=\frac{7}{8}=0.875.
+\end{aligned}
+$$
