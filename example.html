@@ -1,15 +1,54 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-Here’s a clear and paraphrased version of your explanation for **Part (e)**:
-
----
-
-When **$k_1 > 100$** and **$k_2 < 0.1$**, the formation of B is extremely rapid, causing its concentration to spike quickly to around 1.5 mol/dm³. Meanwhile, A is almost instantly depleted. Since the second reaction (B → C) is much slower and there are no reverse reactions, B gradually decreases over time.
-
-When **$k_2 = 1$** and the reverse rate **$k_{-2} = 0$**, B again rises sharply and maintains a high concentration. However, very little C is produced. This is because the backward reaction from C to B dominates, effectively preventing significant conversion of B to C.
-
-If **$k_{-2} = 0.25$**, B still increases rapidly but doesn't remain as high as before. This is due to the reverse reaction being slower than in the previous case, yet still faster than the forward conversion from B to C. As a result, more C is produced compared to when $k_{-2} = 1$, but less than in the irreversible case.
-
----
-
-Let me know if you’d like this incorporated into a formal report or slide.
+$$
+\begin{aligned}
+&\textbf{Abstract:}\\
+&\text{Ethanol--water distillation analyzed by McCabe--Thiele.}\\
+&z_F=0.2182,\ x_D=0.7460,\ x_B=0.1554.\ \text{Mass: }w_F\approx0.4164,\ w_D\approx0.8825,\ w_B\approx0.3200.\\
+&\text{Feed condition }q\approx0.8,\ \text{reflux }R=1.3.\ \text{Operating lines built; stages stepped.}\\
+&\text{Results: }N_{\text{th}}=7,\ \text{optimum feed tray}=6,\ R_{\min}\approx0.69,\ E_o=7/8=0.875.\\[6pt]
+%
+&\textbf{Given / Constants:}\\
+&z_F=0.2182,\ x_D=0.7460,\ x_B=0.1554,\ q=0.8,\ R=1.3.\\
+&M_{\text{EtOH}}=46.068\ \text{g mol}^{-1},\quad M_{\text{H}_2\text{O}}=18.015\ \text{g mol}^{-1}.\\[6pt]
+%
+&\textbf{Sample Calculations (Mole}\to\text{Mass, EtOH):}\\
+&w_{\text{EtOH}}=\dfrac{x_{\text{EtOH}}\,M_{\text{EtOH}}}{x_{\text{EtOH}}\,M_{\text{EtOH}}+\left(1-x_{\text{EtOH}}\right)M_{\text{H}_2\text{O}}}.\\
+&\text{Feed }(x=0.2182):\ w\approx0.4164;\quad \text{Distillate }(x=0.7460):\ w\approx0.8825;\\
+&\text{Bottoms }(x=0.1554):\ w\approx0.3200.\\[6pt]
+%
+&\textbf{Results \& Discussion (Operating Lines):}\\
+&\text{Enriching (top) line, total condenser:}\\
+&\quad y=\dfrac{R}{R+1}x+\dfrac{x_D}{R+1}
+=\dfrac{1.3}{2.3}x+\dfrac{0.7460}{2.3}
+=0.565217\,x+0.324348.\\
+&\text{Feed ($q$) line:}\\
+&\quad y=\dfrac{q}{q-1}x-\dfrac{z_F}{q-1}
+=\dfrac{0.8}{-0.2}x-\dfrac{0.2182}{-0.2}
+=-4x+1.091.\\
+&\text{Feed--top intersection (feed-stage point):}\\
+&\quad 0.565217x+0.324348=-4x+1.091\\
+&\quad \Rightarrow\ 4.565217x=0.766652\ \Rightarrow\ x\approx0.1679,\ y\approx0.4193.\\
+&\text{Stripping (bottom) line through }(x_B,y_B)=(0.1554,0.1554)\text{ and }(0.1679,0.4193):\\
+&\quad m=\dfrac{0.4193-0.1554}{0.1679-0.1554}=\dfrac{0.2639}{0.0125}\approx21.053.\\
+&\quad b=0.4193-21.053\cdot0.1679\approx-3.116.\\
+&\quad y\approx21.053\,x-3.116.\\[6pt]
+%
+&\textbf{Minimum Reflux (Pinch Method):}\\
+&\text{Enriching line at }R_{\min}:\
+y=\dfrac{R_{\min}}{R_{\min}+1}x+\dfrac{x_D}{R_{\min}+1}.\\
+&\text{Pinch }(x_p,y_p)\Rightarrow R_{\min}=\dfrac{x_D-y_p}{\,y_p-x_p\,}.\\
+&\text{Equivalently, intercept } b=\dfrac{x_D}{R_{\min}+1}\Rightarrow R_{\min}=\dfrac{x_D}{b}-1.\\
+&\text{Using } b\approx0.4414:\ R_{\min}\approx\dfrac{0.7460}{0.4414}-1\approx0.69.\\[6pt]
+%
+&\textbf{Stage Count and Efficiency:}\\
+&N_{\text{theoretical}}=7,\quad \text{optimum feed tray}=6,\quad N_{\text{actual}}=8.\\
+&E_o=\dfrac{N_{\text{theoretical}}}{N_{\text{actual}}}=\dfrac{7}{8}=0.875.\\[6pt]
+%
+&\textbf{Conclusion:}\\
+&\text{With }q=0.8\text{ and }R=1.3\text{, operating lines set; feed-stage at }(0.1679,0.4193).\\
+&\text{McCabe--Thiele stepping: }N_{\text{th}}=7,\ \text{feed at tray }6.\\
+&\text{Pinch: }R_{\min}\approx0.69\ (\sim1.9R_{\min}\ \text{at }R=1.3).\\
+&\text{Overall efficiency with 8 actual trays: }E_o=0.875.
+\end{aligned}
+$$
