@@ -1,134 +1,86 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-**Introduction**
+We analyzed continuous ethanol–water distillation using the McCabe–Thiele method. From GC-based compositions, the feed, distillate, and bottoms mole fractions of ethanol were 
+𝑧
+𝐹
+=
+0.2182
+z
+F
+	​
 
-Distillation is one of the most important and widely used separation processes in the chemical and petrochemical industries. It enables the purification of chemical products, the recovery of valuable solvents, and the production of essential fuels such as gasoline, kerosene, and liquefied petroleum gases. Beyond petrochemicals, distillation is integral to alcohol production, air separation (to obtain oxygen and nitrogen), water desalination, and pharmaceuticals. Its ability to separate multi-component liquid mixtures based on volatility differences makes it a cornerstone of both industrial practice and daily life.
+=0.2182, 
+𝑥
+𝐷
+=
+0.7460
+x
+D
+	​
 
-In this experiment, the principles of **continuous distillation in a multistage column under steady feed conditions** are studied. The primary objectives are to construct the operating lines on the McCabe–Thiele diagram, determine the theoretical number of stages, and calculate the overall plate or packing efficiency of the column. The process is demonstrated for both a **tray column** and a **packed column**, allowing a direct comparison of their performances.
+=0.7460, and 
+𝑥
+𝐵
+=
+0.1554
+x
+B
+	​
 
----
+=0.1554; the corresponding mass fractions were 
+𝑤
+𝐹
+≈
+0.4164
+w
+F
+	​
 
-### Theoretical Background
+≈0.4164, 
+𝑤
+𝐷
+≈
+0.8825
+w
+D
+	​
 
-Distillation separates a liquid mixture by vaporizing the more volatile component(s). The McCabe–Thiele method provides a graphical means of analyzing a distillation column using vapor–liquid equilibrium data and mass balances under the assumption of **constant molal overflow** (equal molar vapor and liquid rates between trays). The column is divided into an **enriching section** (above the feed) and a **stripping section** (below the feed).
+≈0.8825, and 
+𝑤
+𝐵
+≈
+0.3200
+w
+B
+	​
 
-From mass balances, the operating lines for the vapor composition $y$ and liquid composition $x$ in each section are:
+≈0.3200 (sample conversion shown). With a partially vaporized feed (
+𝑞
+≈
+0.8
+q≈0.8) and an operating reflux ratio 
+𝑅
+=
+1.3
+R=1.3, we constructed the enriching line, q-line, and stripping line, located the feed-stage intersection, and stepped off stages on the 
+𝑥
+x–
+𝑦
+y VLE diagram. The theoretical number of trays was 7, with optimum feed tray = 6. Using the pinch construction, we obtained R_\min\approx0.69, so the operation at 
+𝑅
+=
+1.3
+R=1.3 is \sim1.9\,R_\min. With 8 actual trays, the overall tray efficiency is 
+𝐸
+𝑜
+=
+7
+/
+8
+=
+0.875
+E
+o
+	​
 
-1. **Stripping section**
-
-   $$
-   y_{m+1}=\frac{L_m}{V_{m+1}} x_m - \frac{W x_W}{V_{m+1}}
-   $$
-
-   where $L_m$ and $V_{m+1}$ are the liquid and vapor flow rates between trays, $W$ is the bottoms flow rate, and $x_W$ is the mole fraction of the more volatile component in the bottoms.
-
-2. **Enriching section**
-
-   $$
-   y_{n+1}=\frac{L_n}{V_{n+1}}x_n + \frac{D x_D}{V_{n+1}}
-          =\frac{R}{R+1}x_n + \frac{x_D}{R+1}
-   $$
-
-   where $D$ is the distillate flow rate, $x_D$ is its composition, and $R$ is the reflux ratio.
-
-3. **Reflux ratio**
-
-   $$
-   R=\frac{L_n}{D}
-   $$
-
-   which expresses the ratio of liquid returned as reflux to the distillate withdrawn.
-
-Feed conditions affect the location of the feed (q) line:
-
-4. **Feed quality**
-
-   $$
-   q = \frac{H_V - H_F}{H_V - H_L}
-   $$
-
-   where $H_V$, $H_F$, and $H_L$ are the enthalpies of saturated vapor, feed, and saturated liquid, respectively.
-
-5. **q-line (feed line)**
-
-   $$
-   y = \frac{q}{q-1} x - \frac{x_F}{q-1}
-   $$
-
-   which intersects the enriching and stripping operating lines at the feed point.
-
-The minimum reflux ratio occurs when the operating lines touch the equilibrium curve (pinch point). Practical operation typically uses 1.3–1.5 times this minimum to allow a finite number of stages.
-
-The overall tray efficiency $E_o$ relates the actual and theoretical number of trays:
-
-6. **Overall tray efficiency**
-
-   $$
-   E_o = \frac{\text{number of theoretical trays}}{\text{number of actual trays}}
-   $$
-
-For packed columns, which lack discrete trays, efficiency is expressed as the **height equivalent to a theoretical plate (HETP)**:
-
-7. **HETP**
-
-   $$
-   HETP = \frac{\text{Height of Packing (m)}}{\text{Total number of theoretical plates in the column}}
-   $$
-
----
-
-### Notation
-
-| Symbol     | Meaning                                             |
-| ---------- | --------------------------------------------------- |
-| D          | Distillate flow rate (LPM)                          |
-| F          | Feed flow rate (LPM)                                |
-| W          | Bottoms flow rate (LPM)                             |
-| L          | Liquid flow in column (LPM)                         |
-| V          | Vapor flow in column                                |
-| x          | Liquid mole fraction of the more volatile component |
-| y          | Vapor mole fraction of the more volatile component  |
-| R          | Reflux ratio                                        |
-| q          | Feed quality                                        |
-| $q_c, q_R$ | Heat duty of condenser and reboiler                 |
-| $H, h$     | Enthalpy of vapor and liquid (kJ/kg)                |
-| $\lambda$  | Latent heat of vaporization                         |
-| E₀         | Overall tray efficiency                             |
-| HETP       | Height equivalent of one theoretical plate          |
-
-Subscripts: **F** (feed), **D** (distillate), **L** (liquid), **W** (bottom product), **m, n** (tray numbers).
-
----
-
-### Brief Experimental Procedure
-
-1. **Mixing of Products**
-
-   * Open specified valves (V26, V30) and start circulation pump P3 to mix the liquid charge.
-
-2. **Charging**
-
-   * Open vent and feed valves (V28, V29) and slowly charge the reboiler with feed solution using pump P1, then close.
-
-3. **Start-up**
-
-   * Begin water flow through V45 and V44 for condenser and cooler.
-   * Introduce steam through V42 to heat the reboiler, maintaining a steam pressure up to 2 bar.
-   * Run the column at **total reflux** (all condensed vapor returned) for about 15 minutes to reach thermal equilibrium.
-
-4. **Steady Operation**
-
-   * Start feed pump P1 at 10 L/h and preheater W5.
-   * Adjust reflux valve V10 to obtain the desired reflux ratio.
-   * Collect and record samples of feed, distillate, and bottom product, along with temperatures, pressures, and flow rates.
-   * Repeat the procedure for the packed column section.
-
-5. **Shut Down**
-
-   * Return to total reflux, close steam and cooling water valves, and stop all pumps.
-
----
-
-In summary, this experiment combines practical operation of a distillation unit with the McCabe–Thiele design method. By integrating theoretical analysis with experimental data—vapor–liquid equilibrium, operating lines, and stage calculations—it provides a comprehensive understanding of continuous distillation and column efficiency for both tray and packed systems.
-
-
+=7/8=0.875.
