@@ -1,149 +1,38 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
-\documentclass[12pt]{article}
-\usepackage{amsmath,amssymb,siunitx}
-\usepackage[margin=1in]{geometry}
-\usepackage{physics}
-\usepackage{bm}
+$$
+\begin{aligned}
+&\textbf{Abstract: } \text{Continuous ethanol--water distillation analyzed via McCabe--Thiele. GC-based mole fractions: }z_F=0.2182,\ x_D=0.7460,\ x_B=0.1554.\ \text{Converted mass fractions: }w_F\approx0.4164,\ w_D\approx0.8825,\ w_B\approx0.3200.\ \text{With }q\approx0.8\text{ and }R=1.3,\ \text{we constructed the enriching, }q\text{-, and stripping lines, stepped stages, and found }N_\text{th}=7,\ \text{optimum feed tray }=6.\ \text{Pinch gives }R_{\min}\approx0.69.\ \text{With }N_\text{act}=8,\ E_o=\tfrac{7}{8}=0.875.}\\[6pt]
+&\textbf{Given/Constants: } z_F=0.2182,\ x_D=0.7460,\ x_B=0.1554,\ q=0.8,\ R=1.3,\ M_{\text{EtOH}}=46.068\ \text{g mol}^{-1},\ M_{\text{H}_2\text{O}}=18.015\ \text{g mol}^{-1}.\\[6pt]
+&\textbf{Mole}\to\textbf{Mass Fraction (EtOH):}\quad
+w_{\text{EtOH}}=\frac{x_{\text{EtOH}}\,M_{\text{EtOH}}}{x_{\text{EtOH}}\,M_{\text{EtOH}}+(1-x_{\text{EtOH}})\,M_{\text{H}_2\text{O}}}.\\
+&\text{Feed }(x=0.2182):\ w\approx0.4164;\quad
+\text{Distillate }(x=0.7460):\ w\approx0.8825;\quad
+\text{Bottoms }(x=0.1554):\ w\approx0.3200.\\[6pt]
+&\textbf{Enriching (Top) Operating Line (total condenser):}\quad
+y=\frac{R}{R+1}x+\frac{x_D}{R+1}
+=\frac{1.3}{2.3}x+\frac{0.7460}{2.3}
+=\boxed{\,0.565217\,x+0.324348\,}.\\[6pt]
+&\textbf{Feed Line (}\bm{q}\textbf{-line):}\quad
+y=\frac{q}{q-1}x-\frac{z_F}{q-1}
+=\frac{0.8}{-0.2}x-\frac{0.2182}{-0.2}
+=\boxed{\,-4x+1.091\,}.\\[6pt]
+&\textbf{Feed--Top Intersection (feed-stage point):}\quad
+0.565217\,x+0.324348=-4x+1.091
+\ \Rightarrow\ 4.565217\,x=0.766652
+\ \Rightarrow\ \boxed{x\approx0.1679,\ y\approx0.4193}.\\[6pt]
+&\textbf{Stripping (Bottom) Operating Line (through }(x_B,y_B)=(0.1554,0.1554)\text{ and feed-stage point):}\\
+&\hspace{1.5em}m=\dfrac{0.4193-0.1554}{0.1679-0.1554}=\dfrac{0.2639}{0.0125}\approx\boxed{21.053},\quad
+b=y-mx=0.4193-21.053(0.1679)\approx\boxed{-3.116},\\
+&\hspace{1.5em}\boxed{\,y\approx21.053\,x-3.116\,}.\\[6pt]
+&\textbf{Minimum Reflux Ratio from Pinch:}\quad
+\text{Enriching line at }R_{\min}:\ y=\frac{R_{\min}}{R_{\min}+1}x+\frac{x_D}{R_{\min}+1}.\
+\text{At pinch }(x_p,y_p)\ \Rightarrow\ \boxed{R_{\min}=\frac{x_D-y_p}{\,y_p-x_p\,}}.\\
+&\text{Equivalently, with intercept }b=\dfrac{x_D}{R_{\min}+1}:\ \boxed{R_{\min}=\dfrac{x_D}{b}-1}.\
+\text{Using }b\approx0.4414:\ R_{\min}\approx\dfrac{0.7460}{0.4414}-1\approx\boxed{0.69}.\\[6pt]
+&\textbf{Stage Count and Efficiency:}\quad
+\boxed{N_\text{theoretical}=7},\ \boxed{\text{Optimum feed tray}=6},\ \boxed{N_\text{actual}=8},\ 
+\boxed{E_o=\dfrac{N_\text{theoretical}}{N_\text{actual}}=\dfrac{7}{8}=0.875}.\\[6pt]
+&\textbf{Conclusion: } \text{With }q=0.8\text{ and }R=1.3,\ \text{the explicit operating lines and pinch yield }N_\text{th}=7,\ \text{feed at tray }6,\ R_{\min}\approx0.69,\ \text{and }E_o=0.875\ \text{for 8 actual trays.}
+\end{aligned}
+$$
 
-\title{McCabe--Thiele Calculations for Ethanol--Water Distillation}
-\author{CHE 409 Report Excerpts}
-\date{}
-
-\begin{document}
-\maketitle
-
-\begin{abstract}
-Continuous distillation of an ethanol--water feed was analyzed using the McCabe--Thiele method. From GC-based compositions, the mole fractions of ethanol were
-\(z_F=0.2182\) (feed), \(x_D=0.7460\) (distillate), and \(x_B=0.1554\) (bottoms).
-Mass fractions computed from molar masses yielded \(w_F\approx0.4164\), \(w_D\approx0.8825\), and \(w_B\approx0.3200\).
-With a partially vaporized feed (\(q\approx0.8\)) and an operating reflux ratio \(R=1.3\), the enriching (top) operating line, the $q$-line (feed line), and the stripping (bottom) line were constructed.
-Tray stepping on the \(x\)--\(y\) VLE diagram gave \(\text{theoretical trays}=7\) and \(\text{optimum feed tray}=6\).
-From the pinch construction, the minimum reflux was \(R_{\min}\approx0.69\), so operation at \(R=1.3\) corresponds to \(\sim 1.9\,R_{\min}\).
-With \(8\) actual trays, the overall tray efficiency is \(E_o=7/8=0.875\).
-\end{abstract}
-
-\section*{Given / Constants}
-\[
-z_F=0.2182,\qquad x_D=0.7460,\qquad x_B=0.1554,\qquad q\approx0.8,\qquad R=1.3
-\]
-\[
-M_{\text{EtOH}}=46.068\ \si{g.mol^{-1}},\qquad M_{\text{H_2O}}=18.015\ \si{g.mol^{-1}}
-\]
-
-\section*{Results \& Discussion with Full Line Equations}
-
-\subsection*{(1) Enriching (Top) Operating Line}
-For a total condenser,
-\begin{align}
-y &= \frac{R}{R+1}\,x+\frac{x_D}{R+1}\label{eq:enrich}\\
-\frac{R}{R+1} &= \frac{1.3}{2.3}=0.565217,\qquad
-\frac{x_D}{R+1}=\frac{0.7460}{2.3}=0.324348 \nonumber\\
-\Rightarrow\quad \boxed{y &= 0.565217\,x+0.324348.}\nonumber
-\end{align}
-
-\subsection*{(2) Feed Line ($q$-line)}
-\begin{align}
-y &= \frac{q}{q-1}\,x-\frac{z_F}{q-1}\label{eq:qline}\\
-\frac{q}{q-1} &= \frac{0.8}{-0.2}=-4,\qquad -\frac{z_F}{q-1}=-\frac{0.2182}{-0.2}=+1.091 \nonumber\\
-\Rightarrow\quad \boxed{y &= -4\,x+1.091.}\nonumber
-\end{align}
-
-\subsection*{(3) Feed--Top Intersection (Feed-Stage Point)}
-Solve \eqref{eq:enrich} and \eqref{eq:qline}:
-\begin{align}
-0.565217\,x+0.324348 &= -4x+1.091 \\
-4.565217\,x &= 0.766652 \\
-\boxed{x &\approx 0.1679},\qquad \boxed{y \approx 0.4193.}
-\end{align}
-
-\subsection*{(4) Stripping (Bottom) Operating Line}
-Using the reboiler equilibrium point \((x_B,y_B)=(x_B,x_B)=(0.1554,0.1554)\) and the feed-stage point \((0.1679,0.4193)\),
-\begin{align}
-m &= \frac{0.4193-0.1554}{0.1679-0.1554}=\frac{0.2639}{0.0125}\approx \boxed{21.053},\\
-b &= y-mx = 0.4193-21.053(0.1679)\approx \boxed{-3.116},\\
-\Rightarrow\quad \boxed{y &\approx 21.053\,x-3.116.}
-\end{align}
-
-\subsection*{(5) Minimum Reflux Ratio from the Pinch}
-At \(R=R_{\min}\), the enriching line passes through the pinch point \((x_p,y_p)\) where the $q$-line intersects the equilibrium curve, and also passes through the distillate:
-\begin{align}
-y &= \frac{R_{\min}}{R_{\min}+1}x+\frac{x_D}{R_{\min}+1}. \label{eq:enrichRmin}
-\end{align}
-Enforcing \((x_p,y_p)\) on \eqref{eq:enrichRmin} gives the standard form
-\begin{align}
-\boxed{R_{\min}=\frac{x_D-y_p}{\,y_p-x_p\,}}.
-\end{align}
-Equivalently, if the enriching-line intercept at pinch is \(b=\dfrac{x_D}{R_{\min}+1}\), then
-\begin{align}
-\boxed{R_{\min}=\frac{x_D}{b}-1.}
-\end{align}
-From the constructed diagram (pinch intercept \(b\approx0.4414\)):
-\begin{align}
-R_{\min} &\approx \frac{0.7460}{0.4414}-1 \approx \boxed{0.69}.
-\end{align}
-
-\subsection*{(6) Stage Count and Efficiency}
-From McCabe--Thiele stepping with the lines above and the ethanol--water VLE:
-\[
-\boxed{N_{\text{theoretical}}=7},\qquad \boxed{\text{Optimum feed tray}=6}.
-\]
-With \(N_{\text{actual}}=8\),
-\begin{align}
-\boxed{E_o=\frac{N_{\text{theoretical}}}{N_{\text{actual}}}=\frac{7}{8}=0.875.}
-\end{align}
-
-\section*{Sample Calculations}
-
-\subsection*{(A) Mole \(\rightarrow\) Mass Fraction (Ethanol)}
-For a binary mixture (EtOH + \(\mathrm{H_2O}\)):
-\begin{align}
-w_{\text{EtOH}}
-= \frac{x_{\text{EtOH}}\,M_{\text{EtOH}}}{x_{\text{EtOH}}\,M_{\text{EtOH}}+(1-x_{\text{EtOH}})\,M_{\text{H}_2\text{O}}}.
-\end{align}
-Using \(M_{\text{EtOH}}=46.068\) and \(M_{\text{H}_2\text{O}}=18.015\ \si{g.mol^{-1}}\):
-\begin{align*}
-\text{Feed }(x=0.2182):\quad
-w &=
-\frac{0.2182(46.068)}{0.2182(46.068)+0.7818(18.015)}
-\approx \boxed{0.4164},\\[3pt]
-\text{Distillate }(x=0.7460):\quad
-w &\approx \boxed{0.8825},\\[3pt]
-\text{Bottoms }(x=0.1554):\quad
-w &\approx \boxed{0.3200}.
-\end{align*}
-
-\subsection*{(B) Enriching Line at \(R=1.3\)}
-\begin{align}
-\boxed{y=\frac{1.3}{2.3}\,x+\frac{0.7460}{2.3}
-=0.565217\,x+0.324348.}
-\end{align}
-
-\subsection*{(C) $q$-Line at \(q=0.8\)}
-\begin{align}
-\boxed{y=\frac{0.8}{-0.2}\,x-\frac{0.2182}{-0.2}
-=-4\,x+1.091.}
-\end{align}
-
-\subsection*{(D) Feed--Top Intersection}
-\begin{align}
-0.565217\,x+0.324348&=-4x+1.091
-\ \Rightarrow\ 
-\boxed{x\approx 0.1679,\ \ y\approx 0.4193.}
-\end{align}
-
-\subsection*{(E) Stripping Line Through \((x_B,y_B)=(0.1554,0.1554)\)}
-\begin{align}
-\boxed{y \approx 21.053\,x-3.116.}
-\end{align}
-
-\subsection*{(F) Minimum Reflux via Pinch Intercept}
-\begin{align}
-\boxed{R_{\min}=\frac{x_D}{b}-1
-\approx \frac{0.7460}{0.4414}-1
-\approx 0.69.}
-\end{align}
-
-\section*{Conclusion}
-Using measured compositions and McCabe--Thiele construction with \(R=1.3\) and \(q\approx0.8\), we obtained explicit operating lines, the feed intersection, and a stage count of \(\boxed{7}\) with the \(\boxed{6^{\text{th}}}\) tray as the optimum feed location. Pinch analysis gave \(\boxed{R_{\min}\approx0.69}\), validating practical operation. With \(8\) actual trays, the overall tray efficiency is \(\boxed{E_o=0.875}\).
-
-\end{document}
