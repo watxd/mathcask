@@ -1,78 +1,45 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
+Here’s a compact 5-slide version with **all symbols in inline math**.
+
+---
 
 # Slide 1 — Model at a glance (inputs → outputs)
 
-* **Goal:** predict sulfur removal in a batch EDS reactor from a **voltage schedule** and your measured **(V!-!I)** curve.
-* **Inputs:** (V_{\text{steps}}) & step durations (\Rightarrow) (I_{\text{sched}}) (via your (V!-!I) table), Faradaic efficiency (\varepsilon_F), electrons per S (n), electrode area (A), mass-transfer (k_m), volume (V).
-* **Outputs:** (S) (ppmw) & conversion vs time, **time-to-spec**, and **current traces** (I_{\text{sched}}(t)) and (I_{\text{eff}}(t)).
+* Goal: predict sulfur removal in a batch EDS reactor from a voltage schedule and the measured (V!-!I) curve.
+* Inputs: (V_{\text{steps}}) with step durations (\Rightarrow I_{\text{sched}}) (via the (V!-!I) table); (\varepsilon_F); (n); (A); (k_m); (V).
+* Outputs: sulfur (ppmw) and conversion vs time, time-to-spec, and current traces (I_{\text{sched}}(t)) and (I_{\text{eff}}(t)).
 
 ---
 
 # Slide 2 — Mass balance → electrochemical rate (and why (n=\mathbf{4}))
 
-Batch balance:
-$$
-\frac{dN_S}{dt}=-r_S,V \quad\Rightarrow\quad \frac{dC_S}{dt}=-r_S' .
-$$
-Faraday + stoichiometry + efficiency:
-$$
-\boxed{;\frac{dC_S}{dt}=-\frac{\varepsilon_F}{n,F,V},I(t);}
-$$
-(DBT (\to) sulfone proceeds via two 2-electron oxidations: sulfide(\to)sulfoxide (2e^-), sulfoxide(\to)sulfone (2e^-) (\Rightarrow n=2+2=\mathbf{4}).)
-Overall cell (neutral/alkaline electrolyte):
-$$
-\mathrm{R_2S}+2,\mathrm{H_2O};\longrightarrow;\mathrm{R_2SO_2}+2,\mathrm{H_2}.
-$$
+* Batch balance: (\frac{dN_S}{dt}=-r_S V \Rightarrow \frac{dC_S}{dt}=-r_S').
+* Faraday + stoichiometry + efficiency: (\boxed{,\frac{dC_S}{dt}= -\frac{\varepsilon_F}{n F V}, I(t),}).
+* Why (n=4): DBT (\to) sulfoxide ((2,e^-)) and sulfoxide (\to) sulfone ((2,e^-)) (\Rightarrow n=2+2=4).
+* Overall cell (neutral/alkaline): (\mathrm{R_2S}+2,\mathrm{H_2O}\to \mathrm{R_2SO_2}+2,\mathrm{H_2}).
 
 ---
 
-# Slide 3 — Voltage (\to) current & **Option A** (current-driven, zero-order)
+# Slide 3 — Voltage (\to) current and Option A (current-driven, zero-order)
 
-Scheduled current from your (V!-!I) data: (I_{\text{sched}}=I(V_{\text{step}})).
-Zero-order rate within a constant-current step:
-$$
-\boxed{;-r_S' = k_A,\qquad k_A=\frac{\varepsilon_F,I_{\text{sched}}}{n,F,V};}
-$$
-Linear concentration profile in the step:
-$$
-C_S(t)=C_{S,0}-k_A,t.
-$$
+* Scheduled current: (I_{\text{sched}}= I!\left( V_{\text{step}} \right)).
+* Zero-order rate in a constant-current step: (\boxed{, -r_S' = k_A,\quad k_A=\frac{\varepsilon_F I_{\text{sched}}}{n F V},}).
+* Concentration in the step: (C_S(t)= C_{S,0} - k_A t) (linear).
 
 ---
 
-# Slide 4 — Diffusion cap & **Option B** (MT-limited, first-order) + switch
+# Slide 4 — Diffusion cap and Option B (mass-transfer-limited, first-order)
 
-Film theory (to anode):
-$$
-\boxed{,j_{\lim}=nF,k_m,C_S,},\qquad \boxed{,I_{\lim}=A,j_{\lim}=A,nF,k_m,C_S,}.
-$$
-If (I_{\text{sched}}>I_{\lim}), only (I_{\lim}) is productive:
-$$
-\frac{dC_S}{dt}=-\frac{\varepsilon_F}{nF V},I_{\lim}
-=-\underbrace{\left(\frac{\varepsilon_F,A,k_m}{V}\right)}*{k*{\text{app}}}C_S,
-\qquad
-\boxed{,k_{\text{app}}=\frac{\varepsilon_F A k_m}{V},}
-$$
-with exponential decay (C_S(t)=C_\star e^{-k_{\text{app}} t}).
-Productive current and switch:
-$$
-\boxed{,I_{\text{eff}}(t)=\min!\big(I_{\text{sched}},,I_{\lim}(t)\big),},\qquad
-\boxed{,C_\star=\frac{I_{\text{sched}}}{A,nF,k_m},},\qquad
-\boxed{,t_{\text{sw}}=\frac{C_{\text{start}}-C_\star}{k_A},}.
-$$
+* Film theory: (\boxed{,j_{\lim}= n F k_m C_S,}), (\boxed{,I_{\lim}= A j_{\lim}= A n F k_m C_S,}).
+* If (I_{\text{sched}} > I_{\lim}): (\frac{dC_S}{dt}= -\left(\frac{\varepsilon_F A k_m}{V}\right) C_S).
+* Apparent constant: (\boxed{,k_{\text{app}}=\frac{\varepsilon_F A k_m}{V},}).
+* Profile in MT limit: (C_S(t)= C_\star \exp(-k_{\text{app}} t)).
 
 ---
 
-# Slide 5 — Implementation (MATLAB & Aspen)
+# Slide 5 — Switching, MATLAB, and Aspen
 
-* **Before (t_{\text{sw}}):** Option A (linear). **After (t_{\text{sw}}):** MT-capped (first-order).
-* **MATLAB:** computes (k_A), (C_\star), (k_{\text{app}}); plots (I_{\text{eff}}(t)) vs (I_{\text{sched}}(t)) and the concentration/conversion traces.
-* **Aspen:** add both reactions with same stoichiometry.
-
-  * **Option A:** Power-Law, all orders (=0), (k_A=\varepsilon_F I/(n F V)) (update per step).
-  * **Option B:** Power-Law, (\text{order(DBT)}=1), (k_{\text{app}}=\varepsilon_F A k_m/V).
-  * Run the **minimum-rate** path per step (enable one and disable the other), or use a single user-rate
-    $$r'=\min!\big(k_A,\ k_{\text{app}},C\big)$$
-    or a smooth Koutecký–Levich-type blend
-    $$r'=\frac{k_A,k_{\text{app}},C}{k_A+k_{\text{app}},C},.$$
-
+* Productive current: (\boxed{,I_{\text{eff}}(t)= \min!\big( I_{\text{sched}},, I_{\lim}(t) \big),}) with (I_{\lim}(t)= A n F k_m C_S(t)).
+* Switch concentration and time: (\boxed{,C_\star= \frac{ I_{\text{sched}} }{ A n F k_m },}), (\boxed{,t_{\text{sw}}= \frac{ C_{\text{start}} - C_\star }{ k_A },}) (valid if (0< t_{\text{sw}} < \Delta t_{\text{step}})).
+* MATLAB: computes (k_A), (C_\star), (k_{\text{app}}); plots (I_{\text{eff}}(t)) vs (I_{\text{sched}}(t)) and concentration/conversion.
+* Aspen: same stoichiometry for both; Option A uses all orders (=0) with (k_A=\varepsilon_F I/(n F V)); Option B uses (\text{order}(\mathrm{DBT})=1) with (k_{\text{app}}=\varepsilon_F A k_m/V); run the minimum-rate path per step or a single user-rate (r'=\min!\big(k_A,, k_{\text{app}} C_S\big)) (smooth blend (r'=(k_A k_{\text{app}} C_S)/(k_A + k_{\text{app}} C_S))).
