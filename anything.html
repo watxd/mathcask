@@ -1,5 +1,6 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
-Here’s a compact 5-slide version with **all symbols in inline math**.
+fart
+Here you go—same 5-slide content, with every equation in inline math:
 
 ---
 
@@ -14,32 +15,32 @@ Here’s a compact 5-slide version with **all symbols in inline math**.
 # Slide 2 — Mass balance → electrochemical rate (and why (n=\mathbf{4}))
 
 * Batch balance: (\frac{dN_S}{dt}=-r_S V \Rightarrow \frac{dC_S}{dt}=-r_S').
-* Faraday + stoichiometry + efficiency: (\boxed{,\frac{dC_S}{dt}= -\frac{\varepsilon_F}{n F V}, I(t),}).
-* Why (n=4): DBT (\to) sulfoxide ((2,e^-)) and sulfoxide (\to) sulfone ((2,e^-)) (\Rightarrow n=2+2=4).
+* Faraday + stoichiometry + efficiency: (\boxed{\frac{dC_S}{dt}= -\frac{\varepsilon_F}{n F V}, I(t)}).
+* Why (n=4): DBT (\to) sulfoxide ((2e^-)) and sulfoxide (\to) sulfone ((2e^-)) (\Rightarrow n=2+2=4).
 * Overall cell (neutral/alkaline): (\mathrm{R_2S}+2,\mathrm{H_2O}\to \mathrm{R_2SO_2}+2,\mathrm{H_2}).
 
 ---
 
 # Slide 3 — Voltage (\to) current and Option A (current-driven, zero-order)
 
-* Scheduled current: (I_{\text{sched}}= I!\left( V_{\text{step}} \right)).
-* Zero-order rate in a constant-current step: (\boxed{, -r_S' = k_A,\quad k_A=\frac{\varepsilon_F I_{\text{sched}}}{n F V},}).
+* Scheduled current: (I_{\text{sched}} = I!\left(V_{\text{step}}\right)).
+* Zero-order rate in a constant-current step: (\boxed{-r_S' = k_A,\quad k_A=\frac{\varepsilon_F I_{\text{sched}}}{n F V}}).
 * Concentration in the step: (C_S(t)= C_{S,0} - k_A t) (linear).
 
 ---
 
 # Slide 4 — Diffusion cap and Option B (mass-transfer-limited, first-order)
 
-* Film theory: (\boxed{,j_{\lim}= n F k_m C_S,}), (\boxed{,I_{\lim}= A j_{\lim}= A n F k_m C_S,}).
+* Film theory: (\boxed{j_{\lim}= n F k_m C_S}), (\boxed{I_{\lim}= A j_{\lim}= A n F k_m C_S}).
 * If (I_{\text{sched}} > I_{\lim}): (\frac{dC_S}{dt}= -\left(\frac{\varepsilon_F A k_m}{V}\right) C_S).
-* Apparent constant: (\boxed{,k_{\text{app}}=\frac{\varepsilon_F A k_m}{V},}).
+* Apparent constant: (\boxed{k_{\text{app}}=\frac{\varepsilon_F A k_m}{V}}).
 * Profile in MT limit: (C_S(t)= C_\star \exp(-k_{\text{app}} t)).
 
 ---
 
 # Slide 5 — Switching, MATLAB, and Aspen
 
-* Productive current: (\boxed{,I_{\text{eff}}(t)= \min!\big( I_{\text{sched}},, I_{\lim}(t) \big),}) with (I_{\lim}(t)= A n F k_m C_S(t)).
-* Switch concentration and time: (\boxed{,C_\star= \frac{ I_{\text{sched}} }{ A n F k_m },}), (\boxed{,t_{\text{sw}}= \frac{ C_{\text{start}} - C_\star }{ k_A },}) (valid if (0< t_{\text{sw}} < \Delta t_{\text{step}})).
+* Productive current: (\boxed{I_{\text{eff}}(t)= \min!\big( I_{\text{sched}},, I_{\lim}(t) \big)}) with (I_{\lim}(t)= A n F k_m C_S(t)).
+* Switch concentration and time: (\boxed{C_\star= \frac{ I_{\text{sched}} }{ A n F k_m }}), (\boxed{t_{\text{sw}}= \frac{ C_{\text{start}} - C_\star }{ k_A }}) (valid if (0< t_{\text{sw}} < \Delta t_{\text{step}})).
 * MATLAB: computes (k_A), (C_\star), (k_{\text{app}}); plots (I_{\text{eff}}(t)) vs (I_{\text{sched}}(t)) and concentration/conversion.
-* Aspen: same stoichiometry for both; Option A uses all orders (=0) with (k_A=\varepsilon_F I/(n F V)); Option B uses (\text{order}(\mathrm{DBT})=1) with (k_{\text{app}}=\varepsilon_F A k_m/V); run the minimum-rate path per step or a single user-rate (r'=\min!\big(k_A,, k_{\text{app}} C_S\big)) (smooth blend (r'=(k_A k_{\text{app}} C_S)/(k_A + k_{\text{app}} C_S))).
+* Aspen: same stoichiometry for both; Option A uses order (=0) with (k_A=\varepsilon_F I/(n F V)); Option B uses (\text{order}(\mathrm{DBT})=1) with (k_{\text{app}}=\varepsilon_F A k_m/V); run the minimum-rate path per step or a single user-rate (r'=\min!\big(k_A,, k_{\text{app}} C_S\big)) (smooth blend (r'=\frac{k_A, k_{\text{app}} C_S}{k_A + k_{\text{app}} C_S})).
