@@ -1,0 +1,48 @@
+<!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
+
+Here’s a clean 5-slide version with **all math inline**.
+
+---
+
+# Slide 1 — Model at a glance (inputs → outputs)
+
+* **Goal:** predict sulfur removal in a batch EDS reactor from a voltage schedule and your measured (V!-!I) curve.
+* **Inputs:** (V_{\text{steps}}) with step durations (\Rightarrow I_{\text{sched}}) (via your (V!-!I) table); (\varepsilon_F); (n); (A); (k_m); (V).
+* **Outputs:** sulfur (ppmw) and conversion vs time, time-to-spec, and current traces (I_{\text{sched}}(t)) and (I_{\text{eff}}(t)).
+
+---
+
+# Slide 2 — Mass balance → electrochemical rate (and why (n=\mathbf{4}))
+
+* Batch balance: (dN_S/dt=-r_S V \Rightarrow dC_S/dt=-r_S').
+* Faraday + stoichiometry + efficiency: (\boxed{,dC_S/dt=-(\varepsilon_F/(n F V)),I(t),}).
+* Why (n=4): DBT (\to) sulfoxide (2 e(^{-})) and sulfoxide (\to) sulfone (2 e(^{-})) (\Rightarrow n=2+2=4).
+* Overall cell (neutral/alkaline): (\mathrm{R_2S}+2,\mathrm{H_2O}\to \mathrm{R_2SO_2}+2,\mathrm{H_2}).
+
+---
+
+# Slide 3 — Voltage (\to) current and **Option A** (current-driven, zero-order)
+
+* Scheduled current from polarization: (I_{\text{sched}}=I(V_{\text{step}})).
+* Zero-order rate in a constant-current step: (\boxed{, -r_S' = k_A,\quad k_A=\varepsilon_F I_{\text{sched}}/(n F V),}).
+* Concentration in the step: (C_S(t)=C_{S,0}-k_A t) (linear).
+
+---
+
+# Slide 4 — Diffusion cap and **Option B** (MT-limited, first-order)
+
+* Film theory: (\boxed{,j_{\lim}=n F k_m C_S,}), (\boxed{,I_{\lim}=A j_{\lim}=A n F k_m C_S,}).
+* If (I_{\text{sched}}>I_{\lim}): (dC_S/dt=-(\varepsilon_F/(n F V)) I_{\lim}=-(\varepsilon_F A k_m/V),C_S).
+* Apparent constant: (\boxed{,k_{\text{app}}=\varepsilon_F A k_m/V,}).
+* Profile in MT limit: (C_S(t)=C_\star,e^{-k_{\text{app}} t}).
+
+---
+
+# Slide 5 — Switching, MATLAB, and Aspen
+
+* Productive current: (\boxed{,I_{\text{eff}}(t)=\min!\big(I_{\text{sched}},,I_{\lim}(t)\big),}) with (I_{\lim}(t)=A n F k_m C_S(t)).
+* Switch concentration and time: (\boxed{,C_\star=I_{\text{sched}}/(A n F k_m),}), (\boxed{,t_{\text{sw}}=(C_{\text{start}}-C_\star)/k_A,}) (valid if (0<t_{\text{sw}}<\Delta t_{\text{step}})).
+* Regimes: before (t_{\text{sw}}) use Option A (linear); after (t_{\text{sw}}) use MT-capped (first-order).
+* MATLAB: computes (k_A), (C_\star), (k_{\text{app}}); plots (I_{\text{eff}}(t)) vs (I_{\text{sched}}(t)) and concentration/conversion.
+* Aspen: same stoichiometry for both; Option A uses all orders (=0) with (k_A=\varepsilon_F I/(n F V)); Option B uses (\text{order}(\mathrm{DBT})=1) with (k_{\text{app}}=\varepsilon_F A k_m/V); run the minimum-rate path per step or a single user rate (r'=\min!\big(k_A,\ k_{\text{app}} C_S\big)) (smooth blend (r'=(k_A k_{\text{app}} C_S)/(k_A+k_{\text{app}} C_S))).
+
