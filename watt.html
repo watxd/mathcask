@@ -1,175 +1,126 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
-Great—let’s write the batch **design equation** for a closed electrochemical desulfurization (EDS) reactor starting from the simple mass balance you attached, then pin down the reaction and $n$ to use with **graphite // graphite** electrodes in **Na$_2$SO$_4$** electrolyte.
+Perfect—let’s do **Option A (current‑driven, zero‑order mapping)** for your **1.0 L** batch, using your **V–I** table and the small **rod electrode** you specified (Ø 6 mm, L = 90 mm).
 
 ---
 
-## 1) Start from the batch mass balance (closed system)
+## Assumptions (tell me if you want different values)
 
-For **sulfur atoms in the fuel phase**, let
+* **Pathway:** DBT → DBT‑sulfone (so **n = 4 e⁻/S**).
+* **Faradaic efficiency to S‑removal:** **εF = 0.70** (typical for graphite in Na₂SO₄; use 0.85 if BDD).
+* **Batch liquid volume:** **V = 1.000 L = 0.001 m³**.
+* **One anode rod** (active area used for current density sanity check):
 
-* $N_S(t)$ = moles of S atoms remaining in the fuel,
-* $C_S(t)=N_S/V_f$ = molar concentration of S in the fuel (well‑mixed volume $V_f$),
-* $A$ = geometric electrode area that is active for EDS,
-* $j(t)=I(t)/A$ = current density,
-* $n$ = electrons per mole of S **removed from the fuel** by the chosen EDS pathway,
-* $\varepsilon_F(t)$ = Faradaic efficiency to the **desired S‑removal reaction**.
-
-At the interface, current is proportional to reaction rate; including selectivity via $\varepsilon_F$,
-
-$$
-r_S \;[\text{mol S}\,\text{m}^{-2}\,\text{s}^{-1}] \;=\; -\,\frac{\varepsilon_F}{nF}\,j .
-$$
-
-**Closed, well‑mixed batch:**
-
-$$
-\boxed{\frac{dN_S}{dt}=A\,r_S \;=\; -\,\frac{\varepsilon_F(t)}{nF}\,I(t)} .
-$$
-
-Divide by $V_f$ to get a concentration ODE:
-
-$$
-\boxed{\frac{dC_S}{dt} \;=\; -\,\frac{\varepsilon_F(t)}{nF\,V_f}\,I(t) \;=\; -\,\frac{\varepsilon_F(t)\,A}{nF\,V_f}\,j(t)} .
-$$
-
-**Integral (general current profile):**
-
-$$
-\boxed{C_S(T)\;=\;C_S(0)\;-\;\frac{\varepsilon_F^{\text{eff}}}{nF\,V_f}\;Q(T)},\qquad Q(T)=\int_0^T I(t)\,dt .
-$$
-
-Here $\varepsilon_F^{\text{eff}}$ is the average Faradaic efficiency over $0\to T$.
-
-> **Mass‑fraction form (ppmw):**
-> Let $m_f$ be fuel mass and $M_S=32.065\ \text{g mol}^{-1}$.
-> Moles of S removed $=\dfrac{m_f\,[w_S(0)-w_S(T)]}{M_S}$.
-> Using $N_S(0)-N_S(T)=\dfrac{\varepsilon_F^{\text{eff}}}{nF}Q$:
->
-> $$
-> \boxed{w_S(T)=w_S(0)-\frac{M_S}{m_f}\;\frac{\varepsilon_F^{\text{eff}}}{nF}\;Q},
-> \qquad \text{and}\quad S_{\text{ppmw}}(T)=10^6\,w_S(T).
-> $$
->
-> Under **constant current** $I$, $Q=IT$ and the decay is linear in time.
-
-You already have $V$–$I$ data. If you operate **potentiostatically** at $V_{\text{set}}$, use your polarization to get $I(t)$. (If $I$ is roughly steady, $Q\approx I\,T$; if it declines, integrate the measured $I(t)$.)
+  * Diameter **d = 6 mm = 0.006 m**, length **L = 0.09 m**
+  * Geometric area (A=\pi dL+2\pi (d/2)^2) = **0.001753 m² = 17.53 cm²**.
+* **Design feed for context** (not needed for Option A k, but used for the mass‑transfer check below): diesel 500 ppmw S as DBT (~0.83 kg in 1 L).
 
 ---
 
-## 2) What reaction is occurring with graphite / Na$_2$SO$_4$?
+## What Aspen needs (Option A)
 
-With neutral **Na$_2$SO$_4$** (0.1–1 M typical) and **graphite** electrodes, the practical, catalyst‑free path is **anodic oxidation of organosulfur** (thiophenes/benzothiophenes/dibenzothiophenes, thioethers, etc.) by water as the O‑donor, plus **H$_2$ evolution at the cathode**:
+For Aspen Plus **RBatch → Power‑Law kinetics**:
 
-**Anode (two sequential 2e⁻ steps on S):**
+[
+\textbf{Rate:}\quad -r'_{\text{DBT}} = k \quad \big[\text{mol·m}^{-3}\text{·s}^{-1}\big]
+]
+[
+\boxed{k=\dfrac{\varepsilon_F,I}{n,F,V}}
+]
 
-$$
-\begin{aligned}
-\text{R–S–R'} + \mathrm{H_2O} &\rightarrow \text{R–S(=O)–R'} + 2\mathrm{H}^+ + 2e^- \quad\text{(sulfoxide)} \\
-\text{R–S(=O)–R'} + \mathrm{H_2O} &\rightarrow \text{R–SO_2–R'} + 2\mathrm{H}^+ + 2e^- \quad\text{(sulfone)}
-\end{aligned}
-$$
+* **Orders (exponents)**: set **DBT = 0**, **H₂O = 0**, **DBT_SULFONE = 0**, **H₂ = 0** (zero‑order overall).
+* **Stoichiometry** (no electrons):
+  `DBT + 2 H2O → DBT_SULFONE + 2 H2`.
 
-**Cathode (neutral/alkaline):**
-
-$$
-2\mathrm{H_2O} + 2e^- \rightarrow \mathrm{H_2} + 2\mathrm{OH}^- .
-$$
-
-This gives a **net of 4 electrons per sulfur atom** to go from sulfide/thiophenic S to **sulfone**. The sulfone is far more polar and is typically removed by extraction/adsorption; the S atom leaves the fuel **phase** without needing to mineralize to sulfate at the anode.
-
-> You **can** attempt complete oxidation of sulfur to aqueous **sulfate**. If you assume the starting S behaves as S(II/–II) and ends at S(VI), the formal change is **8 e⁻ per S**. With bare graphite/Na$_2$SO$_4$ this is hard to do efficiently (OER and graphite corrosion compete), so $\varepsilon_F$ tends to be low. Use $n=8$ only if you truly drive to sulfate; otherwise use $n=4$ for “to‑sulfone then separate”.
-
-**Recommendation for your model with graphite/Na$_2$SO$_4$:**
-
-* Take **$n=4$** (sulfide/thiophene → sulfone), and fold any side reactions (OER, graphite oxidation) into **$\varepsilon_F$** measured from data.
+I give you (k) both in **mol·m⁻³·s⁻¹** and **kmol·m⁻³·h⁻¹** (Aspen default).
 
 ---
 
-## 3) Choosing an initial sulfur level (to plug numbers)
+## k values from your V–I table (εF = 0.70, n = 4, V = 0.001 m³)
 
-Pick based on the fuel you’re emulating:
+[
+k=\frac{0.70,I}{4\cdot 96485 \cdot 0.001}
+]
 
-* **ULSD / gasoline (spec fuels):** 10–50 ppmw S (target after treatment).
-* **Off‑spec diesel / kerosene test feeds:** 100–1000 ppmw S are common for bench EDS tests.
-* **Heavy fuels:** 0.1–0.5 wt % S (or higher) but two‑phase and mass‑transfer effects dominate.
+| V (V) | I (A) | **k** (mol·m⁻³·s⁻¹) | **k** (kmol·m⁻³·h⁻¹) | j (mA·cm⁻²)* |
+| ----: | ----: | ------------------: | -------------------: | -----------: |
+|   1.0 |  0.10 |            0.000181 |             0.000653 |         5.70 |
+|   1.5 |  0.25 |            0.000453 |             0.001632 |        14.26 |
+|   2.0 |  0.50 |            0.000907 |             0.003265 |        28.52 |
+|   2.5 |  0.85 |            0.001542 |             0.005550 |        48.49 |
+|   3.0 |  1.20 |            0.002177 |             0.007835 |        68.45 |
+|   3.5 |  1.45 |            0.002630 |             0.009468 |        82.71 |
+|   4.0 |  1.55 |            0.002811 |             0.010121 |        88.42 |
 
-For a clean bench test, a representative choice is **$w_S(0)=300$–$500$ ppmw** using a model sulfur compound (e.g., **dibenzothiophene**).
+*j computed on the **anode** area (A=17.53\ \text{cm}^2).
 
----
-
-## 4) Put it together (closed‑form results you can use immediately)
-
-### (a) Concentration form
-
-$$
-\boxed{C_S(T)=C_S(0)-\frac{\varepsilon_F^{\text{eff}}}{nF\,V_f}\;Q(T)}
-$$
-
-or, with current density,
-
-$$
-C_S(T)=C_S(0)-\frac{\varepsilon_F^{\text{eff}}\,A}{nF\,V_f}\int_0^T j(t)\,dt .
-$$
-
-### (b) Mass‑fraction / ppmw form (what you likely report)
-
-$$
-\boxed{w_S(T)=w_S(0)-\frac{M_S}{m_f}\,\frac{\varepsilon_F^{\text{eff}}}{nF}\,Q(T)}
-\quad\Rightarrow\quad
-\boxed{S_{\text{ppmw}}(T)=S_{\text{ppmw}}(0)-10^6\frac{M_S}{m_f}\,\frac{\varepsilon_F^{\text{eff}}}{nF}\,Q(T)} .
-$$
-
-### (c) Time to a target at constant current $I$
-
-To go from $w_S(0)$ to $w_S^\star$ (or ppmw$^{\star}$):
-
-$$
-\boxed{T=\frac{nF}{\varepsilon_F\,I}\,\frac{m_f}{M_S}\,\big[w_S(0)-w_S^\star\big]} .
-$$
-
-(Replace the square bracket by $\frac{S_{\text{ppmw}}(0)-S_{\text{ppmw}}^\star}{10^6}$ if you work in ppmw.)
+> **How to use in Aspen:** Create **7 batch steps**, one per voltage level (or pick the subset you’ll run). In each step, set **all exponents = 0** and enter the **k** for that step (in kmol·m⁻³·h⁻¹). Aspen will integrate with constant (k) within each step.
 
 ---
 
-## 5) Quick numeric sense‑check (illustrative)
+## Important sanity check: mass‑transfer limit for this small rod
 
-Say $V_f=1.0$ L of diesel ($m_f\approx0.80$ kg), start at **300 ppmw**, target **10 ppmw**, run at **$I=2.0$ A**, take **$n=4$** and a conservative **$\varepsilon_F=0.70$**.
+At ~500 ppmw S in 1 L, the initial DBT‑S concentration is **(C_0\approx 12.9\ \text{mol·m}^{-3})**. With good stirring (k_m\sim5\times10^{-5}\ \text{m·s}^{-1}):
 
-$$
-T\approx \frac{(4)(96485)}{0.70\cdot 2.0}\cdot\frac{0.80}{0.032065}\cdot\frac{300-10}{10^6}
-\approx 2.0\times 10^{3}\ \text{s}\;\approx\;33\ \text{min}.
-$$
+[
+j_{\lim} = nF k_m C_0 \approx 4\times 96485\times 5\cdot10^{-5}\times 12.9 \approx \textbf{25 mA·cm}^{-2}.
+]
 
-If you insist on full mineralization (**$n=8$**), time doubles to $\sim66$ min for the same $I$ and $\varepsilon_F$.
+With your rod area, the **current limit** is:
+[
+I_{\lim} = A,j_{\lim} \approx 0.001753,\text{m}^2 \times 249.8,\text{A·m}^{-2} \approx \textbf{0.438 A}.
+]
+
+So any step above ~**0.44 A** is **mass‑transfer‑limited** initially; only **1.0 V (0.10 A)** and **1.5 V (0.25 A)** are comfortably below the limit. At (I > I_{\lim}), the **effective** (k) to DBT removal saturates at the value corresponding to (I_{\lim}); the rest of the current goes to side reactions (OER/solvent oxidation), lowering (\varepsilon_F).
+
+### If you want to cap (k) at the mass‑transfer limit
+
+Using (I_{\text{eff}}=\min(I, I_{\lim})= \min(I, 0.438,\text{A})):
+
+| V (V) | I (A) | **I_eff** (A) | **εF_eff**≈εF·min(1, I_lim/I) | **k_cap** (mol·m⁻³·s⁻¹) | **k_cap** (kmol·m⁻³·h⁻¹) |
+| ----: | ----: | ------------: | ----------------------------: | ----------------------: | -----------------------: |
+|   1.0 |  0.10 |         0.100 |                         0.700 |                0.000181 |                 0.000653 |
+|   1.5 |  0.25 |         0.250 |                         0.700 |                0.000453 |                 0.001632 |
+|   2.0 |  0.50 |     **0.438** |                         0.613 |            **0.000794** |             **0.002859** |
+|   2.5 |  0.85 |     **0.438** |                         0.361 |            **0.000794** |             **0.002859** |
+|   3.0 |  1.20 |     **0.438** |                         0.255 |            **0.000794** |             **0.002859** |
+|   3.5 |  1.45 |     **0.438** |                         0.211 |            **0.000794** |             **0.002859** |
+|   4.0 |  1.55 |     **0.438** |                         0.198 |            **0.000794** |             **0.002859** |
+
+**Recommendation for Aspen:** if you plan to run at ≥2.0 V with this single rod, **use the capped (k)** above; that reflects the fact you can’t push more DBT across the film than mass transfer allows.
 
 ---
 
-## 6) How to use your $V$–$I$ curve
+## What cycle time do these imply (1 L, 500→10 ppmw)?
 
-* **Galvanostatic:** plug $I$ directly into the formulas above.
-* **Potentiostatic:** from your $V$–$I$ data at $V_{\text{set}}$, use $I(t)$ (measured) to compute $Q(T)=\int I\,dt$. If you want a predictive expression, you can cap the current by mass‑transfer:
+Total charge needed at εF = 0.70, n = 4:
 
-  $$
-  j(t)=\min\big[j_{\text{pol}}(V_{\text{set}}),\; j_{\lim}(t)\big],\quad j_{\lim}(t)=nF k_m C_S(t),
-  $$
+[
+Q = \frac{nF}{\varepsilon_F}\frac{m_f}{M_S}\frac{S_0-S^\star}{10^6}
+\approx \textbf{6,993 C}.
+]
 
-  and feed $j(t)$ back into the batch ODE.
+* At **0.10 A** → ~**19.4 h**.
+* At **0.25 A** → ~**7.77 h**.
+* If you run at higher voltages, you’re still limited to **~0.438 A effective** at the start with this rod → **~4.44 h** minimum (and longer as sulfur declines, because (j_{\lim}\propto C)).
 
----
-
-## 7) Practical notes (graphite // Na$_2$SO$_4$)
-
-* Expect side reactions (OER at the anode, H$_2$ at the cathode, some graphite corrosion). Measure $\varepsilon_F$ coulometrically: fit the slope of $w_S$ vs $Q$ to $\frac{M_S}{m_f}\frac{\varepsilon_F}{nF}$.
-* Keep Na$_2$SO$_4$ $\sim$0.2–0.5 M for conductivity; control temperature for stable kinetics.
-* If you stop at **sulfone**, plan an **extract/adsorb** step to actually remove it from the fuel phase (that’s what turns oxidation into desulfurization of the **fuel**).
+> **Takeaway:** with a **6 mm×90 mm** rod you are area‑limited. To reach ~1 h cycles at 1 L you need either **much more anode area** (e.g., ~10 rods in parallel or a small plate stack) or **higher (k_m)** (recirculation across a plate cell). The numbers above tell you exactly how to rescale (k): it’s proportional to **I/V**, and (I_{\lim}) scales with **A k_m**.
 
 ---
 
-### TL;DR formulas to drop into your model
+## How to enter this in Aspen RBatch (quick recipe)
 
-* **Take $n=4$** (sulfide/thiophenic S $\rightarrow$ sulfone) for graphite/Na$_2$SO$_4$, and include $\varepsilon_F$ to capture selectivity.
-* **Final concentration:** $C_S(T)=C_S(0)-\dfrac{\varepsilon_F}{nF V_f}\,Q(T)$.
-* **Final ppmw:** $S_{\text{ppmw}}(T)=S_{\text{ppmw}}(0)-10^6\dfrac{M_S}{m_f}\dfrac{\varepsilon_F}{nF}\,Q(T)$.
+1. **Property method:** NRTL (two‑liquid) or ELECNRTL if you include Na₂SO₄/ions.
+2. **Components:** DBT (or hypothetical), DBT_SULFONE (hypothetical), H₂O, H₂ (+ fuel surrogate).
+3. **Reaction:** `DBT + 2 H2O → DBT_SULFONE + 2 H2`.
+4. **Kinetics (Power‑Law):** set **all orders = 0**.
+5. **Steps:** create one step per voltage level you will run. For each step, enter **k** from the table above (use the **capped** values if you want realism with the rod).
+6. **Run isothermal** at your chosen T; track **DBT** and **total S** vs time.
+
+---
+
+### Want me to compute the same table for **εF = 0.85** (BDD) or for **N rods in parallel**?
+
+Say the word and I’ll generate the revised (k) table and the new (I_{\lim}) (it scales with area and with (k_m)).
 
 If you share your $V$–$I$ curve and a target fuel volume/mass, I can plug in the numbers and give you the exact $T$ and $Q$ you’ll need for your spec.
 
