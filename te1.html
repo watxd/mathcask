@@ -1,29 +1,123 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
-$$
-\begin{aligned}
-&\textbf{Abstract: }\ \text{Continuous ethanol--water distillation by McCabe--Thiele. } z_F=0.2182,\ x_D=0.7460,\ x_B=0.1554.\ \text{Mass fractions: } w_F\approx0.4164,\ w_D\approx0.8825,\ w_B\approx0.3200.\ \text{With } q\approx0.8 \text{ and } R=1.3,\ \text{we built operating lines and found } N_{\text{th}}=7,\ \text{feed tray }=6,\ R_{\min}\approx0.69,\ E_o=7/8=0.875.\\[6pt]
-&\textbf{Given: }\ z_F=0.2182,\ x_D=0.7460,\ x_B=0.1554,\ q=0.8,\ R=1.3.\\[6pt]
-&\textbf{Mole}\to\textbf{Mass (EtOH):}\quad
-w_{\text{EtOH}}=\frac{x_{\text{EtOH}}\,M_{\text{EtOH}}}{x_{\text{EtOH}}\,M_{\text{EtOH}}+\left(1-x_{\text{EtOH}}\right)M_{\text{H_2O}}}.\\
-&\text{Feed }(x=0.2182):\ w\approx0.4164;\ \ \text{Distillate }(x=0.7460):\ w\approx0.8825;\ \ \text{Bottoms }(x=0.1554):\ w\approx0.3200.\\[6pt]
-&\textbf{Enriching line (total condenser):}\quad
-y=\frac{R}{R+1}x+\frac{x_D}{R+1}
-=\frac{1.3}{2.3}x+\frac{0.7460}{2.3}
-=0.565217\,x+0.324348.\\[6pt]
-&\textbf{Feed ($q$) line:}\quad
-y=\frac{q}{q-1}x-\frac{z_F}{q-1}
-=\frac{0.8}{-0.2}x-\frac{0.2182}{-0.2}
-=-4x+1.091.\\[6pt]
-&\textbf{Feed--top intersection:}\quad
-0.565217x+0.324348=-4x+1.091\ \Rightarrow\ 4.565217x=0.766652\ \Rightarrow\ x\approx0.1679,\ y\approx0.4193.\\[6pt]
-&\textbf{Stripping line through }(x_B,y_B)=(0.1554,0.1554)\text{ and }(0.1679,0.4193):\\
-&\hspace{1.5em}m=\frac{0.4193-0.1554}{0.1679-0.1554}=\frac{0.2639}{0.0125}\approx21.053,\ \ 
-b=0.4193-21.053\cdot0.1679\approx-3.116,\ \ 
-y\approx21.053\,x-3.116.\\[6pt]
-&\textbf{Minimum reflux }(R_{\min})\textbf{ from pinch:}\quad
-y=\frac{R_{\min}}{R_{\min}+1}x+\frac{x_D}{R_{\min}+1},\ \ (x_p,y_p)\ \Rightarrow\ R_{\min}=\frac{x_D-y_p}{y_p-x_p}.\\
-&\text{Equivalently, if } b=\frac{x_D}{R_{\min}+1} \text{ is the intercept, then } R_{\min}=\frac{x_D}{b}-1,\ \text{ and with } b\approx0.4414:\ R_{\min}\approx\frac{0.7460}{0.4414}-1\approx0.69.\\[6pt]
-&\textbf{Stages and efficiency:}\quad
-N_{\text{theoretical}}=7,\ \text{feed tray}=6,\ N_{\text{actual}}=8,\ E_o=\frac{N_{\text{theoretical}}}{N_{\text{actual}}}=\frac{7}{8}=0.875.
-\end{aligned}
-$$
+Perfect—let’s do **Option A (current‑driven, zero‑order mapping)** for your **1.0 L** batch, using your **V–I** table and the small **rod electrode** you specified (Ø 6 mm, L = 90 mm).
+
+---
+
+## Assumptions (tell me if you want different values)
+
+* **Pathway:** DBT → DBT‑sulfone (so **n = 4 e⁻/S**).
+* **Faradaic efficiency to S‑removal:** **εF = 0.70** (typical for graphite in Na₂SO₄; use 0.85 if BDD).
+* **Batch liquid volume:** **V = 1.000 L = 0.001 m³**.
+* **One anode rod** (active area used for current density sanity check):
+
+  * Diameter **d = 6 mm = 0.006 m**, length **L = 0.09 m**
+  * Geometric area (A=\pi dL+2\pi (d/2)^2) = **0.001753 m² = 17.53 cm²**.
+* **Design feed for context** (not needed for Option A k, but used for the mass‑transfer check below): diesel 500 ppmw S as DBT (~0.83 kg in 1 L).
+
+---
+
+## What Aspen needs (Option A)
+
+For Aspen Plus **RBatch → Power‑Law kinetics**:
+
+[
+\textbf{Rate:}\quad -r'_{\text{DBT}} = k \quad \big[\text{mol·m}^{-3}\text{·s}^{-1}\big]
+]
+[
+\boxed{k=\dfrac{\varepsilon_F,I}{n,F,V}}
+]
+
+* **Orders (exponents)**: set **DBT = 0**, **H₂O = 0**, **DBT_SULFONE = 0**, **H₂ = 0** (zero‑order overall).
+* **Stoichiometry** (no electrons):
+  `DBT + 2 H2O → DBT_SULFONE + 2 H2`.
+
+I give you (k) both in **mol·m⁻³·s⁻¹** and **kmol·m⁻³·h⁻¹** (Aspen default).
+
+---
+
+## k values from your V–I table (εF = 0.70, n = 4, V = 0.001 m³)
+
+[
+k=\frac{0.70,I}{4\cdot 96485 \cdot 0.001}
+]
+
+| V (V) | I (A) | **k** (mol·m⁻³·s⁻¹) | **k** (kmol·m⁻³·h⁻¹) | j (mA·cm⁻²)* |
+| ----: | ----: | ------------------: | -------------------: | -----------: |
+|   1.0 |  0.10 |            0.000181 |             0.000653 |         5.70 |
+|   1.5 |  0.25 |            0.000453 |             0.001632 |        14.26 |
+|   2.0 |  0.50 |            0.000907 |             0.003265 |        28.52 |
+|   2.5 |  0.85 |            0.001542 |             0.005550 |        48.49 |
+|   3.0 |  1.20 |            0.002177 |             0.007835 |        68.45 |
+|   3.5 |  1.45 |            0.002630 |             0.009468 |        82.71 |
+|   4.0 |  1.55 |            0.002811 |             0.010121 |        88.42 |
+
+*j computed on the **anode** area (A=17.53\ \text{cm}^2).
+
+> **How to use in Aspen:** Create **7 batch steps**, one per voltage level (or pick the subset you’ll run). In each step, set **all exponents = 0** and enter the **k** for that step (in kmol·m⁻³·h⁻¹). Aspen will integrate with constant (k) within each step.
+
+---
+
+## Important sanity check: mass‑transfer limit for this small rod
+
+At ~500 ppmw S in 1 L, the initial DBT‑S concentration is **(C_0\approx 12.9\ \text{mol·m}^{-3})**. With good stirring (k_m\sim5\times10^{-5}\ \text{m·s}^{-1}):
+
+[
+j_{\lim} = nF k_m C_0 \approx 4\times 96485\times 5\cdot10^{-5}\times 12.9 \approx \textbf{25 mA·cm}^{-2}.
+]
+
+With your rod area, the **current limit** is:
+[
+I_{\lim} = A,j_{\lim} \approx 0.001753,\text{m}^2 \times 249.8,\text{A·m}^{-2} \approx \textbf{0.438 A}.
+]
+
+So any step above ~**0.44 A** is **mass‑transfer‑limited** initially; only **1.0 V (0.10 A)** and **1.5 V (0.25 A)** are comfortably below the limit. At (I > I_{\lim}), the **effective** (k) to DBT removal saturates at the value corresponding to (I_{\lim}); the rest of the current goes to side reactions (OER/solvent oxidation), lowering (\varepsilon_F).
+
+### If you want to cap (k) at the mass‑transfer limit
+
+Using (I_{\text{eff}}=\min(I, I_{\lim})= \min(I, 0.438,\text{A})):
+
+| V (V) | I (A) | **I_eff** (A) | **εF_eff**≈εF·min(1, I_lim/I) | **k_cap** (mol·m⁻³·s⁻¹) | **k_cap** (kmol·m⁻³·h⁻¹) |
+| ----: | ----: | ------------: | ----------------------------: | ----------------------: | -----------------------: |
+|   1.0 |  0.10 |         0.100 |                         0.700 |                0.000181 |                 0.000653 |
+|   1.5 |  0.25 |         0.250 |                         0.700 |                0.000453 |                 0.001632 |
+|   2.0 |  0.50 |     **0.438** |                         0.613 |            **0.000794** |             **0.002859** |
+|   2.5 |  0.85 |     **0.438** |                         0.361 |            **0.000794** |             **0.002859** |
+|   3.0 |  1.20 |     **0.438** |                         0.255 |            **0.000794** |             **0.002859** |
+|   3.5 |  1.45 |     **0.438** |                         0.211 |            **0.000794** |             **0.002859** |
+|   4.0 |  1.55 |     **0.438** |                         0.198 |            **0.000794** |             **0.002859** |
+
+**Recommendation for Aspen:** if you plan to run at ≥2.0 V with this single rod, **use the capped (k)** above; that reflects the fact you can’t push more DBT across the film than mass transfer allows.
+
+---
+
+## What cycle time do these imply (1 L, 500→10 ppmw)?
+
+Total charge needed at εF = 0.70, n = 4:
+
+[
+Q = \frac{nF}{\varepsilon_F}\frac{m_f}{M_S}\frac{S_0-S^\star}{10^6}
+\approx \textbf{6,993 C}.
+]
+
+* At **0.10 A** → ~**19.4 h**.
+* At **0.25 A** → ~**7.77 h**.
+* If you run at higher voltages, you’re still limited to **~0.438 A effective** at the start with this rod → **~4.44 h** minimum (and longer as sulfur declines, because (j_{\lim}\propto C)).
+
+> **Takeaway:** with a **6 mm×90 mm** rod you are area‑limited. To reach ~1 h cycles at 1 L you need either **much more anode area** (e.g., ~10 rods in parallel or a small plate stack) or **higher (k_m)** (recirculation across a plate cell). The numbers above tell you exactly how to rescale (k): it’s proportional to **I/V**, and (I_{\lim}) scales with **A k_m**.
+
+---
+
+## How to enter this in Aspen RBatch (quick recipe)
+
+1. **Property method:** NRTL (two‑liquid) or ELECNRTL if you include Na₂SO₄/ions.
+2. **Components:** DBT (or hypothetical), DBT_SULFONE (hypothetical), H₂O, H₂ (+ fuel surrogate).
+3. **Reaction:** `DBT + 2 H2O → DBT_SULFONE + 2 H2`.
+4. **Kinetics (Power‑Law):** set **all orders = 0**.
+5. **Steps:** create one step per voltage level you will run. For each step, enter **k** from the table above (use the **capped** values if you want realism with the rod).
+6. **Run isothermal** at your chosen T; track **DBT** and **total S** vs time.
+
+---
+
+### Want me to compute the same table for **εF = 0.85** (BDD) or for **N rods in parallel**?
+
+Say the word and I’ll generate the revised (k) table and the new (I_{\lim}) (it scales with area and with (k_m)).
