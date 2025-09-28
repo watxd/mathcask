@@ -1,38 +1,83 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
+# Slide 1 — What the model does (inputs → outputs)
 
+* **Goal:** predict sulfur removal in a batch EDS reactor from a **voltage schedule** and your measured **(V!-!I)** curve.
+* **Inputs:** (V_{\text{steps}}) & durations (→ (I_{\text{sched}}) via the (V!-!I) table), Faradaic efficiency (\varepsilon_F), electrons per S (n), electrode area (A), mass-transfer (k_m), volume (V).
+* **Outputs:** sulfur (ppmw) & conversion vs time, **time-to-spec**, and **current traces** (scheduled vs productive).
 
-\begin{table}[ht]
-\centering
-\small
-\setlength{\tabcolsep}{6pt}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{lll}
-\hline
-\textbf{Metric} & \textbf{Value} & \textbf{Notes} \\
-\hline
-Feed mole fraction (EtOH), $z_F$                    & 0.2182                                 &  \\
-Distillate mole fraction (EtOH), $x_D$              & 0.7460                                 &  \\
-Bottoms mole fraction (EtOH), $x_B$                 & 0.1554                                 &  \\
-Feed mass fraction (EtOH), $w_F$                    & 0.4164                                 &  \\
-Distillate mass fraction (EtOH), $w_D$              & 0.8825                                 &  \\
-Bottoms mass fraction (EtOH), $w_B$                 & 0.3200                                 &  \\
-Feed thermal condition, $q$                         & 0.8                                    &  \\
-Operating reflux ratio, $R$                         & 1.3                                    &  \\
-Minimum reflux ratio, $R_{\min}$                    & 0.69                                   & from pinch \\
-$R/R_{\min}$                                        & 1.88                                   &  \\
-Enriching (top) line                                 & $y = 0.565217\,x + 0.324348$           & total condenser \\
-Feed ($q$) line                                      & $y = -4\,x + 1.091$                    & $q=0.8,\ z_F=0.2182$ \\
-Stripping (bottom) line                              & $y \approx 21.053\,x - 3.116$          & through $(0.1554,0.1554)$ and $(0.1679,0.4193)$ \\
-Feed–top intersection $(x,y)$                        & $(0.1679,\ 0.4193)$                    & feed-stage point \\
-Theoretical number of trays, $N_{\text{theoretical}}$& 7                                      &  \\
-Optimum feed tray (from top)                         & 6                                      &  \\
-Actual trays                                         & 8                                      &  \\
-Overall tray efficiency, $E_o$                       & 0.875                                  & $E_o = 7/8$ \\
-Condenser duty, $Q_c$                                & $347.93\ \mathrm{J}$                   & $\approx 0.348\ \mathrm{kJ}$ \\
-\hline
-\end{tabular}
-\caption{Summary of main results for ethanol–water distillation analysis (dimensionless unless noted).}
-\label{tab:summary_main_results}
-\end{table}
-```
+---
+
+# Slide 2 — Mass balance → electrochemical rate (and why (n=\mathbf{4}))
+
+Batch balance:
+$$
+\frac{dN_S}{dt}=-r_S V \quad\Rightarrow\quad \frac{dC_S}{dt}=-r_S'.
+$$
+Faraday + stoichiometry + efficiency:
+$$
+\boxed{;\frac{dC_S}{dt}=-\frac{\varepsilon_F}{n,F,V},I(t);}
+$$
+(DBT (\to) sulfone uses two 2e⁻ steps → (n=2+2=\mathbf{4})).
+Overall cell (neutral/alkaline electrolyte):
+$$
+\mathrm{R_2S}+2,\mathrm{H_2O};\longrightarrow;\mathrm{R_2SO_2}+2,\mathrm{H_2}.
+$$
+
+---
+
+# Slide 3 — Voltage → current & **Option A** (current-driven, zero-order)
+
+Voltage step (\Rightarrow) scheduled current from your (V!-!I) table:
+$$
+I_{\text{sched}}=I(V_{\text{step}}).
+$$
+Zero-order rate within a constant-current step:
+$$
+\boxed{;-r_S'=k_A,\qquad k_A=\frac{\varepsilon_F,I_{\text{sched}}}{n,F,V};}
+$$
+Linear concentration profile in the step:
+$$
+C_S(t)=C_{S,\text{start}}-k_A,t.
+$$
+*(Aspen: Power-Law with all orders (=0); MATLAB: `useMassTransferCap=false` gives piecewise-linear segments.)*
+
+---
+
+# Slide 4 — Diffusion cap & **Option B** (MT-limited, first-order)
+
+Film theory (to anode):
+$$
+\boxed{;j_{\lim}=nF,k_m,C_S;},\qquad \boxed{;I_{\lim}=A,j_{\lim}=A,nF,k_m,C_S;}.
+$$
+If (I_{\text{sched}}>I_{\lim}), only (I_{\lim}) is productive:
+$$
+\frac{dC_S}{dt}=-\frac{\varepsilon_F}{nF V},I_{\lim}
+=-\underbrace{\left(\frac{\varepsilon_F,A,k_m}{V}\right)}*{k*{\text{app}}}C_S,
+\qquad
+\boxed{;k_{\text{app}}=\frac{\varepsilon_F A k_m}{V};}
+$$
+with exponential decay
+$$
+C_S(t)=C_\star,e^{-k_{\text{app}},t}.
+$$
+*(Aspen: Power-Law with order(DBT)(=1) and (k_{\text{app}}); MATLAB: `useMassTransferCap=true` gives linear→exponential within a step.)*
+
+---
+
+# Slide 5 — Scheduled vs productive current & the switch (+ implementation)
+
+Productive current and switch criterion:
+$$
+\boxed{;I_{\text{eff}}(t)=\min!\big(I_{\text{sched}},,I_{\lim}(t)\big);},\qquad
+I_{\lim}(t)=A,nF,k_m,C_S(t),
+$$
+$$
+\boxed{;C_\star=\frac{I_{\text{sched}}}{A,nF,k_m};},\qquad
+\boxed{;t_{\text{sw}}=\frac{C_{\text{start}}-C_\star}{k_A};}\ \ (0<t_{\text{sw}}<\Delta t_{\text{step}}).
+$$
+
+* Before (t_{\text{sw}}): **Option A** (linear). After (t_{\text{sw}}): **MT-capped** (first-order).
+* **MATLAB:** computes (k_A), (C_\star), (k_{\text{app}}), plots (I_{\text{eff}}(t)) vs (I_{\text{sched}}(t)).
+* **Aspen:** add both reactions; per step enable the **minimum-rate** path (ON/OFF or a single user-rate (r'=\min(k_A,\ k_{\text{app}}C)); smooth blend: (r'=\dfrac{k_A,k_{\text{app}},C}{k_A+k_{\text{app}},C})).
+
