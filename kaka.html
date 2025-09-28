@@ -1,0 +1,73 @@
+<!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
+# Slide 1 — What the model does (inputs → outputs)
+
+* **Goal:** predict sulfur removal in a batch EDS reactor from a **voltage schedule** and your measured **(V!-!I)** curve.
+* **Inputs:** (V_{\text{steps}}) & durations (→ (I_{\text{sched}}) by interpolating (V!-!I)), Faradaic efficiency (\varepsilon_F), electrons per S (n), electrode area (A), mixing (k_m), volume (V).
+* **Outputs:** sulfur (ppmw) & conversion vs time, **time-to-spec**, and **current traces** (scheduled vs productive).
+
+---
+
+# Slide 2 — Mass balance → electrochemical rate (and why (n=\mathbf{4}))
+
+**Batch balance:** ( \displaystyle \frac{dN_S}{dt}=-r_S V \Rightarrow \frac{dC_S}{dt}=-r_S' ).
+**Faraday + stoich + efficiency:**
+[
+\boxed{\frac{dC_S}{dt}=-\frac{\varepsilon_F}{n,F,V},I(t)}
+]
+**Why (n=4) (DBT → sulfone):** two 2e⁻ steps (sulfide→sulfoxide **2e⁻**, sulfoxide→sulfone **2e⁻**).
+**Half-reactions (alkaline):**
+Anode (4e⁻): ( \text{R}_2\text{S}+4\text{OH}^- \to \text{R}_2\text{SO}_2+2\text{H}_2\text{O}+4e^- )
+Cathode (HER): ( 4\text{H}_2\text{O}+4e^- \to 2\text{H}_2+4\text{OH}^- )
+**Overall:** ( \text{R}_2\text{S}+2\text{H}_2\text{O}\to \text{R}_2\text{SO}_2+2\text{H}_2 ).
+
+---
+
+# Slide 3 — Voltage → current & **Option A** (current-driven, zero-order)
+
+**Map voltage to current:** ( I_{\text{sched}}=\texttt{interp1}(V_{\text{data}},I_{\text{data}},V_{\text{step}},\text{'pchip'}) ).
+**Option A rate (constant-(I) per step):**
+[
+\boxed{-r_S' = k_A,\quad k_A=\frac{\varepsilon_F,I_{\text{sched}}}{n,F,V}}
+]
+**Result in a step:** ( C_S(t)=C_{S,\text{start}}-k_A t ) (**linear decline**).
+*(Aspen: Power-Law with all orders = 0; MATLAB: `useMassTransferCap=false` gives piecewise-linear segments.)*
+
+---
+
+# Slide 4 — Diffusion cap & **Option B** (MT-limited, first-order) + the switch
+
+**Film theory (mass transfer to anode):**
+[
+\boxed{j_{\lim}=nF,k_m,C_S},\qquad \boxed{I_{\lim}=A,j_{\lim}=A,nF,k_m,C_S}
+]
+**When (I_{\text{sched}}>I_{\lim}):** only (I_{\lim}) is productive → first-order:
+[
+\frac{dC_S}{dt}=-\frac{\varepsilon_F}{nF V}I_{\lim}
+=-\underbrace{\left(\frac{\varepsilon_F,A,k_m}{V}\right)}*{k*{\text{app}}} C_S
+]
+[
+\boxed{k_{\text{app}}=\frac{\varepsilon_F A k_m}{V}},\quad C_S(t)=C_\star e^{-k_{\text{app}} t}
+]
+**Productive vs scheduled current & switch:**
+[
+\boxed{I_{\text{eff}}(t)=\min!\big(I_{\text{sched}},,A nF k_m C_S(t)\big)},\quad
+\boxed{C_\star=\frac{I_{\text{sched}}}{A nF k_m}},\quad
+\boxed{t_{\text{sw}}=\frac{C_{\text{start}}-C_\star}{k_A}}
+]
+*(Aspen: Power-Law with order(DBT)=1 and (k_{\text{app}}). MATLAB: `useMassTransferCap=true` gives linear→exponential within a step.)*
+
+---
+
+# Slide 5 — How the code & Aspen implement both regimes
+
+**MATLAB (your script):**
+
+* Builds (I_{\text{sched}}) from (V!-!I), marches steps in `simulate_schedule_optionA`.
+* `evolve_step` computes (k_A), (C_\star), (k_{\text{app}}); returns (C(t)), (I_{\text{eff}}(t)).
+* Plots: (V!-!I); **S(ppmw)** & **Conversion** vs time with regime markers; **(I_{\text{eff}})** vs **(I_{\text{sched}})** (gap = wasted current).
+
+**Aspen (to run A and B safely):**
+
+* **Option A:** same stoich; **all orders 0**; per-step (k_A=\varepsilon_F I/(n F V)).
+* **Option B:** same stoich; **order(DBT)=1**; (k_{\text{app}}=\varepsilon_F A k_m/V).
+* Activate **only the smaller** of the two rates per step (ON/OFF via steps or Calculator), or implement a single user-rate ( r'=\min(k_A,\ k_{\text{app}}C) ) (or smooth Koutecký–Levich blend ( r'=\frac{k_A k_{\text{app}} C}{k_A+k_{\text{app}} C} )).
