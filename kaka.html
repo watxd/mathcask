@@ -1,128 +1,227 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-Of course. Here are the slides in a clean, structured format suitable for a presentation.
+Of course. Here is the content from your document presented in a clean, structured format suitable for a presentation or report.
 
----
+***
 
 ### **Slide 1 — Model at a Glance (Inputs → Outputs)**
 
-**Goal:** Predict sulfur removal (conversion of Dibenzothiophene, DBT) in a batch electrochemical desulfurization (EDS) reactor from a voltage schedule and the measured V–I curve.
+**Goal:** Predict sulfur removal in a batch Electrochemical Desulfurization (EDS) reactor from a voltage schedule and the measured **V–I curve**.
 
-**Inputs:**
-*   **Voltage Schedule:** \( V(t) \)
-*   **Electrode Kinetics:** Via the V–I table
-*   **Faradaic Efficiency:** \( \varepsilon_F \)
-*   **Electrons per Molecule:** \( n \)
-*   **Electrode Area:** \( A \)
-*   **Mass Transfer Coefficient:** \( k_m \)
-*   **Reactor Volume:** \( V \)
-
-**Outputs:**
-*   **DBT Concentration Profile:** \( C(t) \)
-*   **Effective Current:** \( I_{eff}(t) \)
-*   **Desulfurization Conversion:** \( X(t) \)
+| **Inputs** | **Outputs** |
+| :--- | :--- |
+| • Voltage schedule, \( V_{\text{steps}} \), with step durations <br> • Scheduled current, \( I_{\text{sched}} \) (via the V–I table) <br> • Faradaic efficiency, \( \varepsilon_F \) <br> • Electrons per molecule, \( n \) <br> • Electrode area, \( A \) <br> • Mass transfer coefficient, \( k_m \) <br> • Reactor volume, \( V \) | • Sulfur concentration (ppmw) vs. time <br> • Conversion vs. time <br> • Time-to-specification <br> • Current traces: \( I_{\text{sched}}(t) \) and \( I_{\text{eff}}(t) \) |
 
 ---
 
-### **Slide 2 — Mass Balance & Electrochemical Rate (and why n=4)**
+### **Slide 2 — Mass Balance → Electrochemical Rate (and why n=4)**
 
 **Batch Reactor Mass Balance:**
 \[
-\frac{dC}{dt} = -r
+\frac{dN_S}{dt} = -r_S V \quad \Rightarrow \quad \frac{dC_S}{dt} = -r_S'
 \]
-Where \( r \) is the rate of DBT consumption.
 
 **Faraday's Law + Stoichiometry + Efficiency:**
 \[
-r = \frac{\varepsilon_F I}{n F V}
+\frac{dC_S}{dt} = -\frac{\varepsilon_F}{n F V} I(t)
 \]
-*   \( I \): Total current [A]
-*   \( F \): Faraday's constant [C/mol]
-*   \( V \): Reactor volume [m³]
 
-**Why n=4:**
-The reaction pathway is a two-step oxidation:
-1.  DBT → Sulfoxide (consumes 2 e⁻)
-2.  Sulfoxide → Sulfone (consumes 2 e⁻)
+**Why \( n = 4 \)?**
+The desulfurization of Dibenzothiophene (DBT) is a two-step oxidation:
+1.  DBT → Sulfoxide (consumes **2 e⁻**)
+2.  Sulfoxide → Sulfone (consumes **2 e⁻**)
 
-**Overall cell reaction:** \( \text{DBT} \rightarrow \text{Sulfone} \) ⇒ \( n = 2 + 2 = 4 \) electrons per molecule of DBT.
+\[
+n = 2 + 2 = 4 \text{ electrons per molecule of DBT}
+\]
+
+**Overall Cell Reaction (neutral/alkaline):**
+\[
+\mathrm{R_2S} + 2\,\mathrm{H_2O} \to \mathrm{R_2SO_2} + 2\,\mathrm{H_2}
+\]
 
 ---
 
-### **Slide 3 — Voltage → Current & Option A (Current-Driven, Zero-Order)**
+### **Slide 3 — Voltage → Current and Option A (Current-Driven, Zero-Order)**
 
 **From Scheduled Voltage to Current:**
-The V–I table is used to find the current \( I_{sched}(t) \) corresponding to the applied voltage \( V(t) \).
+\[
+I_{\text{sched}} = I(V_{\text{step}})
+\]
+(The V–I table provides the current for each applied voltage step).
 
 **Option A: Current-Driven (Zero-Order Kinetics)**
-*   Assumes current is not limited by DBT concentration.
-*   The electrochemical rate is constant for a given current.
+*Assumption: Current is not limited by reactant concentration.*
 
 **Zero-Order Rate:**
 \[
-r_A = \frac{\varepsilon_F I_{sched}}{n F V} = k_A
+-r_S' = k_A, \quad \text{where} \quad k_A = \frac{\varepsilon_F I_{\text{sched}}}{n F V}
 \]
 
-**Concentration Profile:**
+**Concentration Profile during a step:**
 \[
-C(t) = C_0 - k_A \cdot t
+C_S(t) = C_{S,0} - k_A t \quad \text{(Linear decrease)}
 \]
-(Valid only while \( C(t) > 0 \)).
 
 ---
 
-### **Slide 4 — Diffusion Cap & Option B (Mass-Transfer-Limited, First-Order)**
+### **Slide 4 — Diffusion Cap and Option B (Mass-Transfer-Limited, First-Order)**
 
-**Film Theory (Diffusion Limit):**
-The maximum current is limited by the rate DBT molecules can diffuse to the electrode.
-
-**Limiting Current:**
+**Film Theory & Limiting Current:**
+The maximum current is capped by the rate at which DBT diffuses to the electrode.
 \[
-I_{lim} = n F A k_m C
+j_{\lim} = n F k_m C_S \quad \Rightarrow \quad I_{\lim} = A j_{\lim} = A n F k_m C_S
 \]
-
-**If \( I_{sched} > I_{lim} \):**
-The effective current is capped: \( I_{eff} = I_{lim} \).
 
 **Option B: Mass-Transfer-Limited (First-Order Kinetics)**
-*   Substituting \( I_{lim} \) into the rate expression gives a first-order law.
+*Regime: When \( I_{\text{sched}} > I_{\lim} \), the effective current is \( I_{\lim} \).*
 
-**Apparent Rate Constant:**
+**First-Order Rate Law:**
 \[
-r_B = \left( \frac{\varepsilon_F A k_m}{V} \right) C = k_{app} \cdot C
+\frac{dC_S}{dt} = -\left( \frac{\varepsilon_F A k_m}{V} \right) C_S
 \]
 
-**Concentration Profile:**
+**Apparent Rate Constant and Profile:**
 \[
-C(t) = C_0 \cdot \exp(-k_{app} \cdot t)
+k_{\text{app}} = \frac{\varepsilon_F A k_m}{V} \quad \Rightarrow \quad C_S(t) = C_\star e^{-k_{\text{app}} t} \quad \text{(Exponential decay)}
 \]
 
 ---
 
 ### **Slide 5 — Switching, MATLAB, and Aspen**
 
-**Productive Current:**
+**Productive Current (The Switching Logic):**
 The actual current used for reaction is the minimum of the scheduled and limiting currents.
 \[
-I_{eff} = \min(I_{sched}(t),\ I_{lim}(C))
+I_{\text{eff}}(t) = \min\left(I_{\text{sched}},\ I_{\lim}(t)\right) \quad \text{with} \quad I_{\lim}(t) = A n F k_m C_S(t)
 \]
 
-**Switching Logic:**
-*   At high \( C \): \( I_{lim} \) is high, so \( I_{eff} = I_{sched} \) (Zero-Order, Option A).
-*   At low \( C \): \( I_{lim} \) drops, so \( I_{eff} = I_{lim} \) (First-Order, Option B).
+**Key Transition Points:**
+- **Switch Concentration:** \( C_\star = \dfrac{I_{\text{sched}}}{A n F k_m} \)
+- **Switch Time:** \( t_{\text{sw}} = \dfrac{C_{\text{start}} - C_\star}{k_A} \) (Valid if \( 0 < t_{\text{sw}} < \Delta t_{\text{step}} \))
 
 **MATLAB Implementation:**
-1.  Computes \( k_A \), \( C^* \), \( k_{app} \).
-2.  Numerically solves for \( C(t) \) and \( I_{eff}(t) \).
-3.  Plots \( I_{eff}(t) \) vs. \( I_{sched}(t) \) and concentration/conversion profiles.
+1.  Computes \( k_A \), \( C_\star \), and \( k_{\text{app}} \).
+2.  Plots \( I_{\text{eff}}(t) \) vs. \( I_{\text{sched}}(t) \).
+3.  Solves and plots the concentration and conversion profiles over time.
 
 **Aspen Custom Modeler Implementation:**
-*   **Same Stoichiometry:** \( n = 4 \).
-*   **Option A:** Uses a zero-order rate constant: \( k_A = \frac{\varepsilon_F I}{n F V} \).
-*   **Option B:** Uses a first-order rate law with \( k_{app} = \frac{\varepsilon_F A k_m}{V} \).
+- **Same Stoichiometry** for both options (\( n = 4 \)).
+- **Option A (Zero-Order):** Uses `order = 0` with \( k_A = \dfrac{\varepsilon_F I}{n F V} \).
+- **Option B (First-Order):** Uses `order(DBT) = 1` with \( k_{\text{app}} = \dfrac{\varepsilon_F A k_m}{V} \).
+- **Unified Approach:** A single user-rate expression can be implemented for simplicity:
+    - **Minimum-Rate:** \( r' = \min\left(k_A,\ k_{\text{app}} C_S\right) \)
+    - **Smooth Blend:** \( r' = \dfrac{k_A \cdot k_{\text{app}} C_S}{k_A + k_{\text{app}} C_S} \) (Numerically more stable)
 
-**Smooth Blend (for numerical stability):**
-\[
-I_{eff} \approx \frac{I_{sched} \cdot I_{lim}}{\sqrt{I_{sched}^m + I_{lim}^m}^{~2/m}}
-\]
-(Where \( m \) is a large number, e.g., 8, to approximate the `min` function).
+
+
+Of course. Here is the content from your HTML file presented in a clean, structured format.
+
+***
+
+### **Option A (Current-Driven, Zero-Order Mapping) for a 1.0 L Batch Reactor**
+
+This analysis calculates the zero-order kinetic rate constants for your Aspen model based on your V–I table and a small rod electrode.
+
+---
+
+#### **1. Assumptions**
+
+*   **Pathway:** DBT → DBT-sulfone ⇒ **n = 4 e⁻ per S atom**.
+*   **Faradaic Efficiency:** **εF = 0.70** (Typical for graphite in Na₂SO₄; use 0.85 for BDD).
+*   **Batch Liquid Volume:** **V = 1.000 L = 0.001 m³**.
+*   **Anode Rod Electrode:**
+    *   Diameter: **d = 6 mm = 0.006 m**
+    *   Length: **L = 0.09 m**
+    *   Geometric Area: **A = πdL + 2π(d/2)² = 0.001753 m² = 17.53 cm²**
+*   **Design Feed:** Diesel with 500 ppmw S as DBT (~0.83 kg in 1 L).
+
+---
+
+#### **2. Aspen Plus RBatch Setup (Option A)**
+
+For a **Power-Law kinetics** model in Aspen:
+
+*   **Rate Law:** \(-r'_{\text{DBT}} = k \quad [\text{mol·m}^{-3}\text{·s}^{-1}]\)
+*   **Rate Constant:** \(\boxed{k = \dfrac{\varepsilon_F \cdot I}{n \cdot F \cdot V}}\)
+*   **Reaction Orders:** Set **DBT = 0**, **H₂O = 0**, **DBT_SULFONE = 0**, **H₂ = 0** (Zero-order overall).
+*   **Stoichiometry:** `DBT + 2 H₂O → DBT_SULFONE + 2 H₂`
+
+The rate constant \(k\) is provided below in both **mol·m⁻³·s⁻¹** and **kmol·m⁻³·h⁻¹** (Aspen's default unit).
+
+---
+
+#### **3. Rate Constants from V–I Table**
+(εF = 0.70, n = 4, V = 0.001 m³)
+
+\[k=\frac{0.70 \cdot I}{4 \cdot 96485 \cdot 0.001}\]
+
+| V (V) | I (A) | **k** (mol·m⁻³·s⁻¹) | **k** (kmol·m⁻³·h⁻¹) | j (mA·cm⁻²) * |
+| :--- | :--- | :--- | :--- | :--- |
+| 1.0 | 0.10 | 0.000181 | 0.000653 | 5.70 |
+| 1.5 | 0.25 | 0.000453 | 0.001632 | 14.26 |
+| 2.0 | 0.50 | 0.000907 | 0.003265 | 28.52 |
+| 2.5 | 0.85 | 0.001542 | 0.005550 | 48.49 |
+| 3.0 | 1.20 | 0.002177 | 0.007835 | 68.45 |
+| 3.5 | 1.45 | 0.002630 | 0.009468 | 82.71 |
+| 4.0 | 1.55 | 0.002811 | 0.010121 | 88.42 |
+
+*Current density \(j\) computed on the anode area (A = 17.53 cm²).*
+
+> **How to use in Aspen:** Create **7 batch steps**, one for each voltage level. In each step's kinetics, set all exponents to **0** and enter the corresponding **k** value (in kmol·m⁻³·h⁻¹) from the table above.
+
+---
+
+#### **4. Sanity Check: Mass-Transfer Limit for the Small Rod**
+
+*   Initial DBT-S concentration: \(C_0 \approx 12.9\ \text{mol·m}^{-3}\)
+*   With good stirring (\(k_m \sim 5 \times 10^{-5}\ \text{m·s}^{-1}\)):
+    *   Limiting current density: \(j_{\lim} = nF k_m C_0 \approx \textbf{25 mA·cm}^{-2}\)
+    *   Limiting current: \(I_{\lim} = A \cdot j_{\lim} \approx \textbf{0.438 A}\)
+
+**Conclusion:** Any step above **~0.44 A** is **mass-transfer-limited** initially. Only **1.0 V (0.10 A)** and **1.5 V (0.25 A)** are comfortably below this limit. At higher currents, the effective rate saturates, and the excess current leads to side reactions, lowering the effective Faradaic efficiency.
+
+---
+
+#### **5. Capped Rate Constants (Accounting for Mass-Transfer Limit)**
+
+Using \(I_{\text{eff}} = \min(I, I_{\lim}) = \min(I, 0.438\ \text{A})\)
+
+| V (V) | I (A) | **I_eff** (A) | **εF_eff** ≈ εF·min(1, I_lim/I) | **k_cap** (mol·m⁻³·s⁻¹) | **k_cap** (kmol·m⁻³·h⁻¹) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1.0 | 0.10 | 0.100 | 0.700 | 0.000181 | 0.000653 |
+| 1.5 | 0.25 | 0.250 | 0.700 | 0.000453 | 0.001632 |
+| 2.0 | 0.50 | **0.438** | 0.613 | **0.000794** | **0.002859** |
+| 2.5 | 0.85 | **0.438** | 0.361 | **0.000794** | **0.002859** |
+| 3.0 | 1.20 | **0.438** | 0.255 | **0.000794** | **0.002859** |
+| 3.5 | 1.45 | **0.438** | 0.211 | **0.000794** | **0.002859** |
+| 4.0 | 1.55 | **0.438** | 0.198 | **0.000794** | **0.002859** |
+
+> **Recommendation for Aspen:** If you plan to run at **≥ 2.0 V** with this single rod, **use the capped \(k\) values** for a more realistic simulation.
+
+---
+
+#### **6. Implied Cycle Time (500 ppmw → 10 ppmw S)**
+
+Total charge required (at εF = 0.70, n = 4): \(Q \approx \textbf{6,993 C}\)
+
+*   At **0.10 A** → **~19.4 hours**
+*   At **0.25 A** → **~7.77 hours**
+*   At the mass-transfer limit (**~0.438 A effective**) → **~4.44 hours** minimum (time increases as concentration drops).
+
+> **Takeaway:** With a single **6 mm × 90 mm rod**, you are area-limited. To achieve ~1 hour cycles for a 1 L batch, you need either **more anode area** (e.g., multiple rods) or a **higher mass-transfer coefficient** \(k_m\).
+
+---
+
+#### **7. Quick Aspen RBatch Recipe**
+
+1.  **Property Method:** NRTL or ELECNRTL.
+2.  **Components:** DBT, DBT_SULFONE, H₂O, H₂, fuel surrogate.
+3.  **Reaction:** `DBT + 2 H₂O → DBT_SULFONE + 2 H₂`
+4.  **Kinetics (Power-Law):** Set all reaction orders to **0**.
+5.  **Batch Steps:** Create one step per voltage level. For each step, enter the corresponding **k** value (use **capped** values for realism).
+6.  **Run:** Isothermal at your chosen temperature; track DBT and total S over time.
+
+---
+
+Let me know if you'd like this table recalculated for **εF = 0.85 (BDD)** or for a different electrode configuration (**N rods in parallel**).
