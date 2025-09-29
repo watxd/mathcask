@@ -225,3 +225,104 @@ Total charge required (at εF = 0.70, n = 4): \(Q \approx \textbf{6,993 C}\)
 ---
 
 Let me know if you'd like this table recalculated for **εF = 0.85 (BDD)** or for a different electrode configuration (**N rods in parallel**).
+
+
+
+
+
+    Of course. Here is a step-by-step derivation of the link from the batch balance to the current-based rate, presented in a clear, structured format.
+
+### **From Batch Balance to Current-Based Reaction Rate**
+
+This derivation connects the macroscopic disappearance of sulfur to the electrical current supplied to the system.
+
+---
+
+#### **1. Batch Reactor Balance (Define the Rate)**
+
+We begin by defining the reaction rate in a batch system. Let \( r_S' \) be the **intrinsic rate of disappearance** of sulfur (S) per unit volume [mol S m⁻³ s⁻¹].
+
+The mole balance for sulfur in the reactor volume \( V \) is:
+\[
+\frac{dN_S}{dt} = -r_S' V
+\]
+where \( N_S \) is the total moles of sulfur.
+
+Expressing this in terms of concentration \( C_S = N_S/V \), and assuming constant volume:
+\[
+\frac{dC_S}{dt} = \frac{1}{V} \frac{dN_S}{dt} = -r_S'
+\]
+**Therefore, our goal is to express \( r_S' \) in terms of the applied current.**
+
+---
+
+#### **2. Faraday's Law (From Current to Electron Flow)**
+
+Current \( I(t) \) is the flow of charge per unit time [Coulombs/s or Amps].
+Faraday's constant \( F \) converts charge to moles of electrons ( \( F \approx 96,485 \) C/mol e⁻).
+
+The molar flow rate of electrons is:
+\[
+\dot{n}_{e^-} = \frac{I(t)}{F} \quad \text{[mol e⁻ s⁻¹]}
+\]
+
+---
+
+#### **3. Reaction Stoichiometry (Electrons per Molecule)**
+
+For the hydrodesulfurization of Dibenzothiophene (DBT) to a sulfur-free product, the reaction requires **4 electrons per atom of sulfur removed**.
+\[
+n = 4 \quad \text{[mol e⁻ / mol S]}
+\]
+
+If **every electron** contributed to sulfur removal, the maximum rate of S removal would be:
+\[
+\left( \frac{dN_S}{dt} \right)_{\text{max}} = -\frac{\dot{n}_{e^-}}{n} = -\frac{I(t)}{nF}
+\]
+
+---
+
+#### **4. Faradaic Efficiency (Account for Side Reactions)**
+
+In reality, not all electrons drive the desired reaction. The **Faradaic efficiency** \( \varepsilon_F \) (a number between 0 and 1) represents the fraction of current used productively.
+
+Accounting for this, the actual rate of sulfur removal is:
+\[
+\frac{dN_S}{dt} = -\varepsilon_F \cdot \frac{I(t)}{nF}
+\]
+
+---
+
+#### **5. Final Expression for the Concentration Rate**
+
+To return to our original balance, we divide by the reactor volume \( V \):
+\[
+\frac{dC_S}{dt} = \frac{1}{V} \frac{dN_S}{dt} = -\frac{\varepsilon_F}{n F V} I(t)
+\]
+
+Comparing this to the definition from Step 1 (\( \frac{dC_S}{dt} = -r_S' \)), we identify the reaction rate as:
+\[
+r_S' = \frac{\varepsilon_F}{n F V} I(t)
+\]
+
+**The governing Ordinary Differential Equation (ODE) for the system is therefore:**
+\[
+\boxed{\frac{dC_S}{dt} = -\frac{\varepsilon_F}{n F V} I(t)}
+\]
+
+---
+
+### **Implementation Notes**
+
+*   **Option A (Current-Driven):** Use the scheduled current \( I(t) = I_{\text{sched}} \) directly in the ODE.
+*   **Mass Transfer Limitation:** The effective current for sulfur removal cannot exceed what the reactants' diffusion to the electrode can support. The productive current becomes:
+    \[
+    I_{\text{eff}}(t) = \min \left( I_{\text{sched}},\ A \cdot n F \cdot k_m \cdot C_S(t) \right)
+    \]
+    where \( A \) is the electrode area and \( k_m \) is the mass transfer coefficient. Use \( I_{\text{eff}}(t) \) in place of \( I(t) \) in the ODE.
+
+### **Units Verification**
+\[
+\frac{I\ [\text{C/s}]}{n\ [\text{mol e⁻/mol S}]\ \cdot\ F\ [\text{C/mol e⁻}]\ \cdot\ V\ [\text{m³}]} \rightarrow \frac{\text{mol S}}{\text{s·m³}}
+\]
+The units are consistent for a volumetric rate of change of concentration.
