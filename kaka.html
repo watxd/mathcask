@@ -1,98 +1,128 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
-Here’s a clean LaTeX-ready rewrite (5 concise “slides”). All equations are formatted using inline math ( \cdot ) and display math ( $$\cdot$$ ).
+Of course. Here are the slides in a clean, structured format suitable for a presentation.
 
 ---
 
-# Slide 1 — Model at a glance (inputs → outputs)
+### **Slide 1 — Model at a Glance (Inputs → Outputs)**
 
-* **Goal:** predict sulfur removal in a batch EDS reactor from a **voltage schedule** and your measured **(V!-!I)** curve.
-* **Inputs:** (V_{\text{steps}}) with step durations (\Rightarrow) (I_{\text{sched}}) (via your (V!-!I) table); Faradaic efficiency (\varepsilon_F); electrons per S (n); electrode area (A); mass-transfer coefficient (k_m); volume (V).
-* **Outputs:** sulfur (ppmw) and conversion vs time, time-to-spec, and current traces (I_{\text{sched}}(t)) and (I_{\text{eff}}(t)).
+**Goal:** Predict sulfur removal (conversion of Dibenzothiophene, DBT) in a batch electrochemical desulfurization (EDS) reactor from a voltage schedule and the measured V–I curve.
 
----
+**Inputs:**
+*   **Voltage Schedule:** \( V(t) \)
+*   **Electrode Kinetics:** Via the V–I table
+*   **Faradaic Efficiency:** \( \varepsilon_F \)
+*   **Electrons per Molecule:** \( n \)
+*   **Electrode Area:** \( A \)
+*   **Mass Transfer Coefficient:** \( k_m \)
+*   **Reactor Volume:** \( V \)
 
-# Slide 2 — Mass balance → electrochemical rate (and why (n=\mathbf{4}))
-
-Batch balance:
-$$
-\frac{dN_S}{dt}=-r_S,V \quad\Longrightarrow\quad \frac{dC_S}{dt}=-r_S' .
-$$
-
-Faraday + stoichiometry + efficiency:
-$$
-\boxed{;\frac{dC_S}{dt}=-\frac{\varepsilon_F}{n,F,V},I(t);}
-$$
-
-Why (n=4): DBT (\rightarrow) sulfoxide (2 e(^{-})) and sulfoxide (\rightarrow) sulfone (2 e(^{-})); hence (n=2+2=\mathbf{4}).
-
-Overall cell (neutral/alkaline electrolyte):
-$$
-\mathrm{R_2S}+2,\mathrm{H_2O};\longrightarrow;\mathrm{R_2SO_2}+2,\mathrm{H_2}.
-$$
+**Outputs:**
+*   **DBT Concentration Profile:** \( C(t) \)
+*   **Effective Current:** \( I_{eff}(t) \)
+*   **Desulfurization Conversion:** \( X(t) \)
 
 ---
 
-# Slide 3 — Voltage (\to) current and **Option A** (current-driven, zero-order)
+### **Slide 2 — Mass Balance & Electrochemical Rate (and why n=4)**
 
-Scheduled current from your polarization data:
-$$
-I_{\text{sched}}=I!\left(V_{\text{step}}\right) .
-$$
+**Batch Reactor Mass Balance:**
+\[
+\frac{dC}{dt} = -r
+\]
+Where \( r \) is the rate of DBT consumption.
 
-Zero-order rate (constant (I) within a step):
-$$
-\boxed{;-r_S'=k_A,\qquad k_A=\frac{\varepsilon_F,I_{\text{sched}}}{n,F,V};}
-$$
+**Faraday's Law + Stoichiometry + Efficiency:**
+\[
+r = \frac{\varepsilon_F I}{n F V}
+\]
+*   \( I \): Total current [A]
+*   \( F \): Faraday's constant [C/mol]
+*   \( V \): Reactor volume [m³]
 
-Resulting concentration profile in that step:
-$$
-C_S(t)=C_{S,0}-k_A,t \quad \text{(linear)} .
-$$
+**Why n=4:**
+The reaction pathway is a two-step oxidation:
+1.  DBT → Sulfoxide (consumes 2 e⁻)
+2.  Sulfoxide → Sulfone (consumes 2 e⁻)
 
----
-
-# Slide 4 — Diffusion cap and **Option B** (mass-transfer-limited, first-order)
-
-Film theory to anode:
-$$
-\boxed{,j_{\lim}=nF,k_m,C_S,},\qquad
-\boxed{,I_{\lim}=A,j_{\lim}=A,nF,k_m,C_S,}.
-$$
-
-If (I_{\text{sched}}>I_{\lim}), only (I_{\lim}) can go to DBT oxidation:
-$$
-\frac{dC_S}{dt}
-=-\frac{\varepsilon_F}{nF V},I_{\lim}
-=-\underbrace{\left(\frac{\varepsilon_F,A,k_m}{V}\right)}*{k*{\text{app}}} C_S ,
-\qquad
-\boxed{,k_{\text{app}}=\frac{\varepsilon_F A k_m}{V},}
-$$
-with exponential decay (C_S(t)=C_\star,e^{-k_{\text{app}},t}).
+**Overall cell reaction:** \( \text{DBT} \rightarrow \text{Sulfone} \) ⇒ \( n = 2 + 2 = 4 \) electrons per molecule of DBT.
 
 ---
 
-# Slide 5 — Switching criterion, MATLAB, and Aspen implementation
+### **Slide 3 — Voltage → Current & Option A (Current-Driven, Zero-Order)**
 
-Productive current and switch point:
-$$
-\boxed{,I_{\text{eff}}(t)=\min!\big(I_{\text{sched}},,I_{\lim}(t)\big),},\qquad
-I_{\lim}(t)=A,nF,k_m,C_S(t),
-$$
-$$
-\boxed{,C_\star=\frac{I_{\text{sched}}}{A,nF,k_m},},\qquad
-\boxed{,t_{\text{sw}}=\frac{C_{\text{start}}-C_\star}{k_A},}\ \ (0<t_{\text{sw}}<\Delta t_{\text{step}}).
-$$
+**From Scheduled Voltage to Current:**
+The V–I table is used to find the current \( I_{sched}(t) \) corresponding to the applied voltage \( V(t) \).
 
-* **Before (t_{\text{sw}}):** Option A (linear). **After (t_{\text{sw}}):** MT-capped (first-order).
-* **MATLAB:** computes (k_A), (C_\star), (k_{\text{app}}); plots (I_{\text{eff}}(t)) vs (I_{\text{sched}}(t)) and the concentration/conversion curves.
-* **Aspen:** same stoichiometry for both reactions.
+**Option A: Current-Driven (Zero-Order Kinetics)**
+*   Assumes current is not limited by DBT concentration.
+*   The electrochemical rate is constant for a given current.
 
-  * Option A: Power-Law, all orders (=0), (k_A=\varepsilon_F I/(n F V)) (update per step).
-  * Option B: Power-Law, (\text{order(DBT)}=1), (k_{\text{app}}=\varepsilon_F A k_m/V).
-  * Run the **minimum-rate** path per step (enable one, disable the other), or use a single user-rate
-    $$
-    r'=\min!\big(k_A,\ k_{\text{app}},C_S\big)
-    \quad\text{or}\quad
-    r'=\frac{k_A,k_{\text{app}},C_S}{k_A+k_{\text{app}},C_S}\ \text{(smooth blend)}.
-    $$
+**Zero-Order Rate:**
+\[
+r_A = \frac{\varepsilon_F I_{sched}}{n F V} = k_A
+\]
+
+**Concentration Profile:**
+\[
+C(t) = C_0 - k_A \cdot t
+\]
+(Valid only while \( C(t) > 0 \)).
+
+---
+
+### **Slide 4 — Diffusion Cap & Option B (Mass-Transfer-Limited, First-Order)**
+
+**Film Theory (Diffusion Limit):**
+The maximum current is limited by the rate DBT molecules can diffuse to the electrode.
+
+**Limiting Current:**
+\[
+I_{lim} = n F A k_m C
+\]
+
+**If \( I_{sched} > I_{lim} \):**
+The effective current is capped: \( I_{eff} = I_{lim} \).
+
+**Option B: Mass-Transfer-Limited (First-Order Kinetics)**
+*   Substituting \( I_{lim} \) into the rate expression gives a first-order law.
+
+**Apparent Rate Constant:**
+\[
+r_B = \left( \frac{\varepsilon_F A k_m}{V} \right) C = k_{app} \cdot C
+\]
+
+**Concentration Profile:**
+\[
+C(t) = C_0 \cdot \exp(-k_{app} \cdot t)
+\]
+
+---
+
+### **Slide 5 — Switching, MATLAB, and Aspen**
+
+**Productive Current:**
+The actual current used for reaction is the minimum of the scheduled and limiting currents.
+\[
+I_{eff} = \min(I_{sched}(t),\ I_{lim}(C))
+\]
+
+**Switching Logic:**
+*   At high \( C \): \( I_{lim} \) is high, so \( I_{eff} = I_{sched} \) (Zero-Order, Option A).
+*   At low \( C \): \( I_{lim} \) drops, so \( I_{eff} = I_{lim} \) (First-Order, Option B).
+
+**MATLAB Implementation:**
+1.  Computes \( k_A \), \( C^* \), \( k_{app} \).
+2.  Numerically solves for \( C(t) \) and \( I_{eff}(t) \).
+3.  Plots \( I_{eff}(t) \) vs. \( I_{sched}(t) \) and concentration/conversion profiles.
+
+**Aspen Custom Modeler Implementation:**
+*   **Same Stoichiometry:** \( n = 4 \).
+*   **Option A:** Uses a zero-order rate constant: \( k_A = \frac{\varepsilon_F I}{n F V} \).
+*   **Option B:** Uses a first-order rate law with \( k_{app} = \frac{\varepsilon_F A k_m}{V} \).
+
+**Smooth Blend (for numerical stability):**
+\[
+I_{eff} \approx \frac{I_{sched} \cdot I_{lim}}{\sqrt{I_{sched}^m + I_{lim}^m}^{~2/m}}
+\]
+(Where \( m \) is a large number, e.g., 8, to approximate the `min` function).
