@@ -1,167 +1,46 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 
 
-Here you go—same 5-slide content, with every equation in inline math:
+Of course. Here are all the equations extracted from the report, presented in a clean, sequential format.
 
 ---
 
-# Slide 1 — Model at a glance (inputs → outputs)
+### **Equation 1: Drinking Water Recovery Percentage**
+\[
+\text{Drinking Water Recovery \%} = \dfrac{\text{Permeate}}{\text{Water fed to skids}} = \dfrac{515\ \text{GPM}}{830\ \text{GPM}} = 62.1\%
+\]
 
-* Goal: predict sulfur removal in a batch EDS reactor from a voltage schedule and the measured (V!-!I) curve.
-* Inputs: (V_{\text{steps}}) with step durations (\Rightarrow I_{\text{sched}}) (via the (V!-!I) table); (\varepsilon_F); (n); (A); (k_m); (V).
-* Outputs: sulfur (ppmw) and conversion vs time, time-to-spec, and current traces (I_{\text{sched}}(t)) and (I_{\text{eff}}(t)).
+### **Equation 2: Sodium Hypochlorite Dissociation**
+\[
+\mathrm{NaClO}\ \rightarrow\ \mathrm{Na}^+ + \mathrm{ClO}^-
+\]
 
----
+### **Equation 3: Hypochlorous Acid Formation (pH-dependent equilibrium)**
+\[
+\mathrm{ClO}^- + \mathrm{H}_2\mathrm{O} \rightleftharpoons \mathrm{HOCl} + \mathrm{OH}^-
+\]
 
-# Slide 2 — Mass balance → electrochemical rate (and why (n=\mathbf{4}))
+### **Equation 4: Definition of Free Available Chlorine (FAC)**
+\[
+\mathrm{FAC} = [\mathrm{HOCl}] + [\mathrm{ClO}^-]
+\]
 
-* Batch balance: (\frac{dN_S}{dt}=-r_S V \Rightarrow \frac{dC_S}{dt}=-r_S').
-* Faraday + stoichiometry + efficiency: (\boxed{\frac{dC_S}{dt}= -\frac{\varepsilon_F}{n F V}, I(t)}).
-* Why (n=4): DBT (\to) sulfoxide ((2e^-)) and sulfoxide (\to) sulfone ((2e^-)) (\Rightarrow n=2+2=4).
-* Overall cell (neutral/alkaline): (\mathrm{R_2S}+2,\mathrm{H_2O}\to \mathrm{R_2SO_2}+2,\mathrm{H_2}).
+### **Equation 5: Disinfection Reaction**
+\[
+\mathrm{HOCl} + \mathrm{Pathogen} \rightarrow \mathrm{Inactivated\ Pathogen} + \mathrm{Cl}^- + \mathrm{H}^+
+\]
 
----
+### **Equation 6: DPD Colorimetric Reaction**
+\[
+\mathrm{HOCl} + \mathrm{DPD\ (colorless)} \rightarrow \mathrm{DPD^+\ (pink)} + \mathrm{Cl}^- + \mathrm{H}_2\mathrm{O}
+\]
 
-# Slide 3 — Voltage (\to) current and Option A (current-driven, zero-order)
+### **Equation 7: Diaphragm Pump Flow Rate (Theoretical)**
+\[
+Q = \left(\frac{\pi d^2}{4}\right) \cdot L \cdot \mathrm{SPM}
+\]
 
-* Scheduled current: (I_{\text{sched}} = I!\left(V_{\text{step}}\right)).
-* Zero-order rate in a constant-current step: (\boxed{-r_S' = k_A,\quad k_A=\frac{\varepsilon_F I_{\text{sched}}}{n F V}}).
-* Concentration in the step: (C_S(t)= C_{S,0} - k_A t) (linear).
-
----
-
-# Slide 4 — Diffusion cap and Option B (mass-transfer-limited, first-order)
-
-* Film theory: (\boxed{j_{\lim}= n F k_m C_S}), (\boxed{I_{\lim}= A j_{\lim}= A n F k_m C_S}).
-* If (I_{\text{sched}} > I_{\lim}): (\frac{dC_S}{dt}= -\left(\frac{\varepsilon_F A k_m}{V}\right) C_S).
-* Apparent constant: (\boxed{k_{\text{app}}=\frac{\varepsilon_F A k_m}{V}}).
-* Profile in MT limit: (C_S(t)= C_\star \exp(-k_{\text{app}} t)).
-
----
-
-# Slide 5 — Switching, MATLAB, and Aspen
-
-* Productive current: (\boxed{I_{\text{eff}}(t)= \min!\big( I_{\text{sched}},, I_{\lim}(t) \big)}) with (I_{\lim}(t)= A n F k_m C_S(t)).
-* Switch concentration and time: (\boxed{C_\star= \frac{ I_{\text{sched}} }{ A n F k_m }}), (\boxed{t_{\text{sw}}= \frac{ C_{\text{start}} - C_\star }{ k_A }}) (valid if (0< t_{\text{sw}} < \Delta t_{\text{step}})).
-* MATLAB: computes (k_A), (C_\star), (k_{\text{app}}); plots (I_{\text{eff}}(t)) vs (I_{\text{sched}}(t)) and concentration/conversion.
-* Aspen: same stoichiometry for both; Option A uses order (=0) with (k_A=\varepsilon_F I/(n F V)); Option B uses (\text{order}(\mathrm{DBT})=1) with (k_{\text{app}}=\varepsilon_F A k_m/V); run the minimum-rate path per step or a single user-rate (r'=\min!\big(k_A,, k_{\text{app}} C_S\big)) (smooth blend (r'=\frac{k_A, k_{\text{app}} C_S}{k_A + k_{\text{app}} C_S})).
-
-
-## Assumptions (tell me if you want different values)
-
-* **Pathway:** DBT → DBT‑sulfone (so **n = 4 e⁻/S**).
-* **Faradaic efficiency to S‑removal:** **εF = 0.70** (typical for graphite in Na₂SO₄; use 0.85 if BDD).
-* **Batch liquid volume:** **V = 1.000 L = 0.001 m³**.
-* **One anode rod** (active area used for current density sanity check):
-
-  * Diameter **d = 6 mm = 0.006 m**, length **L = 0.09 m**
-  * Geometric area (A=\pi dL+2\pi (d/2)^2) = **0.001753 m² = 17.53 cm²**.
-* **Design feed for context** (not needed for Option A k, but used for the mass‑transfer check below): diesel 500 ppmw S as DBT (~0.83 kg in 1 L).
-
----
-
-## What Aspen needs (Option A)
-
-For Aspen Plus **RBatch → Power‑Law kinetics**:
-
-[
-\textbf{Rate:}\quad -r'_{\text{DBT}} = k \quad \big[\text{mol·m}^{-3}\text{·s}^{-1}\big]
-]
-[
-\boxed{k=\dfrac{\varepsilon_F,I}{n,F,V}}
-]
-
-* **Orders (exponents)**: set **DBT = 0**, **H₂O = 0**, **DBT_SULFONE = 0**, **H₂ = 0** (zero‑order overall).
-* **Stoichiometry** (no electrons):
-  `DBT + 2 H2O → DBT_SULFONE + 2 H2`.
-
-I give you (k) both in **mol·m⁻³·s⁻¹** and **kmol·m⁻³·h⁻¹** (Aspen default).
-
----
-
-## k values from your V–I table (εF = 0.70, n = 4, V = 0.001 m³)
-
-[
-k=\frac{0.70,I}{4\cdot 96485 \cdot 0.001}
-]
-
-| V (V) | I (A) | **k** (mol·m⁻³·s⁻¹) | **k** (kmol·m⁻³·h⁻¹) | j (mA·cm⁻²)* |
-| ----: | ----: | ------------------: | -------------------: | -----------: |
-|   1.0 |  0.10 |            0.000181 |             0.000653 |         5.70 |
-|   1.5 |  0.25 |            0.000453 |             0.001632 |        14.26 |
-|   2.0 |  0.50 |            0.000907 |             0.003265 |        28.52 |
-|   2.5 |  0.85 |            0.001542 |             0.005550 |        48.49 |
-|   3.0 |  1.20 |            0.002177 |             0.007835 |        68.45 |
-|   3.5 |  1.45 |            0.002630 |             0.009468 |        82.71 |
-|   4.0 |  1.55 |            0.002811 |             0.010121 |        88.42 |
-
-*j computed on the **anode** area (A=17.53\ \text{cm}^2).
-
-> **How to use in Aspen:** Create **7 batch steps**, one per voltage level (or pick the subset you’ll run). In each step, set **all exponents = 0** and enter the **k** for that step (in kmol·m⁻³·h⁻¹). Aspen will integrate with constant (k) within each step.
-
----
-
-## Important sanity check: mass‑transfer limit for this small rod
-
-At ~500 ppmw S in 1 L, the initial DBT‑S concentration is **(C_0\approx 12.9\ \text{mol·m}^{-3})**. With good stirring (k_m\sim5\times10^{-5}\ \text{m·s}^{-1}):
-
-[
-j_{\lim} = nF k_m C_0 \approx 4\times 96485\times 5\cdot10^{-5}\times 12.9 \approx \textbf{25 mA·cm}^{-2}.
-]
-
-With your rod area, the **current limit** is:
-[
-I_{\lim} = A,j_{\lim} \approx 0.001753,\text{m}^2 \times 249.8,\text{A·m}^{-2} \approx \textbf{0.438 A}.
-]
-
-So any step above ~**0.44 A** is **mass‑transfer‑limited** initially; only **1.0 V (0.10 A)** and **1.5 V (0.25 A)** are comfortably below the limit. At (I > I_{\lim}), the **effective** (k) to DBT removal saturates at the value corresponding to (I_{\lim}); the rest of the current goes to side reactions (OER/solvent oxidation), lowering (\varepsilon_F).
-
-### If you want to cap (k) at the mass‑transfer limit
-
-Using (I_{\text{eff}}=\min(I, I_{\lim})= \min(I, 0.438,\text{A})):
-
-| V (V) | I (A) | **I_eff** (A) | **εF_eff**≈εF·min(1, I_lim/I) | **k_cap** (mol·m⁻³·s⁻¹) | **k_cap** (kmol·m⁻³·h⁻¹) |
-| ----: | ----: | ------------: | ----------------------------: | ----------------------: | -----------------------: |
-|   1.0 |  0.10 |         0.100 |                         0.700 |                0.000181 |                 0.000653 |
-|   1.5 |  0.25 |         0.250 |                         0.700 |                0.000453 |                 0.001632 |
-|   2.0 |  0.50 |     **0.438** |                         0.613 |            **0.000794** |             **0.002859** |
-|   2.5 |  0.85 |     **0.438** |                         0.361 |            **0.000794** |             **0.002859** |
-|   3.0 |  1.20 |     **0.438** |                         0.255 |            **0.000794** |             **0.002859** |
-|   3.5 |  1.45 |     **0.438** |                         0.211 |            **0.000794** |             **0.002859** |
-|   4.0 |  1.55 |     **0.438** |                         0.198 |            **0.000794** |             **0.002859** |
-
-**Recommendation for Aspen:** if you plan to run at ≥2.0 V with this single rod, **use the capped (k)** above; that reflects the fact you can’t push more DBT across the film than mass transfer allows.
-
----
-
-## What cycle time do these imply (1 L, 500→10 ppmw)?
-
-Total charge needed at εF = 0.70, n = 4:
-
-[
-Q = \frac{nF}{\varepsilon_F}\frac{m_f}{M_S}\frac{S_0-S^\star}{10^6}
-\approx \textbf{6,993 C}.
-]
-
-* At **0.10 A** → ~**19.4 h**.
-* At **0.25 A** → ~**7.77 h**.
-* If you run at higher voltages, you’re still limited to **~0.438 A effective** at the start with this rod → **~4.44 h** minimum (and longer as sulfur declines, because (j_{\lim}\propto C)).
-
-> **Takeaway:** with a **6 mm×90 mm** rod you are area‑limited. To reach ~1 h cycles at 1 L you need either **much more anode area** (e.g., ~10 rods in parallel or a small plate stack) or **higher (k_m)** (recirculation across a plate cell). The numbers above tell you exactly how to rescale (k): it’s proportional to **I/V**, and (I_{\lim}) scales with **A k_m**.
-
----
-
-## How to enter this in Aspen RBatch (quick recipe)
-
-1. **Property method:** NRTL (two‑liquid) or ELECNRTL if you include Na₂SO₄/ions.
-2. **Components:** DBT (or hypothetical), DBT_SULFONE (hypothetical), H₂O, H₂ (+ fuel surrogate).
-3. **Reaction:** `DBT + 2 H2O → DBT_SULFONE + 2 H2`.
-4. **Kinetics (Power‑Law):** set **all orders = 0**.
-5. **Steps:** create one step per voltage level you will run. For each step, enter **k** from the table above (use the **capped** values if you want realism with the rod).
-6. **Run isothermal** at your chosen T; track **DBT** and **total S** vs time.
-
----
-
-### Want me to compute the same table for **εF = 0.85** (BDD) or for **N rods in parallel**?
-
-Say the word and I’ll generate the revised (k) table and the new (I_{\lim}) (it scales with area and with (k_m)).
+### **Equation 8: Diaphragm Pump Flow Rate (Percentage-based)**
+\[
+Q = Q_{\max} \cdot \left(\frac{\text{Stroke \%}}{100}\right)
+\]
