@@ -1,16 +1,59 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
-Here is the nicely formatted table:
+Perfect—starting fresh with the clarified figures and building each signal from table components (unit steps \(S(t)\) and ramps \(r(t)=t\,S(t)\)). I’ll show the algebra and the final Laplace transforms.
 
 ---
 
-| # | Time-Domain \( f(t) \)                          | Laplace-Domain \( F(s) \)       |
-|---|-------------------------------------------------|---------------------------------|
-| 1 | \( e^{-bt} S(t) \)                              | \( \displaystyle \frac{1}{s+b} \) |
-| 2 | \( t e^{-bt} S(t) \)                            | \( \displaystyle \frac{1}{(s+b)^2} \) |
-| 3 | \( \dfrac{1}{2!} t^{2} e^{-bt} S(t) \)          | \( \displaystyle \frac{1}{(s+b)^3} \) |
-| 4 | \( \dfrac{1}{3!} t^{3} e^{-bt} S(t) \)          | \( \displaystyle \frac{1}{(s+b)^4} \) |
-| 5 | \( \dfrac{1}{4!} t^{4} e^{-bt} S(t) \)          | \( \displaystyle \frac{1}{(s+b)^5} \) |
-| 6 | \( \dfrac{1}{(n-1)!} t^{n-1} e^{-bt} S(t),\ n \ge 1 \) | \( \displaystyle \frac{1}{(s+b)^{n}} \) |
-| 7 | \( \dfrac{1}{n!} t^{n} e^{-bt} S(t),\ n \ge 0 \)       | \( \displaystyle \frac{1}{(s+b)^{n+1}} \) |
+## Figure E3.4a — two levels (5 → 1) then off at \(t=6\)
+
+### Write \(f(t)\) with steps
+
+- Jump to 5 at \(t=0\): \(+5\,S(t)\)  
+- Drop by 4 at \(t=2\): \(-4\,S(t-2)\) (takes 5 down to 1)  
+- Drop by 1 at \(t=6\): \(-S(t-6)\)  (takes 1 down to 0)
+
+\[
+\boxed{f(t)=5\,S(t)-4\,S(t-2)-S(t-6)}
+\]
+
+### Laplace transform (Table: \(\mathcal L\{S(t-a)\}=e^{-as}/s\))
+
+\[
+\boxed{F(s)=\frac{5}{s}-\frac{4e^{-2s}}{s}-\frac{e^{-6s}}{s}=\frac{5-4e^{-2s}-e^{-6s}}{s},\quad \Re(s)>0}
+\]
 
 ---
+
+## Figure E3.4b — trapezoid (slope \(a\); corners at \(t_r,2t_r,3t_r\))
+
+Height of the flat top is \(a\,t_r\).
+
+### Build with ramps
+
+Use \(r(t)=t\,S(t)\) (Table: \(\mathcal L\{r(t)\}=1/s^2\), shift: \(\mathcal L\{r(t-a)\}=e^{-as}/s^2\)).
+
+A compact superposition that produces the trapezoid:
+
+\[
+\boxed{f(t)=a\big[r(t)-r(t-t_r)-r(t-2t_r)+r(t-3t_r)\big]}
+\]
+
+Check by intervals:
+
+- \(0\le t<t_r\): \(f(t)=a\,t\) (slope \(a\))  
+- \(t_r\le t<2t_r\): \(f(t)=a\,t_r\) (flat)  
+- \(2t_r\le t<3t_r\): \(f(t)=a(3t_r-t)\) (slope \(-a\))  
+- \(t\ge 3t_r\): \(f(t)=0\)
+
+### Laplace transform
+
+\[
+\begin{aligned}
+F(s)
+&=a\left[\frac{1}{s^2}-\frac{e^{-s t_r}}{s^2}-\frac{e^{-2s t_r}}{s^2}+\frac{e^{-3s t_r}}{s^2}\right] \\[2mm]
+&=\boxed{\frac{a}{s^2}\Big(1-e^{-s t_r}-e^{-2s t_r}+e^{-3s t_r}\Big)=\frac{a}{s^2}\,(1-e^{-s t_r})(1-e^{-2s t_r}),\quad \Re(s)>0}
+\end{aligned}
+\]
+
+---
+
+These forms use only the standard table entries and the time-shift property, matching the exact level changes in your clarified figures.
