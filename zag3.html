@@ -1,0 +1,79 @@
+<!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
+Absolutely—here’s part (e) done **step-by-step**, with special care on the **time shift**.  
+(Use \(S(t)\) for the unit step.)
+
+---
+
+## Given
+
+\[
+X(s)=\frac{s+1}{s(s+2)(s+3)}\,e^{-0.5s}.
+\]
+
+The factor \(e^{-0.5s}\) signals a **time delay of \(0.5\)**. We’ll first invert the rational part, then apply the delay.
+
+---
+
+## 1) Strip off the delay
+
+Let
+\[
+G(s)=\frac{s+1}{s(s+2)(s+3)}.
+\]
+Then \(X(s)=G(s)\,e^{-0.5s}\).
+
+---
+
+## 2) Partial fractions of \(G(s)\) (Heaviside cover-up)
+
+\[
+G(s)=\frac{\alpha_1}{s}+\frac{\alpha_2}{s+2}+\frac{\alpha_3}{s+3}.
+\]
+
+Heaviside constants:
+\[
+\alpha_1=\left.\frac{s+1}{(s+2)(s+3)}\right|_{s=0}=\frac{1}{6},\qquad
+\alpha_2=\left.\frac{s+1}{s(s+3)}\right|_{s=-2}=\frac{1}{2},\qquad
+\alpha_3=\left.\frac{s+1}{s(s+2)}\right|_{s=-3}=-\frac{2}{3}.
+\]
+
+So
+\[
+G(s)=\frac{1}{6}\frac{1}{s}+\frac{1}{2}\frac{1}{s+2}-\frac{2}{3}\frac{1}{s+3}.
+\]
+
+---
+
+## 3) Inverse Laplace of \(G(s)\)
+
+\[
+g(t)=\mathcal L^{-1}\{G(s)\}
+=\left[\frac{1}{6}+\frac{1}{2}e^{-2t}-\frac{2}{3}e^{-3t}\right]S(t).
+\]
+
+---
+
+## 4) Apply the time-shift (delay) property
+
+**Heaviside shift theorem**:
+\[
+\boxed{\ \mathcal L^{-1}\{G(s)\,e^{-as}\}=g(t-a)\,S(t-a)\ }
+\]
+(Proof sketch: \(\mathcal L\{g(t-a)S(t-a)\}=\int_a^\infty g(t-a)e^{-st}dt
+=e^{-as}\int_0^\infty g(\tau)e^{-s\tau}d\tau=e^{-as}G(s)\).)
+
+With \(a=0.5\):
+\[
+x(t)=g(t-0.5)\,S(t-0.5).
+\]
+
+Substitute \(g(\cdot)\):
+\[
+\boxed{\;
+x(t)=\Big[\tfrac{1}{6}
++\tfrac{1}{2}e^{-2(t-0.5)}
+-\tfrac{2}{3}e^{-3(t-0.5)}\Big]\,S(t-0.5).
+\;}
+\]
+
+**Interpretation:** \(x(t)=0\) for \(t<0.5\). For \(t\ge0.5\), the waveform is exactly the unshifted response \(g(t)\) but **delayed** by \(0.5\) seconds.
