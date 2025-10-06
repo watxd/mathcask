@@ -1,59 +1,124 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
-Perfect—starting fresh with the clarified figures and building each signal from table components (unit steps \(S(t)\) and ramps \(r(t)=t\,S(t)\)). I’ll show the algebra and the final Laplace transforms.
+Let \(S(t)\) denote the unit-step.
 
 ---
 
-## Figure E3.4a — two levels (5 → 1) then off at \(t=6\)
+## (a) \(\displaystyle X(s)=\frac{s(s+1)}{(s+2)(s+3)(s+4)}\)
 
-### Write \(f(t)\) with steps
-
-- Jump to 5 at \(t=0\): \(+5\,S(t)\)  
-- Drop by 4 at \(t=2\): \(-4\,S(t-2)\) (takes 5 down to 1)  
-- Drop by 1 at \(t=6\): \(-S(t-6)\)  (takes 1 down to 0)
-
+Factor the denominator and do partial fractions:
 \[
-\boxed{f(t)=5\,S(t)-4\,S(t-2)-S(t-6)}
+\frac{s(s+1)}{(s+2)(s+3)(s+4)}
+=\frac{\alpha_1}{s+2}+\frac{\alpha_2}{s+3}+\frac{\alpha_3}{s+4}.
 \]
-
-### Laplace transform (Table: \(\mathcal L\{S(t-a)\}=e^{-as}/s\))
-
+Heaviside cover–up:
 \[
-\boxed{F(s)=\frac{5}{s}-\frac{4e^{-2s}}{s}-\frac{e^{-6s}}{s}=\frac{5-4e^{-2s}-e^{-6s}}{s},\quad \Re(s)>0}
+\alpha_1=\left.\frac{s(s+1)}{(s+3)(s+4)}\right|_{s=-2}=1,\quad
+\alpha_2=\left.\frac{s(s+1)}{(s+2)(s+4)}\right|_{s=-3}=-6,\quad
+\alpha_3=\left.\frac{s(s+1)}{(s+2)(s+3)}\right|_{s=-4}=6.
 \]
-
----
-
-## Figure E3.4b — trapezoid (slope \(a\); corners at \(t_r,2t_r,3t_r\))
-
-Height of the flat top is \(a\,t_r\).
-
-### Build with ramps
-
-Use \(r(t)=t\,S(t)\) (Table: \(\mathcal L\{r(t)\}=1/s^2\), shift: \(\mathcal L\{r(t-a)\}=e^{-as}/s^2\)).
-
-A compact superposition that produces the trapezoid:
-
+Thus
 \[
-\boxed{f(t)=a\big[r(t)-r(t-t_r)-r(t-2t_r)+r(t-3t_r)\big]}
+X(s)=\frac{1}{s+2}-\frac{6}{s+3}+\frac{6}{s+4}.
 \]
-
-Check by intervals:
-
-- \(0\le t<t_r\): \(f(t)=a\,t\) (slope \(a\))  
-- \(t_r\le t<2t_r\): \(f(t)=a\,t_r\) (flat)  
-- \(2t_r\le t<3t_r\): \(f(t)=a(3t_r-t)\) (slope \(-a\))  
-- \(t\ge 3t_r\): \(f(t)=0\)
-
-### Laplace transform
-
+Inverse Laplace:
 \[
-\begin{aligned}
-F(s)
-&=a\left[\frac{1}{s^2}-\frac{e^{-s t_r}}{s^2}-\frac{e^{-2s t_r}}{s^2}+\frac{e^{-3s t_r}}{s^2}\right] \\[2mm]
-&=\boxed{\frac{a}{s^2}\Big(1-e^{-s t_r}-e^{-2s t_r}+e^{-3s t_r}\Big)=\frac{a}{s^2}\,(1-e^{-s t_r})(1-e^{-2s t_r}),\quad \Re(s)>0}
-\end{aligned}
+\boxed{x(t)=\big(e^{-2t}-6e^{-3t}+6e^{-4t}\big)\,S(t).}
 \]
 
 ---
 
-These forms use only the standard table entries and the time-shift property, matching the exact level changes in your clarified figures.
+## (c) \(\displaystyle X(s)=\frac{s+4}{(s+1)^2}\)
+
+Decompose for the repeated pole:
+\[
+\frac{s+4}{(s+1)^2}=\frac{\alpha_1}{s+1}+\frac{\alpha_2}{(s+1)^2}.
+\]
+Multiply by \((s+1)^2\): \(s+4=\alpha_1(s+1)+\alpha_2\Rightarrow \alpha_1=1,\ \alpha_2=3\).
+Hence
+\[
+\boxed{x(t)=\big(e^{-t}+3t\,e^{-t}\big)\,S(t).}
+\]
+
+---
+
+## (e) \(\displaystyle X(s)=\frac{s+1}{s(s+2)(s+3)}\,e^{-0.5s}\)
+
+Time shift: \(\mathcal L^{-1}\{F(s)e^{-a s}\}=f(t-a)S(t-a)\).
+First invert
+\[
+G(s)=\frac{s+1}{s(s+2)(s+3)}
+=\frac{\alpha_1}{s}+\frac{\alpha_2}{s+2}+\frac{\alpha_3}{s+3}.
+\]
+Heaviside:
+\[
+\alpha_1=\left.\frac{s+1}{(s+2)(s+3)}\right|_{s=0}=\tfrac16,\quad
+\alpha_2=\left.\frac{s+1}{s(s+3)}\right|_{s=-2}=\tfrac12,\quad
+\alpha_3=\left.\frac{s+1}{s(s+2)}\right|_{s=-3}=-\tfrac23.
+\]
+So \(g(t)=\tfrac16+\tfrac12 e^{-2t}-\tfrac23 e^{-3t}\) for \(t\ge0\).
+Apply the delay \(a=0.5\):
+\[
+\boxed{x(t)=\Big[\tfrac16+\tfrac12 e^{-2(t-0.5)}-\tfrac23 e^{-3(t-0.5)}\Big]\,S(t-0.5).}
+\]
+
+---
+
+Absolutely — here are (a) and (e) exactly as before, and (c) redone **using the Heaviside cover-up for repeated roots**.
+
+---
+
+## (a) \(\displaystyle X(s)=\frac{s(s+1)}{(s+2)(s+3)(s+4)}\)
+
+Partial fractions:
+\[
+\frac{s(s+1)}{(s+2)(s+3)(s+4)}
+=\frac{\alpha_1}{s+2}+\frac{\alpha_2}{s+3}+\frac{\alpha_3}{s+4},
+\]
+\[
+\alpha_1=1,\qquad \alpha_2=-6,\qquad \alpha_3=6.
+\]
+Inverse Laplace:
+\[
+\boxed{x(t)=\big(e^{-2t}-6e^{-3t}+6e^{-4t}\big)\,S(t).}
+\]
+
+---
+
+## (c) \(\displaystyle X(s)=\frac{s+4}{(s+1)^2}\) — **Heaviside for repeated root**
+
+Write
+\[
+\frac{s+4}{(s+1)^2}=\frac{\alpha_1}{s+1}+\frac{\alpha_2}{(s+1)^2}.
+\]
+
+For a repeated pole at \(s=-1\) of order \(2\):
+\[
+\alpha_2=\lim_{s\to-1}(s+1)^2X(s)=\lim_{s\to-1}(s+4)=3,
+\]
+\[
+\alpha_1=\left.\frac{d}{ds}\Big[(s+1)^2X(s)\Big]\right|_{s=-1}
+=\left.\frac{d}{ds}(s+4)\right|_{s=-1}=1.
+\]
+
+Thus
+\[
+X(s)=\frac{1}{s+1}+\frac{3}{(s+1)^2}
+\quad\Longrightarrow\quad
+\boxed{x(t)=\big(e^{-t}+3t\,e^{-t}\big)\,S(t).}
+\]
+
+---
+
+## (e) \(\displaystyle X(s)=\frac{s+1}{s(s+2)(s+3)}\,e^{-0.5s}\)
+
+First invert
+\[
+\frac{s+1}{s(s+2)(s+3)}=\frac{1}{6}\frac{1}{s}
++\frac{1}{2}\frac{1}{s+2}-\frac{2}{3}\frac{1}{s+3}.
+\]
+So \(g(t)=\tfrac16+\tfrac12 e^{-2t}-\tfrac23 e^{-3t}\) for \(t\ge0\).
+
+Apply the delay \(0.5\):
+\[
+\boxed{x(t)=\Big[\tfrac16+\tfrac12 e^{-2(t-0.5)}-\tfrac23 e^{-3(t-0.5)}\Big]\,S(t-0.5).}
+\]
