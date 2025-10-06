@@ -1,399 +1,46 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
-# Summer Training Final Report
+Here’s the model and answers to all three asks, using the given hint/assumptions.
 
-**Company:** Saudi Aramco – Water Operations Division (WOD), Dhahran
-**Department:** Utilities & Facilities Services (U&FSD)
+# 1) Unsteady model (h(t)) vs. (q_i(t))
 
-## Abstract
-
-This report consolidates all training narrative and technical content into a single, rubric-aligned document that preserves the original flow and order of information exactly as observed in sequence at site. It begins with orientation and unit introductions, proceeds through detailed familiarization with the Drinking Water Production Unit—including TDS fundamentals, spiral-wound membrane theory, two-stage RO operation, remineralization, degasification, and chlorination—and continues with distribution zoning. It then documents the Water Wells and Raw Water Production Unit, the Sanitary Operations Unit (NSTP and AWTP) with full process descriptions and performance targets, and the Home Ownership Operations Unit. Subsequently, it covers raw-water standards, storage-tank disinfection methods, sampling requirements, and well maintenance procedures (RIH/POH). The report next develops the sodium hypochlorite dosing chemistry and field QA/QC using the DPD method, including point-of-injection verification, followed by the Week-3 incident investigation of a blocked injection point. It then records the vendor FRP tank inspection and repair specification, the NaOCl PM program, and a side-by-side technology discussion of the PulsaSeries® 7120 diaphragm metering pump versus a DuCoNite® 15 hose pump with operating envelopes and selection logic. A site visit summary to NOV Fiberglass (manufacturing, QA/QC, and product range) is included. The report maintains all original figure and table references (e.g., **Figure 1 (from Progress 1)**, **Figures 2–3 (from Progress 2)**) exactly where called in the text so that media can be inserted one-to-one without renumbering. The document closes with a concise conclusion that reflects the integrated outcomes of learning, operations, reliability, and safety.
-
----
-
-## 1. Week 1 Orientation and Division Overview
-
-Week’s 1 consisted of Aramco Introductory meeting (Monday) where general rules regarding safety, traffic, and IT were introduced, followed by an introduction (Tuesday) on the water operation division.
-
-The water operation division consists of several units, excluding the maintenance units, the units would be
- • Drinking Water Production Unit
- • Water Wells and Raw Water Production Unit
- • Sanitary Operations Unit
- • Home Ownership Operations Unit
-
-Since Wednesday, an orientation until next Wednesday took place where each unit was visited and an introduction took place.
-
----
-
-## 2. Drinking Water Production Unit — Orientation and Learning
-
-From Wednesday until next Monday, an orientation and site visit of the Drinking Water Production Unit, here what I have learned:
-
-Total Dissolved Solids, commonly known as TDS, refer to the combined content of all inorganic and organic substances dissolved in water. These substances exist as ions or very small molecules that pass through a standard filter. TDS includes minerals such as calcium, magnesium, sodium, potassium, chlorides, sulfates, bicarbonates, and trace elements. The TDS level is measured in milligrams per liter (mg/L) or parts per million (ppm) and is a key indicator of water quality, affecting taste, hardness, corrosion potential, and suitability for drinking or industrial use.
-
-Seawater has extremely high TDS levels, typically averaging around 35,000 ppm. This high salinity is mainly due to dissolved sodium chloride (common salt) along with significant amounts of magnesium, sulfate, calcium, and potassium ions. The elevated TDS makes seawater unsuitable for direct human consumption. The high mineral content is also why seawater tastes salty and why desalination is necessary to produce fresh water from the ocean.
-
-Well water exhibits a broad range of TDS levels, depending on the local geology and potential contamination sources. In our case (Dhahran) it’s around 3700 ppm.
-
-Drinking water has regulated TDS limits to ensure it is safe and pleasant to consume. The World Health Organization (WHO) and many national standards recommend TDS levels below 500 ppm for taste and consumer acceptability, Per Aramco standards, Drinking Water should be below 500 and greater than 100 ppm. Low-TDS drinking water tends to taste clean and fresh, while water with very low TDS may taste flat due to the absence of minerals.
-
-If we were to take any conventional water bottle, if you read the label, you’d certainly find the composition in PPM or mg/L, you’d also find the TDS, for example, **Figure 1 (from Progress 1)** shows the composition and the TDS found in an IVAL water bottle, the TDS is 118 ppm, and if you were to sum the composition, you’d get a value around 120 ppm, of course, the values are given in average composition, however if we know the exact value of each dissolved solid, we can accurately calculate the TDS by just summing the concentrations of each dissolved solid.
-
-One of the most effective methods to reduce TDS is Reverse Osmosis (RO). The RO process uses a semi-permeable membrane to remove dissolved solids from water. In this process, water is forced under high pressure through the membrane. The tiny pores of the membrane allow only water molecules to pass through, rejecting salts, minerals, and most dissolved impurities. The purified water collected on the other side is called permeate, while the concentrated brine left behind is known as reject water or concentrate.
-
-The spiral-wound membrane module, shown in **Figure 2 (from Progress 1)**, is one of the most widely used configurations in reverse osmosis (RO) and nanofiltration processes for water treatment and desalination. This design was developed to maximize membrane surface area within a compact cylindrical housing while maintaining efficient flow paths for both the feed and permeate streams. The figure illustrates the structure and operation of a spiral-wound membrane model in detail.
-
-At the core of the module lies a perforated permeate collection pipe. This pipe acts as the central manifold into which purified water, called permeate, is collected after it passes through the membrane layers. Surrounding this central tube are multiple membrane envelopes that have been fabricated by folding flat sheet membranes over themselves and sealing their edges. Between the layers of each envelope, a permeate spacer is inserted to create open channels that allow permeate to flow inward toward the perforated pipe.
-
-The spaces between the outside surfaces of adjacent envelopes are filled with feed spacers. These feed spacers serve two purposes: they maintain a consistent gap (defined by the height H in the **Figure 2 (from Progress 1)**) for the feed water to flow through, and they help promote turbulence to minimize fouling and scaling on the membrane surface. During operation, the pressurized feed water enters the module from one end, flowing along the feed channels in the direction marked “Feed flow.” As it travels along the membrane surface, the pressure forces water molecules to pass through the semi-permeable membrane, leaving behind most dissolved salts and impurities.
-
-The water that successfully passes through the membrane enters the internal permeate channel of the membrane envelope. It then spirals inward toward the center of the module, following the path marked “Permeate flow.” This spiral path allows the module to efficiently collect permeate over a large membrane area without requiring complex piping. The remaining feed water, which becomes more concentrated as permeation occurs, exits the module as the residue flow or concentrate. This brine stream contains the rejected salts and must be properly managed or disposed of, depending on the application.
-
-The **Figure 2 (from Progress 1)** also labels the key geometric parameters of the membrane sheets. The length (L) and width (W) of the membrane sheet before it is rolled determine the available filtration area and the size of the spiral. The height (H) of the feed spacer defines the thickness of the feed flow channel and strongly influences the pressure drop and mass transfer characteristics of the module. When the membrane sheets are rolled around the permeate pipe, the resulting “jelly roll” structure combines high surface area with a compact footprint, which is a major advantage for industrial-scale desalination and water purification plants.
-
-In the Dhahran water drinking plant, the process involves extracting water from well, then processing it to be drinking water. **Figure 3 (from Progress 1)** shows a simple BFD of the Dhahran water drinking plant process.
-
-The process feed starts from water with TDS around 3700 ppm extracted from wells with volumetric flow rate of around 2700 GPM (Gallons Per Minute) at a pressure around 160 PSIG fed to cartridge filters, cartridge filters are designed to remove suspended solids, fine particles, and certain microorganisms from the water before it proceeds to further treatment stages. Essentially, it consists of a cylindrical housing that holds replaceable filter elements commonly made of pleated polyester, polypropylene, cellulose, or other synthetic materials through which water is forced under pressure. As the water flows through the filter media, particles larger than the pore size of the cartridge are physically trapped and retained, then the clear water goes to tanks to essentially control the flow for the rest of the process, the clear water tanks decouples the raw water supply from the RO process, providing flow stabilization, operational flexibility, additional settling, and storage reserve, then the process goes through booster pumps, where the outlet pressure is at 50–60 PSIG. In reverse osmosis (RO) water treatment systems, it is critical to protect the membranes from scaling and fouling to ensure reliable operation and high-quality water production. One of the most important steps in this process is the introduction of antiscalant chemicals into the feedwater before it reaches the filtration and membrane separation stages. Antiscalant is a specially formulated chemical additive that prevents the crystallization and deposition of sparingly soluble salts, such as calcium carbonate, calcium sulfate, barium sulfate, and silica. Without proper antiscalant dosing, these salts can form hard scale deposits that obstruct water flow channels, reduce membrane permeability, increase energy consumption, and lead to costly maintenance and downtime.
-
-To deliver the antiscalant into the water stream in precise quantities, a diaphragm dosing pump is commonly employed. A diaphragm pump is a type of positive displacement pump specifically designed for accurate metering of chemicals. Its operation relies on the movement of a flexible diaphragm, usually made from corrosion-resistant elastomeric material, which cyclically expands and contracts within the pump chamber. During the suction stroke, the diaphragm is pulled back, creating a vacuum that draws the antiscalant solution from the storage tank through an inlet check valve into the pump chamber. In the subsequent discharge stroke, the diaphragm is pushed forward, compressing the liquid and forcing it through an outlet check valve into the injection point on the main water line. This back-and-forth motion provides consistent volumetric dosing while preventing the pumped fluid from contacting moving mechanical components, thereby offering excellent chemical compatibility, leak-free operation, and long-term reliability.
-
-Diaphragm dosing pumps are valued in water treatment applications because they allow operators to finely adjust the flow rate of the chemical dosing to match the process requirements. The dosing rate can be controlled manually using adjustment knobs or automatically through electronic controllers and flow meters that respond to the real-time water flow. This precise control ensures that the antiscalant concentration remains within the target range, providing continuous protection against scale formation without overdosing or wasting chemicals.
-
-After the antiscalant is injected into the water by the diaphragm dosing pump, it must be mixed thoroughly to ensure the chemical is evenly distributed throughout the feed stream. This is accomplished by passing the water through an inline mixer, which is a static mixing device installed directly in the pipeline. The inline mixer contains a series of fixed internal elements—such as baffles or helical vanes—that generate turbulence and create radial mixing patterns as water flows through. This agitation disperses the antiscalant uniformly across the entire cross-section of the pipe, eliminating zones of high or low concentration and preparing the water for the next treatment steps. To balance performance and cost-effectiveness, the antiscalant dosage should be maintained within **0.7–1.4 ppm**, as this range provides sufficient scale inhibition without unnecessary overconsumption.
-
-Once the chemical mixing is complete, the water flows through micron filters. Micron filters are fine filtration elements that remove suspended solids, colloidal particles, and other fine debris that could otherwise deposit on the membrane surface and contribute to fouling. These filters are rated by the particle size they can capture—for example, a 5-micron filter will retain all particles measuring 5 micrometers or larger. By effectively removing fine particulate matter, micron filters further protect the RO membranes.
-
-The water then is pumped to **250–260 PSIG** by centrifugal pumps and then enters the **2-staged skids** at around **830 GPM**. A two-stage skid refers to a modular, pre-assembled frame (the “skid”) that contains the RO membrane vessels arranged in two stages of filtration. This configuration is designed to improve recovery (the percentage of water converted into product water) and optimize performance while reducing waste. In a single-stage system, all the feed water passes through one set of membrane elements in parallel, and the concentrate (reject stream) is simply discharged. In contrast, a two-stage system takes the concentrate stream exiting the first stage and feeds it into a second stage of membranes to extract additional permeate (treated water). This setup increases the overall recovery rate of the system depending on feed water quality and membrane limits.
-
-**How It Works:**
- • First Stage: Raw feed water enters the first set of pressure vessels containing RO membranes. A portion of the water permeates through the membranes, becoming product water (permeate), while the rest exits as concentrate.
- • Second Stage: The concentrate from the first stage, which still contains significant water, is directed to a second set of RO membranes arranged in series. Here, more fresh water is recovered, and a smaller volume of high-salinity brine remains for disposal.
- • Stage 1 Reject becomes the feed to Stage 2.
- • Permeate from both stages is combined for product water.
- • Stage 2 Reject is the final concentrate discharged.
-
-**Figure 4 (from Progress 1)** illustrates industrial RO skids.
-
-Recall that the TDS from the water well is around **3700 ppm**, the permeate of the RO skids, (product water) would have a TDS of around **150 ppm**. Also, the feed of **830 GPM** entering the skids would be processed such that the permeate (product water) flow rate is around **515 GPM**, which means that the reject would be **315 GPM**, the reject water has a TDS of around **11,000 ppm**. This higher concentration occurs because the removal of permeate reduces the volume of water in which the salts are dissolved, thereby concentrating the dissolved solids in the remaining stream.
-
-**Drinking Water Recovery %** = ( \dfrac{\text{Permeate}}{\text{Water fed to skids}} = \dfrac{515\ \text{GPM}}{830\ \text{GPM}} = 62.1% )
-
-Then, portion of the product water (around **25%**) is routed through calcium carbonate columns. These columns contain granular calcium carbonate media. As the water flows through the media, it dissolves a controlled amount of calcium and bicarbonate ions. This process:
- • Raises the hardness and alkalinity of the water.
- • Increases the pH, making the water less corrosive.
- • Improves taste and compliance with drinking water standards.
-
-Only 25% of the total product water is directed through the calcium carbonate columns rather than the entire stream. This proportioning serves several important functions:
-
-**Controlled Mineral Addition:** Passing all the permeate through the columns could overcorrect the mineral content, resulting in excessive hardness or elevated alkalinity beyond desired limits. By blending a portion of remineralized water (25%) with untreated RO water (75%), operators can achieve precisely balanced mineral levels in the final product.
-
-**Process Efficiency:** Routing a fraction of the flow through the columns reduces the required size and capacity of the remineralization system. This approach minimizes equipment costs, footprint, and operational complexity while still delivering sufficient mineral dosing.
-
-**Operational Flexibility:** The fraction can be adjusted if water quality requirements change seasonally or with variations in feed water composition. Operators can modify the blend ratio to maintain compliance without major system modifications.
-
-The treated water undergoes additional conditioning and disinfection steps to ensure it is chemically stable, safe for consumption, and compliant with regulatory standards before it is stored and distributed to customers. The first step is passage through degasifier blowers. In this unit, air is blown through the water to strip out dissolved gases, primarily carbon dioxide (CO₂). The removal of CO₂ is important because excess carbon dioxide lowers the pH of the water, making it more corrosive to pipes and storage tanks. By reducing free CO₂, the water’s pH is stabilized, and the effectiveness of later chemical dosing is improved. Additionally, degasification helps eliminate any volatile compounds that could impart undesirable taste or odor to the finished water.
-
-Following degasification, sodium carbonate (soda ash) is added to the water using a precise dosing pump. The main purpose of this step is to raise the pH to a level that is less aggressive to the distribution system, typically around **7.5 to 8.5**. Soda ash neutralizes any remaining acidity and increases the alkalinity of the water, providing a buffering capacity that helps maintain a stable pH even if minor chemical changes occur later. This adjustment not only protects infrastructure from corrosion but also improves compliance with drinking water regulations that specify minimum alkalinity and pH standards.
-
-Once pH correction is complete, the water is disinfected by dosing with **calcium hypochlorite**, a solid chlorine-releasing compound. This chemical rapidly dissolves and releases free chlorine, which kills bacteria, viruses, and other potentially harmful microorganisms. The addition of calcium hypochlorite serves a dual purpose: it provides an immediate disinfecting action and leaves a **residual chlorine concentration** in the water. This residual acts as a protective barrier against microbial recontamination as the water travels through storage tanks and distribution pipes to the consumer’s tap. The free chlorine concentration should be in the range of **0.2–0.5 ppm**, as a concentration above **0.7 ppm** can cause health problems.
-
-Finally, the treated and disinfected water flows into product storage tanks. These tanks serve several important functions. They provide buffer storage capacity, allowing the plant to maintain a steady supply even if the RO system experiences brief shutdowns or maintenance. The tanks also allow time for chemical reactions—such as complete pH stabilization and chlorine equilibration—to reach a consistent state before the water is sent to customers. From this point, the water is pumped into the distribution system (zones), ready for safe and reliable delivery to consumers.
-
-**(Zone-2 Distribution):**
-The destinations are: Dhahran Hills; Al Midra; Old Abqaiq Road.
-
-**(Zone-1 Distribution):**
-Water stored in Zone-1 Drinking Water Storage Tanks is distributed by gravity (i.e., without pumping, relying on elevation differences) to the following places: JHAH (Johns Hopkins Aramco Healthcare); Main Camp; Old Camp; Ar-Rabiyah.
-
----
-
-## 3. Weekly Continuation and Unit Orientations
-
-For Sunday and Monday, it consisted of Drinking water plant orientation which was addressed in the previous week’s box.
-
-On Tuesday, a quick orientation regarding these units
- • Water Wells and Raw Water Production Unit
- • Sanitary Operations Unit
- • Home Ownership Operations Unit
-
-I was assigned to Raw Water Production Unit, so I’ll discuss it in more details in the next’s week box.
-
----
-
-## 4. Sanitary Operations Unit — NSTP and AWTP
-
-**Sanitary Operations Unit**
-Consists of NSTP (North Sewage Treatment Plant) and AWTP (Advanced Wastewater Treatment Plant)
-
-### 4.1 NSTP: North Sewage Treatment Plant — Process Overview
-
-The North Sewage Treatment Plant in Dhahran is an activated sludge wastewater treatment facility with a capacity of **14 million gallons per day**. It receives influent wastewater primarily from: Dana/Doha home ownership areas; Saudi Aramco Dhahran areas; King Fahd University of Petroleum and Minerals (KFUPM). **Table 1** shows the influent wastewater flows including average and peak flows. **Table 2** shows the characteristics of the incoming wastewater, mainly BOD and TSS concentrations. **Table 3** shows the treated effluent quality after processing.
-
-**Preliminary Treatment: Screening and Grit Removal**
-The first step involves mechanical removal of large solids and grit. Four mechanical step screens equipped with moveable lamellas separate floating, settling, and suspended materials from incoming wastewater. Screenings are lifted, washed, dewatered, and conveyed to a bagging system for disposal. After screening, the wastewater passes through vortex grit removal units. These create a swirling motion that forces grit and heavy particles to settle by gravity. Grit is pumped to classifiers for washing and dewatering before disposal.
-
-**Flow Division and Sludge Mixing**
-Screened and de-gritted wastewater enters a diversion chamber that splits flow into metering stations. Here, it is measured and mixed with return sludge. Return sludge, rich in active biomass, ensures adequate microorganism concentrations for biological treatment. The mixture proceeds to the aeration tanks.
-
-**Biological Treatment: Activated Sludge Process**
-The core treatment uses aeration tanks subdivided into four cells (A–D).
- • **Cell A** is anoxic, equipped with low-speed mixers to keep solids suspended without introducing oxygen. It promotes **denitrification**, converting nitrate to nitrogen gas.
- • **Cells B, C, and D** are aerobic zones. Cell B uses variable frequency drive-driven high-efficiency surface aerators, automatically controlled by dissolved oxygen levels. Cells C and D use fixed-speed aerators to provide oxygen necessary for biological oxidation of organic pollutants and nitrification of ammonia to nitrate.
- • An internal recycle pump returns nitrate-rich effluent from Cell D to Cell A for denitrification.
-
-Through this process, organic matter is oxidized to carbon dioxide and water, and nitrogen compounds are biologically transformed.
-
-**Clarification**
-After biological treatment, the mixed liquor flows to secondary clarifiers. Solids settle to form return sludge, while clarified liquid overflows to the next stage. The clarifiers reduce biochemical oxygen demand (BOD) and suspended solids to **less than 15 mg/L**. Return sludge is scraped to hoppers and pumped back to aeration tanks to maintain microorganism populations, or wasted for further treatment to control solids retention time.
-
-**Disinfection and Effluent Transfer**
-Secondary effluent undergoes disinfection with **sodium hypochlorite**. This process ensures pathogen reduction prior to reuse or disposal. Contact time is provided in equalization basins. Chlorine is also dosed to emergency holding ponds if raw sewage bypass occurs. The disinfected effluent is then pumped to the **Advanced Wastewater Treatment Plant** for tertiary treatment.
-
-**Sludge Treatment and Dewatering**
-Excess sludge collected during clarification is sent to **aerobic digesters**. These units stabilize the sludge by promoting endogenous respiration—microorganisms consume their own cell mass when external food is limited. This reduces pathogens, odors, and the volume of solids. Air blowers supply oxygen to maintain aerobic conditions and keep solids suspended. The digested sludge is pumped to **centrifuges**, where polymer dosing helps condition it. Inside each centrifuge, centrifugal forces separate solids from liquid. The solids (“cake”) are discharged to containers, while clarified liquid (“centrate”) is pumped away. This step produces a more manageable sludge for final disposal.
-
-**Odor Control System**
-The plant uses a hybrid odor control strategy. Air extracted from odor-prone areas—such as the headworks, metering stations, and sludge handling facilities—passes through **two-stage bio-filters** followed by **carbon adsorption units**.
- • **Bio-filters** remove most hydrogen sulfide and odorous compounds by biological oxidation. In the first stage, expanded clay media hosts sulfur-oxidizing bacteria. In the second stage, activated carbon media adsorbs residual odors and volatile organic compounds.
- • **Carbon Adsorber Units** polish the exhaust air further, capturing remaining contaminants before venting.
-
-**Performance Overview**
- • Influent BOD and TSS: ~**150 mg/L** each
- • Final effluent BOD and TSS: **<15 mg/L**
- • Treatment capacity: **14 MGD average** (**42 MGD** peak)
-
-**Figure 5 (from Progress 1)** shows a BFD of NSTP process.
-
-### 4.2 AWTP: Advanced Wastewater Treatment Plant — Process Overview
-
-The Advanced Wastewater Treatment Plant (AWTP) is located within the Saudi Aramco Dhahran community. It provides tertiary treatment for the secondary effluent received from the North Sewage Treatment Plant (NSTP). The main goal is to further reduce suspended solids and organic pollutants measured as Biochemical Oxygen Demand (BOD) and disinfect the water for safe reuse in irrigation.
-
-The process begins when secondary treated effluent, with an average BOD of less than **15 mg/L** and Total Suspended Solids (TSS) below **15 mg/L**, is transferred through a force main into the AWTP. **Table 4** shows that the average daily influent flow to the plant is **14 MGD** (≈52,996 m³/d), with the influent meeting secondary treatment standards prior to further polishing.
-
-Upon arrival, the effluent is directed to a splitter box that distributes the flow evenly to two parallel sets of **continuous backwash filters**. Before filtration, the water may be dosed with alum to improve particulate removal and sodium hypochlorite for initial disinfection.
-
-In the continuous backwash filters, the influent enters at the bottom of the sand filter beds. As the water moves upward, suspended solids are captured by the sand media. The clean filtrate exits at the top and flows to the effluent pump station. The filters clean themselves continuously: air scouring and hydraulic action move accumulated solids upward as backwash water, which is directed to a **Spent Backwash Settling Tank**.
-
-The spent backwash water is clarified by gravity settling. Heavier solids settle to the bottom, while the clarified supernatant overflows into a supernatant pump station, returning to the influent splitter box for re-treatment. The settled sludge is conveyed by gravity to the Backwash Sludge Pump Station, which pumps it to the Raw Sewage Pumping Station at NSTP.
-
-After filtration, the tertiary treated effluent is disinfected again with sodium hypochlorite and stored in three above-ground irrigation tanks. **Nine irrigation pumps and two jockey pumps** distribute the reclaimed water to Dhahran Hills, spray fields, and a golf course. This reuse reduces the demand for potable water in irrigation and supports sustainable resource management.
-
-**Table 5** shows that the final treated effluent achieves a BOD concentration of **<10 mg/L** and TSS **<10 mg/L**, demonstrating the plant’s effectiveness in achieving advanced tertiary treatment standards suitable for irrigation reuse. **Figure 6 (from Progress 1)** shows the AWTP BFD.
-
----
-
-## 5. Home Ownership Operations Unit
-
-Home Ownership Operations was simply receiving processed raw water then distributing the homes of Al Dawhah Al Janubiyah.
-
----
-
-## 6. Water Wells and Raw Water Production Unit — Process Description
-
-The raw water process illustrated in the diagram begins with the extraction of groundwater from multiple well fields, divided into Zone 1, Zone 2, and Zone 3. Each zone contains a group of wells that pump raw water into dedicated pipelines. This water, while relatively clean compared to surface sources, still requires disinfection to ensure it is safe for storage and eventual distribution.
-
-To achieve this, the process incorporates **sodium hypochlorite dosing** prior to the storage tanks. Sodium hypochlorite, a widely used liquid disinfectant, is stored in dedicated tanks near each well field. From these tanks, the chemical is precisely metered into the main water line by **diaphragm dosing pumps**. A diaphragm pump functions by flexing an internal membrane back and forth to draw in a measured volume of chemical solution and then discharge it into the water stream under controlled pressure. This design allows operators to adjust the dosing rate accurately to match the incoming flow of raw water.
-
-The purpose of chlorination at this stage is twofold. First, it provides immediate disinfection by neutralizing bacteria, viruses, and other microorganisms that may be present in the raw groundwater. Second, it establishes a **free chlorine residual** that persists in the water as it fills and resides in the large storage tanks. Maintaining an appropriate residual level is critical to prevent any regrowth of microbes within the tanks themselves. For this system, the **target free chlorine** concentration in the tanks is maintained within a range of **0.2 to 0.5 ppm**. This concentration is sufficient to achieve effective disinfection while avoiding excessive chlorine levels that could affect taste, odor, or the corrosivity of the water.
-
-After chlorination, the water is directed into **high-capacity storage tanks** sized to ensure a continuous and reliable supply. **Zone 1** water is stored in a **6 million gallon** tank, while **Zones 2 and 3** each have tanks with a capacity of **11.76 million gallons**. These tanks serve as buffer reservoirs that smooth out fluctuations in well production and allow consistent flow to downstream consumers. They also provide sufficient contact time for chlorine to react fully with any remaining contaminants, thereby stabilizing the residual chlorine level before the water is distributed.
-
-From the storage tanks, the water is conveyed to various end-use locations. Zone 1 supplies areas including Jabal Area, Ar-Rabiyah, Main Camp, fire hydrants, and the power house. Additionally, a portion of Zone 1 water is routed to the **Drinking Water Plant**. Zone 2 and Zone 3 water is similarly distributed to facilities such as the RO plant area, LIP, Dhahran Hills, Al-Midra, Old Abqaiq, and road facilities. **Figure 7 (from Progress 1)** shows a simple BFD of the Raw Water process.
-
----
-
-## 7. Raw Water Standards, Disinfection Methods, and Well Maintenance
-
-**Raw water production** forms the backbone of water supply in the Dhahran region, supporting potable water treatment, irrigation, industrial utilities, and fire safety systems. Saudi Aramco’s Utilities & Facilities Services Department has established detailed standards, operating procedures, and contingency measures to maintain the reliability and safety of this system. This section explains the key standards applied to water wells, the **Run-In-Hole (RIH)** and **Pull-Out-Hole (POH)** procedures used in maintenance, the water quality limits imposed on raw water, and the overall process flow from extraction to supply.
-
-**Water Well Standards**
-Water wells across the Dhahran community are operated under strict technical and sanitary constraints. **Table 6** shows Safe Operating Limits for Raw Water Wells. These parameters are monitored routinely:
- • Chlorine residual is tested every **two hours**.
- • **TDS** is measured **weekly**.
- • **Bacteria** are analyzed **quarterly**.
-
-Such regular sampling ensures compliance with Saudi Aramco’s sanitary codes and supports reliable potable water treatment downstream.
-
-**Disinfection Methods for Water Storage Tanks — Purpose**
-To disinfect water storage tanks following construction, repairs, or painting, ensuring the absence of microbial contamination prior to placing the tanks into service.
-
-**High Concentration Method**
-Procedure: Fill the entire tank with potable water; dose to **25 mg/L**; hold **≥24 h**; drain or dechlorinate before refilling.
-Example: For **100,000 L**, chlorine required = 2.5 kg.
-When to Use: Small/medium tanks where disposal or dechlorination is feasible; rapid, thorough disinfection.
-
-**Low Concentration Method**
-Procedure: Fill **1/25** of tank with water at **50 mg/L** for **24 h**; then fill to capacity (diluting to **2 mg/L**) and hold **another 24 h**.
-Example: For **100,000 L**: partial fill **4,000 L** at **50 mg/L** → 200 g chlorine; after fill, residual becomes **2 mg/L**.
-When to Use: Large tanks where draining/disposal of highly chlorinated water is challenging; conserve water and minimize waste.
-
-**Sampling and Testing Requirements (Both Methods)**
-Sterile, thiosulfate-treated bottles; verify absence of coliforms and HPC ≤500 CFU/mL. If testing fails: empty and disinfect again via High Concentration Method; test both refilled tank and supply source; correct any supply contamination before repeating disinfection. Notes: 24-hour minimum holding per stage; before sampling, residual ≤3 mg/L (High Method) and verified 2 mg/L after dilution (Low Method). Once satisfactory, place tank into service.
-
-**RIH and POH Maintenance Procedures**
-**POH (Pull-Out-Hole):** remove pump assembly for inspection/repair—coordinate work order; disconnect services; remove discharge heads, column pipes, cables, and pump; drain, inspect, transfer to shops; document steps and update records.
-**RIH (Run-In-Hole):** reinstall/commission—prepare lifting/rigging and safety; lower motor and perform megger testing; connect pump and motor; lower string and connect fittings; disinfect per procedures; flush to drain **30 min–4 h**; record flow, pressure, water level, and motor amperage.
-
----
-
-## 8. Recalling the Raw Water Process and Chlorination Chemistry
-
-Recalling the Raw Water Process mentioned on the previous progress report (**Figure 1**), We mentioned the disinfection process of raw water, the process incorporates **sodium hypochlorite dosing** prior to the storage tanks. Sodium hypochlorite (NaClO), a widely used liquid disinfectant, is stored in **Fiber-Glass tanks**. From these tanks, the chemical is injected into the main water line (The Main Line) by **diaphragm dosing pumps**. A diaphragm pump functions by flexing an internal membrane back and forth to draw in a measured volume of chemical solution and then discharge it into the water stream under controlled pressure. This design allows operators to adjust the dosing rate accurately to match the incoming flow of raw water.
-
-The purpose of chlorination at this stage is twofold. First, it provides immediate disinfection by neutralizing bacteria, viruses, and other microorganisms that may be present in the raw groundwater. Second, it establishes a **free chlorine residual** that persists in the water as it fills and resides in the large storage tanks. Maintaining an appropriate residual level is critical to prevent any regrowth of microbes within the tanks themselves. For this system, the target free chlorine concentration in the tanks is maintained within a range of **0.2 to 0.5 ppm**.
-
-The Sodium Hypochlorite tanks hold a solution of NaClO. Upon addition to water, sodium hypochlorite dissociates and participates in a series of equilibrium reactions that produce the active disinfectant species.
-
+Mass balance on the liquid (constant (\rho), cross-section (A)):
 [
-\mathrm{NaClO}\ \rightarrow\ \mathrm{Na}^+ + \mathrm{ClO}^-
+\frac{d(\rho A h)}{dt}=\rho,(q_i-q);;\Rightarrow;;A\frac{dh}{dt}=q_i-q. \tag{1}
 ]
 
-The hypochlorite ion (ClO⁻) then reacts with water in a pH-dependent equilibrium:
-
+Valve outflow (square-root relation):
 [
-\mathrm{ClO}^- + \mathrm{H}_2\mathrm{O} \rightleftharpoons \mathrm{HOCl} + \mathrm{OH}^-
+q=C_v!\left(P_g+\frac{\rho g}{g_c}h-P_a\right)^{1/2}. \tag{2}
 ]
 
-The resulting **hypochlorous acid (HOCl)** is a weak acid and the principal germicidal agent in chlorine-based disinfection systems. At lower pH (≈6.5–7.5), HOCl formation is favored; above pH 8, a greater proportion remains as **ClO⁻**, which is less effective.
-
-**Free available chlorine (FAC)** refers to the sum: (\mathrm{FAC} = [\mathrm{HOCl}] + [\mathrm{ClO}^-]). Among these, HOCl is approximately **80–100×** more effective as a disinfectant than ClO⁻ due to higher oxidizing potential and better penetration of microbial cell walls:
-
+Gas pressure from ideal gas law (isothermal, (n_g=m_g/M) moles, gas volume (A(H-h))):
 [
-\mathrm{HOCl} + \mathrm{Pathogen} \rightarrow \mathrm{Inactivated\ Pathogen} + \mathrm{Cl}^- + \mathrm{H}^+
+P_g=\frac{n_gRT}{A(H-h)}=\frac{(m_g/M)RT}{A(H-h)}. \tag{3}
 ]
 
-Following the primary disinfection process, a portion of the chlorine remains in the treated water, providing a residual disinfectant effect; this includes HOCl and ClO⁻ that remain after initial demand is satisfied.
-
-To maintain the residual chlorine within range, a check is done **every 2 hours** on discharge of the Tanks. One of the most widely used field methods involves the use of **DPD** reagents with a portable colorimeter (**Figures 2, 3 (from Progress 2)**) such as a pocket chlorine meter. This method offers rapid, accurate measurements of free chlorine in water samples.
-
-The DPD method is a colorimetric technique in which the presence of free chlorine (HOCl and ClO⁻) reacts with DPD powder to produce a pink-magenta colored complex. The intensity of this color is directly proportional to the concentration of free chlorine in the water sample:
-
+Substitute (2)–(3) into (1):
 [
-\mathrm{HOCl} + \mathrm{DPD\ (colorless)} \rightarrow \mathrm{DPD^+\ (pink)} + \mathrm{Cl}^- + \mathrm{H}_2\mathrm{O}
-]
+\boxed{,A\frac{dh}{dt}
+= q_i
 
-Only free chlorine reacts instantly with the DPD reagent to form this color.
+* C_v!\left[\frac{(m_g/M)RT}{A(H-h)}+\frac{\rho g}{g_c}h-P_a\right]^{1/2},}
+  \tag{4}
+  ]
+  (valid while the bracket is (\ge 0)).
 
-**Procedure Using a Pocket Colorimeter**
- • **Sample Collection:** Fill a clean vial with the water sample (**Figure 2 (from Progress 2)**).
- • **Add DPD Powder:** Add one DPD pillow and mix (**Figure 2 (from Progress 2)**).
- • **Color Development:** Pink develops within seconds (**Figure 2 (from Progress 2)**).
- • **Measurement:** Insert the vial into the pocket colorimeter (**Figure 3 (from Progress 2)**).
- • **Reading:** Device displays mg/L (ppm) free chlorine.
+# 2) Dependence on ambient pressure (P_a) (sealed tank)
 
-The operation of the chlorine dosing system is governed by the residual chlorine level measured in the storage tank. If the residual chlorine concentration in the tank is found to be low, the dosing pump is activated. Conversely, if the residual level is sufficiently high, the pump remains off to prevent over-chlorination.
+Equation (4) contains (P_a) explicitly, so the sealed-tank dynamics **are not** independent of (P_a).
 
-Once the dosing pump is activated, a verification step is performed to ensure that chlorine is being injected into the main pipelines specifically, the section of the line upstream of the tank. This is done by collecting a water sample from a dedicated drain valve installed on the main line. The goal of this step is not to quantify the chlorine concentration, but simply to confirm the presence or absence of chlorine in the injected stream. To perform this verification, a DPD reagent is added to the collected water sample. If chlorine is present, the solution will turn pink to red; if not, injection is absent. In such routine checks, a pocket colorimeter is typically unnecessary because the test is qualitative. It is also commonly observed that the intensity of the red color in the main line sample is higher than that of the tank sample due to higher localized concentration in the small pipe volume.
+# 3) If the headspace is open to atmosphere
 
-**Week 3:** chlorine was absent in the main line despite the dosing pump being operational. A DPD field test confirmed the lack of free chlorine in the injected stream. Further inspection revealed that the **injection point** into the main line was blocked by a foreign material (a small stone/solid), which prevented chlorine from entering the system. A subsequent visual inspection of the sodium hypochlorite (NaOCl) storage tanks showed the presence of small solid materials inside one of the tanks, likely **crystalline deposits** of chloride salts that can clog injection lines and disrupt disinfection. A specialized vendor was called to do a **damage assessment** to the tank.
-
----
-
-## 9. Vendor Inspection and Damage Assessment of Sodium Hypochlorite Tank
-
-In the fifth week, a vendor visit was conducted upon request to perform a damage assessment on the sodium hypochlorite storage tank, which is constructed from fiberglass-reinforced plastic (FRP). The purpose of the inspection was to evaluate the condition of specific damaged nozzle fittings and internal lining issues that had been observed during operation. The assessment aimed to determine the extent of the damage, identify potential causes, and provide appropriate recommendations for corrective and preventive measures.
-
-### A. Nozzle / FRP Flange Inspection
-
-**1. 2″ FRP Flange for Level Indicator**
-A chemical leak was observed at the gasket interface of the 2″ FRP flange connected to the level indicator. Inspection revealed flange face misalignment, resulting in a wider flange gap at the bottom section. This misalignment was identified as the root cause of the leak. Corrosion and chemical exposure were noted on bolts and nuts in the affected area. Additionally, the installed gasket was only **2–3 mm** thick, insufficient under misalignment.
-**Recommendations:** Replace with **5 mm Neoprene** gasket; correct flange alignment for even compression.
-
-**2. 4″ FRP Flange for Chemical Outlet**
-Similar flange misalignment and gasket sealing failure were observed, leading to chemical leakage.
-**Recommendations:** Realign faces; use **5 mm Neoprene** gasket; torque cross-pattern to ANSI values.
-
-**3. 6″ FRP Flange on Top of the Tank**
-The 6″ FRP flange was found **open** without a cover or piping, presenting contamination risk.
-**Recommendations:** Install **6″ FRP blind flange** with compatible gasket and bolts; keep tank sealed.
-
-**4. 4″ FRP Flange for Ventilation**
-Connected to a PVC vent line to atmosphere.
-**Recommendations:** Ensure support and chemical compatibility; install a vent filter/scrubber at discharge to minimize impact and meet air quality regulations.
-
-### B. Internal Lining Condition
-
-**Observations:** Internal inspection revealed severe chemical attack on the corrosion barrier layer, especially near lower wall sections and nozzle penetrations. The resin-rich layer and **C-veil** had been partially eroded, exposing structural laminates (CSM/woven roving). This increases risk of resin degradation, fiber delamination, and eventual leakage.
-**Evaluation:** Once FRP laminate is exposed to strong oxidizers like NaOCl, it cannot self-heal; complete chemical and mechanical rehabilitation is required.
-
-### Recommended Repair Methodology
-
-**Surface Preparation:** Clean with water then acetone; grind degraded resin and loose fibers (60–80 grit); dry, dust-free surface.
-**Liner Reconstruction (wet-on-wet):**
- • One layer C-glass veil;
- • Two layers CSM **450 gsm/m²**;
- • **Vinyl ester** resin (e.g., Hetron 922 or equivalent).
-**Targets:** Overlap ≥50 mm; final cured **2.5–3.0 mm** thickness; roll to remove air.
-**Post-Cure (if applicable):** Ambient ≥24 h; thermal **50–60 °C for 3–6 h** to enhance resistance.
-**Final Exterior Coat:** UV-resistant vinyl-ester topcoat (white) for durability and inspection.
-**QA/Inspection:** Visual after cure; check voids/under-cure/delamination; document repair area dimensions, resin batch, cure time.
-
-### C. Preventive Maintenance Program
-
-Adhere to a NaOCl Tank PM Checklist with **daily/weekly/monthly/semi-annual/annual** inspections, leak detection, flange torque checks, internal/external condition assessments, vent filter service, NDT as required, and complete maintenance records.
-
-**Follow-up action:** Submit a service request to OMSG for **RCA** and a **Class 3 estimate** for refurbishing or replacing **NaOCl Tank #3 (Zone 1–2)**.
-
----
-
-## 10. Metering Technologies — Diaphragm and Hose Pumps
-
-A diaphragm pump (membrane pump) uses a flexible diaphragm with check valves for unidirectional flow. Key components: diaphragm; pump shaft; pump head; suction/discharge **check valves**.
-
-**Working Principle**
-**Suction Stroke (Figure 4 (from Progress 2))**: shaft retracts; diaphragm pulls back; low-pressure zone opens suction check; discharge remains closed; volume drawn equals diaphragm displacement.
-**Discharge Stroke (Figure 4 (from Progress 2))**: shaft advances; chamber volume reduces; suction closes; discharge opens; fluid is expelled.
-
-Currently, a **Pulsafeeder PulsaSeries® 7120** (**Figure 5 (from Progress 2)**) is used for NaOCl injection into the main line. While accurate and leak-free, it has occasional clogging and higher maintenance demand. To evaluate an alternative, a **DuCoNite® 15** hose pump (**Figure 6 (from Progress 2)**) is proposed on a trial basis.
-
-**PulsaSeries® 7120 — Flow vs. Stroke/Pressure**
-The pump supports linear stroke adjustment and multiple piston/diaphragm combinations. Flow rate:
+Then (P_g=P_a). From (2),
 [
-Q = \left(\frac{\pi d^2}{4}\right) \cdot L \cdot \mathrm{SPM}, \qquad
-Q = Q_{\max} \cdot \left(\frac{\text{Stroke %}}{100}\right)
+q=C_v!\left(\frac{\rho g}{g_c}h\right)^{1/2},
 ]
-**Table 2 (from Progress 2)** provides model selection at 60 Hz (70/175 SPM) across piston sizes and diaphragm styles. Observations: larger pistons increase flow ((A \propto d^2)) but reduce rated pressure ((P=F/A)); diaphragm style affects pressure rating (Metal > Composite). **Figure 6 (from Progress 2)** shows flow-pressure envelopes: small pistons achieve higher pressure at low flow; larger pistons deliver higher flow at lower pressure—an intrinsic reciprocating pump trade-off.
-
-**Hose Pump Working Principle (Figure 7 (from Progress 2))**
-A rotor compresses a flexible hose; fluid is pushed forward; on release, vacuum draws in more fluid. Advantages: **no valves or seals**, self-priming, dry-run tolerant, good for abrasive/viscous/gas-forming fluids.
-
-**DuCoNite® 15 Overview (Figure 8 (from Progress 2))**
-Max continuous flow **375 L/h** (99 USGPH); intermittent **525 L/h**; max pressure **12 bar**; max continuous speed **75 rpm**; reversible; dry-run capable; DuCoNite-coated cast iron with 316 SS hardware; hose materials: CSM/EPDM/NBR/NR.
-**Operating Envelope (Figure 9 (from Progress 2))**: green zone continuous to **40 °C**; yellow zone intermittent; flow/pressure set speed and power (e.g., **375 L/h at 400 kPa** continuous with ≈0.25 kW).
-**Technical Specifications (Table 3 (from Progress 2))**; **Comparison Table (Table 4 (from Progress 2))** juxtaposes DuCoNite 15 and Pulsa 7120. The hose pump offers low-maintenance, self-priming robustness for gas-forming oxidizers; the diaphragm pump excels in higher-pressure precision dosing. A trial is recommended.
-
----
-
-## 11. Summary of Site Visit — NOV Fiberglass Company
-
-OMSG organized a factory visit to **NOV** (3rd Industrial City, Dammam), manufacturing fiberglass products (tanks, pipes, manholes, valves boxes, power poles, etc.). The visit included U&FSD (OMSG and WOD) and CSTSD design team. Objective: learn manufacturing process and applicability in U&FSD projects and maintenance.
-
-**Piping Systems:** High-pressure water injection up to **3000 psi**, low/medium pressure, and gravity systems; sizes **2″ to 168″**. **SGRE** systems (2–6″) for Saudi market operate **750–3500 psi**, **–34 °C to 82 °C**; supplied in rolls up to **18,000 m** without joints. Advantages: higher flow than steel, UV/wear resistance, chemically bonded GRE laminate; approved by CSD with 9comm number.
-
-**Tanks and Vessels:** Custom up to **120 ft** diameter—chemical/water storage, columns, scrubbers, pressure vessels; double-walled options; NOV is working with CSD for storage tank approvals.
-
-**Structural Components:** Ladders, handrails, grating, gates, manholes, wetwells, shelters, power poles, and custom structures; corrosion-resistant, low-maintenance, UV-protected.
-
-**Pressure/Hydrostatic Testing:** Demonstrated pressure and burst testing to **6,000 psi** as part of QA/QC.
-
----
-
-## 12. Assignment to NSTP — Detailed Process Description
-
-The treatment process at the North Sewage Treatment Plant (NSTP) follows a comprehensive and highly effective flow scheme designed for high-capacity biological treatment and solids separation. It begins at the **coarse screening** stage, where raw influent passes through mechanical screens with wash press (**Figure 10 (from Progress 2)**). These screens remove large debris (wood, plastics, rags, fibrous materials). The wash press compacts and rinses screenings to minimize odor and organic content before disposal, reducing downstream load.
-
-Subsequently, the screened water enters the **Bragging Machine** for **fine screening** to capture finer solids, further protecting downstream equipment. The flow proceeds to **grit handling**. In the **Vortex Grit Removal Unit**, influent is introduced tangentially, generating a vortex that settles inorganic particles (sand, grit, small stones) while organics remain in suspension. Settled grit is conveyed to the **Grit Classifier**, washed, and dewatered for disposal.
-
-Air from screening and grit zones is extracted and routed to the **Odor Control Unit** (chemical scrubbers/activated carbon/biofilters) to treat H₂S, ammonia, and VOCs. The screened, degritted flow enters the **Return Sludge Mixing Chamber** to combine with **RAS**, increasing biomass concentration ahead of biological treatment.
-
-The combined flow enters **Aeration Tanks** divided into anoxic and aerobic compartments. In anoxic zones (with submersible mixers), **denitrification** reduces nitrate (NO₃⁻) to N₂ gas. In aerobic zones (diffused or surface aeration), microbial communities oxidize BOD and nitrify ammonia (NH₄⁺ → NO₃⁻). **Internal Recycle Pumps** return nitrate-rich liquor to anoxic zones, enabling further denitrification. This configuration represents a **Modified Bardenpho/A²/O** style, enabling removal of carbon, nitrogen, and partial phosphorus.
-
-After biological treatment, the mixed liquor proceeds to **Secondary Settling Tanks (Clarifiers)**, where gravity settling forms sludge blankets and clarified secondary effluent. A portion of settled sludge returns as **RAS**; excess **WAS** is withdrawn for further processing. Scum removal collects floating debris, oils, and grease. Secondary Effluent typically has **BOD and TSS <15 mg/L (Table 8)**, representing >90% reduction from influent (~150 mg/L each, **Table 7**).
-
-**WAS** is pumped to **Aerobic Digesters** for further stabilization; **Digested Sludge Pumps** send it to **Polymer Dosing** and then to **Sludge Dewatering Centrifuges**, producing **20–30%** solids cake, while centrate is returned for treatment. The **Equalization/Contact Basin** equalizes flow and provides disinfection contact time prior to discharge or reuse. Peak flow conditions are accommodated (as high as **42.0 MGD** or **158,990 m³/d** with peak factor 3, **Table 6**). In summary, **Figure 10 (from Progress 2)** reflects a robust, integrated system meeting stringent discharge requirements.
-
----
-
-## Conclusion
-
-The consolidated summer training record documents a complete operational walkthrough of potable and reclaimed water systems in Dhahran, preserving the exact chronological flow of observations and technical explanations. Beginning with orientation and unit overviews, it advanced through detailed RO plant familiarization—covering TDS, membrane fundamentals, two-stage recovery to ~62%, remineralization at ~25%, degasification, and chlorination control—and documented distribution zoning. It then addressed raw-water production, standards, storage-tank disinfection, sampling frequencies, and well maintenance (RIH/POH). The report established the chemistry of NaOCl disinfection and DPD residual control with two-hour cadence, formalized point-of-injection verification, and captured the Week-3 blockage incident that prompted corrective and preventive actions. The vendor’s FRP tank assessment and specified repair methodology, along with a preventive maintenance program, form the backbone of materials integrity and reliability going forward. A balanced technology perspective compared the PulsaSeries® 7120 diaphragm pump and a DuCoNite® 15 hose pump, recommending a trial for data-driven selection. Finally, the NSTP and AWTP descriptions demonstrated consistent secondary and tertiary performance (BOD/TSS ≤15/10 mg/L), enabling safe reuse and reinforcing system sustainability. The outcomes collectively strengthen process understanding, QA/QC discipline, and reliability culture across WOD’s water cycle while keeping all figures and tables referenced precisely where they belong in the main body.
+and the model reduces to
+[
+\boxed{,A\frac{dh}{dt}=q_i- C_v!\left(\frac{\rho g}{g_c}h\right)^{1/2},}.
+]
+This form **does not** depend on (P_a).
 
