@@ -1,46 +1,56 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
 Here’s the model and answers to all three asks, using the given hint/assumptions.
 
-# 1) Unsteady model (h(t)) vs. (q_i(t))
+---
 
-Mass balance on the liquid (constant (\rho), cross-section (A)):
-[
-\frac{d(\rho A h)}{dt}=\rho,(q_i-q);;\Rightarrow;;A\frac{dh}{dt}=q_i-q. \tag{1}
-]
+### **1) Unsteady model \( h(t) \) vs. \( q_i(t) \)**
+
+Mass balance on the liquid (constant \( \rho \), cross-section \( A \)):
+
+\[
+\frac{d(\rho A h)}{dt} = \rho (q_i - q) \quad \Rightarrow \quad A \frac{dh}{dt} = q_i - q \tag{1}
+\]
 
 Valve outflow (square-root relation):
-[
-q=C_v!\left(P_g+\frac{\rho g}{g_c}h-P_a\right)^{1/2}. \tag{2}
-]
 
-Gas pressure from ideal gas law (isothermal, (n_g=m_g/M) moles, gas volume (A(H-h))):
-[
-P_g=\frac{n_gRT}{A(H-h)}=\frac{(m_g/M)RT}{A(H-h)}. \tag{3}
-]
+\[
+q = C_v \left( P_g + \frac{\rho g}{g_c} h - P_a \right)^{1/2} \tag{2}
+\]
+
+Gas pressure from ideal gas law (isothermal, \( n_g = m_g/M \) moles, gas volume \( A(H - h) \)):
+
+\[
+P_g = \frac{n_g R T}{A(H - h)} = \frac{(m_g/M) R T}{A(H - h)} \tag{3}
+\]
 
 Substitute (2)–(3) into (1):
-[
-\boxed{,A\frac{dh}{dt}
-= q_i
 
-* C_v!\left[\frac{(m_g/M)RT}{A(H-h)}+\frac{\rho g}{g_c}h-P_a\right]^{1/2},}
-  \tag{4}
-  ]
-  (valid while the bracket is (\ge 0)).
+\[
+\boxed{A \frac{dh}{dt} = q_i - C_v \left[ \frac{(m_g/M) R T}{A(H - h)} + \frac{\rho g}{g_c} h - P_a \right]^{1/2}} \tag{4}
+\]
 
-# 2) Dependence on ambient pressure (P_a) (sealed tank)
+(Valid while the bracket is \( \ge 0 \).)
 
-Equation (4) contains (P_a) explicitly, so the sealed-tank dynamics **are not** independent of (P_a).
+---
 
-# 3) If the headspace is open to atmosphere
+### **2) Dependence on ambient pressure \( P_a \) (sealed tank)**
 
-Then (P_g=P_a). From (2),
-[
-q=C_v!\left(\frac{\rho g}{g_c}h\right)^{1/2},
-]
-and the model reduces to
-[
-\boxed{,A\frac{dh}{dt}=q_i- C_v!\left(\frac{\rho g}{g_c}h\right)^{1/2},}.
-]
-This form **does not** depend on (P_a).
+Equation (4) contains \( P_a \) explicitly, so the sealed-tank dynamics **are not** independent of \( P_a \).
 
+---
+
+### **3) If the headspace is open to atmosphere**
+
+Then \( P_g = P_a \). From (2):
+
+\[
+q = C_v \left( \frac{\rho g}{g_c} h \right)^{1/2}
+\]
+
+and the model reduces to:
+
+\[
+\boxed{A \frac{dh}{dt} = q_i - C_v \left( \frac{\rho g}{g_c} h \right)^{1/2}} \tag{5}
+\]
+
+This form **does not** depend on \( P_a \).
