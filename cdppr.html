@@ -309,192 +309,93 @@ Take allowable thickness loss \( \Delta \delta = 100 \ \mu \mathrm{m} = 1 \times
 
 ---
 
-### **Executive CHE Conclusion**
 
-The **5-L, 0.12 m²** EDS cell at **~4 V/2.1 A** reaches **8 ppmw** in **~275 min**, with **specific energy ~0.008 kWh L⁻¹**, **ΔT ~10 K** (no cooling), and **~1.0 L h⁻¹** throughput including a 15-min turnaround. The physics are a long **zero-order** segment followed by a short **first-order** tail, both tunable via **area** and **mixing**. **BDD anode + Ni cathode** maximizes stability and lifetime; **graphite** is acceptable for a low-capex prototype with scheduled cleaning.
 
-    Awesome—here’s a **CHE-only verification** that your **final 5-L design** meets every constraint/spec. I show the **number**, the **calculation**, and (at the end) a **mini MATLAB checker** you can paste/run to reproduce all results.
+# **Chemical Engineering Design Verification Report**
 
----
-# **CHE-Only Verification: Final 5-L Design Meets All Constraints & Specs**
+## **Executive Summary**
 
-**Awesome—here’s a **CHE-only verification** that your **final 5-L design** meets every constraint/spec. I show the **number**, the **calculation**, and (at the end) a **mini MATLAB checker** you can paste/run to reproduce all results.
+This report verifies that the proposed 5-L electrochemical desulfurization (EDS) system meets all specified constraints and performance requirements. The design achieves ultra-low sulfur diesel production (≤10 ppmw) with minimal energy consumption, safe operating conditions, and robust scalability.
 
----
+## **Design Basis**
 
-## **Final Design (Inputs Used)**
+### **System Parameters**
+- **Fuel Volume**: \( V = 5.000~\mathrm{L} = 0.005~\mathrm{m^3} \)
+- **Fuel Mass**: \( m_f = 4.150~\mathrm{kg} \) (diesel density \( \rho = 0.83~\mathrm{kg~L^{-1}} \))
+- **Sulfur Specification**: Initial \( S_0 = 500~\mathrm{ppmw} \), Target \( S_{\text{targ}} \leq 10\text{--}15~\mathrm{ppmw} \)
+- **Electrode Configuration**: Total area \( A = 0.120~\mathrm{m^2} \) (sheet/mesh)
+- **Mass Transfer**: Film coefficient \( k_m = 5 \times 10^{-5}~\mathrm{m~s^{-1}} \)
 
-* Fuel volume \( V = 5.000~\mathrm{L} = 0.005~\mathrm{m^3} \); fuel mass \( m_f = 4.150~\mathrm{kg} \) (diesel \( 0.83~\mathrm{kg,L^{-1}} \)).
-* Initial sulfur \( S_0 = 500~\mathrm{ppmw} \); target \( S_{\rm targ} \le 10 \)–\( 15~\mathrm{ppmw} \).
-* Electrodes: total area \( A = 0.120~\mathrm{m^2} \) (sheet/mesh).
-* Mixing/film: \( k_m = 5\times10^{-5}~\mathrm{m,s^{-1}} \).
-* Faradaic efficiency \( \varepsilon_F = 0.70 \); electrons per S \( n = 4 \); \( F = 96485~\mathrm{C,mol^{-1}} \); \( M_S = 32.065~\mathrm{g,mol^{-1}} \).
-* Schedule (what actually drives the batch to spec): **Step 1** \( V = 4.0~\mathrm{V} \), \( I_{\rm sched} = 2.10~\mathrm{A} \) until spec at **\( t_{\rm hit} = 16480~\mathrm{s} \) (274.7 min)**.
-* Turnaround (drain/fill): \( 15~\mathrm{min} \).
-* Thermal: \( T_0 = 25^\circ\mathrm{C} \), \( \eta_{\rm heat} = 0.70 \), \( U A = 5~\mathrm{W,K^{-1}} \), \( c_{p,{\rm fuel}} = 2.1~\mathrm{kJ,kg^{-1},K^{-1}} \), \( m_{\rm hw} = 2~\mathrm{kg} \), \( c_{p,{\rm hw}} = 0.5~\mathrm{kJ,kg^{-1},K^{-1}} \).
+### **Electrochemical Parameters**
+- Faradaic efficiency \( \varepsilon_F = 0.70 \)
+- Electrons per sulfur atom \( n = 4 \)
+- Faraday constant \( F = 96,485~\mathrm{C~mol^{-1}} \)
+- Sulfur molar mass \( M_S = 32.065~\mathrm{g~mol^{-1}} \)
 
----
+### **Operating Schedule**
+- **Step 1**: \( V = 4.0~\mathrm{V} \), \( I_{\text{sched}} = 2.10~\mathrm{A} \)
+- **Time to Specification**: \( t_{\text{hit}} = 16,480~\mathrm{s} \) (274.7 min)
+- **Turnaround Time**: 15 min
 
-## **Constraint 1 — Operating Temperature (\( \le 100^\circ\mathrm{C} \))**  ✅ **Met (~35 °C)**
+### **Thermal Properties**
+- Initial temperature \( T_0 = 25^\circ\mathrm{C} \)
+- Heat fraction \( \eta_{\text{heat}} = 0.70 \)
+- Overall heat transfer \( UA = 5~\mathrm{W~K^{-1}} \)
+- Specific heats: Fuel \( c_{p,\text{fuel}} = 2.1~\mathrm{kJ~kg^{-1}~K^{-1}} \), Hardware \( c_{p,\text{hw}} = 0.5~\mathrm{kJ~kg^{-1}~K^{-1}} \)
+- Hardware mass \( m_{\text{hw}} = 2.0~\mathrm{kg} \)
 
-**Energy balance (piecewise-constant power):**
+## **Design Verification**
+
+### **Constraint Compliance Analysis**
+
+| Constraint | Requirement | Design Performance | Verification | Status |
+|------------|-------------|-------------------|--------------|---------|
+| **Operating Temperature** | \( \leq 100^\circ\mathrm{C} \) | \( \approx 35^\circ\mathrm{C} \) | Thermal capacity: \( C_{\text{th}} = m_f c_{p,\text{fuel}} + m_{\text{hw}} c_{p,\text{hw}} = 4.15 \times 2.1 + 2.0 \times 0.5 = 9.7~\mathrm{kJ~K^{-1}} \)<br>Energy input: \( E_{\text{batch}} = VI t = 4.0 \times 2.10 \times 16,480 = 138.4~\mathrm{kJ} \)<br>Heat generation: \( Q = \eta_{\text{heat}} E_{\text{batch}} = 0.7 \times 138.4 = 96.9~\mathrm{kJ} \)<br>Temperature rise: \( \Delta T = Q/C_{\text{th}} \approx 10~\mathrm{K} \) | ✅ **Met** |
+| **Operating Pressure** | \( \approx 1~\mathrm{atm} \) | Ambient pressure operation | Well-mixed, vented design with hydrogen gas venting at near-ambient conditions | ✅ **Met** |
+| **Electrode Longevity** | \( \geq 6~\text{months} \) | 14-70 months (material dependent) | Charge per cycle: \( Q_{\text{cyc}} = I t_{\text{hit}} = 2.10 \times 16,480 = 34.6~\mathrm{kC} \)<br>Charge density: \( q_{\text{cyc}} = Q_{\text{cyc}}/A = 34.6/0.120 = 288~\mathrm{kC~m^{-2}} \)<br>Cycles per month: \( \approx 149 \)<br>Monthly charge density: \( q_{\text{month}} = 288 \times 149 = 42.9~\mathrm{MC~m^{-2}~month^{-1}} \)<br>Life estimates: Ni (14 mo), Graphite (21 mo), BDD (70 mo) | ✅ **Met** |
+| **DC Power Supply** | 5-10 V range | 4.0 V operating voltage | Compatible with standard laboratory DC power supplies with adequate margin | ✅ **Met** |
+| **Reactor Capacity** | \( \leq 5~\mathrm{L} \) | 5.0 L design volume | Meets laboratory scale requirements with area/volume ratio \( A/V = 24~\mathrm{m^2~m^{-3}} \) | ✅ **Met** |
+| **Production Rate** | \( \geq 1~\mathrm{L~h^{-1}} \) | 1.04 L h⁻¹ | Cycle time: \( t_{\text{cycle}} = (274.7 + 15)/60 = 4.83~\mathrm{h} \)<br>Production rate: \( 5.0/4.83 = 1.04~\mathrm{L~h^{-1}} \) | ✅ **Met** |
+
+### **Specification Compliance Analysis**
+
+| Specification | Requirement | Design Performance | Verification | Status |
+|---------------|-------------|-------------------|--------------|---------|
+| **ULS Sulfur Content** | \( < 10~\mathrm{ppmw} \) | \( \approx 8~\mathrm{ppmw} \) | Zero-order rate: \( k_A = \frac{\varepsilon_F I}{n F V} = \frac{0.7 \times 2.10}{4 \times 96,485 \times 0.005} = 7.62 \times 10^{-4}~\mathrm{mol~m^{-3}~s^{-1}} \)<br>Switch concentration: \( C_\star = \frac{I}{A n F k_m} = \frac{2.10}{0.120 \times 4 \times 96,485 \times 5 \times 10^{-5}} = 0.907~\mathrm{mol~m^{-3}} \)<br>Switch time: \( t_{\text{sw}} = \frac{C_0 - C_\star}{k_A} \approx 26,400~\mathrm{s} \)<br>First-order tail: \( k_{\text{app}} = \frac{\varepsilon_F A k_m}{V} = 8.4 \times 10^{-4}~\mathrm{s^{-1}} \) | ✅ **Met** |
+| **Energy Consumption** | \( < 1~\mathrm{kWh~L^{-1}} \) | 0.0077 kWh L⁻¹ | Batch energy: \( E_{\text{batch}} = 0.0384~\mathrm{kWh} \)<br>Specific energy: \( E_\ell = 0.0384/5.0 = 0.0077~\mathrm{kWh~L^{-1}} \) | ✅ **Met** |
+| **Maintenance Frequency** | \( \leq \text{quarterly} \) | Quarterly cleaning sufficient | Electrode life \( \gg 3 \) months with BDD/Ni configuration<br>Benign temperature profile supports extended operation | ✅ **Met** |
+| **Scalability** | Lab to pilot scale | Maintains performance at scale | Area/volume rule: \( A/V = 24~\mathrm{m^2~m^{-3}} \)<br>For 100 L: \( A = 2.4~\mathrm{m^2} \)<br>Limiting current: \( I_{\lim,0} = A j_{\lim,0} \approx 602~\mathrm{A} \)<br>Preserves zero-order regime with \( I_{\text{sched}} \ll I_{\lim,0} \) | ✅ **Met** |
+| **Gas Emissions** | No significant H₂S or SOₓ | Only H₂ production | Overall stoichiometry: \( \mathrm{R_2S} + 2\mathrm{H_2O} \rightarrow \mathrm{R_2SO_2} + 2\mathrm{H_2} \)<br>Sulfur retained in liquid phase as sulfone<br>Hydrogen production: 0.13 mol per batch (3.1 L at ambient) | ✅ **Met** |
+| **Feed Compatibility** | Straight-run diesel/kerosene | Compatible without pretreatment | Mass transfer characteristics compatible with model assumptions<br>No special pretreatment required | ✅ **Met** |
+
+## **Kinetic Performance Verification**
+
+### **Mass Transfer Limited Operation**
+The design ensures operation predominantly in the zero-order regime:
 \[
-C_{\rm th} = m_f c_{p,{\rm fuel}} + m_{\rm hw} c_{p,{\rm hw}} = 4.15 \cdot 2.1 + 2 \cdot 0.5 \approx 9.7~\mathrm{kJ,K^{-1}}
+I_{\lim,0} = A \cdot n F k_m C_{S,0} = 0.120 \times 4 \times 96,485 \times 5 \times 10^{-5} \times 12.94 \approx 29.97~\mathrm{A}
+\]
+Since \( I_{\text{sched}} = 2.10~\mathrm{A} \ll I_{\lim,0} \), the system operates in the current-limited regime for most of the batch cycle.
+
+### **Concentration Profile**
+The transition from zero-order to first-order kinetics occurs at:
+\[
+C_\star = \frac{I_{\text{sched}}}{A n F k_m} = 0.907~\mathrm{mol~m^{-3}}
+\]
+corresponding to approximately 35 ppmw sulfur content. The final approach to 8 ppmw occurs in the mass-transfer limited regime with characteristic time constant:
+\[
+k_{\text{app}} = \frac{\varepsilon_F A k_m}{V} = 8.4 \times 10^{-4}~\mathrm{s^{-1}}
 \]
 
-Electrical energy to spec:
-\[
-E_{\rm batch} = V I t = 4.0 \cdot 2.10 \cdot 16480 = 1.384 \times 10^{5}~\mathrm{J} = 0.0384~\mathrm{kWh}
-\]
+## **Conclusion**
 
-Heat into system: \( \eta_{\rm heat} E_{\rm batch} = 0.7 \cdot 138.4~\mathrm{kJ} = 96.9~\mathrm{kJ} \)
+All constraints and specifications are satisfied by the 5-L electrochemical desulfurization module. The design demonstrates:
 
-Adiabatic rise \( \Delta T \approx 96.9 / 9.7 \approx 10~\mathrm{K} \). With small losses (\( UA = 5 \)) the **final temperature \( \approx 35^\circ\mathrm{C} \)**, well below \( 100^\circ\mathrm{C} \).
+1. **Safe Operation**: Maximum temperature of approximately 35°C and ambient pressure operation
+2. **Economic Viability**: Electrode life exceeding 12 months with preferred materials (BDD anode/Ni cathode)
+3. **Energy Efficiency**: Cell-specific energy consumption of 0.0077 kWh L⁻¹
+4. **Production Capacity**: Throughput of 1.04 L h⁻¹ meeting target requirements
+5. **Environmental Compliance**: Only hydrogen gas emission with sulfur retained in the liquid phase
+6. **Scalability**: Maintained performance through conserved area-to-volume ratio
 
----
-
-## **Constraint 2 — Operating Pressure (\( \approx 1~\mathrm{atm} \))**  ✅ **Met**
-
-Well-mixed, vented, non-pressurized lab cell; no intentional back-pressure. Gas made is \( \mathrm{H_2} \) (see Spec. 5), vented at near-ambient.
-
----
-
-## **Constraint 3 — Electrode Longevity (\( \ge 6 \) months)**  ✅ **Met (\( \gtrsim \) 12–70 months depending on material)**
-
-Use the **charge-to-failure model** (per geometric area):
-
-* Charge per cycle: \( Q_{\rm cyc} = I_{\rm avg} t_{\rm hit} \approx 2.1 \cdot 16480 = 3.46 \times 10^{4}~\mathrm{C} \)
-* Charge density per cycle: \( q_{\rm cyc} = Q_{\rm cyc} / A = 3.46 \times 10^{4} / 0.120 \approx 2.88 \times 10^{5}~\mathrm{C,m^{-2}} \)
-* Cycles per month (24/7): \( \approx \frac{30 \cdot 24}{(274.7 + 15) / 60} = 149 \)
-* Monthly charge density: \( q_{\rm mo} = 2.88 \times 10^{5} \cdot 149 \approx 4.29 \times 10^{7}~\mathrm{C,m^{-2},mo^{-1}} \)
-
-With conservative literature-style thresholds \( Q_{\rm fail} \) (total charge to observable degradation):
-
-* **Ni cathode** \( Q_{\rm fail,Ni} = 6 \times 10^{8}~\mathrm{C,m^{-2}} \Rightarrow \) life \( \approx 6.0 \times 10^{8} / 4.29 \times 10^{7} \approx \mathbf{14} \) **months**
-* **Graphite anode** \( Q_{\rm fail,G} = 9 \times 10^{8} \Rightarrow \mathbf{21} \) **months** (with occasional solvent rinse)
-* **BDD anode** \( Q_{\rm fail,BDD} = 3 \times 10^{9} \Rightarrow \mathbf{70} \) **months**
-
-**Final BOM (BDD anode + Ni cathode) \( \Rightarrow \) system life \( \ge \) Ni's \( \sim \)14 mo \( \gg 6 \) mo**
-
----
-
-## **Constraint 4 — Stable DC Low-Voltage Supply (5–10 V)**  ✅ **Met**
-
-Your schedule uses \( 4.0~\mathrm{V} \) (well inside a standard **5–10 V DC** lab supply range with margin). CHE confirms compatibility (EE owns the PSU).
-
----
-
-## **Constraint 5 — Reactor Capacity (\( \le 5~\mathrm{L} \)) Lab Scale**  ✅ **Met**
-
-Design volume \( 5.0~\mathrm{L} \) with **area/volume** \( A/V = 0.120 / 0.005 = 24~\mathrm{m^2,m^{-3}} \) (used below for scalability).
-
----
-
-## **Constraint 6 — Production Rate (\( \ge 1~\mathrm{L,h^{-1}} \))**  ✅ **Met (1.04 L h⁻¹)**
-
-Cycle time = react + turnaround = \( 274.7 + 15 = 289.7~\mathrm{min} = 4.83~\mathrm{h} \)
-Rate = \( 5.0 / 4.83 = \mathbf{1.04~\mathrm{L,h^{-1}}} \)
-
----
-
-## **Specification 1 — ULS Sulfur (<10 \( \mathrm{ppmw} \))**  ✅ **Met (~8 ppmw)**
-
-Model reaches \( 8~\mathrm{ppmw} \) at \( t_{\rm hit} = 274.7~\mathrm{min} \) in Step 1.
-**Check** (current-driven then MT tail):
-
-* Zero-order rate \( k_A = \frac{\varepsilon_F I}{n F V} = \frac{0.7 \cdot 2.1}{4 \cdot 96485 \cdot 0.005} = 7.62 \times 10^{-4}~\mathrm{mol,m^{-3},s^{-1}} \)
-* Switch concentration \( C_\star = \frac{I}{A n F k_m} = \frac{2.10}{0.120 \cdot 4 \cdot 96485 \cdot 5 \cdot 10^{-5}} = 0.907~\mathrm{mol,m^{-3}} \)
-* Switch time \( t_{\rm sw} = \frac{C_0 - C_\star}{k_A} \approx 2.64 \times 10^{4}~\mathrm{s} \) (≈ 264 min)
-* First-order tail \( k_{\rm app} = \frac{\varepsilon_F A k_m}{V} = 8.4 \times 10^{-4}~\mathrm{s^{-1}} \) → remaining few minutes to spec
-Result matches the **MATLAB** simulation
-
----
-
-## **Specification 2 — Energy Consumption (<1 \( \mathrm{kWh,L^{-1}} \))**  ✅ **Met (0.0077 kWh L⁻¹)**
-
-\( E_{\rm batch} = 0.0384~\mathrm{kWh} \) (above)
-Specific energy \( E_\ell = E_{\rm batch} / 5.0 = \mathbf{0.0077~\mathrm{kWh,L^{-1}}} \) (**cell-electrical**; balance-of-plant will be added in EE)
-
----
-
-## **Specification 3 — Maintenance (\( \le \)) Once/Quarter**  ✅ **Met (Quarterly Cleaning Plan)**
-
-With BDD/Ni life \( \gtrsim 12 \) months and benign \( \Delta T \), a **quarterly solvent rinse + visual check** is sufficient. (Charge-to-failure model above shows \( \gg \) 3 months)
-
----
-
-## **Specification 4 — Scalable (Lab 1–5 L → Pilot 100–500 L)**  ✅ **Met (A/V Rule)**
-
-Hold \( A/V = 24~\mathrm{m^2,m^{-3}} \)
-For \( 100~\mathrm{L} \) (\( 0.1~\mathrm{m^3} \)) → **\( A = 2.4~\mathrm{m^2} \)**
-Initial \( j_{\lim,0} = n F k_m C_{S,0} = 250.8~\mathrm{A,m^{-2}} \) ⇒ \( I_{\lim,0} = A j_{\lim,0} \approx 602~\mathrm{A} \)
-Scheduling any \( I_{\rm sched} \ll 602~\mathrm{A} \) keeps the **zero-order** regime and preserves time-to-spec
-
----
-
-## **Specification 5 — No Significant Release of \( \mathrm{H_2S} \) or \( \mathrm{SO_x} \)**  ✅ **Met (Only \( \mathrm{H_2} \))**
-
-Stoichiometry (overall): \( \mathrm{R_2S} + 2~\mathrm{H_2O} \rightarrow \mathrm{R_2SO_2} + 2~\mathrm{H_2} \)
-**Sulfur stays in liquid** (sulfone). Gas made per batch (to vent):
-S removed \( \approx \) \( (500 - 8) \times 10^{-6} \cdot 4.150~\mathrm{kg} / 32.065~\mathrm{kg,kmol^{-1}} \approx 0.064~\mathrm{mol} \)
-\( \mathrm{H_2} \) produced \( = 2 \times 0.064 \approx 0.13~\mathrm{mol} \approx 3.1~\mathrm{L} \) at ambient—small, clean vent
-
----
-
-## **Specification 6 — Feed: Straight-Run Diesel/Kerosene**  ✅ **Met**
-
-CHE confirms miscibility and mass-transfer constants are in the same range used in the model; no special pretreatment needed
-
----
-
-## **One-Shot MATLAB Checker (Paste & Run)**
-
-```matlab
-% === CHE Final Design Checker (5 L module) ===
-clear; F = 96485; Ms = 32.065e-3;
-V_L = 5; V = V_L * 1e-3; rho = 0.83; mf = rho * V_L; S0 = 500; Sfin = 8;
-A = 0.120; km = 5e-5; epsF = 0.70; n = 4;
-Vcell = 4.0; I = 2.10; t_hit = 16480; t_turn = 15 * 60;
-
-% Temperature check
-cp_f = 2.1e3; mhw = 2; cphw = 0.5e3; UA = 5; eta = 0.70; T0 = 25; Tamb = 25;
-Cth = mf * cp_f + mhw * cphw;
-Ebatch = Vcell * I * t_hit; dT = eta * Ebatch / Cth; Tfinal = T0 + dT; % small UA => ~adiabatic
-
-% Production
-prod_Lph = V_L / ((t_hit + t_turn) / 3600);
-
-% Energy (cell-only)
-kWh_per_L = (Ebatch / 3.6e6) / V_L;
-
-% ULS sulfur reach
-mfuel = rho * V_L; C0 = (S0 / 1e6 * mfuel) / Ms / V;
-Clim0 = n * F * km * C0; Ilim0 = A * Clim0;
-kA = epsF * I / (n * F * V); Cstar = I / (A * n * F * km);
-tsw = (C0 - Cstar) / kA; kapp = epsF * A * km / V;
-
-% Electrode longevity (months), using charge-to-failure thresholds
-Qcyc = I * t_hit; qcyc = Qcyc / A; cycles_per_month = (30 * 24 * 3600) / (t_hit + t_turn);
-qmonth = qcyc * cycles_per_month;
-Qfail_Ni = 6e8; Qfail_G = 9e8; Qfail_BDD = 3e9; % C/m^2
-life_Ni_months  = Qfail_Ni / qmonth;
-life_G_months   = Qfail_G  / qmonth;
-life_BDD_months = Qfail_BDD / qmonth;
-
-fprintf('--- CHE Final Design Checks ---\n');
-fprintf('Temp final (C): %.1f   (<=100 OK)\n', Tfinal);
-fprintf('Pressure: ~1 atm (vented) OK\n');
-fprintf('Production (L/h): %.2f  (>=1 OK)\n', prod_Lph);
-fprintf('Energy (kWh/L): %.4f  (<1 OK)\n', kWh_per_L);
-fprintf('I_lim,0 (A): %.2f; I_sched (A): %.2f  (I_sched << I_lim,0 OK)\n', Ilim0, I);
-fprintf('t_switch (min): %.1f; k_app (1/s): %.2g\n', tsw / 60, kapp);
-fprintf('Electrode life (months): Ni=%.1f, Graphite=%.1f, BDD=%.1f  (>=6 OK)\n', ...
-        life_Ni_months, life_G_months, life_BDD_months);
-```
-
----
-
-### **Bottom Line (CHE)**
-
-All **constraints and specifications are satisfied** by the 5-L module using your measured V–I data and the Option-A/MT-cap physics. The design is energy-light (≈ 0.008 kWh L⁻¹ cell-only), cool (≈ 35 °C), productive (≈ 1.04 L h⁻¹), and robust (electrode life \( \gg \) 6 months with BDD/Ni).
-
+The verification confirms the technical feasibility of the proposed EDS system for laboratory-scale ultra-low sulfur fuel production.
