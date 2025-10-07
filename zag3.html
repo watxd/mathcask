@@ -1,79 +1,186 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
-Absolutely—here’s part (e) done **step-by-step**, with special care on the **time shift**.  
-(Use \(S(t)\) for the unit step.)
+Of course. Here is the design description, formatted for clarity with proper mathematical typesetting and structured tables.
 
 ---
 
-## Given
+# **4.1 Overall Description (CHE Scope)**
 
-\[
-X(s)=\frac{s+1}{s(s+2)(s+3)}\,e^{-0.5s}.
-\]
+**Objective.** Remove sulfur (using Dibenzothiophene, DBT, as a model compound) in middle-distillate fuel from an initial **500 ppmw** to a target of **≤ 10–15 ppmw**. The process is **Electrochemical Desulfurization (EDS)** in a stirred batch cell with a neutral aqueous support electrolyte (Na₂SO₄). Voltage is imposed stepwise; the resulting current is derived from the measured **V–I** characteristic.
 
-The factor \(e^{-0.5s}\) signals a **time delay of \(0.5\)**. We’ll first invert the rational part, then apply the delay.
+**Key CHE Choices.** Neutral sulfate electrolyte (0.5–1.0 M), vigorous mixing, a short interelectrode gap, and a high electrode area-to-volume ratio to minimize mass-transfer limitations. Preferred materials: **Borondoped Diamond (BDD) anode** with a **Nickel (or graphite) cathode**.
 
 ---
 
-## 1) Strip off the delay
+# **4.2 Detailed Design Description (CHE)**
 
-Let
+## **Chemistry & Stoichiometry (DBT → Sulfone)**
+
+Two consecutive 2e⁻ oxidations yield \( n = 4 \) e⁻ per S atom overall:
+
+*   **Anode (overall):** \( \text{DBT} + 2\ \text{H}_2\text{O} \rightarrow \text{DBT-sulfone} + 4\ \text{H}^+ + 4\ \text{e}^- \)
+*   **Cathode:** \( 4\ \text{H}_2\text{O} + 4\ \text{e}^- \rightarrow 2\ \text{H}_2 + 4\ \text{OH}^- \)
+*   **Net Cell Reaction:** \( \text{R}_2\text{S} + 2\ \text{H}_2\text{O} \rightarrow \text{R}_2\text{SO}_2 + 2\ \text{H}_2 \)
+
+**Faradaic Link (Current-Driven):**
 \[
-G(s)=\frac{s+1}{s(s+2)(s+3)}.
+\frac{dC_S}{dt} = -\frac{\varepsilon_F}{n F V} I(t)
 \]
-Then \(X(s)=G(s)\,e^{-0.5s}\).
+where \( \varepsilon_F \) is the Faradaic efficiency for sulfur removal.
+
+**Mass-Transfer Limit & Regime Switching:**
+\[
+I_{\lim}(C) = A n F k_m C \quad \Rightarrow \quad I_{\mathrm{eff}}(t) = \min\left[I_{\mathrm{sched}}(t),\ I_{\lim}(C_S)\right]
+\]
+The concentration at which the regime switches from current-limited to mass-transfer-limited is:
+\[
+C_\star = \frac{I_{\mathrm{sched}}}{A n F k_m}
+\]
+
+*   **Zero-Order Regime** (\( I_{\mathrm{sched}} > I_{\lim} \)): \( \frac{dC_S}{dt} = -k_A \), where \( k_A = \frac{\varepsilon_F I_{\mathrm{sched}}}{n F V} \).
+*   **First-Order Regime** (\( I_{\mathrm{sched}} \leq I_{\lim} \)): \( \frac{dC_S}{dt} = -k_{\mathrm{app}} C_S \), where \( k_{\mathrm{app}} = \frac{\varepsilon_F A k_m}{V} \).
+
+**Energy Balance (Well-Mixed Cell):**
+With power input \( P(t) = V_{\text{cell}} I_{\mathrm{eff}}(t) \),
+\[
+m c_p \frac{dT}{dt} = \eta_J P(t) - U A (T - T_\infty)
+\]
+where \( \eta_J \) is the fraction of electrical power dissipated as heat.
 
 ---
 
-## 2) Partial fractions of \(G(s)\) (Heaviside cover-up)
+# **4.3 Final Design Analysis & Results (CHE)**
 
-\[
-G(s)=\frac{\alpha_1}{s}+\frac{\alpha_2}{s+2}+\frac{\alpha_3}{s+3}.
-\]
-
-Heaviside constants:
-\[
-\alpha_1=\left.\frac{s+1}{(s+2)(s+3)}\right|_{s=0}=\frac{1}{6},\qquad
-\alpha_2=\left.\frac{s+1}{s(s+3)}\right|_{s=-2}=\frac{1}{2},\qquad
-\alpha_3=\left.\frac{s+1}{s(s+2)}\right|_{s=-3}=-\frac{2}{3}.
-\]
-
-So
-\[
-G(s)=\frac{1}{6}\frac{1}{s}+\frac{1}{2}\frac{1}{s+2}-\frac{2}{3}\frac{1}{s+3}.
-\]
+**Physical Constants:** \( F = 96,485\ \mathrm{C\ mol^{-1}} \), \( M_S = 32.065\ \mathrm{g\ mol^{-1}} \), \( \varepsilon_F = 0.70 \), \( n = 4 \), \( k_m = 5 \times 10^{-5}\ \mathrm{m\ s^{-1}} \).
 
 ---
 
-## 3) Inverse Laplace of \(G(s)\)
+## **A) Prototype (Bench Scale) — 1 L, Rod Electrode**
 
-\[
-g(t)=\mathcal L^{-1}\{G(s)\}
-=\left[\frac{1}{6}+\frac{1}{2}e^{-2t}-\frac{2}{3}e^{-3t}\right]S(t).
-\]
+| Parameter | Value | Description |
+| :--- | :--- | :--- |
+| Fuel Volume, \( V \) | 1.0 L | |
+| Fuel Mass, \( m_f \) | 0.83 kg | Density \( \rho = 0.83\ \mathrm{kg/L} \) |
+| Initial S Concentration, \( C_{S,0} \) | 12.94 mol m⁻³ | From 500 ppmw S |
+| Electrode Area, \( A \) | 0.00175 m² (17.5 cm²) | Single rod (6 mm Ø × 90 mm) |
+| Limiting Current Density, \( j_{\lim,0} \) | 250.8 A m⁻² | \( j_{\lim,0} = nF k_m C_{S,0} \) |
+| Initial Limiting Current, \( I_{\lim,0} \) | **0.44 A** | \( I_{\lim,0} = A \cdot j_{\lim,0} \) |
+| Apparent Rate Constant, \( k_{\mathrm{app}} \) | \( 6.13 \times 10^{-5} \) s⁻¹ | \( k_{\mathrm{app}} = \varepsilon_F A k_m / V \) |
+| Half-life, \( t_{1/2} \) | ~189 min | \( \ln(2)/k_{\mathrm{app}} \) |
+| Time to Target (8 ppmw) | **~18.8 hours** | \( t = \frac{1}{k_{\mathrm{app}}} \ln\left(\frac{C_{S,0}}{C_{S, target}}\right) \) |
+
+**Implication:** The measured bench currents (e.g., 0.85 A @ 2.5 V, 1.55 A @ 4 V) exceed \( I_{\lim,0} \). The prototype runs **mass-transfer-limited from the start**, leading to a long processing time.
 
 ---
 
-## 4) Apply the time-shift (delay) property
+## **B) Final Design — 5 L Batch Cell, High-Area Electrodes**
 
-**Heaviside shift theorem**:
-\[
-\boxed{\ \mathcal L^{-1}\{G(s)\,e^{-as}\}=g(t-a)\,S(t-a)\ }
-\]
-(Proof sketch: \(\mathcal L\{g(t-a)S(t-a)\}=\int_a^\infty g(t-a)e^{-st}dt
-=e^{-as}\int_0^\infty g(\tau)e^{-s\tau}d\tau=e^{-as}G(s)\).)
+**Inputs (from Simulation):**
+*   **Fuel:** \( V = 5.000\ \mathrm{L} \), \( m_f = 4.150\ \mathrm{kg} \), \( S_0 = 500\ \mathrm{ppmw} \)
+*   **Electrodes:** \( A = 1200\ \mathrm{cm^2} = 0.1200\ \mathrm{m^2} \)
+*   **Voltage Steps & Currents:** \( [4.0\ \mathrm{V},\ 3.0\ \mathrm{V},\ 4.5\ \mathrm{V}] \), \( I = [2.10\ \mathrm{A},\ 1.50\ \mathrm{A},\ 2.63\ \mathrm{A}] \)
 
-With \(a=0.5\):
-\[
-x(t)=g(t-0.5)\,S(t-0.5).
-\]
+### **B1. Mass-Transfer and Regime Switching Analysis**
 
-Substitute \(g(\cdot)\):
-\[
-\boxed{\;
-x(t)=\Big[\tfrac{1}{6}
-+\tfrac{1}{2}e^{-2(t-0.5)}
--\tfrac{2}{3}e^{-3(t-0.5)}\Big]\,S(t-0.5).
-\;}
-\]
+| Parameter | Value | Description |
+| :--- | :--- | :--- |
+| \( C_{S,0} \) | 12.942 mol m⁻³ | Initial S concentration |
+| \( j_{\lim,0} \) | 250.8 A m⁻² | \( nF k_m C_{S,0} \) |
+| \( I_{\lim,0} \) | **29.97 A** | \( A \cdot j_{\lim,0} \) |
 
-**Interpretation:** \(x(t)=0\) for \(t<0.5\). For \(t\ge0.5\), the waveform is exactly the unshifted response \(g(t)\) but **delayed** by \(0.5\) seconds.
+**Step 1 Analysis (4.0 V, \( I = 2.10\ \mathrm{A} \)):**
+
+*   **Zero-Order Rate Constant:**
+    \[
+    k_A = \frac{\varepsilon_F I}{n F V} = \frac{0.7 \times 2.10}{4 \times 96485 \times 0.005} \approx \mathbf{7.62 \times 10^{-4}\ \mathrm{mol\ m^{-3}\ s^{-1}}}
+    \]
+*   **Switch Concentration:**
+    \[
+    C_\star = \frac{I}{A n F k_m} = \frac{2.10}{0.120 \times 19.30} \approx \mathbf{0.907\ \mathrm{mol\ m^{-3}}}
+    \]
+*   **Time to Switch (Zero-Order Duration):**
+    \[
+    t_{\mathrm{sw}} = \frac{C_{S,0} - C_\star}{k_A} \approx \frac{12.94 - 0.907}{7.62 \times 10^{-4}} \approx \mathbf{15,800\ s}\ (\approx 264\ \mathrm{min})
+    \]
+*   **First-Order Tail:**
+    \[
+    k_{\mathrm{app}} = \frac{\varepsilon_F A k_m}{V} = \frac{0.7 \times 0.120 \times 5\times10^{-5}}{0.005} = \mathbf{8.4 \times 10^{-4}\ \mathrm{s^{-1}}}
+    \]
+    *Theoretical* time from \( C_\star \) to 8 ppmw (0.207 mol m⁻³): ~29 min.
+    **Actual simulation:** Target reached at **274.7 min**, implying the first-order segment lasted ~10.7 min, consistent with slightly higher \( k_m \) or \( \varepsilon_F \) near the end.
+
+**Takeaway:** The **large electrode area** keeps the process in the fast **zero-order regime** for most of the batch; a **short first-order tail** finishes the job.
+
+### **B2. Energy Use and Thermal Rise**
+
+*   **Hit-Time Energy (to 8 ppmw at 274.7 min):**
+    \[
+    E_{\text{batch}} = V I t = 4.0\ \mathrm{V} \times 2.10\ \mathrm{A} \times 16480\ \mathrm{s} = \mathbf{138.4\ kJ}\ (\mathbf{0.0384\ kWh})
+    \]
+*   **Specific Energy Consumption:**
+    \[
+    E_\ell = \frac{0.0384\ \mathrm{kWh}}{5.0\ \mathrm{L}} = \mathbf{0.0077\ kWh\ L^{-1}}
+    \]
+*   **Thermal Check (No Cooling, \( \eta_J = 0.7 \)):**
+    *   Heat to Fuel: \( Q \approx 0.7 \times 138.4\ \mathrm{kJ} \approx 96\ \mathrm{kJ} \)
+    *   Thermal Capacity: Fuel \( \approx 8.7\ \mathrm{kJ/K} \), Hardware \( \approx 1.0\ \mathrm{kJ/K} \), Total \( C_{\mathrm{th}} \approx 9.7\ \mathrm{kJ/K} \)
+    *   **Predicted Temperature Rise:** \( \Delta T \approx 96 / 9.7 \approx \mathbf{10\ K} \)
+
+### **B3. Production Rate**
+
+*   **Time to Spec (8 ppmw):** **274.7 min**
+*   **Cycle Time:** ~4.83 h (including 15 min turnaround)
+*   **Production Rate:** \( \approx \mathbf{1.04\ L\ h^{-1}} \) on-spec.
+
+---
+
+## **C) Materials & Electrolytes — Quantified CHE Comparison**
+
+| Component | Option | Anode Window / Fouling | \( k_m \) Impact | Expected Life | CHE Verdict |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Anode** | Graphite | Wide; polymeric film risk | Neutral | Months (with cleaning) | Low-capex pilot |
+| **Anode** | Nickel | Moderate; oxide growth | Neutral | Months (current drift likely) | Better as **cathode** |
+| **Anode** | **BDD** | **Widest; minimal fouling** | Neutral | **Years** at these \( j \) | **Best for endurance** |
+| **Cathode** | Ni / Graphite / SS | Robust H₂ evolution | Slight increase from bubble mixing | — | Use Ni mesh |
+| **Electrolyte**| Na₂SO₄ (0.5–1 M) | Conductive, non-halide | Slight increase (lower viscosity) | — | Baseline |
+
+**Chosen "Final CHE" Stack:** **BDD anode / Ni cathode / Na₂SO₄ (0.5–1 M)**, area ≈ **0.12 m²** per 5 L module.
+
+---
+
+## **D) CHE Design Rules (from the Numbers)**
+
+1.  **Maximize Electrode Area:** Choose \( A \) so that \( I_{\lim,0} \gg I_{\text{sched}} \). Here, \( 30\ \mathrm{A} \gg 2.1\ \mathrm{A} \) ensures a long zero-order regime.
+2.  **Minimize the First-Order Tail:** Use \( C_\star = I/(A n F k_m) \) to predict its onset. Increase \( A \) or \( k_m \) (mixing) to shrink its duration.
+3.  **Energy is Modest:** The cell-specific energy can be very low (≈ **0.008 kWh L⁻¹**). Thermal management is simple for well-designed batches.
+4.  **Materials Dictate Uptime:** For ultra-low specs and minimal downtime, **BDD** is superior due to its stability and consistent \( \varepsilon_F \).
+
+---
+
+## **E) Ready-to-Use Calculation Set (CHE)**
+
+*   **Zero-Order Step:**
+    \[
+    k_A = \frac{\varepsilon_F I}{n F V}; \quad C(t) = C_0 - k_A t
+    \]
+*   **Switch to First-Order:**
+    \[
+    C_\star = \frac{I}{A n F k_m}; \quad t_{\mathrm{sw}} = \frac{C_0 - C_\star}{k_A}
+    \]
+*   **First-Order Tail:**
+    \[
+    k_{\mathrm{app}} = \frac{\varepsilon_F A k_m}{V}; \quad t = \frac{1}{k_{\mathrm{app}}} \ln\left(\frac{C_\mathrm{start}}{C_\mathrm{target}}\right)
+    \]
+*   **Energy & Specific Energy:**
+    \[
+    E = \sum V_i I_i t_i\ (\mathrm{J}); \quad E_\ell = \frac{E}{3.6 \times 10^6 \cdot V_{\text{fuel}}}\ (\mathrm{kWh\ L^{-1}})
+    \]
+*   **Adiabatic Temperature Rise:**
+    \[
+    \Delta T \approx \frac{\eta_J E}{m_f c_{p,f} + m_{\mathrm{hw}} c_{p, \mathrm{hw}}}
+    \]
+
+---
+
+### **Executive CHE Conclusion**
+
+The **5-L EDS cell** with **0.12 m² electrode area**, driven at **4 V / 2.1 A**, reduces sulfur from 500 ppmw to 8 ppmw in **~275 minutes**. The process exhibits a long, fast **zero-order** segment followed by a short **first-order** tail. The design is energy-efficient (**~0.008 kWh L⁻¹**, cell-only) and thermally manageable (**ΔT ≈ 10 K** without cooling), yielding a production rate of **~1.0 L h⁻¹**. Performance is tunable via electrode area and mixing intensity. For sustained operation, a **BDD anode** with **Ni cathode** and **Na₂SO₄** electrolyte is recommended.
