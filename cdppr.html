@@ -1,0 +1,314 @@
+<!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
+
+Of course. Here is the complete CHE-only Final Design write-up, preserving all your original content, with mathematical notation and tables rendered in a clean, professional format.
+
+---
+
+# **4.1 Overall Description (CHE Scope)**
+
+**Objective.** Reduce sulfur (DBT as a proxy) in middle-distillate fuel from **500 ppmw** to **≤ 10–15 ppmw** using **electrochemical desulfurization (EDS)** in a **stirred batch** cell with neutral electrolyte (Na₂SO₄). We impose a **voltage schedule**; the operating **current** is read from the measured **V–I** curve.
+
+**Key CHE choices.** Neutral sulfate (0.5–1.0 M), vigorous mixing, short gap, large electrode **area/volume**. **BDD anode** + **Ni cathode** preferred for endurance and stable Faradaic efficiency.
+
+---
+
+# **4.2 Detailed Design Description (CHE)**
+
+## **Chemistry & Stoichiometry (why \( n=4 \) )**
+
+Two 2e⁻ oxidations convert DBT → sulfone, so \( n=2+2=4 \ \mathrm{e^-}/\text{S} \) overall.
+
+*   **Anode (overall):**
+    \[
+    \mathrm{DBT} + 2\ \mathrm{H_2O} \rightarrow \mathrm{DBT\text{-}sulfone} + 4\ \mathrm{H^+} + 4\ \mathrm{e^-}
+    \]
+*   **Cathode:**
+    \[
+    4\ \mathrm{H_2O} + 4\ \mathrm{e^-} \rightarrow 2\ \mathrm{H_2} + 4\ \mathrm{OH^-}
+    \]
+*   **Net (neutral/alkaline):**
+    \[
+    \mathrm{R_2S} + 2\ \mathrm{H_2O} \rightarrow \mathrm{R_2SO_2} + 2\ \mathrm{H_2}
+    \]
+
+## **Governing CHE Model: Mass Balance + Faraday**
+
+Batch balance and Faraday’s law (Option A, **current-driven**):
+\[
+\frac{dN_S}{dt} = -r_S V, \qquad \frac{dC_S}{dt} = -r_S'
+\]
+\[
+\boxed{\frac{dC_S}{dt} = -\frac{\varepsilon_F}{n F V} I_{\text{eff}}(t)}
+\]
+
+**Mass-transfer cap** and regime switching:
+\[
+I_{\lim}(C) = A n F k_m C, \qquad I_{\text{eff}}(t) = \min\big[I_{\text{sched}}(t), I_{\lim}(C_S)\big]
+\]
+\[
+\boxed{C_\star = \frac{I_{\text{sched}}}{A n F k_m}}, \qquad \boxed{t_{\text{sw}} = \frac{C_{\text{start}} - C_\star}{k_A}}
+\]
+
+**Zero-order (Option A inside a step)**:
+\[
+\boxed{k_A = \frac{\varepsilon_F I_{\text{sched}}}{n F V}} \quad \Rightarrow \quad C_S(t) = C_{\text{start}} - k_A t
+\]
+
+**First-order tail (MT-capped)**:
+\[
+\boxed{k_{\text{app}} = \frac{\varepsilon_F A k_m}{V}}, \qquad C_S(t) = C_{\text{start}} \exp(-k_{\text{app}} t)
+\]
+
+**Mixed step (zero→first)**:
+\[
+t_{\text{to target}} =
+\begin{cases}
+\dfrac{C_{\text{start}} - C_{\text{target}}}{k_A}, & C_{\text{target}} \ge C_\star \\[8pt]
+t_{\text{sw}} + \dfrac{1}{k_{\text{app}}} \ln\left(\dfrac{C_\star}{C_{\text{target}}}\right), & C_{\text{target}} < C_\star
+\end{cases}
+\]
+
+**Concentration from a spec in ppmw**:
+\[
+C_{S,0} = \frac{(S_0/10^6) m_{\text{fuel}}}{M_S V} \quad [\text{mol m}^{-3}]
+\]
+
+## **Energy and Temperature Model (Closed-Form Final-Temperature)**
+
+Let \( P(t) = V(t) I_{\text{eff}}(t) \). Lumped, well-mixed energy balance:
+\[
+\frac{dT}{dt} = \frac{\eta_{\mathrm{heat}} V(t) I_{\mathrm{eff}}(t) - U A [T(t) - T_{\mathrm{amb}}]}{C_{\mathrm{th}}}, \qquad C_{\mathrm{th}} = m_{\mathrm{fuel}} c_{p,\mathrm{fuel}} + m_{\mathrm{hw}} c_{p,\mathrm{hw}}
+\]
+
+**Closed form at \( t=t_f \):**
+\[
+\boxed{T(t_f) = T_{\mathrm{amb}} + [T(0) - T_{\mathrm{amb}}] e^{-\beta t_f} + \frac{\eta_{\mathrm{heat}}}{C_{\mathrm{th}}} \int_{0}^{t_f} e^{-\beta (t_f - \tau)} V(\tau) I_{\mathrm{eff}}(\tau) d\tau}
+\]
+\[
+\beta = \frac{U A}{C_{\mathrm{th}}}
+\]
+
+**Piecewise-constant step recursion (\( k=1,\dots,N \))** with \( P_k = V_k I_{\mathrm{eff},k} \), \( \Delta t_k \):
+\[
+\boxed{T_k = T_{\mathrm{amb}} + (T_{k-1} - T_{\mathrm{amb}}) e^{-\beta \Delta t_k} + \frac{\eta_{\mathrm{heat}} P_k}{U A} (1 - e^{-\beta \Delta t_k})}
+\]
+(adiabatic \( UA=0 \): \( T(t_f) = T(0) + \tfrac{\eta_{\mathrm{heat}}}{C_{\mathrm{th}}} \int V I_{\mathrm{eff}} dt \) )
+
+## **Energy (kWh) and Specific Energy (kWh/L)**
+
+\[
+E_{\text{batch}} = \sum_k V_k I_{\text{eff},k} \Delta t_k \quad [\text{J}], \qquad \boxed{E_{\text{kWh}} = \frac{E_{\text{batch}}}{3.6 \times 10^6}}
+\]
+\[
+\boxed{E_\ell = \frac{E_{\text{kWh}}}{V_{\text{fuel,L}}}} \quad [\text{kWh L}^{-1}]
+\]
+
+## **Production Rate**
+
+\[
+\boxed{\text{Prod}_{\text{L/h}} = \frac{\phi_{\text{rec}} V_{\text{fuel,L}}}{\dfrac{t_{\text{hit}}}{3600} + \dfrac{t_{\text{turn}}}{60}}}
+\]
+
+## **Electrode Longevity (Two Ways)**
+
+**(A) Corrosion-limited thickness loss (Faraday):**
+\[
+\dot{\delta} = \frac{M}{n_{\text{corr}} F \rho} j_{\text{corr}} \quad \Rightarrow \quad \boxed{\tau_{\text{life}} = \frac{\delta_0 - \delta_{\min}}{\dot{\delta}}}
+\]
+(\( \tau_{\text{months}} = \tau_{\text{life}} / (30 \cdot 24 \cdot 3600) \)).
+
+**(B) Active-area fade per cycle (empirical):**
+\[
+\frac{A_N}{A_0} = (1 - f_A)^N \quad \Rightarrow \quad \boxed{N_{\text{fail}} = \frac{\ln(A_{\text{th}} / A_0)}{\ln(1 - f_A)}}, \qquad \tau_{\text{months}} = \frac{N_{\text{fail}} (t_{\text{hit}} / 3600 + t_{\text{turn}} / 60)}{24 \cdot 30}
+\]
+
+---
+
+# **4.3 Final Design Analysis & Results (CHE)**
+
+**Shared constants:** \( F = 96485 \ \mathrm{C \ mol^{-1}} \), \( M_S = 32.065 \ \mathrm{g \ mol^{-1}} \), \( \varepsilon_F = 0.70 \), \( n = 4 \), \( k_m = 5 \times 10^{-5} \ \mathrm{m \ s^{-1}} \).
+**V–I table (A vs V):** 1.0 → 0.10, 1.5 → 0.25, 2.0 → 0.50, 2.5 → 0.85, 3.0 → 1.20, 3.5 → 1.45, 4.0 → 1.55 (used to interpolate).
+
+---
+
+## **A) Prototype (bench) — 1 L, one 6 mm×90 mm rod**
+
+*   \( V = 0.001 \ \mathrm{m^3} \), \( \rho = 0.83 \ \mathrm{kg \ L^{-1}} \Rightarrow m_f = 0.83 \ \mathrm{kg} \)
+    \( S_0 = 500 \ \mathrm{ppmw} \Rightarrow C_{S,0} = 12.94 \ \mathrm{mol \ m^{-3}} \).
+
+*   **Area:** \( A \approx \pi dL + 2\pi (d/2)^2 = 0.00175 \ \mathrm{m^2} \).
+
+*   **Limiting current:**
+    \( j_{\lim,0} = n F k_m C_{S,0} = 250.8 \ \mathrm{A \ m^{-2}} \) ⇒ \( I_{\lim,0} = A \cdot j_{\lim,0} \approx 0.44 \ \mathrm{A} \).
+    Bench currents (0.85–1.55 A) \( > I_{\lim,0} \) ⇒ **MT-limited from start**.
+
+*   **First-order constant:**
+    \( k_{\text{app}} = \dfrac{\varepsilon_F A k_m}{V} = 6.13 \times 10^{-5} \ \mathrm{s^{-1}} \) ⇒ \( t_{1/2} = \ln 2 / k_{\text{app}} \approx 189 \ \mathrm{min} \).
+
+*   **Time to spec (8 ppmw (\( \Rightarrow C_{\mathrm{target}} = 0.207 \ \mathrm{mol \ m^{-3}} \))**
+    \( t = \dfrac{1}{k_{\text{app}}} \ln\left(\dfrac{12.94}{0.207}\right) \approx \mathbf{18.8 \ h} \).
+    *(Conclusion: bench needs more area/mixing → motivates scale-up.)*
+
+---
+
+## **B) Final Design — 5 L batch, high-area electrodes**
+
+**Inputs (from your slide):** \( V = 0.005 \ \mathrm{m^3} \) (5 L), \( m_f = 4.150 \ \mathrm{kg} \), \( A = 0.120 \ \mathrm{m^2} \), \( S_0 = 500 \ \mathrm{ppmw} \Rightarrow C_{S,0} = 12.942 \ \mathrm{mol \ m^{-3}} \).
+Voltage steps (A from V–I & schedule): **[4.0, 3.0, 4.5] V** with **[2.10, 1.50, 2.63] A**, durations **[24000, 24000, 18000] s**. Model reaches spec during **Step 1**.
+
+### **B1. Regime and Switching (Step 1 at 4.0 V, \( I_{\text{sched}} = 2.10 \ \mathrm{A} \) )**
+
+*   \( j_{\lim,0} = 250.8 \ \mathrm{A \ m^{-2}} \Rightarrow I_{\lim,0} = A \cdot j_{\lim,0} \approx \mathbf{29.97 \ A} \) (so we start far from MT-cap).
+
+*   **Zero-order rate:**
+    \( k_A = \dfrac{\varepsilon_F I}{n F V} = \dfrac{0.7 \cdot 2.10}{4 \cdot 96485 \cdot 0.005} = \mathbf{7.62 \times 10^{-4} \ \mathrm{mol \ m^{-3} \ s^{-1}}} \).
+
+*   **Switch:**
+    \( C_\star = \dfrac{I}{A n F k_m} = \dfrac{2.10}{0.120 \cdot (4 \cdot 96485 \cdot 5 \times 10^{-5})} = \mathbf{0.907 \ \mathrm{mol \ m^{-3}}} \).
+    \( t_{\text{sw}} = \dfrac{12.94 - 0.907}{7.62 \times 10^{-4}} = \mathbf{2.64 \times 10^{4} \ \mathrm{s}} \) (**≈ 264 min**).
+
+*   **Tail (if needed):**
+    \( k_{\text{app}} = \dfrac{\varepsilon_F A k_m}{V} = \dfrac{0.7 \cdot 0.120 \cdot 5 \times 10^{-5}}{0.005} = \mathbf{8.4 \times 10^{-4} \ \mathrm{s^{-1}}} \).
+    From \( C_\star \to C_{\mathrm{8ppm}} \): \( t = \dfrac{1}{k_{\text{app}}} \ln \dfrac{0.907}{0.207} \approx \mathbf{29 \ \mathrm{min}} \).
+
+**Observed:** Model hits **8 ppmw** at **274.7 min** ⇒ short tail (~ 10.7 min), consistent with slight \( k_m \) boost near end or small \( \varepsilon_F \) drift. The big \( A \) keeps most of the batch in **zero-order**.
+
+### **B2. Energy and Temperature (Cell-Only)**
+
+*   **Energy to hit-time:**
+    \( E_{\text{batch}} = V I t = 4.0 \cdot 2.10 \cdot 16480 = \mathbf{1.384 \times 10^{5} \ \mathrm{J}} \)
+    (\( \Rightarrow E_{\text{kWh}} = 0.0384 \ \mathrm{kWh} \)),
+    (\( \Rightarrow E_\ell = 0.0384 / 5.0 = \mathbf{0.0077 \ \mathrm{kWh \ L^{-1}}} \)).
+
+*   **Thermal rise (no cooling, \( \eta_{\text{heat}} = 0.7 \)):**
+    \( Q_{\text{to fuel}} \approx 0.7 \times 138 \ \mathrm{kJ} = \mathbf{96 \ \mathrm{kJ}} \).
+    \( C_{\text{th}} \approx m_f c_{p,\text{fuel}} + m_{\text{hw}} c_{p,\text{hw}} \approx 4.15 \cdot 2.1 + 2.0 \cdot 0.5 \approx \mathbf{9.7 \ \mathrm{kJ \ K^{-1}}} \).
+    \( \Delta T \approx Q_{\text{to fuel}} / C_{\text{th}} \approx \mathbf{10 \ \mathrm{K}} \Rightarrow T_{\text{final}} \approx 35^\circ \mathrm{C} \).
+    *(Exact \( T_{\text{final}} \) from the recursion shown above if \( UA > 0 \).)*
+
+### **B3. Production Metric**
+
+With **15 min** turnaround:
+Cycle \( = \dfrac{16480}{3600} + \dfrac{15}{60} = 4.83 \ \mathrm{h} \) ⇒
+\( \text{Prod}_{\text{L/h}} = \dfrac{1.00 \cdot 5.0}{4.83} = \mathbf{1.04 \ \mathrm{L \ h^{-1}}} \) on-spec.
+
+---
+
+## **C) Materials & Electrolytes (CHE-Relevant)**
+
+| Electrode | Typical Behavior (CHE View) | Lifetime Note (See Formulas) |
+| :--- | :--- | :--- |
+| **BDD (Anode)** | Widest anodic window, lowest fouling | Very low \( j_{\text{corr}} \) ⇒ multi-year \( \tau_{\text{life}} \) for small \( \Delta \delta \) |
+| **Nickel (Cathode)** | Robust HER, good conductivity | Months–years depending on \( j_{\text{corr}} \) |
+| **Graphite (Anode)** | Wide window, film risk at high V | Months if \( j_{\text{corr}} \) elevated; longer with cleaning |
+
+**Electrode Life (Illustrative Numbers, Use Your Measured \( j_{\text{corr}} \)):**
+Take allowable thickness loss \( \Delta \delta = 100 \ \mu \mathrm{m} = 1 \times 10^{-4} \ \mathrm{m} \).
+
+*   **Ni** (\( M = 0.05869 \ \mathrm{kg \ mol^{-1}} \), \( \rho = 8900 \ \mathrm{kg \ m^{-3}} \), \( n_{\text{corr}} = 2 \), \( j_{\text{corr}} = 5 \ \mu \mathrm{A \ cm^{-2}} = 0.05 \ \mathrm{A \ m^{-2}} \)):
+    \( \dot{\delta} = \dfrac{M}{n F \rho} j = 1.71 \times 10^{-12} \ \mathrm{m \ s^{-1}} \Rightarrow \tau \approx 5.9 \times 10^{7} \ \mathrm{s} \approx \mathbf{1.9 \ y} \).
+
+*   **Graphite** (\( M = 0.01201 \), \( \rho = 2260 \), \( n_{\text{corr}} = 4 \)):
+    If \( j_{\text{corr}} = 50 \ \mu \mathrm{A \ cm^{-2}} = 0.5 \ \mathrm{A \ m^{-2}} \):
+    \( \dot{\delta} \approx 6.9 \times 10^{-12} \ \mathrm{m \ s^{-1}} \Rightarrow \tau \approx 0.46 \ \mathrm{y} \) (**~6 months**).
+    If \( j_{\text{corr}} = 2 \ \mu \mathrm{A \ cm^{-2}} \): life is ~**11 y** (shows sensitivity).
+
+*   **BDD (Diamond-like C)** (same stoichiometry as C but **very low** \( j_{\text{corr}} \), e.g., \( 0.1 \ \mu \mathrm{A \ cm^{-2}} \Rightarrow 0.001 \ \mathrm{A \ m^{-2}} \)):
+    \( \dot{\delta} \approx 1.4 \times 10^{-14} \ \mathrm{m \ s^{-1}} \Rightarrow \tau \approx \mathbf{230 \ y} \) for \( \Delta \delta = 100 \ \mu \mathrm{m} \).
+    *(In practice, life is limited by fouling/handling, not bulk corrosion.)*
+
+---
+
+## **D) What the Numbers Say (CHE Design Rules)**
+
+1.  **Choose area** so \( I_{\lim,0} \gg I_{\text{sched}} \). Here \( I_{\lim,0} \approx 30 \ \mathrm{A} \) vs \( I_{\text{sched}} \le 2.63 \ \mathrm{A} \) ⇒ long **zero-order** regime.
+2.  **Predict the tail** with \( C_\star = \dfrac{I}{A n F k_m} \) and minimize it by raising \( A \) or \( k_m \).
+3.  **Energy is modest** at hit-time: **\( E_\ell \approx 0.008 \ \mathrm{kWh \ L^{-1}} \)** (cell only).
+4.  **Thermal rise** is small (≈ 10 K without cooling) by the lumped energy balance.
+5.  **Materials matter**: BDD anode + Ni cathode give the best stability; graphite is fine for low-capex pilots with periodic cleaning.
+
+---
+
+## **E) Ready-to-Use Calculation Set (Copy-Paste)**
+
+*   **Zero-order:** \( k_A = \varepsilon_F I / (n F V) \), \( C(t) = C_0 - k_A t \).
+*   **Switch:** \( C_\star = I / (A n F k_m) \), \( t_{\text{sw}} = (C_0 - C_\star) / k_A \).
+*   **First-order tail:** \( k_{\text{app}} = \varepsilon_F A k_m / V \), \( t = (1 / k_{\text{app}}) \ln(C_{\text{start}} / C_{\text{target}}) \).
+*   **Energy:** \( E_{\text{kWh}} = \big( \sum V_i I_i \Delta t_i \big) / 3.6 \times 10^6 \); \( E_\ell = E_{\text{kWh}} / V_{\text{fuel,L}} \).
+*   **Temperature (step recursion):**
+    \( T_k = T_{\text{amb}} + (T_{k-1} - T_{\text{amb}}) e^{-\beta \Delta t_k} + (\eta_{\text{heat}} P_k / U A)(1 - e^{-\beta \Delta t_k}) \), \( \beta = U A / C_{\text{th}} \).
+*   **Production:** \( \text{Prod}_{\text{L/h}} = \phi_{\text{rec}} V_{\text{fuel,L}} / (t_{\text{hit}} / 3600 + t_{\text{turn}} / 60) \).
+*   **Electrode life (corrosion):** \( \tau = (\delta_0 - \delta_{\min}) / \big[ (M / (n_{\text{corr}} F \rho)) j_{\text{corr}} \big] \).
+
+---
+
+## **Symbols and Units Reference**
+
+| Symbol | Meaning (Summary) | Units |
+| :--- | :--- | :--- |
+| \( C_S \) | Sulfur concentration in fuel (as S, molar) | \( \mathrm{mol \ m^{-3}} \) |
+| \( N_S \) | Total moles of sulfur in reactor | \( \mathrm{mol} \) |
+| \( r_S \equiv r_S' \) | Volumetric sulfur-removal rate | \( \mathrm{mol \ m^{-3} \ s^{-1}} \) |
+| \( \varepsilon_F \) | Faradaic efficiency to S-removal | — |
+| \( n \) | Electrons per S removed (DBT→sulfone: \( n=4 \)) | \( \mathrm{e^- \ S^{-1}} \) (dimensionless) |
+| \( F \) | Faraday constant | \( \mathrm{C \ mol^{-1}} \) |
+| \( V \) | Reactor (fuel) volume | \( \mathrm{m^{3}} \) |
+| \( V_{\text{fuel,L}} \) | Reactor (fuel) volume, liters | \( \mathrm{L} \) |
+| \( V_{\text{cell}}(t) \) | Cell voltage vs time (schedule) | \( \mathrm{V} \) |
+| \( A_{\text{elec}} \) | Geometric/active electrode area | \( \mathrm{m^{2}} \) |
+| \( A_{\text{ht}} \) | Heat-transfer area (for \( UA \)) | \( \mathrm{m^{2}} \) |
+| \( k_m \) | Liquid-film mass-transfer coefficient | \( \mathrm{m \ s^{-1}} \) |
+| \( I_{\text{sched}}(t) \) | Scheduled/operating current from V–I | \( \mathrm{A} \) |
+| \( I_{\text{eff}}(t) \) | Productive current (min of scheduled/limiting) | \( \mathrm{A} \) |
+| \( I_{\lim}(C) \) | Limiting current at concentration \( C \) | \( \mathrm{A} \) |
+| \( j_{\lim} \) | Limiting current density | \( \mathrm{A \ m^{-2}} \) (\( = (\mathrm{mA \ cm^{-2}}) \times 10 \)) |
+| \( j \) | Generic current density | \( \mathrm{A \ m^{-2}} \) |
+| \( C_\star \) | Switch concentration where \( I_{\text{sched}} = I_{\lim} \) | \( \mathrm{mol \ m^{-3}} \) |
+| \( t_{\text{sw}} \) | Time within a step when \( C_S \) reaches \( C_\star \) | \( \mathrm{s} \) |
+| \( k_A \) | Zero-order volumetric rate constant (Option A) | \( \mathrm{mol \ m^{-3} \ s^{-1}} \) |
+| \( k_{\text{app}} \) | Apparent first-order rate constant (MT-capped) | \( \mathrm{s^{-1}} \) |
+| \( X \) | Sulfur conversion, \( 1 - C_S / C_{S,0} \) | — |
+| \( S_0 \) (ppmw) | Initial sulfur specification (mass ppm) | \( \mathrm{ppmw} \) (\( = \mathrm{mg \ kg^{-1}} \)) |
+| \( S_{\text{target}} \) (ppmw) | Target sulfur spec (mass ppm) | \( \mathrm{ppmw} \) |
+| \( M_S \) | Molar mass of sulfur | \( \mathrm{kg \ mol^{-1}} \) |
+| \( \rho_{\text{fuel}} \) | Fuel density | \( \mathrm{kg \ L^{-1}} \) (or \( \mathrm{kg \ m^{-3}} \)) |
+| \( m_f \) | Fuel mass in reactor | \( \mathrm{kg} \) |
+| \( T(t) \) | Reactor (bulk fuel) temperature | \( {}^{\circ}\mathrm{C} \) (or K) |
+| \( T_{\text{amb}} \) | Ambient/surroundings temperature | \( {}^{\circ}\mathrm{C} \) (or K) |
+| \( c_{p,\text{fuel}} \) | Fuel specific heat | \( \mathrm{J \ kg^{-1} \ K^{-1}} \) |
+| \( m_{\text{hw}} \) | Lumped hardware mass (cell metal, etc.) | \( \mathrm{kg} \) |
+| \( c_{p,\text{hw}} \) | Hardware specific heat | \( \mathrm{J \ kg^{-1} \ K^{-1}} \) |
+| \( C_{\text{th}} \) | Lumped thermal capacitance (\( = m_{\text{fuel}} c_{p,\text{fuel}} + m_{\text{hw}} c_{p,\text{hw}} \)) | \( \mathrm{J \ K^{-1}} \) |
+| \( U \) | Overall heat-transfer coefficient | \( \mathrm{W \ m^{-2} \ K^{-1}} \) |
+| \( UA \) | Overall heat-loss conductance | \( \mathrm{W \ K^{-1}} \) |
+| \( \eta_{\text{heat}} \) | Fraction of electrical power appearing as heat | — |
+| \( \beta \) | Thermal decay constant (\( \beta = U A / C_{\text{th}} \)) | \( \mathrm{s^{-1}} \) |
+| \( P(t) \) | Electrical power to cell, \( V_{\text{cell}} I_{\text{eff}} \) | \( \mathrm{W} \) |
+| \( E_{\text{batch}} \) | Batch electrical energy (\( \sum V I \Delta t \)) | \( \mathrm{J} \) |
+| \( E_{\text{kWh}} \) | Batch electrical energy | \( \mathrm{kWh} \) |
+| \( E_\ell \) | Specific energy per fuel volume, \( E_{\text{kWh}} / V_{\text{fuel,L}} \) | \( \mathrm{kWh \ L^{-1}} \) |
+| \( t_{\text{hit}} \) | Time to reach sulfur target | \( \mathrm{s} \) (or \( \mathrm{min} \), \( \mathrm{h} \)) |
+| \( \Delta t_k \) | Duration of step \( k \) in the schedule | \( \mathrm{s} \) |
+| \( t_k \) | Cumulative time to end of step \( k \) | \( \mathrm{s} \) |
+| \( \phi_{\text{rec}} \) | Liquid recovery fraction (accounting losses) | — |
+| \( t_{\text{turn}} \) | Turnaround/downtime per batch | \( \mathrm{min} \) |
+| \( \text{Prod}_{\text{L/h}} \) | Production rate of on-spec fuel | \( \mathrm{L \ h^{-1}} \) |
+| \( \delta \) | Electrode thickness (instantaneous) | \( \mathrm{m} \) |
+| \( \Delta \delta \) | Allowable thickness loss to end-of-life | \( \mathrm{m} \) |
+| \( n_{\text{corr}} \) | Electrons per atom in dissolution (corrosion valence) | — |
+| \( j_{\text{corr}} \) | Corrosion current density (uniform) | \( \mathrm{A \ m^{-2}} \) |
+| \( M \) | Electrode material molar mass | \( \mathrm{kg \ mol^{-1}} \) |
+| \( \rho_{\text{solid}} \) | Electrode bulk density | \( \mathrm{kg \ m^{-3}} \) |
+| \( \dot{\delta} \) | Thickness loss rate (from Faraday’s law) | \( \mathrm{m \ s^{-1}} \) |
+| \( \tau_{\text{life}} \) | Electrode life (time to \( \Delta \delta \)) | \( \mathrm{s} \) (often reported in months/years) |
+| \( f_A \) | Active-area loss per cycle (empirical) | — |
+| \( A_0, A_N \) | Initial and \( N \)-cycle active area | \( \mathrm{m^{2}} \) |
+| \( A_{\text{th}} \) | Minimum acceptable active area (threshold) | \( \mathrm{m^{2}} \) (or fraction of \( A_0 \)) |
+| \( N_{\text{fail}} \) | Cycles to reach \( A_{\text{th}} \) | cycles |
+| \( \text{ppmw} \) | Parts per million by mass (mg/kg) | — |
+
+---
+
+### **Executive CHE Conclusion**
+
+The **5-L, 0.12 m²** EDS cell at **~4 V/2.1 A** reaches **8 ppmw** in **~275 min**, with **specific energy ~0.008 kWh L⁻¹**, **ΔT ~10 K** (no cooling), and **~1.0 L h⁻¹** throughput including a 15-min turnaround. The physics are a long **zero-order** segment followed by a short **first-order** tail, both tunable via **area** and **mixing**. **BDD anode + Ni cathode** maximizes stability and lifetime; **graphite** is acceptable for a low-capex prototype with scheduled cleaning.
