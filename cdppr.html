@@ -399,3 +399,209 @@ All constraints and specifications are satisfied by the 5-L electrochemical desu
 6. **Scalability**: Maintained performance through conserved area-to-volume ratio
 
 The verification confirms the technical feasibility of the proposed EDS system for laboratory-scale ultra-low sulfur fuel production.
+
+
+
+    # **Process Monitoring and Product Purification Plan**
+
+## **1.0 Sulfur Monitoring Strategy**
+
+### **1.1 Analytical Methods**
+
+**Primary Referee Method (Final Acceptance)**
+- **Method**: ASTM D5453 (UV fluorescence for total sulfur in liquid hydrocarbons)
+- **Detection Limit**: ≤ 1 ppmw
+- **Analysis Time**: 10–15 minutes per sample
+- **Application**: Final product certification
+
+**Rapid In-Process Methods**
+- **XRF Analysis (ASTM D4294)**: Portable/benchtop for total sulfur
+  - Detection Limit: 5–10 ppmw
+  - Use: Routine process monitoring
+- **HPLC-UV Speciation**: 
+  - Column: C18
+  - Mobile Phase: 95:5 acetonitrile:water
+  - Detection: UV 254 nm
+  - Flow Rate: 1 mL min⁻¹
+  - Purpose: Distinguish DBT vs. DBT-sulfone
+
+**Coulombic Soft Sensor**
+\[
+C_S(t) =
+\begin{cases}
+C_0 - \dfrac{\varepsilon_F}{n F V} \displaystyle\int_0^t I(\tau)  d\tau, & I < I_{\lim}(C) \\[8pt]
+C_\star  e^{-k_{\text{app}}(t - t_{\text{sw}})}, & I \ge I_{\lim}(C)
+\end{cases}
+\]
+where:
+- \( I_{\lim} = A n F k_m C \)
+- \( k_{\text{app}} = \dfrac{\varepsilon_F A k_m}{V} \)
+
+### **1.2 Sampling Protocol**
+
+| Sampling Point | Volume | Frequency | Method | Purpose |
+|---------------|--------|-----------|---------|----------|
+| **Feed** | 20 mL | Start of batch | D5453 | Establish baseline \( S_0 \) ≈ 500 ppmw |
+| **In-Process** | 5 mL | Every 60 min | XRF/HPLC | Process monitoring |
+| **Final Product** | 20 mL | 275 min (predicted) | D5453 | Final certification |
+
+**Acceptance Criterion**: \( S_{\text{final}} \le 10\text{--}15~\text{ppmw} \)
+
+### **1.3 Mass Balance Verification**
+
+**Sulfur Removal Calculation**:
+\[
+n_S = \frac{(S_0 - S_{\text{final}})}{10^6} \cdot \frac{m_{\text{fuel}}}{M_S} \quad \text{(mol S removed)}
+\]
+\[
+n_{\text{sulfone}} \approx n_S \quad \text{(1:1 stoichiometry)}
+\]
+
+**For 5-L Batch**:
+- \( m_{\text{fuel}} = 4.150~\mathrm{kg} \)
+- \( S_0 = 500~\mathrm{ppmw} \), \( S_{\text{final}} = 8~\mathrm{ppmw} \)
+- \( n_S \simeq 0.064~\mathrm{mol} \)
+
+---
+
+## **2.0 Sulfur Extraction from Product**
+
+### **2.1 Option 1: Liquid-Liquid Extraction (LLE) with Acetonitrile**
+
+**Design Basis**:
+- Feed (F): 5 L treated fuel
+- Sulfone content: \( n_{\text{sulfone}} \approx 0.064~\text{mol} \)
+- Distribution coefficient: \( K_D = \dfrac{C_{\text{sulfone}}^{\text{MeCN}}}{C_{\text{sulfone}}^{\text{fuel}}} \approx 4 \)
+- Solvent ratio: \( S/F = 0.5 \) (2.5 L MeCN total)
+
+**Stage Efficiency Calculation**:
+
+**Single-Stage Recovery**:
+\[
+R_1 = \frac{K_D \cdot S/F}{1 + K_D \cdot S/F} = \frac{4 \times 0.5}{1 + 4 \times 0.5} = \frac{2}{3} = 0.667
+\]
+
+**Multi-Stage Recovery**:
+\[
+R_N = 1 - (1 - R_1)^N
+\]
+
+| Number of Stages | Recovery Efficiency | Sulfur in Raffinate (from 8 ppmw) |
+|------------------|---------------------|-----------------------------------|
+| 1 | 66.7% | 2.7 ppmw |
+| 2 | 88.9% | 0.9 ppmw |
+| 3 | 96.3% | 0.3 ppmw |
+
+**Recommended**: 2–3 stage counter-current LLE
+
+**Operation Protocol**:
+1. **Mixing**: 5–10 minutes at 20–30°C
+2. **Settling**: 5–10 minutes phase separation
+3. **Solvent Recovery**: Distill MeCN (BP 82°C) for recycle
+4. **Sulfone Concentrate**: ~14 g per batch
+
+### **2.2 Option 2: Adsorptive Polishing**
+
+**Design Parameters**:
+- Adsorbent capacity: \( q^* \approx 100~\mathrm{mg~g^{-1}} \)
+- Sulfone mass per batch: ~14 g
+- Minimum adsorbent: ≥ 140 g
+- **Recommended**: 0.5–1.0 kg for extended service life
+
+**Operating Conditions**:
+- Flow rate: 1–2 bed volumes per hour
+- Temperature: 40–60°C (reduces viscosity)
+- Regeneration: MeCN or isopropanol
+
+### **2.3 Combined Approach**
+
+For maximum reliability:
+- **Primary**: 1–2 LLE stages for bulk sulfone removal
+- **Polishing**: Small guard bed for final trim
+
+---
+
+## **3.0 Safety and Environmental Considerations**
+
+### **3.1 Gas Management**
+- Primary gas: \( \mathrm{H_2} \) (~3 L per batch)
+- Venting: Through flame arrestor
+- No \( \mathrm{H_2S} \) or \( \mathrm{SO_x} \) emissions expected
+
+### **3.2 Waste Streams**
+- **Sulfone Concentrate**: ~14 g per batch (non-volatile solid/oil)
+- **Disposition**: Energy recovery/incineration
+- **Solvent Loss**: < 1–3% of circulation (closed-loop distillation)
+
+---
+
+## **4.0 Batch Record Documentation**
+
+### **4.1 Required Documentation**
+
+| Document | Purpose | Acceptance Criteria |
+|----------|---------|---------------------|
+| **D5453 Certificate** | Feed and product certification | \( S_0 \) ≈ 500 ppmw, \( S_{\text{final}} \) ≤ 10 ppmw |
+| **Process Model Output** | Performance verification | \( I_{\text{sched}} \ll I_{\lim,0} \), \( t_{\text{hit}} \) ≈ 275 min |
+| **Extraction Log** | Purification record | Solvent ratio, stages, recovery efficiency |
+| **Final Product Analysis** | Quality assurance | Post-extraction D5453 confirmation |
+
+### **4.2 Mass Balance Closure**
+
+**Verification Equation**:
+\[
+\text{Sulfur In} - \text{Sulfur Out} = \text{Sulfur in Waste Streams}
+\]
+\[
+\frac{S_0 \cdot m_{\text{fuel}}}{10^6} - \frac{S_{\text{final}} \cdot m_{\text{fuel}}}{10^6} = \frac{m_{\text{sulfone}} \cdot M_S}{M_{\text{sulfone}}}
+\]
+
+---
+
+## **5.0 Process Optimization Tools**
+
+### **5.1 LLE Sizing Calculator**
+
+```matlab
+% LLE Sizing for Sulfone Removal (5 L Fuel Basis)
+F = 5.0;                 % L fuel
+S_over_F = 0.5;          % solvent-to-feed volume ratio (MeCN)
+KD = 4.0;                % distribution coefficient (MeCN/fuel)
+N = 2;                   % number of ideal stages
+
+R1 = (KD * S_over_F) / (1 + KD * S_over_F);
+Rtot = 1 - (1 - R1)^N;
+
+fprintf('LLE Performance Summary:\n');
+fprintf('Distribution Coefficient (K_D): %.1f\n', KD);
+fprintf('Solvent-to-Feed Ratio (S/F): %.2f\n', S_over_F);
+fprintf('Number of Stages: %d\n', N);
+fprintf('Overall Recovery: %.1f%%\n', 100 * Rtot);
+```
+
+**Expected Output**: 
+- 2 stages: 88.9% recovery
+- 3 stages: 96.3% recovery
+
+---
+
+## **6.0 Implementation Summary**
+
+### **6.1 Monitoring Strategy**
+- **Primary**: ASTM D5453 for certification
+- **Secondary**: XRF for process control
+- **Tertiary**: Coulombic model for sampling timing
+
+### **6.2 Extraction Selection**
+- **Preferred**: 2–3 stage MeCN LLE with solvent recovery
+- **Alternative**: Adsorptive polishing (0.5–1 kg adsorbent)
+- **Conservative**: Combined LLE + guard bed
+
+### **6.3 Performance Guarantee**
+The integrated monitoring and extraction approach ensures:
+- Final product sulfur ≤ 10 ppmw
+- Mass balance closure within ±5%
+- Environmentally managed waste streams
+- Economical solvent reuse
+
+This comprehensive plan provides quantitative assurance that the EDS process will consistently meet ultra-low sulfur specifications while maintaining operational efficiency and environmental compliance.
