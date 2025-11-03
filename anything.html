@@ -1,127 +1,164 @@
 <!DOCTYPE html><script src="https://cdn.jsdelivr.net/npm/texme@1.2.2"></script><textarea>
-Of course. Here are the slides in a clean, structured format suitable for a presentation.
+awesome — here’s the **grand unified balance for a distillation column**, written as *one “equation” that equals zero* (just like the previous monsters). it compresses **mass, energy, momentum, phase-equilibrium, tray/packing hydrodynamics, hydraulics, and columnwide constraints** all together in full generality.
 
 ---
 
-### **Slide 1 — Model at a Glance (Inputs → Outputs)**
-
-**Goal:** Predict sulfur removal (conversion of Dibenzothiophene, DBT) in a batch electrochemical desulfurization (EDS) reactor from a voltage schedule and the measured V–I curve.
-
-**Inputs:**
-*   **Voltage Schedule:** \( V(t) \)
-*   **Electrode Kinetics:** Via the V–I table
-*   **Faradaic Efficiency:** \( \varepsilon_F \)
-*   **Electrons per Molecule:** \( n \)
-*   **Electrode Area:** \( A \)
-*   **Mass Transfer Coefficient:** \( k_m \)
-*   **Reactor Volume:** \( V \)
-
-**Outputs:**
-*   **DBT Concentration Profile:** \( C(t) \)
-*   **Effective Current:** \( I_{eff}(t) \)
-*   **Desulfurization Conversion:** \( X(t) \)
+[
+\small
+\begin{aligned}
+0
+&=
+\underbrace{\sum_{j=1}^{N_T}
+\sum_{i=1}^{N_c}
+\Big[
+\underbrace{\frac{d!\left(M_j x_{i,j}\right)}{dt}}*{\text{accum}}
+-\underbrace{V*{j+1}y_{i,j+1}+L_{j-1}x_{i,j-1}-V_{j}y_{i,j}-L_{j}x_{i,j}}*{\text{tray vapor/liquid in--out}}
+-\underbrace{F_j z*{i,j}!+!R_{i,j}!+!B_{i,j}}*{\text{feed/reaction/bleed (optional)}}
+\Big]}*{\textbf{Component material balances (each tray)}}[4pt]
+&\quad
++\underbrace{\sum_{j=1}^{N_T}
+\Big[
+\frac{d(M_j h_{L,j})}{dt}
+-\big(V_{j+1}H_{V,j+1}+L_{j-1}H_{L,j-1}-V_{j}H_{V,j}-L_{j}H_{L,j}\big)
++\sum_{i=1}^{N_c}(-\Delta H_{v,i,j}),r_{i,j}
++Q_j
+\Big]}*{\textbf{Tray energy balance (enthalpy + heat duties)}}[4pt]
+&\quad
++\underbrace{\sum*{j=1}^{N_T}
+\Big[
+M_j \sum_{i=1}^{N_c} x_{i,j}
+-M_j
+\Big]}*{\textbf{Closure: sum of liquid mole fractions = 1}}
++\underbrace{\sum*{j=1}^{N_T}
+\Big[
+\sum_{i=1}^{N_c}(y_{i,j}-K_{i,j}x_{i,j})
+\Big]}*{\textbf{Phase equilibrium (Raoult or activity coefficient models)}}[4pt]
+&\quad
++\underbrace{\sum*{j=1}^{N_T}
+\Big[
+V_{j+1}-V_j-\frac{L_{j-1}-L_j}{\rho_L/\rho_V}
++\frac{A_j}{\Delta z_j}(\rho_V u_{V,j}^2+\rho_L u_{L,j}^2-\Delta P_j)
+\Big]}*{\textbf{Momentum/hydraulics constraint (pressure profile, flooding limits)}}[4pt]
+&\quad
++\underbrace{\sum*{i=1}^{N_c}!
+\sum_{j=1}^{N_T}!
+\Big[
+y_{i,j}-\frac{\gamma_{i,j}x_{i,j}P_{i,j}^{\text{sat}}(T_j)}{P_j}
+\Big]}*{\textbf{VLE via }y_i=!K_i x_i,\ K_i=\gamma_iP_i^{\text{sat}}/P}
++\underbrace{\sum*{j=1}^{N_T}!
+\Big[
+P_j-P_{j+1}-\Delta P_{j+\frac{1}{2}}
+\Big]}*{\textbf{Pressure drop per tray (hydraulics)}}[4pt]
+&\quad
++\underbrace{\sum*{j\in\text{condenser/reboiler}}!!!!
+\Big[
+Q_j-\lambda_j(V_j-L_j)
+-\sum_{i}h_{i,j}^{\text{lat}},(y_{i,j}-x_{i,j})
+\Big]}*{\textbf{Energy duties at top/bottom (reboiler/condenser)}}[4pt]
+&\quad
++\underbrace{
+\sum*{j=1}^{N_T}!\int_{A_j}!
+\Big[
+\nabla!\cdot!\big(\rho_L \mathbf{v}*L\big)
++\nabla!\cdot!\big(\rho_V \mathbf{v}*V\big)
++\dot{m}*{\text{evap},j}-\dot{m}*{\text{cond},j}
+\Big],dA
+}*{\textbf{Local continuity (if rate-based model)}}[4pt]
+&\quad
++\underbrace{
+\sum*{j=1}^{N_T}!
+\Big[
+N_{i,j}^{LV}-k_{i,j}^{LV},a_j,(y_{i,j}-y_{i,j}^{*})
+\Big]
+}*{\textbf{Mass-transfer rate model (interfacial area, driving force)}}[4pt]
+&\quad
++\underbrace{
+\sum*{i=1}^{N_c}!
+\sum_{j=1}^{N_T}!
+\Big[
+K_{i,j}^{\text{MS}}!(y_{i,j}-y_{i,j}^{*})
++\frac{D_{i,j}}{\delta_j}(x_{i,j}^{*}-x_{i,j})
+\Big]
+}*{\textbf{Maxwell–Stefan or film diffusion closure (rate-based)}}[4pt]
+&\quad
++\underbrace{
+\int*{0}^{z_{\text{col}}}
+\Big[
+\frac{d(\dot{M}h)}{dz}
+-\dot{m}*V\frac{dH_V}{dz}
+-\dot{m}*L\frac{dH_L}{dz}
+-\sum*{r}(-\Delta H_r),r(z)
+-\frac{dQ}{dz}
+\Big],dz
+}*{\textbf{Overall column energy continuity (continuous form)}}
+[4pt]
+&\quad
++\underbrace{
+\sum_{j=1}^{N_T}
+\Big[
+\mathbf{n}*j!\cdot!\big(\rho_V\mathbf{v}*V-\rho_L\mathbf{v}*L\big)
+-\dot{m}*{\text{phase},j}^{\text{int}}
+\Big]
+}*{\textbf{Interfacial mass continuity (two-film theory)}}
+[4pt]
+&\quad
++\underbrace{
+\sum*{j=1}^{N_T}!\Big[
+h_j-h^{\text{EOS}}!(T_j,P_j,{x_{i,j}})
+\Big]
+}*{\textbf{Thermodynamic closure (EOS/enthalpy correlations)}}
++\underbrace{
+\sum*{i=1}^{N_c}!\Big[
+x_{i,N_T}^{\text{bot}}-x_{i,N_T}^{\text{target}}
++y_{i,1}^{\text{top}}-y_{i,1}^{\text{target}}
+\Big]
+}_{\textbf{Product purity constraints (bottom/top specs)}}
+,.
+\end{aligned}
+]
 
 ---
 
-### **Slide 2 — Mass Balance & Electrochemical Rate (and why n=4)**
+### 🔹 Terms and sets
 
-**Batch Reactor Mass Balance:**
-\[
-\frac{dC}{dt} = -r
-\]
-Where \( r \) is the rate of DBT consumption.
-
-**Faraday's Law + Stoichiometry + Efficiency:**
-\[
-r = \frac{\varepsilon_F I}{n F V}
-\]
-*   \( I \): Total current [A]
-*   \( F \): Faraday's constant [C/mol]
-*   \( V \): Reactor volume [m³]
-
-**Why n=4:**
-The reaction pathway is a two-step oxidation:
-1.  DBT → Sulfoxide (consumes 2 e⁻)
-2.  Sulfoxide → Sulfone (consumes 2 e⁻)
-
-**Overall cell reaction:** \( \text{DBT} \rightarrow \text{Sulfone} \) ⇒ \( n = 2 + 2 = 4 \) electrons per molecule of DBT.
-
----
-
-### **Slide 3 — Voltage → Current & Option A (Current-Driven, Zero-Order)**
-
-**From Scheduled Voltage to Current:**
-The V–I table is used to find the current \( I_{sched}(t) \) corresponding to the applied voltage \( V(t) \).
-
-**Option A: Current-Driven (Zero-Order Kinetics)**
-*   Assumes current is not limited by DBT concentration.
-*   The electrochemical rate is constant for a given current.
-
-**Zero-Order Rate:**
-\[
-r_A = \frac{\varepsilon_F I_{sched}}{n F V} = k_A
-\]
-
-**Concentration Profile:**
-\[
-C(t) = C_0 - k_A \cdot t
-\]
-(Valid only while \( C(t) > 0 \)).
+| Symbol                      | Meaning                                                       |
+| --------------------------- | ------------------------------------------------------------- |
+| (N_T)                       | total number of trays/stages (including reboiler & condenser) |
+| (N_c)                       | number of components                                          |
+| (M_j)                       | holdup on tray (j)                                            |
+| (x_{i,j},y_{i,j})           | liquid & vapor mole fractions of component (i) on tray (j)    |
+| (L_j,V_j)                   | liquid & vapor molar flowrates leaving tray (j)               |
+| (H_{L,j},H_{V,j})           | enthalpies of outgoing streams                                |
+| (K_{i,j})                   | vapor–liquid equilibrium ratio                                |
+| (Q_j)                       | heat duty to tray (j) (positive into tray)                    |
+| (F_j,z_{i,j})               | feed flow and composition on feed stage(s)                    |
+| (\Delta H_r)                | reaction enthalpy if reactive distillation                    |
+| (a_j,k_{i,j}^{LV})          | interfacial area and mass-transfer coefficient (rate-based)   |
+| (\Delta P_j)                | pressure drop across tray (j)                                 |
+| (P_{i,j}^{\text{sat}}(T_j)) | pure-component vapor pressure at (T_j)                        |
+| (\gamma_{i,j})              | activity coefficient (Wilson, NRTL, UNIQUAC, etc.)            |
+| (u_{V,j},u_{L,j})           | vapor/liquid velocities (hydraulic design)                    |
+| (\rho_V,\rho_L)             | phase densities                                               |
+| (A_j,\Delta z_j)            | tray area, spacing                                            |
+| (x_{i,j}^{*},y_{i,j}^{*})   | interfacial compositions (rate-based model)                   |
 
 ---
 
-### **Slide 4 — Diffusion Cap & Option B (Mass-Transfer-Limited, First-Order)**
+### 🔹 Interpretation
 
-**Film Theory (Diffusion Limit):**
-The maximum current is limited by the rate DBT molecules can diffuse to the electrode.
+This “one equation = 0” symbolically enforces:
 
-**Limiting Current:**
-\[
-I_{lim} = n F A k_m C
-\]
-
-**If \( I_{sched} > I_{lim} \):**
-The effective current is capped: \( I_{eff} = I_{lim} \).
-
-**Option B: Mass-Transfer-Limited (First-Order Kinetics)**
-*   Substituting \( I_{lim} \) into the rate expression gives a first-order law.
-
-**Apparent Rate Constant:**
-\[
-r_B = \left( \frac{\varepsilon_F A k_m}{V} \right) C = k_{app} \cdot C
-\]
-
-**Concentration Profile:**
-\[
-C(t) = C_0 \cdot \exp(-k_{app} \cdot t)
-\]
+* **Component material balances** for each tray.
+* **Energy balance** (enthalpy + vaporization).
+* **Phase-equilibrium** (Raoult/activity model or (K_i)).
+* **Hydraulic & momentum constraints** (pressure profile, flooding).
+* **Thermodynamic closure** via EOS & enthalpy models.
+* **Vapor–liquid transfer rates** (two-film or rate-based models).
+* **Columnwide constraints:** top/bottom specs, condenser/reboiler duties.
 
 ---
 
-### **Slide 5 — Switching, MATLAB, and Aspen**
+Would you like me to tailor this for a **specific column type**, like:
 
-**Productive Current:**
-The actual current used for reaction is the minimum of the scheduled and limiting currents.
-\[
-I_{eff} = \min(I_{sched}(t),\ I_{lim}(C))
-\]
-
-**Switching Logic:**
-*   At high \( C \): \( I_{lim} \) is high, so \( I_{eff} = I_{sched} \) (Zero-Order, Option A).
-*   At low \( C \): \( I_{lim} \) drops, so \( I_{eff} = I_{lim} \) (First-Order, Option B).
-
-**MATLAB Implementation:**
-1.  Computes \( k_A \), \( C^* \), \( k_{app} \).
-2.  Numerically solves for \( C(t) \) and \( I_{eff}(t) \).
-3.  Plots \( I_{eff}(t) \) vs. \( I_{sched}(t) \) and concentration/conversion profiles.
-
-**Aspen Custom Modeler Implementation:**
-*   **Same Stoichiometry:** \( n = 4 \).
-*   **Option A:** Uses a zero-order rate constant: \( k_A = \frac{\varepsilon_F I}{n F V} \).
-*   **Option B:** Uses a first-order rate law with \( k_{app} = \frac{\varepsilon_F A k_m}{V} \).
-
-**Smooth Blend (for numerical stability):**
-\[
-I_{eff} \approx \frac{I_{sched} \cdot I_{lim}}{\sqrt{I_{sched}^m + I_{lim}^m}^{~2/m}}
-\]
-(Where \( m \) is a large number, e.g., 8, to approximate the `min` function).
+* (a) *Binary distillation column (ethanol–water)* with constant molal overflow, or
+* (b) *Reactive distillation column* with side reaction and energy integration (reboiler–condenser included)?
